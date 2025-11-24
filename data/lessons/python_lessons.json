@@ -1,0 +1,294 @@
+[
+  {
+    "id": "python_lesson_1",
+    "courseId": "python",
+    "title": "Introducción a Python",
+    "description": "Aprende qué es Python, su historia y por qué es tan popular.",
+    "order": 1,
+    "estimatedMinutes": 15,
+    "content": {
+      "introduction": "Python es un lenguaje de programación de alto nivel, interpretado y de propósito general. Fue creado por Guido van Rossum y lanzado en 1991.",
+      "sections": [
+        {
+          "id": "python_1_sec_1",
+          "title": "¿Qué es Python?",
+          "content": "Python es conocido por su sintaxis clara y legible, lo que lo hace ideal para principiantes. Es usado en desarrollo web, ciencia de datos, inteligencia artificial, automatización y más.",
+          "order": 1
+        },
+        {
+          "id": "python_1_sec_2",
+          "title": "¿Por qué aprender Python?",
+          "content": "Python es fácil de aprender, tiene una gran comunidad, miles de librerías disponibles y es uno de los lenguajes más demandados en el mercado laboral.",
+          "order": 2
+        },
+        {
+          "id": "python_1_sec_3",
+          "title": "Aplicaciones de Python",
+          "content": "Python se utiliza en: desarrollo web (Django, Flask), análisis de datos (Pandas, NumPy), machine learning (TensorFlow, scikit-learn), automatización, scripts, y mucho más.",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "python_1_ex_1",
+          "title": "Tu primer programa en Python",
+          "code": "print('¡Hola Mundo!')",
+          "language": "python",
+          "explanation": "Este es el programa más básico en Python. La función print() muestra texto en la pantalla."
+        }
+      ],
+      "summary": "Python es un lenguaje versátil, fácil de aprender y muy poderoso, perfecto para comenzar tu viaje en la programación.",
+      "keyPoints": [
+        "Python es un lenguaje interpretado y de alto nivel",
+        "Es conocido por su sintaxis clara y legible",
+        "Se usa en múltiples campos: web, datos, IA, automatización",
+        "Tiene una comunidad grande y activa"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "python_1_ch_1",
+        "lessonId": "python_lesson_1",
+        "question": "¿En qué año fue lanzado Python por primera vez?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "1989", "isCorrect": false },
+          { "id": "opt_2", "text": "1991", "isCorrect": true },
+          { "id": "opt_3", "text": "1995", "isCorrect": false },
+          { "id": "opt_4", "text": "2000", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Python fue lanzado por primera vez en 1991 por Guido van Rossum.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "python_1_ch_2",
+        "lessonId": "python_lesson_1",
+        "question": "¿Cuál de las siguientes NO es una aplicación común de Python?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "Desarrollo web", "isCorrect": false },
+          { "id": "opt_2", "text": "Machine Learning", "isCorrect": false },
+          {
+            "id": "opt_3",
+            "text": "Diseño de hardware de procesadores",
+            "isCorrect": true
+          },
+          { "id": "opt_4", "text": "Análisis de datos", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "Python no se usa típicamente para diseño de hardware de procesadores. Eso requiere lenguajes de bajo nivel como VHDL o Verilog.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "python_1_ch_3",
+        "lessonId": "python_lesson_1",
+        "question": "Python es un lenguaje compilado.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. Python es un lenguaje interpretado, no compilado. El código se ejecuta línea por línea.",
+        "points": 10,
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": "python_lesson_2",
+    "courseId": "python",
+    "title": "Instalación y configuración del entorno",
+    "description": "Aprende a instalar Python y configurar tu entorno de desarrollo.",
+    "order": 2,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "Para empezar a programar en Python, necesitas instalarlo en tu computadora y configurar un entorno de desarrollo adecuado.",
+      "sections": [
+        {
+          "id": "python_2_sec_1",
+          "title": "Descargando Python",
+          "content": "Visita python.org y descarga la versión más reciente de Python para tu sistema operativo (Windows, macOS o Linux).",
+          "order": 1
+        },
+        {
+          "id": "python_2_sec_2",
+          "title": "Instalación paso a paso",
+          "content": "Durante la instalación, asegúrate de marcar la opción 'Add Python to PATH'. Esto te permitirá ejecutar Python desde cualquier lugar en tu terminal.",
+          "order": 2
+        },
+        {
+          "id": "python_2_sec_3",
+          "title": "Editores de código recomendados",
+          "content": "Algunos editores populares para Python son: VS Code, PyCharm, Sublime Text, y Jupyter Notebook. VS Code es gratuito y muy completo.",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "python_2_ex_1",
+          "title": "Verificar la instalación",
+          "code": "python --version",
+          "language": "bash",
+          "explanation": "Ejecuta este comando en tu terminal para verificar que Python se instaló correctamente."
+        }
+      ],
+      "summary": "Con Python instalado y un buen editor de código, estás listo para comenzar a programar.",
+      "keyPoints": [
+        "Descarga Python desde python.org",
+        "Marca 'Add Python to PATH' durante la instalación",
+        "Elige un editor de código (VS Code recomendado)",
+        "Verifica la instalación con python --version"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "python_2_ch_1",
+        "lessonId": "python_lesson_2",
+        "question": "¿Qué opción debes marcar durante la instalación de Python en Windows?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Install for all users",
+            "isCorrect": false
+          },
+          { "id": "opt_2", "text": "Add Python to PATH", "isCorrect": true },
+          {
+            "id": "opt_3",
+            "text": "Install pip separately",
+            "isCorrect": false
+          },
+          { "id": "opt_4", "text": "Enable debugging mode", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Marcar 'Add Python to PATH' permite ejecutar Python desde cualquier ubicación en la terminal.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "python_2_ch_2",
+        "lessonId": "python_lesson_2",
+        "question": "¿Cuál comando usas para verificar la versión de Python instalada?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "python -v", "isCorrect": false },
+          { "id": "opt_2", "text": "python --version", "isCorrect": true },
+          { "id": "opt_3", "text": "python check", "isCorrect": false },
+          { "id": "opt_4", "text": "python info", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "El comando correcto es 'python --version' o 'python -V'.",
+        "points": 10,
+        "order": 2
+      }
+    ]
+  },
+  {
+    "id": "python_lesson_3",
+    "courseId": "python",
+    "title": "Tu primer programa",
+    "description": "Escribe y ejecuta tu primer programa en Python.",
+    "order": 3,
+    "estimatedMinutes": 15,
+    "content": {
+      "introduction": "Es hora de escribir tu primer programa en Python. Aprenderás a usar la función print() y ejecutar código.",
+      "sections": [
+        {
+          "id": "python_3_sec_1",
+          "title": "La función print()",
+          "content": "La función print() es una de las más básicas en Python. Se usa para mostrar información en la pantalla.",
+          "order": 1
+        },
+        {
+          "id": "python_3_sec_2",
+          "title": "Escribiendo tu primer programa",
+          "content": "Abre tu editor de código, crea un archivo llamado 'hola.py' y escribe: print('¡Hola Mundo!')",
+          "order": 2
+        },
+        {
+          "id": "python_3_sec_3",
+          "title": "Ejecutando el programa",
+          "content": "Abre tu terminal, navega hasta donde guardaste el archivo y ejecuta: python hola.py",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "python_3_ex_1",
+          "title": "Hola Mundo",
+          "code": "print('¡Hola Mundo!')",
+          "language": "python",
+          "explanation": "Este programa imprime el mensaje '¡Hola Mundo!' en la pantalla."
+        },
+        {
+          "id": "python_3_ex_2",
+          "title": "Múltiples líneas",
+          "code": "print('Hola')\nprint('Mundo')\nprint('desde Python')",
+          "language": "python",
+          "explanation": "Puedes usar print() varias veces para imprimir múltiples líneas."
+        }
+      ],
+      "summary": "¡Felicidades! Has escrito y ejecutado tu primer programa en Python.",
+      "keyPoints": [
+        "print() muestra información en la pantalla",
+        "Los archivos Python tienen extensión .py",
+        "Se ejecutan con el comando: python nombre_archivo.py",
+        "Puedes usar comillas simples o dobles para texto"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "python_3_ch_1",
+        "lessonId": "python_lesson_3",
+        "question": "¿Qué función se usa para mostrar texto en la pantalla?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "show()", "isCorrect": false },
+          { "id": "opt_2", "text": "display()", "isCorrect": false },
+          { "id": "opt_3", "text": "print()", "isCorrect": true },
+          { "id": "opt_4", "text": "output()", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "La función print() es la que se usa para mostrar información en Python.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "python_3_ch_2",
+        "lessonId": "python_lesson_3",
+        "question": "¿Cuál es la extensión correcta para archivos Python?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": ".python", "isCorrect": false },
+          { "id": "opt_2", "text": ".py", "isCorrect": true },
+          { "id": "opt_3", "text": ".pt", "isCorrect": false },
+          { "id": "opt_4", "text": ".pyt", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Los archivos Python usan la extensión .py",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "python_3_ch_3",
+        "lessonId": "python_lesson_3",
+        "question": "¿Qué imprimirá este código: print('Hola', 'Mundo')?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "HolaMundo", "isCorrect": false },
+          { "id": "opt_2", "text": "Hola Mundo", "isCorrect": true },
+          { "id": "opt_3", "text": "Hola,Mundo", "isCorrect": false },
+          { "id": "opt_4", "text": "Error", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "print() separa múltiples argumentos con un espacio por defecto.",
+        "points": 10,
+        "order": 3
+      }
+    ]
+  }
+]

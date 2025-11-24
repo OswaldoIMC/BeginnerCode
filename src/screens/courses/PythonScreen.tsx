@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -9,55 +9,67 @@ import {
   Pressable,
   StatusBar,
   Image,
+  ActivityIndicator,
 } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { CommonActions } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { COLORS, FONT_SIZES } from "../../../types";
+import { COLORS, FONT_SIZES, Course, Lesson } from "../../../types";
 import * as Progress from "react-native-progress";
+import DataService from "../../services/DataService";
+
 const PythonImage = require("../../../assets/python.png");
 
 const PythonScreen = () => {
   const [menuVisible, setMenuVisible] = useState<boolean>(false);
+  const [course, setCourse] = useState<Course | null>(null);
+  const [lessons, setLessons] = useState<Lesson[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const navigation = useNavigation();
 
-  const lessons = [
-    { id: 1, title: "Introducción a Python", progress: 1.0 },
-    { id: 2, title: "Instalación y configuración del entorno", progress: 0.6 },
-    { id: 3, title: "Tu primer programa", progress: 0.3 },
-    { id: 4, title: "Variables y tipos de datos", progress: 0.4 },
-    { id: 5, title: "Operadores aritméticos y lógicos", progress: 0.9 },
-    { id: 6, title: "Entrada y salida de datos", progress: 0.1 },
-    { id: 7, title: "Condicionales", progress: 0.8 },
-    { id: 8, title: "Bucles", progress: 0.2 },
-    { id: 9, title: "Listas y tuplas", progress: 0.5 },
-    { id: 10, title: "Diccionarios y conjuntos", progress: 0.1 },
-    { id: 11, title: "Funciones", progress: 0.6 },
-    {
-      id: 12,
-      title: "Ámbito de variables y valores por defecto",
-      progress: 0.3,
-    },
-    { id: 13, title: "Manejo de errores", progress: 0.4 },
-    { id: 14, title: "Archivos", progress: 0.9 },
-    { id: 15, title: "Módulos y paquetes", progress: 0.1 },
-    { id: 16, title: "Introducción a las librerías estándar", progress: 0.8 },
-    {
-      id: 17,
-      title: "Listas por comprensión y expresiones lambda",
-      progress: 0.2,
-    },
-    { id: 18, title: "Introducción a la POO", progress: 0.5 },
-    { id: 19, title: "Proyecto final", progress: 0.0 },
-    { id: 20, title: "Siguientes pasos", progress: 0.6 },
-  ];
+  /**
+   * Carga los datos del curso y sus lecciones
+   */
+  useEffect(() => {
+    loadCourseData();
+  }, []);
+
+  /**
+   * Función para cargar los datos del curso
+   */
+  const loadCourseData = () => {
+    try {
+      setLoading(true);
+
+      // Obtener el curso de Python
+      const pythonCourse = DataService.getCourseById("python");
+      setCourse(pythonCourse || null);
+
+      // Obtener las lecciones del curso
+      const pythonLessons = DataService.getLessonsByCourse("python");
+      setLessons(pythonLessons);
+
+      setLoading(false);
+    } catch (error) {
+      console.error("Error al cargar los datos del curso:", error);
+      setLoading(false);
+    }
+  };
+
+  /**
+   * Maneja el clic en una lección
+   */
+  const handleLessonPress = (lesson: Lesson) => {
+    console.log("Navegando a lección:", lesson.title);
+    navigation.navigate("LessonDetail", { lessonId: lesson.id });
+  };
 
   /**
    * Maneja el cierre de sesión
    */
   const handleLogout = (): void => {
-    setMenuVisible(false); // Mostramos confirmación antes de cerrar sesión
+    setMenuVisible(false);
     navigation.dispatch(
       CommonActions.reset({
         index: 0,
@@ -71,7 +83,7 @@ const PythonScreen = () => {
    */
   const handleProfile = (): void => {
     console.log("Navegando a perfil de usuario");
-    setMenuVisible(false); // Aquí iría la navegación al perfil cuando esté implementado
+    setMenuVisible(false);
     handleComingSoon("Perfil de Usuario");
   };
 
@@ -79,7 +91,6 @@ const PythonScreen = () => {
    * Muestra mensaje de funcionalidad próximamente disponible
    */
   const handleComingSoon = (feature: string): void => {
-    // Implementación básica por ahora
     console.log(`Funcionalidad: ${feature} - Próximamente disponible`);
   };
 
@@ -89,6 +100,7 @@ const PythonScreen = () => {
   const openMenu = (): void => {
     setMenuVisible(true);
   };
+
   /**
    * Cierra el menú de hamburguesa
    */
@@ -96,9 +108,30 @@ const PythonScreen = () => {
     setMenuVisible(false);
   };
 
+  // Mostrar loading mientras se cargan los datos
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color={COLORS.primary} />
+        <Text style={styles.loadingText}>Cargando curso...</Text>
+      </View>
+    );
+  }
+
+  // Si no hay datos del curso, mostrar error
+  if (!course) {
+    return (
+      <View style={styles.loadingContainer}>
+        <MaterialIcons name="error-outline" size={50} color={COLORS.error} />
+        <Text style={styles.errorText}>No se pudo cargar el curso</Text>
+      </View>
+    );
+  }
+
   return (
     <SafeAreaProvider>
       <StatusBar backgroundColor={COLORS.primary} barStyle="light-content" />
+
       {/* Header Bar */}
       <View style={styles.headerBar}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -109,6 +142,7 @@ const PythonScreen = () => {
           <MaterialIcons name="menu" size={24} color="white" />
         </TouchableOpacity>
       </View>
+
       {/* Modal del menú de hamburguesa */}
       <Modal
         animationType="slide"
@@ -137,47 +171,126 @@ const PythonScreen = () => {
       </Modal>
 
       <ScrollView contentContainerStyle={styles.lessonList}>
-        {/* Grid de opciones principales */}
         <View style={styles.contentContainer}>
+          {/* Header del curso */}
           <View style={styles.headerContainer}>
             <Image source={PythonImage} style={styles.logo} />
-            <Text style={styles.courseTitle}>Python</Text>
+            <Text style={styles.courseTitle}>{course.name}</Text>
+
+            {/* Información adicional del curso */}
+            <View style={styles.courseInfoContainer}>
+              <View style={styles.infoItem}>
+                <MaterialIcons name="school" size={18} color={COLORS.primary} />
+                <Text style={styles.infoText}>
+                  {course.totalLessons} lecciones
+                </Text>
+              </View>
+              <View style={styles.infoItem}>
+                <MaterialIcons
+                  name="schedule"
+                  size={18}
+                  color={COLORS.primary}
+                />
+                <Text style={styles.infoText}>~{course.estimatedHours}h</Text>
+              </View>
+              <View style={styles.infoItem}>
+                <MaterialIcons
+                  name="trending-up"
+                  size={18}
+                  color={COLORS.primary}
+                />
+                <Text style={styles.infoText}>
+                  {course.difficulty === "beginner"
+                    ? "Principiante"
+                    : course.difficulty}
+                </Text>
+              </View>
+            </View>
           </View>
 
           {/* Descripción del curso */}
           <Text style={styles.subtitle}>Detalles del curso</Text>
-          <Text style={styles.description}>
-            Este curso esta basado en el lenguaje de programación Python, el
-            objetivo es aprender los fundamentos básicos del lenguaje, asi como
-            su estructura.
-          </Text>
-          <Text style={styles.lessonText}>Lecciones</Text>
+          <Text style={styles.description}>{course.description}</Text>
+
+          <Text style={styles.lessonText}>Lecciones ({lessons.length})</Text>
 
           {/* Lista de lecciones */}
-          {lessons.map((lesson) => (
-            <TouchableOpacity
-              key={lesson.id}
-              style={styles.lessonCard}
-              activeOpacity={0.8}
-            >
-              <View style={styles.lessonIconContainer}>
-                <Text style={styles.lessonNumber}>
-                  {lesson.id < 10 ? `0${lesson.id}` : lesson.id}
-                </Text>
-              </View>
-              <View style={styles.lessonInfo}>
-                <Text style={styles.lessonTitle}>{lesson.title}</Text>
-                <Progress.Bar
-                  progress={lesson.progress}
-                  width={null}
-                  color="#3776AB" // Color del curso Python
-                  unfilledColor="#E0E0E0"
-                  borderWidth={0}
-                  height={8}
-                />
-              </View>
-            </TouchableOpacity>
-          ))}
+          {lessons.map((lesson, index) => {
+            const progress = DataService.getLessonProgress(lesson.id);
+
+            return (
+              <TouchableOpacity
+                key={lesson.id}
+                style={styles.lessonCard}
+                activeOpacity={0.8}
+                onPress={() => handleLessonPress(lesson)}
+              >
+                <View style={styles.lessonIconContainer}>
+                  <Text style={styles.lessonNumber}>
+                    {lesson.order < 10 ? `0${lesson.order}` : lesson.order}
+                  </Text>
+                </View>
+                <View style={styles.lessonInfo}>
+                  <Text style={styles.lessonTitle}>{lesson.title}</Text>
+                  <Text style={styles.lessonDescription} numberOfLines={2}>
+                    {lesson.description}
+                  </Text>
+
+                  {/* Información adicional */}
+                  <View style={styles.lessonMetaContainer}>
+                    <View style={styles.lessonMeta}>
+                      <MaterialIcons
+                        name="access-time"
+                        size={14}
+                        color={COLORS.textSecondary}
+                      />
+                      <Text style={styles.lessonMetaText}>
+                        {lesson.estimatedMinutes} min
+                      </Text>
+                    </View>
+                    <View style={styles.lessonMeta}>
+                      <MaterialIcons
+                        name="quiz"
+                        size={14}
+                        color={COLORS.textSecondary}
+                      />
+                      <Text style={styles.lessonMetaText}>
+                        {lesson.challenges.length} retos
+                      </Text>
+                    </View>
+                  </View>
+
+                  {/* Barra de progreso */}
+                  <Progress.Bar
+                    progress={progress}
+                    width={null}
+                    color="#3776AB"
+                    unfilledColor="#E0E0E0"
+                    borderWidth={0}
+                    height={8}
+                    style={styles.progressBar}
+                  />
+
+                  {/* Porcentaje de progreso */}
+                  {progress > 0 && (
+                    <Text style={styles.progressText}>
+                      {Math.round(progress * 100)}% completado
+                    </Text>
+                  )}
+                </View>
+
+                {/* Icono de completado */}
+                {progress === 1.0 && (
+                  <MaterialIcons
+                    name="check-circle"
+                    size={24}
+                    color="#4CAF50"
+                    style={styles.completedIcon}
+                  />
+                )}
+              </TouchableOpacity>
+            );
+          })}
         </View>
       </ScrollView>
     </SafeAreaProvider>
@@ -190,6 +303,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.surface,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: COLORS.surface,
+  },
+  loadingText: {
+    marginTop: 10,
+    fontSize: FONT_SIZES.medium,
+    color: COLORS.textSecondary,
+  },
+  errorText: {
+    marginTop: 10,
+    fontSize: FONT_SIZES.medium,
+    color: COLORS.error,
   },
   headerBar: {
     flexDirection: "row",
@@ -246,7 +375,23 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: COLORS.text,
     textAlign: "center",
-    marginBottom: 10,
+    marginBottom: 15,
+  },
+  courseInfoContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 20,
+    marginTop: 10,
+  },
+  infoItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+  },
+  infoText: {
+    fontSize: FONT_SIZES.small,
+    color: COLORS.textSecondary,
+    fontWeight: "500",
   },
   menuOverlay: {
     flex: 1,
@@ -304,7 +449,9 @@ const styles = StyleSheet.create({
     color: COLORS.text,
     textAlign: "left",
     marginLeft: 10,
+    marginRight: 10,
     marginBottom: 20,
+    lineHeight: 24,
   },
   lessonText: {
     fontSize: 30,
@@ -329,11 +476,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.08,
     shadowRadius: 4,
     elevation: 3,
-    alignItems: "center",
+    alignItems: "flex-start",
+    position: "relative",
   },
   lessonIconContainer: {
-    width: 75,
-    height: 75,
+    width: 60,
+    height: 60,
     borderRadius: 12,
     backgroundColor: "#E3ECF9",
     justifyContent: "center",
@@ -341,7 +489,7 @@ const styles = StyleSheet.create({
     marginRight: 15,
   },
   lessonNumber: {
-    fontSize: 50,
+    fontSize: 28,
     fontWeight: "bold",
     color: COLORS.primary,
   },
@@ -349,9 +497,43 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   lessonTitle: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "600",
     color: "#142646",
+    marginBottom: 5,
+  },
+  lessonDescription: {
+    fontSize: 14,
+    color: COLORS.textSecondary,
+    marginBottom: 8,
+    lineHeight: 20,
+  },
+  lessonMetaContainer: {
+    flexDirection: "row",
+    gap: 15,
     marginBottom: 10,
+  },
+  lessonMeta: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+  },
+  lessonMetaText: {
+    fontSize: 12,
+    color: COLORS.textSecondary,
+  },
+  progressBar: {
+    marginTop: 5,
+  },
+  progressText: {
+    fontSize: 11,
+    color: COLORS.primary,
+    marginTop: 5,
+    fontWeight: "600",
+  },
+  completedIcon: {
+    position: "absolute",
+    top: 15,
+    right: 15,
   },
 });
