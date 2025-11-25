@@ -13,9 +13,11 @@ import {
 } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { CommonActions } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { COLORS, FONT_SIZES, Course, Lesson } from "../../../types";
+import { RootStackParamList } from "../../navigation/StackNavigator";
 import * as Progress from "react-native-progress";
 import DataService from "../../services/DataService";
 
@@ -26,7 +28,11 @@ const PythonScreen = () => {
   const [course, setCourse] = useState<Course | null>(null);
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const navigation = useNavigation();
+  const [lessonsProgress, setLessonsProgress] = useState<{
+    [key: string]: number;
+  }>({});
+  const navigation =
+    useNavigation<StackNavigationProp<RootStackParamList, "Python">>();
 
   /**
    * Carga los datos del curso y sus lecciones
@@ -38,7 +44,7 @@ const PythonScreen = () => {
   /**
    * Función para cargar los datos del curso
    */
-  const loadCourseData = () => {
+  const loadCourseData = async () => {
     try {
       setLoading(true);
 
@@ -49,6 +55,14 @@ const PythonScreen = () => {
       // Obtener las lecciones del curso
       const pythonLessons = DataService.getLessonsByCourse("python");
       setLessons(pythonLessons);
+
+      // Cargar progreso de todas las lecciones
+      const progressMap: { [key: string]: number } = {};
+      for (const lesson of pythonLessons) {
+        const progress = await DataService.getLessonProgress(lesson.id);
+        progressMap[lesson.id] = progress;
+      }
+      setLessonsProgress(progressMap);
 
       setLoading(false);
     } catch (error) {
@@ -84,7 +98,7 @@ const PythonScreen = () => {
   const handleProfile = (): void => {
     console.log("Navegando a perfil de usuario");
     setMenuVisible(false);
-    handleComingSoon("Perfil de Usuario");
+    navigation.navigate("Profile");
   };
 
   /**
@@ -216,7 +230,7 @@ const PythonScreen = () => {
 
           {/* Lista de lecciones */}
           {lessons.map((lesson, index) => {
-            const progress = DataService.getLessonProgress(lesson.id);
+            const progress = lessonsProgress[lesson.id] || 0;
 
             return (
               <TouchableOpacity

@@ -17,42 +17,31 @@ import { CommonActions } from "@react-navigation/native";
 import { RootStackParamList } from "../../navigation/StackNavigator";
 import { COLORS, FONT_SIZES } from "../../../types";
 import { ScrollView } from "react-native-gesture-handler";
+
 const PythonImage = require("../../../assets/python.png");
 const JavaImage = require("../../../assets/java.png");
 const JSImage = require("../../../assets/js.png");
 const CsharpImage = require("../../../assets/c-sharp.png");
 const CppImage = require("../../../assets/c-.png");
-/**
- * Tipo para las props de navegación de esta pantalla
- */
+
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
-/**
- * Props que recibe el componente HomeScreen
- */
+
 interface HomeScreenProps {
   navigation: HomeScreenNavigationProp;
 }
-/**
- * Interfaz para definir las opciones del menú principal
- */
+
 interface MenuOption {
   id: string;
   title: string;
   color: string;
-  route?: keyof RootStackParamList;
+  route?: "Python"; // Solo routes que no requieren params
   progress?: number;
   onPress?: () => void;
 }
-/**
- * Pantalla principal del sistema
- * Muestra el menú principal con las opciones disponibles
- */
+
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
-  // Estado para controlar la visibilidad del menú
   const [menuVisible, setMenuVisible] = useState<boolean>(false);
-  /**
-   * Opciones del menú principal
-   */
+
   const menuOptions: MenuOption[] = [
     {
       id: "Python",
@@ -95,11 +84,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
       color: "#525358ff",
     },
   ];
-  /**
-   * Maneja el cierre de sesión
-   */
+
   const handleLogout = (): void => {
-    setMenuVisible(false); // Mostramos confirmación antes de cerrar sesión
+    setMenuVisible(false);
     navigation.dispatch(
       CommonActions.reset({
         index: 0,
@@ -107,36 +94,25 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
       })
     );
   };
-  /**
-   * Maneja la navegación al perfil del usuario
-   */
+
   const handleProfile = (): void => {
     console.log("Navegando a perfil de usuario");
-    setMenuVisible(false); // Aquí iría la navegación al perfil cuando esté implementado
-    handleComingSoon("Perfil de Usuario");
+    setMenuVisible(false);
+    navigation.navigate("Profile");
   };
-  /**
-   * Muestra mensaje de funcionalidad próximamente disponible
-   */
+
   const handleComingSoon = (feature: string): void => {
-    // Implementación básica por ahora
     console.log(`Funcionalidad: ${feature} - Próximamente disponible`);
   };
-  /**
-   * Abre el menú de hamburguesa
-   */
+
   const openMenu = (): void => {
     setMenuVisible(true);
   };
-  /**
-   * Cierra el menú de hamburguesa
-   */
+
   const closeMenu = (): void => {
     setMenuVisible(false);
   };
-  /**
-   * Maneja la navegación a las diferentes pantallas
-   */
+
   const handleNavigation = (option: MenuOption): void => {
     if (option.route) {
       navigation.navigate(option.route);
@@ -144,9 +120,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
       option.onPress();
     }
   };
-  /**
-   * Renderiza una imagen segun el id
-   */
+
   const renderImage = (option: MenuOption) => {
     if (option.id === "Python") {
       return (
@@ -214,17 +188,16 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
       );
     }
   };
+
   return (
     <SafeAreaProvider style={styles.container}>
       <StatusBar backgroundColor={COLORS.primary} barStyle="light-content" />
-      {/* Header Bar */}
       <View style={styles.headerBar}>
         <Text style={styles.headerTitle}>BeginnerCode</Text>
         <TouchableOpacity style={styles.iconButton} onPress={openMenu}>
           <MaterialIcons name="menu" size={24} color="white" />
         </TouchableOpacity>
       </View>
-      {/* Modal del menú de hamburguesa */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -250,7 +223,6 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
           </View>
         </View>
       </Modal>
-      {/* Grid de opciones principales */}
       <ScrollView>
         <View style={styles.contentContainer}>
           <View style={styles.headerContainer}>
@@ -268,20 +240,14 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                 onPress={() => handleNavigation(option)}
                 activeOpacity={0.7}
               >
-                {/* Icono a la izquierda */}
                 <View style={styles.iconContainer}>{renderImage(option)}</View>
-
-                {/* Contenido de la derecha */}
                 <View style={styles.textContainer}>
                   <Text style={styles.cardText}>{option.title}</Text>
-
-                  {/* Progreso en texto */}
                   {typeof option.progress === "number" && (
                     <Text style={styles.progressText}>
                       Progreso: {Math.round(option.progress * 100)}%
                     </Text>
                   )}
-                  {/* Barra de progreso */}
                   {typeof option.progress === "number" && (
                     <View style={styles.progressBarBackground}>
                       <View
@@ -304,9 +270,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     </SafeAreaProvider>
   );
 };
-/**
- * Estilos del componente
- */
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -463,4 +427,5 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
 });
+
 export default HomeScreen;

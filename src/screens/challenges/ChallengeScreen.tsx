@@ -9,6 +9,7 @@ import {
   ScrollView,
   Modal,
   Animated,
+  Alert,
 } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -23,6 +24,7 @@ import {
   ChallengeOption,
 } from "../../../types";
 import DataService from "../../services/DataService";
+import StorageService from "../../services/StorageService";
 import * as Progress from "react-native-progress";
 
 /**
@@ -138,8 +140,59 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
         useNativeDriver: true,
       }).start();
     } else {
-      // Mostrar resultados finales
+      // Guardar progreso antes de mostrar resultados
+      saveProgress();
       setShowResults(true);
+    }
+  };
+
+  /**
+   * Guarda el progreso de la lección
+   */
+  const saveProgress = async () => {
+    if (!lesson) return;
+
+    try {
+      const percentage = Math.round(
+        (correctAnswers / lesson.challenges.length) * 100
+      );
+      const allChallengesIds = lesson.challenges.map((c) => c.id);
+
+      // Guardar progreso
+      await StorageService.saveLessonProgress(
+        lesson.id,
+        lesson.courseId,
+        allChallengesIds,
+        percentage,
+        lesson.challenges.length
+      );
+
+      // Actualizar puntos totales
+      const totalPoints = correctAnswers * 10; // 10 puntos por respuesta correcta
+      await StorageService.updateTotalPoints(totalPoints);
+
+      // Verificar y desbloquear medallas
+      const profile = await StorageService.getUserProfile();
+      if (profile) {
+        const unlockedBadges = await StorageService.checkAndUnlockBadges(
+          profile
+        );
+
+        if (unlockedBadges.length > 0) {
+          // Mostrar notificación de medallas desbloqueadas
+          setTimeout(() => {
+            Alert.alert(
+              "¡Nueva Medalla! 🏆",
+              `Has desbloqueado ${unlockedBadges.length} medalla(s) nueva(s)`,
+              [{ text: "¡Genial!" }]
+            );
+          }, 1000);
+        }
+      }
+
+      console.log("Progreso guardado exitosamente");
+    } catch (error) {
+      console.error("Error al guardar progreso:", error);
     }
   };
 
@@ -176,7 +229,7 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
     challenge: Challenge
   ): string => {
     if (!isAnswered) {
-      return COLORS.card;
+      return selectedOption === option.id ? COLORS.primary : COLORS.card;
     }
 
     if (option.id === challenge.correctAnswerId) {
@@ -313,7 +366,7 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
               onPress={handleRetry}
             >
               <MaterialIcons name="refresh" size={24} color="#fff" />
-              <Text style={styles.resultButtonText}>Intentar de nuevo</Text>
+              <Text style={styles.resultButtonText}>Intentar de Nuevo</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -479,7 +532,7 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
             onPress={handleConfirmAnswer}
             disabled={!selectedOption}
           >
-            <Text style={styles.actionButtonText}>Confirmar respuesta</Text>
+            <Text style={styles.actionButtonText}>Confirmar Respuesta</Text>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity
@@ -488,7 +541,7 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
           >
             <Text style={styles.actionButtonText}>
               {currentChallengeIndex < lesson.challenges.length - 1
-                ? "Siguiente pregunta"
+                ? "Siguiente Pregunta"
                 : "Ver Resultados"}
             </Text>
             <MaterialIcons name="arrow-forward" size={24} color="#fff" />

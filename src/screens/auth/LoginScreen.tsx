@@ -12,58 +12,37 @@ import {
   Dimensions,
 } from "react-native";
 
-import { StackNavigationProp } from "@react-navigation/stack"; // Importamos los tipos que definimos
+import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../navigation/StackNavigator";
-import { LoginFormData, COLORS, FONT_SIZES } from "../../../types/index"; // Importamos la imagen
+import { LoginFormData, COLORS, FONT_SIZES } from "../../../types/index";
+import StorageService from "../../services/StorageService";
+
 const loginImage = require("../../../assets/Login_Image_NoBG.png");
 const loginHeader = require("../../../assets/login_header.png");
 const { height } = Dimensions.get("window");
-
-/**
- * Tipo para las props de navegación de esta pantalla
- */
 
 type LoginScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   "Login"
 >;
 
-/**
- * Props que recibe el componente LoginScreen
- */
-
 interface LoginScreenProps {
   navigation: LoginScreenNavigationProp;
 }
 
-/**
- * Pantalla de inicio de sesión
- * Permite a los usuarios autenticarse en el sistema
- */
-
 const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
-  // Estados del formulario usando el tipo LoginFormData
   const [formData, setFormData] = useState<LoginFormData>({
     username: "",
     password: "",
-  }); // Estado para controlar si está cargando
+  });
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  /**
-   * Actualiza los datos del formulario
-   * @param field - Campo a actualizar ('username' o 'password')
-   * @param value - Nuevo valor del campo
-   */
+
   const updateFormData = (field: keyof LoginFormData, value: string): void => {
     setFormData((prevData) => ({
       ...prevData,
       [field]: value,
     }));
   };
-
-  /**
-   * Valida que los campos del formulario no estén vacíos
-   * returns true si los campos son válidos, false en caso contrario
-   */
 
   const validateForm = (): boolean => {
     if (!formData.username.trim()) {
@@ -80,9 +59,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
     }
     return true;
   };
-  /**
-   * Maneja el proceso de inicio de sesión
-   */
+
   const handleLogin = (): void => {
     if (!validateForm()) {
       return;
@@ -103,21 +80,38 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
       { cancelable: false }
     );
   };
-  /**
-   * Simula el proceso de autenticación
-   */
-  const authenticateUser = (): void => {
-    setIsLoading(true); // Simulamos una petición al servidor (2 segundos)
-    setTimeout(() => {
-      setIsLoading(false); // Aquí iría la lógica real de autenticación
-      // Por ahora, cualquier usuario/contraseña es válido
-      console.log("Usuario autenticado:", formData.username); // Navegamos a la pantalla principal
-      navigation.replace("Home");
-    }, 2000);
+
+  const authenticateUser = async (): Promise<void> => {
+    setIsLoading(true);
+
+    try {
+      // Verificar si ya existe un perfil
+      let profile = await StorageService.getUserProfile();
+
+      if (!profile) {
+        // Crear perfil inicial para nuevo usuario
+        profile = await StorageService.createInitialProfile(formData.username);
+        console.log("Perfil inicial creado para:", formData.username);
+      } else {
+        console.log("Usuario existente:", profile.username);
+      }
+
+      // Simulamos delay de red
+      setTimeout(() => {
+        setIsLoading(false);
+        console.log("Usuario autenticado:", formData.username);
+        navigation.replace("Home");
+      }, 1500);
+    } catch (error) {
+      console.error("Error en autenticación:", error);
+      setIsLoading(false);
+      Alert.alert(
+        "Error",
+        "Hubo un problema al iniciar sesión. Intenta de nuevo."
+      );
+    }
   };
-  /**
-   * Maneja la recuperación de contraseña
-   */
+
   const handleForgotPassword = (): void => {
     Alert.alert(
       "Recuperación de contraseña",
@@ -125,9 +119,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
       [{ text: "Entendido" }]
     );
   };
-  /**
-   * Maneja el registro de nuevo usuario
-   */
+
   const handleRegister = (): void => {
     Alert.alert(
       "Registro",
@@ -135,19 +127,18 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
       [{ text: "Entendido" }]
     );
   };
+
   return (
     <KeyboardAvoidingView
       style={styles.container}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <View style={styles.content}>
-        {/* Logo de la aplicación */}
         <Image source={loginHeader} style={styles.loginHeader} />
         <Image source={loginImage} style={styles.loginImage} />
         <Text style={styles.title}>BeginnerCode</Text>
         <Text style={styles.subtitle}>Inicio de sesión</Text>
         <View style={styles.formContainer}>
-          {/* Campo Usuario */}
           <TextInput
             style={styles.input}
             placeholder="Usuario"
@@ -158,7 +149,6 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
             autoCorrect={false}
             editable={!isLoading}
           />
-          {/* Campo Contraseña */}
           <TextInput
             style={styles.input}
             placeholder="Contraseña"
@@ -173,7 +163,6 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
           <TouchableOpacity onPress={handleForgotPassword}>
             <Text style={styles.linkForg}>¿Olvidaste tu contraseña?</Text>
           </TouchableOpacity>
-          {/* Botón de Login */}
           <TouchableOpacity
             style={[styles.loginButton, { opacity: isLoading ? 0.6 : 1 }]}
             onPress={handleLogin}
@@ -184,7 +173,6 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
             </Text>
           </TouchableOpacity>
         </View>
-        {/* Enlaces adicionales */}
         <View style={styles.registerContainer}>
           <Text style={styles.registerText}>¿No tienes una cuenta?</Text>
           <TouchableOpacity onPress={handleRegister} activeOpacity={0.6}>
@@ -196,9 +184,6 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
   );
 };
 
-/**
- * Estilos del componente
- */
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -209,7 +194,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
   },
-
   loginHeader: {
     position: "absolute",
     top: 0,
@@ -217,7 +201,6 @@ const styles = StyleSheet.create({
     height: height * 0.3,
     resizeMode: "cover",
   },
-
   loginImage: {
     position: "absolute",
     top: height * 0.3 - 60,
@@ -296,4 +279,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
 export default LoginScreen;

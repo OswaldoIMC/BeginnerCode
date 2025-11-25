@@ -3,6 +3,7 @@
  */
 
 import { Course, Lesson } from "../../types";
+import StorageService from "./StorageService";
 
 // Importar los datos JSON
 import pythonCourseData from "../../data/courses/python.json";
@@ -56,45 +57,37 @@ class DataService {
 
   /**
    * Obtiene el número de lecciones completadas de un curso
-   * (Por ahora devuelve 0, lo implementaremos con AsyncStorage después)
    */
-  getCompletedLessonsCount(courseId: string): number {
-    // TODO: Implementar con AsyncStorage
-    return 0;
+  async getCompletedLessonsCount(courseId: string): Promise<number> {
+    const courseProgress = await StorageService.getCourseProgress(courseId);
+    return courseProgress ? courseProgress.completedLessons.length : 0;
   }
 
   /**
    * Calcula el progreso de un curso (0 a 1)
-   * (Por ahora devuelve valores aleatorios de ejemplo)
    */
-  getCourseProgress(courseId: string): number {
-    // TODO: Implementar con AsyncStorage
-    // Por ahora devolvemos valores de ejemplo
-    const progressMap: { [key: string]: number } = {
-      python: 0.15,
-      java: 0.0,
-      javascript: 0.0,
-    };
-    return progressMap[courseId] || 0;
+  async getCourseProgress(courseId: string): Promise<number> {
+    const courseProgress = await StorageService.getCourseProgress(courseId);
+    return courseProgress ? courseProgress.progressPercentage : 0;
   }
 
   /**
    * Obtiene el progreso de una lección específica (0 a 1)
    */
-  getLessonProgress(lessonId: string): number {
-    // TODO: Implementar con AsyncStorage
-    // Por ahora simulamos progresos diferentes
-    const lessons = pythonLessonsData as Lesson[];
-    const lessonIndex = lessons.findIndex((l) => l.id === lessonId);
+  async getLessonProgress(lessonId: string): Promise<number> {
+    const lessonProgress = await StorageService.getLessonProgress(lessonId);
 
-    if (lessonIndex === -1) return 0;
+    if (!lessonProgress) return 0;
+    if (lessonProgress.completed) return 1.0;
 
-    // Simulamos que las primeras lecciones tienen más progreso
-    if (lessonIndex === 0) return 1.0;
-    if (lessonIndex === 1) return 0.6;
-    if (lessonIndex === 2) return 0.3;
+    // Calcular progreso basado en retos completados
+    const lesson = this.getLessonById(lessonId);
+    if (!lesson) return 0;
 
-    return Math.random() * 0.5; // Progreso aleatorio para las demás
+    const totalChallenges = lesson.challenges.length;
+    const completedChallenges = lessonProgress.challengesCompleted.length;
+
+    return completedChallenges / totalChallenges;
   }
 }
 
