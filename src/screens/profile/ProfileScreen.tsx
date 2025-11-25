@@ -83,7 +83,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
           onPress: async () => {
             await StorageService.clearAllData();
             Alert.alert(
-              "Progreso Reiniciado",
+              "Progreso reiniciado",
               "Tu progreso ha sido reiniciado. Por favor, inicia sesión nuevamente.",
               [
                 {
@@ -110,7 +110,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
    */
   const handleLogout = () => {
     Alert.alert(
-      "Cerrar Sesión",
+      "Cerrar sesión",
       "¿Estás seguro de que quieres cerrar sesión?",
       [
         {
@@ -118,7 +118,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
           style: "cancel",
         },
         {
-          text: "Cerrar Sesión",
+          text: "Cerrar sesión",
           style: "destructive",
           onPress: () => {
             navigation.dispatch(
@@ -293,13 +293,13 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
             {renderStatCard(
               "school",
               stats.totalLessonsCompleted,
-              "Lecciones Completadas",
+              "Lecciones completadas",
               "#4CAF50"
             )}
             {renderStatCard(
               "emoji-events",
               stats.totalPoints,
-              "Puntos Totales",
+              "Puntos totales",
               "#FF9800"
             )}
             {renderStatCard(
@@ -311,7 +311,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
             {renderStatCard(
               "menu-book",
               stats.coursesStarted,
-              "Cursos Iniciados",
+              "Cursos iniciados",
               "#2196F3"
             )}
           </View>
@@ -336,7 +336,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>
             <MaterialIcons name="info" size={24} color={COLORS.primary} />{" "}
-            Información de la Cuenta
+            Información de la cuenta
           </Text>
           <View style={styles.infoContainer}>
             <View style={styles.infoRow}>
@@ -400,8 +400,8 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
               )
             }
           >
-            <MaterialIcons name="language" size={24} color={COLORS.primary} />
-            <Text style={styles.optionText}>Idioma</Text>
+            <MaterialIcons name="dark-mode" size={24} color={COLORS.primary} />
+            <Text style={styles.optionText}>Tema</Text>
             <MaterialIcons
               name="chevron-right"
               size={24}
@@ -433,7 +433,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
           >
             <MaterialIcons name="refresh" size={24} color={COLORS.error} />
             <Text style={[styles.optionText, { color: COLORS.error }]}>
-              Reiniciar Progreso
+              Reiniciar progreso
             </Text>
             <MaterialIcons
               name="chevron-right"
@@ -448,7 +448,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
           >
             <MaterialIcons name="logout" size={24} color={COLORS.error} />
             <Text style={[styles.optionText, { color: COLORS.error }]}>
-              Cerrar Sesión
+              Cerrar sesión
             </Text>
             <MaterialIcons
               name="chevron-right"

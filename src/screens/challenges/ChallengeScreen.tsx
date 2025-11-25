@@ -229,7 +229,7 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
     challenge: Challenge
   ): string => {
     if (!isAnswered) {
-      return selectedOption === option.id ? COLORS.primary : COLORS.card;
+      return COLORS.card;
     }
 
     if (option.id === challenge.correctAnswerId) {
@@ -366,7 +366,7 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
               onPress={handleRetry}
             >
               <MaterialIcons name="refresh" size={24} color="#fff" />
-              <Text style={styles.resultButtonText}>Intentar de Nuevo</Text>
+              <Text style={styles.resultButtonText}>Intentar de nuevo</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -532,7 +532,7 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
             onPress={handleConfirmAnswer}
             disabled={!selectedOption}
           >
-            <Text style={styles.actionButtonText}>Confirmar Respuesta</Text>
+            <Text style={styles.actionButtonText}>Confirmar respuesta</Text>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity
@@ -541,7 +541,7 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
           >
             <Text style={styles.actionButtonText}>
               {currentChallengeIndex < lesson.challenges.length - 1
-                ? "Siguiente Pregunta"
+                ? "Siguiente pregunta"
                 : "Ver Resultados"}
             </Text>
             <MaterialIcons name="arrow-forward" size={24} color="#fff" />
