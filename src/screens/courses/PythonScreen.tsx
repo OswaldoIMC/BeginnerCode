@@ -39,7 +39,14 @@ const PythonScreen = () => {
    */
   useEffect(() => {
     loadCourseData();
-  }, []);
+
+    // Listener para recargar cuando la pantalla recibe foco
+    const unsubscribe = navigation.addListener("focus", () => {
+      loadCourseData();
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   /**
    * Función para cargar los datos del curso
@@ -164,24 +171,104 @@ const PythonScreen = () => {
         visible={menuVisible}
         onRequestClose={closeMenu}
       >
-        <View style={styles.menuOverlay}>
-          <View style={styles.menuContainer}>
-            <Text style={styles.menuTitle}>Menú</Text>
-            <Pressable style={styles.menuOption} onPress={handleProfile}>
-              <MaterialIcons name="person" size={20} color={COLORS.primary} />
-              <Text style={styles.menuText}>Mi Perfil</Text>
-            </Pressable>
-            <Pressable style={styles.menuOption} onPress={handleLogout}>
-              <MaterialIcons name="logout" size={20} color={COLORS.error} />
-              <Text style={[styles.menuText, { color: COLORS.error }]}>
-                Cerrar Sesión
-              </Text>
-            </Pressable>
-            <Pressable style={styles.closeMenuButton} onPress={closeMenu}>
-              <Text style={styles.closeMenuText}>Cancelar</Text>
-            </Pressable>
-          </View>
-        </View>
+        <Pressable style={styles.menuOverlay} onPress={closeMenu}>
+          <Pressable
+            style={styles.menuContainer}
+            onPress={(e) => e.stopPropagation()}
+          >
+            {/* Header del modal */}
+            <View style={styles.modalHeader}>
+              <MaterialIcons name="menu" size={28} color={COLORS.primary} />
+              <Text style={styles.menuTitle}>Menú</Text>
+              <TouchableOpacity onPress={closeMenu} style={styles.closeButton}>
+                <MaterialIcons
+                  name="close"
+                  size={24}
+                  color={COLORS.textSecondary}
+                />
+              </TouchableOpacity>
+            </View>
+
+            {/* Opciones del menú */}
+            <View style={styles.menuOptions}>
+              <Pressable style={styles.menuOption} onPress={handleProfile}>
+                <View style={styles.menuIconContainer}>
+                  <MaterialIcons
+                    name="person"
+                    size={24}
+                    color={COLORS.primary}
+                  />
+                </View>
+                <View style={styles.menuTextContainer}>
+                  <Text style={styles.menuOptionTitle}>Mi Perfil</Text>
+                  <Text style={styles.menuOptionDescription}>
+                    Ver estadísticas y medallas
+                  </Text>
+                </View>
+                <MaterialIcons
+                  name="chevron-right"
+                  size={24}
+                  color={COLORS.textSecondary}
+                />
+              </Pressable>
+
+              <Pressable
+                style={styles.menuOption}
+                onPress={() => {
+                  closeMenu();
+                  navigation.navigate("Settings");
+                }}
+              >
+                <View style={styles.menuIconContainer}>
+                  <MaterialIcons
+                    name="settings"
+                    size={24}
+                    color={COLORS.primary}
+                  />
+                </View>
+                <View style={styles.menuTextContainer}>
+                  <Text style={styles.menuOptionTitle}>Configuración</Text>
+                  <Text style={styles.menuOptionDescription}>
+                    Ajustes de la aplicación
+                  </Text>
+                </View>
+                <MaterialIcons
+                  name="chevron-right"
+                  size={24}
+                  color={COLORS.textSecondary}
+                />
+              </Pressable>
+
+              <View style={styles.menuDivider} />
+
+              <Pressable style={styles.menuOption} onPress={handleLogout}>
+                <View
+                  style={[
+                    styles.menuIconContainer,
+                    { backgroundColor: COLORS.error + "15" },
+                  ]}
+                >
+                  <MaterialIcons name="logout" size={24} color={COLORS.error} />
+                </View>
+                <View style={styles.menuTextContainer}>
+                  <Text
+                    style={[styles.menuOptionTitle, { color: COLORS.error }]}
+                  >
+                    Cerrar Sesión
+                  </Text>
+                  <Text style={styles.menuOptionDescription}>
+                    Salir de tu cuenta
+                  </Text>
+                </View>
+                <MaterialIcons
+                  name="chevron-right"
+                  size={24}
+                  color={COLORS.error}
+                />
+              </Pressable>
+            </View>
+          </Pressable>
+        </Pressable>
       </Modal>
 
       <ScrollView contentContainerStyle={styles.lessonList}>
@@ -414,42 +501,68 @@ const styles = StyleSheet.create({
   },
   menuContainer: {
     backgroundColor: COLORS.surface,
-    padding: 20,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    minHeight: 200,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    paddingBottom: 20,
+    maxHeight: "70%",
+  },
+  modalHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.background,
   },
   menuTitle: {
-    fontSize: FONT_SIZES.large,
+    fontSize: FONT_SIZES.xlarge,
     fontWeight: "bold",
     color: COLORS.text,
-    textAlign: "center",
-    marginBottom: 20,
+    flex: 1,
+    marginLeft: 12,
+  },
+  closeButton: {
+    padding: 4,
+  },
+  menuOptions: {
+    paddingHorizontal: 12,
+    paddingTop: 8,
   },
   menuOption: {
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 15,
-    paddingHorizontal: 10,
-    borderRadius: 8,
-    marginBottom: 5,
+    paddingVertical: 16,
+    paddingHorizontal: 12,
+    borderRadius: 12,
+    marginBottom: 4,
   },
-  menuText: {
+  menuIconContainer: {
+    width: 44,
+    height: 44,
+    borderRadius: 12,
+    backgroundColor: COLORS.primary + "15",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 12,
+  },
+  menuTextContainer: {
+    flex: 1,
+  },
+  menuOptionTitle: {
     fontSize: FONT_SIZES.medium,
+    fontWeight: "600",
     color: COLORS.text,
-    marginLeft: 15,
-    fontWeight: "500",
+    marginBottom: 2,
   },
-  closeMenuButton: {
-    alignSelf: "center",
-    marginTop: 15,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+  menuOptionDescription: {
+    fontSize: FONT_SIZES.small,
+    color: COLORS.textSecondary,
   },
-  closeMenuText: {
-    fontSize: FONT_SIZES.medium,
-    color: COLORS.text,
-    fontWeight: "500",
+  menuDivider: {
+    height: 1,
+    backgroundColor: COLORS.background,
+    marginVertical: 8,
   },
   subtitle: {
     fontSize: 23,

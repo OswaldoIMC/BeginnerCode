@@ -7,6 +7,7 @@ import PythonScreen from "../screens/courses/PythonScreen";
 import LessonDetailScreen from "../screens/lessons/LessonDetailScreen";
 import ChallengeScreen from "../screens/challenges/ChallengeScreen";
 import ProfileScreen from "../screens/profile/ProfileScreen";
+import SettingsScreen from "../screens/settings/SettingsScreen";
 
 /**
  * Definición de los tipos para los parámetros de navegación
@@ -24,6 +25,7 @@ export type RootStackParamList = {
     lessonId: string;
   };
   Profile: undefined;
+  Settings: undefined;
 };
 
 /**
@@ -97,6 +99,15 @@ const StackNavigator: React.FC = () => {
         component={ProfileScreen}
         options={{
           title: "Mi Perfil",
+        }}
+      />
+
+      {/* Pantalla de configuración */}
+      <Stack.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          title: "Configuración",
         }}
       />
     </Stack.Navigator>

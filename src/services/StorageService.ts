@@ -232,23 +232,25 @@ class StorageService {
         profile.lessonsProgress.push(lessonProgress);
       }
 
-      // Actualizar progreso del curso
-      await this.updateCourseProgressPercentage(courseId, profile);
-
       // Si completó la lección, añadirla a completedLessons del curso
-      if (completed) {
-        const courseProgress = profile.coursesProgress.find(
-          (cp) => cp.courseId === courseId
-        );
-        if (
-          courseProgress &&
-          !courseProgress.completedLessons.includes(lessonId)
-        ) {
+      const courseProgress = profile.coursesProgress.find(
+        (cp) => cp.courseId === courseId
+      );
+      if (completed && courseProgress) {
+        if (!courseProgress.completedLessons.includes(lessonId)) {
           courseProgress.completedLessons.push(lessonId);
+          console.log(
+            `Lección ${lessonId} añadida a completadas. Total: ${courseProgress.completedLessons.length}`
+          );
         }
       }
 
-      return await this.saveUserProfile(profile);
+      // Actualizar progreso del curso
+      await this.updateCourseProgressPercentage(courseId, profile);
+
+      const saved = await this.saveUserProfile(profile);
+      console.log(`Progreso guardado: ${saved}`);
+      return saved;
     } catch (error) {
       console.error("Error al guardar progreso de lección:", error);
       return false;
@@ -268,10 +270,24 @@ class StorageService {
     if (!courseProgress) return;
 
     const completedLessons = courseProgress.completedLessons.length;
-    // Asumimos que conocemos el total de lecciones (esto se puede obtener del DataService)
-    const totalLessons = 20; // Python tiene 20 lecciones
 
-    courseProgress.progressPercentage = completedLessons / totalLessons;
+    // Obtener el total de lecciones del curso desde los datos
+    let totalLessons = 20; // Por defecto Python tiene 20 lecciones
+
+    // Podrías mejorar esto importando DataService, pero por ahora es estático
+    if (courseId === "python") {
+      totalLessons = 20;
+    }
+
+    courseProgress.progressPercentage =
+      totalLessons > 0 ? completedLessons / totalLessons : 0;
+    courseProgress.totalPoints = profile.lessonsProgress
+      .filter((lp) => lp.completed)
+      .reduce((sum, lp) => sum + lp.score, 0);
+
+    console.log(
+      `Progreso del curso ${courseId}: ${completedLessons}/${totalLessons} = ${courseProgress.progressPercentage}`
+    );
   }
 
   /**

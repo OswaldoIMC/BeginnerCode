@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -17,6 +17,7 @@ import { CommonActions } from "@react-navigation/native";
 import { RootStackParamList } from "../../navigation/StackNavigator";
 import { COLORS, FONT_SIZES } from "../../../types";
 import { ScrollView } from "react-native-gesture-handler";
+import DataService from "../../services/DataService";
 
 const PythonImage = require("../../../assets/python.png");
 const JavaImage = require("../../../assets/java.png");
@@ -41,41 +42,59 @@ interface MenuOption {
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const [menuVisible, setMenuVisible] = useState<boolean>(false);
+  const [pythonProgress, setPythonProgress] = useState<number>(0);
+
+  // Cargar progreso al montar y cuando vuelve el foco
+  useEffect(() => {
+    loadProgress();
+
+    const unsubscribe = navigation.addListener("focus", () => {
+      loadProgress();
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  const loadProgress = async () => {
+    const progress = await DataService.getCourseProgress("python");
+    console.log("Progreso de Python en Home:", progress); // Debug
+    setPythonProgress(progress);
+  };
 
   const menuOptions: MenuOption[] = [
     {
       id: "Python",
       title: "Python",
       color: "#3963bdff",
-      progress: 0,
+      progress: pythonProgress, // Usar el estado
       route: "Python",
     },
     {
       id: "Java",
       title: "Java",
       color: "#f47f36ff",
-      progress: 0.2,
+      progress: 0,
       onPress: () => handleComingSoon("Java"),
     },
     {
       id: "Javascript",
       title: "Javascript",
       color: "#faf32bff",
-      progress: 0.4,
+      progress: 0,
       onPress: () => handleComingSoon("Javascript"),
     },
     {
       id: "C#",
       title: "C#",
       color: "#a116a3ff",
-      progress: 0.8,
+      progress: 0,
       onPress: () => handleComingSoon("C#"),
     },
     {
       id: "C++",
       title: "C++",
       color: "#122e92ff",
-      progress: 1,
+      progress: 0,
       onPress: () => handleComingSoon("C++"),
     },
     {
@@ -198,30 +217,111 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
           <MaterialIcons name="menu" size={24} color="white" />
         </TouchableOpacity>
       </View>
+      {/* Modal del menú de hamburguesa */}
       <Modal
         animationType="slide"
         transparent={true}
         visible={menuVisible}
         onRequestClose={closeMenu}
       >
-        <View style={styles.menuOverlay}>
-          <View style={styles.menuContainer}>
-            <Text style={styles.menuTitle}>Menú</Text>
-            <Pressable style={styles.menuOption} onPress={handleProfile}>
-              <MaterialIcons name="person" size={20} color={COLORS.primary} />
-              <Text style={styles.menuText}>Mi Perfil</Text>
-            </Pressable>
-            <Pressable style={styles.menuOption} onPress={handleLogout}>
-              <MaterialIcons name="logout" size={20} color={COLORS.error} />
-              <Text style={[styles.menuText, { color: COLORS.error }]}>
-                Cerrar Sesión
-              </Text>
-            </Pressable>
-            <Pressable style={styles.closeMenuButton} onPress={closeMenu}>
-              <Text style={styles.closeMenuText}>Cancelar</Text>
-            </Pressable>
-          </View>
-        </View>
+        <Pressable style={styles.menuOverlay} onPress={closeMenu}>
+          <Pressable
+            style={styles.menuContainer}
+            onPress={(e) => e.stopPropagation()}
+          >
+            {/* Header del modal */}
+            <View style={styles.modalHeader}>
+              <MaterialIcons name="menu" size={28} color={COLORS.primary} />
+              <Text style={styles.menuTitle}>Menú</Text>
+              <TouchableOpacity onPress={closeMenu} style={styles.closeButton}>
+                <MaterialIcons
+                  name="close"
+                  size={24}
+                  color={COLORS.textSecondary}
+                />
+              </TouchableOpacity>
+            </View>
+
+            {/* Opciones del menú */}
+            <View style={styles.menuOptions}>
+              <Pressable style={styles.menuOption} onPress={handleProfile}>
+                <View style={styles.menuIconContainer}>
+                  <MaterialIcons
+                    name="person"
+                    size={24}
+                    color={COLORS.primary}
+                  />
+                </View>
+                <View style={styles.menuTextContainer}>
+                  <Text style={styles.menuOptionTitle}>Mi Perfil</Text>
+                  <Text style={styles.menuOptionDescription}>
+                    Ver estadísticas y medallas
+                  </Text>
+                </View>
+                <MaterialIcons
+                  name="chevron-right"
+                  size={24}
+                  color={COLORS.textSecondary}
+                />
+              </Pressable>
+
+              <Pressable
+                style={styles.menuOption}
+                onPress={() => {
+                  closeMenu();
+                  navigation.navigate("Settings");
+                }}
+              >
+                <View style={styles.menuIconContainer}>
+                  <MaterialIcons
+                    name="settings"
+                    size={24}
+                    color={COLORS.primary}
+                  />
+                </View>
+                <View style={styles.menuTextContainer}>
+                  <Text style={styles.menuOptionTitle}>Configuración</Text>
+                  <Text style={styles.menuOptionDescription}>
+                    Ajustes de la aplicación
+                  </Text>
+                </View>
+                <MaterialIcons
+                  name="chevron-right"
+                  size={24}
+                  color={COLORS.textSecondary}
+                />
+              </Pressable>
+
+              <View style={styles.menuDivider} />
+
+              <Pressable style={styles.menuOption} onPress={handleLogout}>
+                <View
+                  style={[
+                    styles.menuIconContainer,
+                    { backgroundColor: COLORS.error + "15" },
+                  ]}
+                >
+                  <MaterialIcons name="logout" size={24} color={COLORS.error} />
+                </View>
+                <View style={styles.menuTextContainer}>
+                  <Text
+                    style={[styles.menuOptionTitle, { color: COLORS.error }]}
+                  >
+                    Cerrar Sesión
+                  </Text>
+                  <Text style={styles.menuOptionDescription}>
+                    Salir de tu cuenta
+                  </Text>
+                </View>
+                <MaterialIcons
+                  name="chevron-right"
+                  size={24}
+                  color={COLORS.error}
+                />
+              </Pressable>
+            </View>
+          </Pressable>
+        </Pressable>
       </Modal>
       <ScrollView>
         <View style={styles.contentContainer}>
@@ -366,42 +466,68 @@ const styles = StyleSheet.create({
   },
   menuContainer: {
     backgroundColor: COLORS.surface,
-    padding: 20,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    minHeight: 200,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    paddingBottom: 20,
+    maxHeight: "70%",
+  },
+  modalHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.background,
   },
   menuTitle: {
-    fontSize: FONT_SIZES.large,
+    fontSize: FONT_SIZES.xlarge,
     fontWeight: "bold",
     color: COLORS.text,
-    textAlign: "center",
-    marginBottom: 20,
+    flex: 1,
+    marginLeft: 12,
+  },
+  closeButton: {
+    padding: 4,
+  },
+  menuOptions: {
+    paddingHorizontal: 12,
+    paddingTop: 8,
   },
   menuOption: {
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 15,
-    paddingHorizontal: 10,
-    borderRadius: 8,
-    marginBottom: 5,
+    paddingVertical: 16,
+    paddingHorizontal: 12,
+    borderRadius: 12,
+    marginBottom: 4,
   },
-  menuText: {
+  menuIconContainer: {
+    width: 44,
+    height: 44,
+    borderRadius: 12,
+    backgroundColor: COLORS.primary + "15",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 12,
+  },
+  menuTextContainer: {
+    flex: 1,
+  },
+  menuOptionTitle: {
     fontSize: FONT_SIZES.medium,
+    fontWeight: "600",
     color: COLORS.text,
-    marginLeft: 15,
-    fontWeight: "500",
+    marginBottom: 2,
   },
-  closeMenuButton: {
-    alignSelf: "center",
-    marginTop: 15,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+  menuOptionDescription: {
+    fontSize: FONT_SIZES.small,
+    color: COLORS.textSecondary,
   },
-  closeMenuText: {
-    fontSize: FONT_SIZES.medium,
-    color: COLORS.text,
-    fontWeight: "500",
+  menuDivider: {
+    height: 1,
+    backgroundColor: COLORS.background,
+    marginVertical: 8,
   },
   iconContainer: {
     marginRight: 15,

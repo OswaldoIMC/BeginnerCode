@@ -67,6 +67,9 @@ class DataService {
    * Calcula el progreso de un curso (0 a 1)
    */
   async getCourseProgress(courseId: string): Promise<number> {
+    // Inicializar el curso si no existe
+    await StorageService.initializeCourseProgress(courseId);
+
     const courseProgress = await StorageService.getCourseProgress(courseId);
     return courseProgress ? courseProgress.progressPercentage : 0;
   }

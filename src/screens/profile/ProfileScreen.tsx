@@ -83,7 +83,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
           onPress: async () => {
             await StorageService.clearAllData();
             Alert.alert(
-              "Progreso reiniciado",
+              "Progreso Reiniciado",
               "Tu progreso ha sido reiniciado. Por favor, inicia sesión nuevamente.",
               [
                 {
@@ -110,7 +110,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
    */
   const handleLogout = () => {
     Alert.alert(
-      "Cerrar sesión",
+      "Cerrar Sesión",
       "¿Estás seguro de que quieres cerrar sesión?",
       [
         {
@@ -118,7 +118,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
           style: "cancel",
         },
         {
-          text: "Cerrar sesión",
+          text: "Cerrar Sesión",
           style: "destructive",
           onPress: () => {
             navigation.dispatch(
@@ -293,13 +293,13 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
             {renderStatCard(
               "school",
               stats.totalLessonsCompleted,
-              "Lecciones completadas",
+              "Lecciones Completadas",
               "#4CAF50"
             )}
             {renderStatCard(
               "emoji-events",
               stats.totalPoints,
-              "Puntos totales",
+              "Puntos Totales",
               "#FF9800"
             )}
             {renderStatCard(
@@ -311,7 +311,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
             {renderStatCard(
               "menu-book",
               stats.coursesStarted,
-              "Cursos iniciados",
+              "Cursos Iniciados",
               "#2196F3"
             )}
           </View>
@@ -336,7 +336,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>
             <MaterialIcons name="info" size={24} color={COLORS.primary} />{" "}
-            Información de la cuenta
+            Información de la Cuenta
           </Text>
           <View style={styles.infoContainer}>
             <View style={styles.infoRow}>
@@ -360,102 +360,6 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
               </Text>
             </View>
           </View>
-        </View>
-
-        {/* Opciones */}
-        <View style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}>
-            <MaterialIcons name="settings" size={24} color={COLORS.primary} />{" "}
-            Configuración
-          </Text>
-
-          <TouchableOpacity
-            style={styles.optionButton}
-            onPress={() =>
-              Alert.alert(
-                "Próximamente",
-                "Esta función estará disponible pronto."
-              )
-            }
-          >
-            <MaterialIcons
-              name="notifications"
-              size={24}
-              color={COLORS.primary}
-            />
-            <Text style={styles.optionText}>Notificaciones</Text>
-            <MaterialIcons
-              name="chevron-right"
-              size={24}
-              color={COLORS.textSecondary}
-            />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.optionButton}
-            onPress={() =>
-              Alert.alert(
-                "Próximamente",
-                "Esta función estará disponible pronto."
-              )
-            }
-          >
-            <MaterialIcons name="dark-mode" size={24} color={COLORS.primary} />
-            <Text style={styles.optionText}>Tema</Text>
-            <MaterialIcons
-              name="chevron-right"
-              size={24}
-              color={COLORS.textSecondary}
-            />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.optionButton}
-            onPress={() =>
-              Alert.alert(
-                "Próximamente",
-                "Esta función estará disponible pronto."
-              )
-            }
-          >
-            <MaterialIcons name="help" size={24} color={COLORS.primary} />
-            <Text style={styles.optionText}>Ayuda</Text>
-            <MaterialIcons
-              name="chevron-right"
-              size={24}
-              color={COLORS.textSecondary}
-            />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[styles.optionButton, styles.dangerButton]}
-            onPress={handleResetProgress}
-          >
-            <MaterialIcons name="refresh" size={24} color={COLORS.error} />
-            <Text style={[styles.optionText, { color: COLORS.error }]}>
-              Reiniciar progreso
-            </Text>
-            <MaterialIcons
-              name="chevron-right"
-              size={24}
-              color={COLORS.error}
-            />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[styles.optionButton, styles.dangerButton]}
-            onPress={handleLogout}
-          >
-            <MaterialIcons name="logout" size={24} color={COLORS.error} />
-            <Text style={[styles.optionText, { color: COLORS.error }]}>
-              Cerrar sesión
-            </Text>
-            <MaterialIcons
-              name="chevron-right"
-              size={24}
-              color={COLORS.error}
-            />
-          </TouchableOpacity>
         </View>
 
         {/* Espacio al final */}
