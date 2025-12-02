@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -9,17 +9,17 @@ import {
   Switch,
   Alert,
 } from "react-native";
+import * as Notifications from "expo-notifications";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { MaterialIcons } from "@expo/vector-icons";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../navigation/StackNavigator";
-import { COLORS, FONT_SIZES } from "../../../types";
+import { FONT_SIZES } from "../../../types";
 import StorageService from "../../services/StorageService";
 import { CommonActions } from "@react-navigation/native";
+import { useTheme } from "../../context/ThemeContext";
+import NotificationService from "../../services/NotificationService";
 
-/**
- * Props de navegación para esta pantalla
- */
 type SettingsScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   "Settings"
@@ -29,27 +29,26 @@ interface SettingsScreenProps {
   navigation: SettingsScreenNavigationProp;
 }
 
-/**
- * Pantalla de configuración
- * Permite al usuario ajustar notificaciones, tema, idioma, etc.
- */
 const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
-  const [notificationsEnabled, setNotificationsEnabled] =
-    useState<boolean>(true);
-  const [darkModeEnabled, setDarkModeEnabled] = useState<boolean>(false);
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+  const { theme, isDarkMode, setDarkMode } = useTheme();
 
-  /**
-   * Maneja el reinicio de progreso
-   */
+  useEffect(() => {
+    const initNotifications = async () => {
+      const enabledInStorage =
+        await NotificationService.getNotificationsEnabled();
+      const { status } = await Notifications.getPermissionsAsync();
+      setNotificationsEnabled(enabledInStorage && status === "granted");
+    };
+    initNotifications();
+  }, []);
+
   const handleResetProgress = () => {
     Alert.alert(
       "Reiniciar Progreso",
       "¿Estás seguro de que quieres reiniciar todo tu progreso? Esta acción no se puede deshacer.",
       [
-        {
-          text: "Cancelar",
-          style: "cancel",
-        },
+        { text: "Cancelar", style: "cancel" },
         {
           text: "Reiniciar",
           style: "destructive",
@@ -57,7 +56,7 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
             await StorageService.clearAllData();
             Alert.alert(
               "Progreso reiniciado",
-              "Tu progreso ha sido reiniciado. Por favor, inicia sesión nuevamente.",
+              "Tu progreso ha sido reiniciado.",
               [
                 {
                   text: "OK",
@@ -78,18 +77,12 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
     );
   };
 
-  /**
-   * Maneja el cierre de sesión
-   */
   const handleLogout = () => {
     Alert.alert(
       "Cerrar sesión",
       "¿Estás seguro de que quieres cerrar sesión?",
       [
-        {
-          text: "Cancelar",
-          style: "cancel",
-        },
+        { text: "Cancelar", style: "cancel" },
         {
           text: "Cerrar sesión",
           style: "destructive",
@@ -107,132 +100,187 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaProvider style={styles.container}>
-      <StatusBar backgroundColor={COLORS.primary} barStyle="light-content" />
+    <SafeAreaProvider
+      style={[styles.container, { backgroundColor: theme.background }]}
+    >
+      <StatusBar
+        backgroundColor={theme.primary}
+        barStyle={isDarkMode ? "light-content" : "dark-content"}
+      />
 
-      {/* Header Bar */}
-      <View style={styles.headerBar}>
+      {/* Header */}
+      <View style={[styles.headerBar, { backgroundColor: theme.primary }]}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <MaterialIcons name="arrow-back" size={28} color="#fff" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Configuración</Text>
+
+        <Text style={[styles.headerTitle, { color: "#fff" }]}>
+          Configuración
+        </Text>
+
         <View style={{ width: 28 }} />
       </View>
 
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.contentContainer}
-      >
-        {/* Sección de Notificaciones */}
-        <View style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}>Notificaciones</Text>
-
-          <View style={styles.settingRow}>
-            <View style={styles.settingInfo}>
-              <MaterialIcons
-                name="notifications"
-                size={24}
-                color={COLORS.primary}
-              />
-              <View style={styles.settingTextContainer}>
-                <Text style={styles.settingLabel}>Notificaciones Push</Text>
-                <Text style={styles.settingDescription}>
-                  Recibe recordatorios de lecciones diarias
-                </Text>
-              </View>
-            </View>
-            <Switch
-              value={notificationsEnabled}
-              onValueChange={setNotificationsEnabled}
-              trackColor={{ false: "#E0E0E0", true: COLORS.primary + "80" }}
-              thumbColor={notificationsEnabled ? COLORS.primary : "#f4f3f4"}
-            />
-          </View>
-        </View>
-
-        {/* Sección de Apariencia */}
-        <View style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}>Apariencia</Text>
-
-          <View style={styles.settingRow}>
-            <View style={styles.settingInfo}>
-              <MaterialIcons
-                name="dark-mode"
-                size={24}
-                color={COLORS.primary}
-              />
-              <View style={styles.settingTextContainer}>
-                <Text style={styles.settingLabel}>Tema Oscuro</Text>
-                <Text style={styles.settingDescription}>
-                  Cambia entre tema claro y oscuro
-                </Text>
-              </View>
-            </View>
-            <Switch
-              value={darkModeEnabled}
-              onValueChange={setDarkModeEnabled}
-              trackColor={{ false: "#E0E0E0", true: COLORS.primary + "80" }}
-              thumbColor={darkModeEnabled ? COLORS.primary : "#f4f3f4"}
-            />
-          </View>
-        </View>
-
-        {/* Sección de Ayuda */}
-        <View style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}>Soporte</Text>
-
-          <TouchableOpacity style={styles.optionButton}>
-            <MaterialIcons name="info" size={24} color={COLORS.primary} />
-            <Text style={styles.optionText}>Acerca de</Text>
-            <MaterialIcons
-              name="chevron-right"
-              size={24}
-              color={COLORS.textSecondary}
-            />
-          </TouchableOpacity>
-        </View>
-
-        {/* Sección de Cuenta */}
-        <View style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}>Cuenta</Text>
-
-          <TouchableOpacity
-            style={[styles.optionButton, styles.dangerButton]}
-            onPress={handleResetProgress}
-          >
-            <MaterialIcons name="refresh" size={24} color={COLORS.error} />
-            <Text style={[styles.optionText, { color: COLORS.error }]}>
-              Reiniciar progreso
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.contentContainer}>
+          {/* Notificaciones */}
+          <View style={styles.sectionContainer}>
+            <Text style={[styles.sectionTitle, { color: theme.text }]}>
+              Notificaciones
             </Text>
-            <MaterialIcons
-              name="chevron-right"
-              size={24}
-              color={COLORS.error}
-            />
-          </TouchableOpacity>
 
-          <TouchableOpacity
-            style={[styles.optionButton, styles.dangerButton]}
-            onPress={handleLogout}
-          >
-            <MaterialIcons name="clear" size={24} color={COLORS.error} />
-            <Text style={[styles.optionText, { color: COLORS.error }]}>
-              Eliminar cuenta
+            <View style={[styles.settingRow, { backgroundColor: theme.card }]}>
+              <View style={styles.settingInfo}>
+                <MaterialIcons
+                  name="notifications"
+                  size={24}
+                  color={theme.primary}
+                />
+                <View style={styles.settingTextContainer}>
+                  <Text style={[styles.settingLabel, { color: theme.text }]}>
+                    Notificaciones Push
+                  </Text>
+                  <Text
+                    style={[
+                      styles.settingDescription,
+                      { color: theme.textSecondary },
+                    ]}
+                  >
+                    Recibe recordatorios de lecciones diarias
+                  </Text>
+                </View>
+              </View>
+
+              <Switch
+                value={notificationsEnabled}
+                onValueChange={async (value) => {
+                  setNotificationsEnabled(value);
+                  await NotificationService.setNotificationsEnabled(value);
+                }}
+                trackColor={{ false: theme.border, true: theme.primary + "80" }}
+                thumbColor={notificationsEnabled ? theme.primary : "#f4f3f4"}
+              />
+            </View>
+          </View>
+
+          {/* Apariencia */}
+          <View style={styles.sectionContainer}>
+            <Text style={[styles.sectionTitle, { color: theme.text }]}>
+              Apariencia
             </Text>
-            <MaterialIcons
-              name="chevron-right"
-              size={24}
-              color={COLORS.error}
-            />
-          </TouchableOpacity>
-        </View>
 
-        {/* Versión de la app */}
-        <View style={styles.versionContainer}>
-          <Text style={styles.versionText}>BeginnerCode v1.0.0</Text>
-        </View>
+            <View style={[styles.settingRow, { backgroundColor: theme.card }]}>
+              <View style={styles.settingInfo}>
+                <MaterialIcons
+                  name="dark-mode"
+                  size={24}
+                  color={theme.primary}
+                />
+                <View style={styles.settingTextContainer}>
+                  <Text style={[styles.settingLabel, { color: theme.text }]}>
+                    Tema Oscuro
+                  </Text>
+                  <Text
+                    style={[
+                      styles.settingDescription,
+                      { color: theme.textSecondary },
+                    ]}
+                  >
+                    Cambia entre tema claro y oscuro
+                  </Text>
+                </View>
+              </View>
 
-        <View style={{ height: 30 }} />
+              <Switch
+                value={isDarkMode}
+                onValueChange={setDarkMode}
+                trackColor={{ false: theme.border, true: theme.primary + "80" }}
+                thumbColor={isDarkMode ? theme.primary : "#f4f3f4"}
+              />
+            </View>
+          </View>
+
+          {/* Soporte */}
+          <View style={styles.sectionContainer}>
+            <Text style={[styles.sectionTitle, { color: theme.text }]}>
+              Soporte
+            </Text>
+
+            <TouchableOpacity
+              style={[styles.optionButton, { backgroundColor: theme.card }]}
+            >
+              <MaterialIcons name="info" size={24} color={theme.primary} />
+              <Text style={[styles.optionText, { color: theme.text }]}>
+                Acerca de
+              </Text>
+              <MaterialIcons
+                name="chevron-right"
+                size={24}
+                color={theme.textSecondary}
+              />
+            </TouchableOpacity>
+          </View>
+
+          {/* Cuenta */}
+          <View style={styles.sectionContainer}>
+            <Text style={[styles.sectionTitle, { color: theme.text }]}>
+              Cuenta
+            </Text>
+
+            <TouchableOpacity
+              style={[
+                styles.optionButton,
+                {
+                  backgroundColor: theme.card,
+                  borderColor: theme.error,
+                  borderWidth: 1,
+                },
+              ]}
+              onPress={handleResetProgress}
+            >
+              <MaterialIcons name="refresh" size={24} color={theme.error} />
+              <Text style={[styles.optionText, { color: theme.error }]}>
+                Reiniciar progreso
+              </Text>
+              <MaterialIcons
+                name="chevron-right"
+                size={24}
+                color={theme.error}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[
+                styles.optionButton,
+                {
+                  backgroundColor: theme.card,
+                  borderColor: theme.error,
+                  borderWidth: 1,
+                },
+              ]}
+              onPress={handleLogout}
+            >
+              <MaterialIcons name="clear" size={24} color={theme.error} />
+              <Text style={[styles.optionText, { color: theme.error }]}>
+                Eliminar cuenta
+              </Text>
+              <MaterialIcons
+                name="chevron-right"
+                size={24}
+                color={theme.error}
+              />
+            </TouchableOpacity>
+          </View>
+
+          {/* Versión */}
+          <View style={styles.versionContainer}>
+            <Text style={[styles.versionText, { color: theme.textSecondary }]}>
+              BeginnerCode v1.0.0
+            </Text>
+          </View>
+
+          <View style={{ height: 30 }} />
+        </View>
       </ScrollView>
     </SafeAreaProvider>
   );
@@ -241,45 +289,27 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
 export default SettingsScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLORS.surface,
-  },
+  container: { flex: 1 },
   headerBar: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: COLORS.primary,
     paddingHorizontal: 20,
     paddingVertical: 15,
     elevation: 4,
-    shadowColor: COLORS.text,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
   },
   headerTitle: {
     fontSize: FONT_SIZES.xlarge,
     fontWeight: "bold",
-    color: COLORS.surface,
     flex: 1,
     textAlign: "center",
   },
-  scrollView: {
-    flex: 1,
-  },
-  contentContainer: {
-    paddingBottom: 20,
-  },
-  sectionContainer: {
-    paddingHorizontal: 15,
-    marginBottom: 25,
-    marginTop: 10,
-  },
+  scrollView: { flex: 1 },
+  contentContainer: { paddingBottom: 20 },
+  sectionContainer: { paddingHorizontal: 15, marginBottom: 25, marginTop: 10 },
   sectionTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    color: COLORS.text,
     marginBottom: 15,
     marginLeft: 5,
   },
@@ -287,54 +317,23 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: COLORS.card,
     padding: 15,
     borderRadius: 12,
     marginBottom: 10,
   },
-  settingInfo: {
-    flexDirection: "row",
-    alignItems: "center",
-    flex: 1,
-    gap: 15,
-  },
-  settingTextContainer: {
-    flex: 1,
-  },
-  settingLabel: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: COLORS.text,
-    marginBottom: 4,
-  },
-  settingDescription: {
-    fontSize: 13,
-    color: COLORS.textSecondary,
-  },
+  settingInfo: { flexDirection: "row", alignItems: "center", flex: 1, gap: 15 },
+  settingTextContainer: { flex: 1 },
+  settingLabel: { fontSize: 16, fontWeight: "600", marginBottom: 4 },
+  settingDescription: { fontSize: 13 },
   optionButton: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: COLORS.card,
     padding: 15,
     borderRadius: 12,
     marginBottom: 10,
     gap: 15,
   },
-  optionText: {
-    fontSize: 16,
-    color: COLORS.text,
-    flex: 1,
-  },
-  versionContainer: {
-    alignItems: "center",
-    marginTop: 20,
-  },
-  versionText: {
-    fontSize: 14,
-    color: COLORS.textSecondary,
-  },
-  dangerButton: {
-    borderWidth: 1,
-    borderColor: COLORS.error + "40",
-  },
+  optionText: { fontSize: 16, flex: 1 },
+  versionContainer: { alignItems: "center", marginTop: 20 },
+  versionText: { fontSize: 14 },
 });

@@ -2,6 +2,8 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 // Importación de pantallas
 import LoginScreen from "../screens/auth/LoginScreen";
+import RegisterScreen from "../screens/auth/RegisterScreen";
+import RecoverPasswordScreen from "../screens/auth/RecoverPasswordScreen";
 import HomeScreen from "../screens/home/HomeScreen";
 import PythonScreen from "../screens/courses/PythonScreen";
 import LessonDetailScreen from "../screens/lessons/LessonDetailScreen";
@@ -16,6 +18,8 @@ import SettingsScreen from "../screens/settings/SettingsScreen";
 
 export type RootStackParamList = {
   Login: undefined;
+  Register: undefined;
+  RecoverPassword: undefined;
   Home: undefined;
   Python: undefined;
   LessonDetail: {
@@ -53,6 +57,24 @@ const StackNavigator: React.FC = () => {
         component={LoginScreen}
         options={{
           title: "Iniciar Sesión",
+        }}
+      />
+
+      {/* Pantalla de Registro */}
+      <Stack.Screen
+        name="Register"
+        component={RegisterScreen}
+        options={{
+          title: "Registro",
+        }}
+      />
+
+      {/* Pantalla de Recuperar Contraseña */}
+      <Stack.Screen
+        name="RecoverPassword"
+        component={RecoverPasswordScreen}
+        options={{
+          title: "Recuperar Contraseña",
         }}
       />
 

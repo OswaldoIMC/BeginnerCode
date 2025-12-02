@@ -11,11 +11,12 @@ import {
   Platform,
   Dimensions,
 } from "react-native";
-
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../navigation/StackNavigator";
 import { LoginFormData, COLORS, FONT_SIZES } from "../../../types/index";
 import StorageService from "../../services/StorageService";
+import AuthService from "../../services/AuthService";
 
 const loginImage = require("../../../assets/Login_Image_NoBG.png");
 const loginHeader = require("../../../assets/login_header.png");
@@ -85,23 +86,32 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
     setIsLoading(true);
 
     try {
-      // Verificar si ya existe un perfil
-      let profile = await StorageService.getUserProfile();
+      // Intentar login con AuthService
+      const result = await AuthService.login(
+        formData.username,
+        formData.password
+      );
 
-      if (!profile) {
-        // Crear perfil inicial para nuevo usuario
-        profile = await StorageService.createInitialProfile(formData.username);
-        console.log("Perfil inicial creado para:", formData.username);
-      } else {
-        console.log("Usuario existente:", profile.username);
+      if (!result.success) {
+        setIsLoading(false);
+        Alert.alert("Error de autenticación", result.message);
+        return;
       }
 
-      // Simulamos delay de red
-      setTimeout(() => {
-        setIsLoading(false);
-        console.log("Usuario autenticado:", formData.username);
-        navigation.replace("Home");
-      }, 1500);
+      // Login exitoso
+      console.log("Usuario autenticado:", formData.username);
+
+      // Verificar si ya existe un perfil, si no, crearlo
+      let profile = await StorageService.getUserProfile();
+
+      if (!profile || profile.username !== formData.username) {
+        // Crear perfil inicial para este usuario
+        profile = await StorageService.createInitialProfile(formData.username);
+        console.log("Perfil inicial creado para:", formData.username);
+      }
+
+      setIsLoading(false);
+      navigation.replace("Home");
     } catch (error) {
       console.error("Error en autenticación:", error);
       setIsLoading(false);
@@ -113,19 +123,11 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
   };
 
   const handleForgotPassword = (): void => {
-    Alert.alert(
-      "Recuperación de contraseña",
-      "Esta funcionalidad estará disponible próximamente.",
-      [{ text: "Entendido" }]
-    );
+    navigation.navigate("RecoverPassword");
   };
 
   const handleRegister = (): void => {
-    Alert.alert(
-      "Registro",
-      "Esta funcionalidad estará disponible próximamente.",
-      [{ text: "Entendido" }]
-    );
+    navigation.navigate("Register");
   };
 
   return (
@@ -133,53 +135,55 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
       style={styles.container}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <View style={styles.content}>
-        <Image source={loginHeader} style={styles.loginHeader} />
-        <Image source={loginImage} style={styles.loginImage} />
-        <Text style={styles.title}>BeginnerCode</Text>
-        <Text style={styles.subtitle}>Inicio de sesión</Text>
-        <View style={styles.formContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Usuario"
-            placeholderTextColor={COLORS.textSecondary}
-            value={formData.username}
-            onChangeText={(text) => updateFormData("username", text)}
-            autoCapitalize="none"
-            autoCorrect={false}
-            editable={!isLoading}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Contraseña"
-            placeholderTextColor={COLORS.textSecondary}
-            value={formData.password}
-            onChangeText={(text) => updateFormData("password", text)}
-            secureTextEntry
-            autoCapitalize="none"
-            autoCorrect={false}
-            editable={!isLoading}
-          />
-          <TouchableOpacity onPress={handleForgotPassword}>
-            <Text style={styles.linkForg}>¿Olvidaste tu contraseña?</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.loginButton, { opacity: isLoading ? 0.6 : 1 }]}
-            onPress={handleLogin}
-            disabled={isLoading}
-          >
-            <Text style={styles.loginButtonText}>
-              {isLoading ? "Iniciando sesión..." : "Iniciar sesión"}
-            </Text>
-          </TouchableOpacity>
+      <SafeAreaProvider>
+        <View style={styles.content}>
+          <Image source={loginHeader} style={styles.loginHeader} />
+          <Image source={loginImage} style={styles.loginImage} />
+          <Text style={styles.title}>BeginnerCode</Text>
+          <Text style={styles.subtitle}>Inicio de sesión</Text>
+          <View style={styles.formContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="Usuario"
+              placeholderTextColor={COLORS.textSecondary}
+              value={formData.username}
+              onChangeText={(text) => updateFormData("username", text)}
+              autoCapitalize="none"
+              autoCorrect={false}
+              editable={!isLoading}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Contraseña"
+              placeholderTextColor={COLORS.textSecondary}
+              value={formData.password}
+              onChangeText={(text) => updateFormData("password", text)}
+              secureTextEntry
+              autoCapitalize="none"
+              autoCorrect={false}
+              editable={!isLoading}
+            />
+            <TouchableOpacity onPress={handleForgotPassword}>
+              <Text style={styles.linkForg}>¿Olvidaste tu contraseña?</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.loginButton, { opacity: isLoading ? 0.6 : 1 }]}
+              onPress={handleLogin}
+              disabled={isLoading}
+            >
+              <Text style={styles.loginButtonText}>
+                {isLoading ? "Iniciando sesión..." : "Iniciar sesión"}
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.registerContainer}>
+            <Text style={styles.registerText}>¿No tienes una cuenta?</Text>
+            <TouchableOpacity onPress={handleRegister} activeOpacity={0.6}>
+              <Text style={styles.linkReg}>Regístrate</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View style={styles.registerContainer}>
-          <Text style={styles.registerText}>¿No tienes una cuenta?</Text>
-          <TouchableOpacity onPress={handleRegister} activeOpacity={0.6}>
-            <Text style={styles.linkReg}>Regístrate</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      </SafeAreaProvider>
     </KeyboardAvoidingView>
   );
 };
