@@ -1,0 +1,10 @@
+{
+  "id": "java",
+  "name": "Java",
+  "description": "Este curso está basado en el lenguaje de programación Java, el objetivo es aprender los fundamentos básicos del lenguaje, así como su estructura.",
+  "color": "#f47f36ff",
+  "difficulty": "intermediate",
+  "totalLessons": 20,
+  "estimatedHours": 40,
+  "isComingSoon": false
+}

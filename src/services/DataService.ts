@@ -8,12 +8,21 @@ import StorageService from "./StorageService";
 // Importar los datos JSON
 import pythonCourseData from "../../data/courses/python.json";
 import pythonLessonsData from "../../data/lessons/python_lessons.json";
+import javaCourseData from "../../data/courses/java.json";
+import javaLessonsData from "../../data/lessons/java_lessons.json";
 
 /**
  * Servicio de datos
  * Maneja la obtención de cursos, lecciones y retos
  */
 class DataService {
+  // Mapeo de lecciones por curso
+  private lessonsByCourse: Record<string, Lesson[]> = {
+    python: pythonLessonsData as Lesson[],
+    java: javaLessonsData as Lesson[],
+    // más cursos aquí
+  };
+
   /**
    * Obtiene todos los cursos disponibles
    */
@@ -23,7 +32,11 @@ class DataService {
         ...(pythonCourseData as Course),
         icon: require("../../assets/python.png"),
       },
-      // Aquí puedes añadir más cursos cuando los crees
+      {
+        ...(javaCourseData as Course),
+        icon: require("../../assets/java.png"),
+      },
+      // Aquí puedes añadir más cursos
     ];
   }
 
@@ -32,27 +45,24 @@ class DataService {
    */
   getCourseById(courseId: string): Course | undefined {
     const courses = this.getCourses();
-    return courses.find((course) => course.id === courseId);
+    return courses.find(
+      (course) => course.id.toLowerCase() === courseId.toLowerCase()
+    );
   }
 
   /**
    * Obtiene todas las lecciones de un curso
    */
   getLessonsByCourse(courseId: string): Lesson[] {
-    if (courseId === "python") {
-      return pythonLessonsData as Lesson[];
-    }
-    // Aquí añadirías más casos para otros cursos
-    return [];
+    return this.lessonsByCourse[courseId.toLowerCase()] || [];
   }
 
   /**
-   * Obtiene una lección específica por su ID
+   * Obtiene una lección específica por su ID y curso
    */
-  getLessonById(lessonId: string): Lesson | undefined {
-    // Por ahora solo tenemos Python, pero esto escala fácilmente
-    const allLessons = pythonLessonsData as Lesson[];
-    return allLessons.find((lesson) => lesson.id === lessonId);
+  getLessonById(courseId: string, lessonId: string): Lesson | undefined {
+    const lessons = this.getLessonsByCourse(courseId);
+    return lessons.find((lesson) => lesson.id === lessonId);
   }
 
   /**
@@ -77,14 +87,14 @@ class DataService {
   /**
    * Obtiene el progreso de una lección específica (0 a 1)
    */
-  async getLessonProgress(lessonId: string): Promise<number> {
+  async getLessonProgress(courseId: string, lessonId: string): Promise<number> {
     const lessonProgress = await StorageService.getLessonProgress(lessonId);
 
     if (!lessonProgress) return 0;
     if (lessonProgress.completed) return 1.0;
 
-    // Calcular progreso basado en retos completados
-    const lesson = this.getLessonById(lessonId);
+    // Buscar la lección usando el courseId
+    const lesson = this.getLessonById(courseId, lessonId);
     if (!lesson) return 0;
 
     const totalChallenges = lesson.challenges.length;

@@ -2,7 +2,7 @@
   "id": "python",
   "name": "Python",
   "description": "Este curso está basado en el lenguaje de programación Python, el objetivo es aprender los fundamentos básicos del lenguaje, así como su estructura.",
-  "color": "#3776AB",
+  "color": "#3963bdff",
   "difficulty": "beginner",
   "totalLessons": 20,
   "estimatedHours": 40,

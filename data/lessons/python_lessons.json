@@ -290,5 +290,1452 @@
         "order": 3
       }
     ]
+  },
+  {
+    "id": "python_lesson_4",
+    "courseId": "python",
+    "title": "Variables y tipos de datos",
+    "description": "Aprende qué son las variables en Python y los tipos de datos más comunes.",
+    "order": 4,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "Las variables son espacios en memoria donde podemos almacenar información. Python permite trabajar con diferentes tipos de datos como números, texto y booleanos.",
+      "sections": [
+        {
+          "id": "python_4_sec_1",
+          "title": "¿Qué es una variable?",
+          "content": "Una variable es un nombre que referencia un valor. En Python no necesitas declarar el tipo explícitamente; se asigna automáticamente.",
+          "order": 1
+        },
+        {
+          "id": "python_4_sec_2",
+          "title": "Tipos de datos básicos",
+          "content": "Algunos tipos de datos comunes en Python son: enteros (int), decimales (float), texto (str) y booleanos (bool).",
+          "order": 2
+        },
+        {
+          "id": "python_4_sec_3",
+          "title": "Reglas para nombrar variables",
+          "content": "Los nombres de variables deben comenzar con una letra o guion bajo, no pueden contener espacios, y son sensibles a mayúsculas y minúsculas.",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "python_4_ex_1",
+          "title": "Declarar variables",
+          "code": "nombre = 'Ana'\nedad = 25\npi = 3.14\nes_estudiante = True",
+          "language": "python",
+          "explanation": "Python asigna el tipo de dato automáticamente dependiendo del valor."
+        },
+        {
+          "id": "python_4_ex_2",
+          "title": "Ver el tipo de una variable",
+          "code": "x = 10\nprint(type(x))",
+          "language": "python",
+          "explanation": "La función type() muestra el tipo de dato de una variable."
+        }
+      ],
+      "summary": "Las variables guardan información y pueden contener distintos tipos de datos como números, texto o booleanos.",
+      "keyPoints": [
+        "Python asigna los tipos automáticamente",
+        "Los tipos básicos son int, float, str y bool",
+        "Los nombres de variables no pueden tener espacios",
+        "Puedes usar type() para revisar el tipo de dato"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "python_4_ch_1",
+        "lessonId": "python_lesson_4",
+        "question": "¿Cuál de los siguientes NO es un tipo de dato básico en Python?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "int", "isCorrect": false },
+          { "id": "opt_2", "text": "str", "isCorrect": false },
+          { "id": "opt_3", "text": "float", "isCorrect": false },
+          { "id": "opt_4", "text": "num", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_4",
+        "explanation": "El tipo 'num' no existe en Python. Los tipos numéricos son int y float.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "python_4_ch_2",
+        "lessonId": "python_lesson_4",
+        "question": "¿Qué imprimirá este código: type(True)?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "<class 'bool'>", "isCorrect": true },
+          { "id": "opt_2", "text": "<class 'true'>", "isCorrect": false },
+          { "id": "opt_3", "text": "<bool>", "isCorrect": false },
+          { "id": "opt_4", "text": "bool", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "True es un valor booleano, su tipo es <class 'bool'>.",
+        "points": 10,
+        "order": 2
+      }
+    ]
+  },
+  {
+    "id": "python_lesson_5",
+    "courseId": "python",
+    "title": "Operadores aritméticos y lógicos",
+    "description": "Aprende a usar los operadores básicos para trabajar con números y condiciones.",
+    "order": 5,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "Python incluye operadores que permiten hacer cálculos y comparar valores. Son esenciales para controlar el flujo del programa.",
+      "sections": [
+        {
+          "id": "python_5_sec_1",
+          "title": "Operadores aritméticos",
+          "content": "Los operadores aritméticos incluyen: +, -, *, /, // (división entera), % (módulo), ** (potencia).",
+          "order": 1
+        },
+        {
+          "id": "python_5_sec_2",
+          "title": "Operadores de comparación",
+          "content": "Se usan para comparar valores: ==, !=, >, <, >=, <=.",
+          "order": 2
+        },
+        {
+          "id": "python_5_sec_3",
+          "title": "Operadores lógicos",
+          "content": "Permiten combinar condiciones: and, or, not.",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "python_5_ex_1",
+          "title": "Ejemplos aritméticos",
+          "code": "a = 10\nb = 3\nprint(a + b)\nprint(a // b)\nprint(a % b)",
+          "language": "python",
+          "explanation": "+ suma, // redondea la división, % obtiene el residuo."
+        },
+        {
+          "id": "python_5_ex_2",
+          "title": "Comparaciones",
+          "code": "print(5 > 3)\nprint(5 == 5)\nprint(4 != 2)",
+          "language": "python",
+          "explanation": "Cada expresión devuelve un valor booleano: True o False."
+        }
+      ],
+      "summary": "Los operadores son esenciales para realizar cálculos, comparar valores y crear condiciones.",
+      "keyPoints": [
+        "Operadores aritméticos: +, -, *, /, %, **, //",
+        "Operadores de comparación devuelven True o False",
+        "Usa and, or y not para combinar condiciones"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "python_5_ch_1",
+        "lessonId": "python_lesson_5",
+        "question": "¿Qué devuelve la expresión: 10 % 3?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "3", "isCorrect": false },
+          { "id": "opt_2", "text": "1", "isCorrect": true },
+          { "id": "opt_3", "text": "0", "isCorrect": false },
+          { "id": "opt_4", "text": "10", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "El operador % devuelve el residuo de la división.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "python_5_ch_2",
+        "lessonId": "python_lesson_5",
+        "question": "¿Cuál operador lógico requiere que ambas condiciones sean verdaderas?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "or", "isCorrect": false },
+          { "id": "opt_2", "text": "and", "isCorrect": true },
+          { "id": "opt_3", "text": "not", "isCorrect": false },
+          { "id": "opt_4", "text": "==", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "'and' solo devuelve True si ambas expresiones son verdaderas.",
+        "points": 10,
+        "order": 2
+      }
+    ]
+  },
+  {
+    "id": "python_lesson_6",
+    "courseId": "python",
+    "title": "Entrada del usuario con input()",
+    "description": "Aprende a recibir información del usuario con la función input().",
+    "order": 6,
+    "estimatedMinutes": 15,
+    "content": {
+      "introduction": "La función input() permite interactuar con el usuario pidiéndole información desde la consola.",
+      "sections": [
+        {
+          "id": "python_6_sec_1",
+          "title": "La función input()",
+          "content": "input() siempre devuelve un valor de tipo cadena (str), incluso si el usuario escribe un número.",
+          "order": 1
+        },
+        {
+          "id": "python_6_sec_2",
+          "title": "Convirtiendo tipos",
+          "content": "Para usar números, debes convertir la entrada con int() o float().",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "python_6_ex_1",
+          "title": "Pidiendo datos al usuario",
+          "code": "nombre = input('¿Cómo te llamas? ')\nprint('Hola', nombre)",
+          "language": "python",
+          "explanation": "input() muestra un mensaje y espera que el usuario escriba algo."
+        },
+        {
+          "id": "python_6_ex_2",
+          "title": "Convertir a número",
+          "code": "edad = int(input('¿Cuántos años tienes? '))\nprint('Tendrás', edad + 1, 'el próximo año')",
+          "language": "python",
+          "explanation": "Se usa int() para convertir la entrada a número entero."
+        }
+      ],
+      "summary": "input() permite recibir datos del usuario, pero siempre devuelve texto; debes convertirlo si necesitas números.",
+      "keyPoints": [
+        "input() devuelve una cadena",
+        "Para números usa int() o float()",
+        "Puedes mostrar un mensaje dentro de input()"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "python_6_ch_1",
+        "lessonId": "python_lesson_6",
+        "question": "¿Qué tipo de dato devuelve siempre input()?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "int", "isCorrect": false },
+          { "id": "opt_2", "text": "str", "isCorrect": true },
+          { "id": "opt_3", "text": "float", "isCorrect": false },
+          { "id": "opt_4", "text": "bool", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "input() siempre devuelve texto, sin importar lo que escriba el usuario.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "python_lesson_7",
+    "courseId": "python",
+    "title": "Condicionales: if, elif y else",
+    "description": "Aprende a tomar decisiones en tu programa con estructuras condicionales.",
+    "order": 7,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "Las estructuras condicionales permiten ejecutar código solo cuando se cumple una condición.",
+      "sections": [
+        {
+          "id": "python_7_sec_1",
+          "title": "La estructura if",
+          "content": "if evalúa una condición y ejecuta el bloque de código si es verdadera.",
+          "order": 1
+        },
+        {
+          "id": "python_7_sec_2",
+          "title": "elif y else",
+          "content": "elif permite evaluar múltiples condiciones. else se ejecuta si ninguna condición anterior es verdadera.",
+          "order": 2
+        },
+        {
+          "id": "python_7_sec_3",
+          "title": "Identación",
+          "content": "Python usa sangría (indentación) para definir bloques de código. Por lo general se usan 4 espacios.",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "python_7_ex_1",
+          "title": "Ejemplo básico",
+          "code": "edad = 18\nif edad >= 18:\n    print('Eres mayor de edad')",
+          "language": "python",
+          "explanation": "El código dentro de if solo se ejecuta si la condición es verdadera."
+        },
+        {
+          "id": "python_7_ex_2",
+          "title": "if, elif, else",
+          "code": "nota = 85\nif nota >= 90:\n    print('Excelente')\nelif nota >= 70:\n    print('Aprobado')\nelse:\n    print('Reprobado')",
+          "language": "python",
+          "explanation": "elif permite evaluar múltiples casos antes de llegar a else."
+        }
+      ],
+      "summary": "Las estructuras condicionales permiten que tu programa tome decisiones en base a comparaciones o valores.",
+      "keyPoints": [
+        "if evalúa una condición",
+        "elif permite múltiples casos",
+        "else se ejecuta cuando no se cumple ninguna condición",
+        "La indentación es fundamental en Python"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "python_7_ch_1",
+        "lessonId": "python_lesson_7",
+        "question": "¿Qué palabra clave se usa para evaluar múltiples condiciones?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "elseif", "isCorrect": false },
+          { "id": "opt_2", "text": "elif", "isCorrect": true },
+          { "id": "opt_3", "text": "else if", "isCorrect": false },
+          { "id": "opt_4", "text": "elseif()", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "En Python la palabra correcta es 'elif'.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "python_7_ch_2",
+        "lessonId": "python_lesson_7",
+        "question": "En Python, los bloques de código se definen mediante:",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "Llaves {}", "isCorrect": false },
+          { "id": "opt_2", "text": "Paréntesis ()", "isCorrect": false },
+          { "id": "opt_3", "text": "Indentación", "isCorrect": true },
+          { "id": "opt_4", "text": "Comillas", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "Python usa indentación para definir los bloques de código.",
+        "points": 10,
+        "order": 2
+      }
+    ]
+  },
+  {
+    "id": "python_lesson_8",
+    "courseId": "python",
+    "title": "Ciclos for y while",
+    "description": "Aprende a repetir instrucciones usando ciclos for y while.",
+    "order": 8,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "Los ciclos permiten ejecutar un bloque de código varias veces. En Python existen dos ciclos principales: for y while.",
+      "sections": [
+        {
+          "id": "python_8_sec_1",
+          "title": "Ciclo for",
+          "content": "El ciclo for recorre elementos de una secuencia como listas, cadenas o rangos.",
+          "order": 1
+        },
+        {
+          "id": "python_8_sec_2",
+          "title": "Ciclo while",
+          "content": "El ciclo while ejecuta código mientras una condición sea verdadera.",
+          "order": 2
+        },
+        {
+          "id": "python_8_sec_3",
+          "title": "La función range()",
+          "content": "range() genera una secuencia de números que se puede usar en un for. Puede recibir 1, 2 o 3 parámetros.",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "python_8_ex_1",
+          "title": "Recorriendo una lista",
+          "code": "frutas = ['manzana', 'pera', 'uva']\nfor fruta in frutas:\n    print(fruta)",
+          "language": "python",
+          "explanation": "El ciclo for recorre cada elemento de la lista en orden."
+        },
+        {
+          "id": "python_8_ex_2",
+          "title": "Ciclo while",
+          "code": "contador = 1\nwhile contador <= 3:\n    print('Número:', contador)\n    contador += 1",
+          "language": "python",
+          "explanation": "while repite el bloque mientras la condición sea verdadera."
+        },
+        {
+          "id": "python_8_ex_3",
+          "title": "Usando range()",
+          "code": "for i in range(1, 5):\n    print(i)",
+          "language": "python",
+          "explanation": "range(1, 5) genera 1, 2, 3, 4."
+        }
+      ],
+      "summary": "Los ciclos permiten repetir acciones de forma automática. for recorre secuencias y while se ejecuta mientras una condición sea verdadera.",
+      "keyPoints": [
+        "for recorre listas, rangos y más",
+        "while depende de una condición",
+        "range() genera secuencias de números"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "python_8_ch_1",
+        "lessonId": "python_lesson_8",
+        "question": "¿Qué ciclo es mejor cuando sabes exactamente cuántas veces repetir la acción?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "while", "isCorrect": false },
+          { "id": "opt_2", "text": "for", "isCorrect": true },
+          { "id": "opt_3", "text": "repeat", "isCorrect": false },
+          { "id": "opt_4", "text": "loop", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "for es ideal cuando conoces el número exacto de repeticiones.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "python_lesson_9",
+    "courseId": "python",
+    "title": "Listas",
+    "description": "Aprende qué son las listas y cómo manipular elementos dentro de ellas.",
+    "order": 9,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "Las listas permiten almacenar múltiples valores en una sola variable. Son uno de los tipos más usados en Python.",
+      "sections": [
+        {
+          "id": "python_9_sec_1",
+          "title": "Creación de listas",
+          "content": "Las listas se crean usando corchetes []. Pueden contener valores de cualquier tipo.",
+          "order": 1
+        },
+        {
+          "id": "python_9_sec_2",
+          "title": "Acceder a elementos",
+          "content": "Puedes acceder a un elemento usando su índice. Los índices comienzan en 0.",
+          "order": 2
+        },
+        {
+          "id": "python_9_sec_3",
+          "title": "Métodos comunes",
+          "content": "Algunos métodos útiles son: append(), insert(), remove(), pop(), sort().",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "python_9_ex_1",
+          "title": "Creando y accediendo",
+          "code": "numeros = [10, 20, 30]\nprint(numeros[0])",
+          "language": "python",
+          "explanation": "numeros[0] devuelve el primer elemento de la lista."
+        },
+        {
+          "id": "python_9_ex_2",
+          "title": "Modificando una lista",
+          "code": "colores = ['rojo', 'azul']\ncolores.append('verde')\nprint(colores)",
+          "language": "python",
+          "explanation": "append() agrega un elemento al final de la lista."
+        }
+      ],
+      "summary": "Las listas son estructuras flexibles que te permiten almacenar y modificar colecciones de datos.",
+      "keyPoints": [
+        "Las listas usan corchetes []",
+        "Los índices comienzan en 0",
+        "Métodos útiles: append(), remove(), pop(), sort()"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "python_9_ch_1",
+        "lessonId": "python_lesson_9",
+        "question": "¿Qué método agrega un elemento al final de la lista?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "add()", "isCorrect": false },
+          { "id": "opt_2", "text": "append()", "isCorrect": true },
+          { "id": "opt_3", "text": "insert()", "isCorrect": false },
+          { "id": "opt_4", "text": "push()", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "append() agrega un elemento al final de la lista.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "python_lesson_10",
+    "courseId": "python",
+    "title": "Tuplas",
+    "description": "Aprende qué son las tuplas y cuándo usarlas.",
+    "order": 10,
+    "estimatedMinutes": 15,
+    "content": {
+      "introduction": "Las tuplas son similares a las listas, pero sus elementos no se pueden modificar. Son estructuras inmutables.",
+      "sections": [
+        {
+          "id": "python_10_sec_1",
+          "title": "Creación de tuplas",
+          "content": "Las tuplas se crean con paréntesis (). Pueden contener valores de distintos tipos.",
+          "order": 1
+        },
+        {
+          "id": "python_10_sec_2",
+          "title": "Acceder a elementos",
+          "content": "Al igual que una lista, puedes acceder por índice empezando en 0.",
+          "order": 2
+        },
+        {
+          "id": "python_10_sec_3",
+          "title": "¿Cuándo usar tuplas?",
+          "content": "Son útiles para datos que no deben cambiar, como coordenadas o configuraciones.",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "python_10_ex_1",
+          "title": "Crear una tupla",
+          "code": "punto = (3, 4)\nprint(punto[0])",
+          "language": "python",
+          "explanation": "Las tuplas son ideales para datos que no deben modificarse."
+        },
+        {
+          "id": "python_10_ex_2",
+          "title": "Inmutabilidad",
+          "code": "t = (1, 2, 3)\n# t[0] = 5  # Esto generaría un error",
+          "language": "python",
+          "explanation": "Las tuplas no permiten reasignar elementos."
+        }
+      ],
+      "summary": "Las tuplas son como listas inmutables, ideales para datos que no deben cambiar.",
+      "keyPoints": [
+        "Se crean con paréntesis ()",
+        "Los elementos no pueden modificarse",
+        "Son útiles para datos constantes"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "python_10_ch_1",
+        "lessonId": "python_lesson_10",
+        "question": "¿Cuál es la característica principal de las tuplas?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "Son modificables", "isCorrect": false },
+          { "id": "opt_2", "text": "Son inmutables", "isCorrect": true },
+          { "id": "opt_3", "text": "Usan corchetes []", "isCorrect": false },
+          {
+            "id": "opt_4",
+            "text": "Solo almacenan números",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "La característica principal es que no pueden modificarse.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "python_lesson_11",
+    "courseId": "python",
+    "title": "Diccionarios",
+    "description": "Aprende cómo funcionan los diccionarios y cómo almacenar pares clave-valor.",
+    "order": 11,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "Los diccionarios almacenan información en pares clave-valor. Son muy útiles para representar objetos o datos estructurados.",
+      "sections": [
+        {
+          "id": "python_11_sec_1",
+          "title": "Creación de diccionarios",
+          "content": "Se crean con llaves {} y usan pares clave: valor.",
+          "order": 1
+        },
+        {
+          "id": "python_11_sec_2",
+          "title": "Acceso a valores",
+          "content": "Puedes obtener un valor usando su clave: diccionario['clave'].",
+          "order": 2
+        },
+        {
+          "id": "python_11_sec_3",
+          "title": "Métodos útiles",
+          "content": "Algunos métodos son keys(), values(), items(), get().",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "python_11_ex_1",
+          "title": "Crear diccionario",
+          "code": "persona = {\n    'nombre': 'Ana',\n    'edad': 30\n}\nprint(persona['nombre'])",
+          "language": "python",
+          "explanation": "Acceder a un valor usando su clave es simple y rápido."
+        },
+        {
+          "id": "python_11_ex_2",
+          "title": "Usando get()",
+          "code": "print(persona.get('altura', 'No disponible'))",
+          "language": "python",
+          "explanation": "get() permite dar un valor por defecto si la clave no existe."
+        }
+      ],
+      "summary": "Los diccionarios permiten almacenar datos de forma organizada mediante claves y valores.",
+      "keyPoints": [
+        "Usan llaves {}",
+        "Cada elemento tiene clave y valor",
+        "Métodos útiles: keys(), values(), items(), get()"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "python_11_ch_1",
+        "lessonId": "python_lesson_11",
+        "question": "¿Cómo accedes al valor asociado a la clave 'nombre' en un diccionario llamado persona?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "persona(nombre)", "isCorrect": false },
+          { "id": "opt_2", "text": "persona['nombre']", "isCorrect": true },
+          { "id": "opt_3", "text": "persona.get(nombre)", "isCorrect": false },
+          { "id": "opt_4", "text": "persona{'nombre'}", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "La forma más común de acceder a valores es usando persona['clave'].",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "python_lesson_12",
+    "courseId": "python",
+    "title": "Conjuntos (sets)",
+    "description": "Aprende qué son los conjuntos y cómo trabajar con colecciones sin elementos repetidos.",
+    "order": 12,
+    "estimatedMinutes": 15,
+    "content": {
+      "introduction": "Los sets son colecciones desordenadas que no permiten elementos duplicados. Son ideales para operaciones matemáticas como uniones y diferencias.",
+      "sections": [
+        {
+          "id": "python_12_sec_1",
+          "title": "Creación de sets",
+          "content": "Se crean usando llaves {} o la función set(). No garantizan orden.",
+          "order": 1
+        },
+        {
+          "id": "python_12_sec_2",
+          "title": "Operaciones con sets",
+          "content": "Los sets permiten operaciones como union(), intersection(), difference().",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "python_12_ex_1",
+          "title": "Eliminar duplicados",
+          "code": "numeros = {1, 2, 2, 3}\nprint(numeros)",
+          "language": "python",
+          "explanation": "Los sets eliminan duplicados automáticamente."
+        },
+        {
+          "id": "python_12_ex_2",
+          "title": "Uniones e intersecciones",
+          "code": "a = {1, 2, 3}\nb = {3, 4, 5}\nprint(a.union(b))\nprint(a.intersection(b))",
+          "language": "python",
+          "explanation": "union() combina elementos; intersection() obtiene los comunes."
+        }
+      ],
+      "summary": "Los sets son útiles para evitar duplicados y realizar operaciones matemáticas entre colecciones.",
+      "keyPoints": [
+        "Los sets no permiten duplicados",
+        "No garantizan el orden",
+        "Métodos útiles: union(), intersection(), difference()"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "python_12_ch_1",
+        "lessonId": "python_lesson_12",
+        "question": "¿Qué estructura NO permite elementos duplicados?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "Lista", "isCorrect": false },
+          { "id": "opt_2", "text": "Tupla", "isCorrect": false },
+          { "id": "opt_3", "text": "Diccionario", "isCorrect": false },
+          { "id": "opt_4", "text": "Set", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_4",
+        "explanation": "Los sets no permiten duplicados.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "python_lesson_13",
+    "courseId": "python",
+    "title": "Funciones básicas",
+    "description": "Aprende a crear y usar funciones en Python.",
+    "order": 13,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "Las funciones permiten agrupar código que realiza una tarea específica. Facilitan la organización y reutilización del código.",
+      "sections": [
+        {
+          "id": "python_13_sec_1",
+          "title": "Definir una función",
+          "content": "Las funciones se crean con la palabra clave def, seguida del nombre y paréntesis.",
+          "order": 1
+        },
+        {
+          "id": "python_13_sec_2",
+          "title": "Llamar una función",
+          "content": "Para ejecutar una función simplemente escribes su nombre seguido de paréntesis.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "python_13_ex_1",
+          "title": "Función simple",
+          "code": "def saludar():\n    print('Hola desde una función')\n\nsaludar()",
+          "language": "python",
+          "explanation": "La función se define con def y se ejecuta llamándola por su nombre."
+        }
+      ],
+      "summary": "Las funciones te permiten reutilizar código y mantener tu programa organizado.",
+      "keyPoints": [
+        "Se definen con def",
+        "Se ejecutan llamando su nombre",
+        "Pueden o no recibir parámetros"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "python_13_ch_1",
+        "lessonId": "python_lesson_13",
+        "question": "¿Con qué palabra clave se define una función en Python?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "function", "isCorrect": false },
+          { "id": "opt_2", "text": "def", "isCorrect": true },
+          { "id": "opt_3", "text": "fun", "isCorrect": false },
+          { "id": "opt_4", "text": "method", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "La palabra clave correcta para definir funciones es def.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "python_13_ch_2",
+        "lessonId": "python_lesson_13",
+        "question": "¿Qué imprimirá este código?\n\ndef hola():\n    print('Hola')\nhola()",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "Hola", "isCorrect": true },
+          { "id": "opt_2", "text": "hola()", "isCorrect": false },
+          { "id": "opt_3", "text": "Nada", "isCorrect": false },
+          { "id": "opt_4", "text": "Error", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "La función imprime 'Hola' cuando se ejecuta.",
+        "points": 10,
+        "order": 2
+      }
+    ]
+  },
+  {
+    "id": "python_lesson_14",
+    "courseId": "python",
+    "title": "Parámetros, return y scope",
+    "description": "Aprende cómo recibir datos en funciones, devolver valores y entender el alcance de variables.",
+    "order": 14,
+    "estimatedMinutes": 25,
+    "content": {
+      "introduction": "Las funciones pueden recibir valores llamados parámetros y pueden devolver resultados usando return. También es importante entender el alcance (scope) de las variables.",
+      "sections": [
+        {
+          "id": "python_14_sec_1",
+          "title": "Parámetros",
+          "content": "Los parámetros permiten enviar información a la función al momento de llamarla.",
+          "order": 1
+        },
+        {
+          "id": "python_14_sec_2",
+          "title": "Return",
+          "content": "Una función puede devolver un valor usando la palabra return.",
+          "order": 2
+        },
+        {
+          "id": "python_14_sec_3",
+          "title": "Scope (alcance)",
+          "content": "Las variables dentro de una función solo existen dentro de ella (scope local).",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "python_14_ex_1",
+          "title": "Función con parámetros",
+          "code": "def sumar(a, b):\n    return a + b\n\nresultado = sumar(3, 5)\nprint(resultado)",
+          "language": "python",
+          "explanation": "La función recibe dos valores y devuelve su suma."
+        },
+        {
+          "id": "python_14_ex_2",
+          "title": "Scope local",
+          "code": "def ejemplo():\n    mensaje = 'Hola'\n    print(mensaje)\nejemplo()\n# print(mensaje)  # Esto generaría un error",
+          "language": "python",
+          "explanation": "mensaje solo existe dentro de la función."
+        }
+      ],
+      "summary": "Los parámetros permiten enviar información, return devuelve resultados y el scope determina dónde existen las variables.",
+      "keyPoints": [
+        "Las funciones pueden recibir parámetros",
+        "return devuelve valores",
+        "Las variables dentro de funciones tienen scope local"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "python_14_ch_1",
+        "lessonId": "python_lesson_14",
+        "question": "¿Qué palabra se usa para devolver un valor en una función?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "send", "isCorrect": false },
+          { "id": "opt_2", "text": "give", "isCorrect": false },
+          { "id": "opt_3", "text": "return", "isCorrect": true },
+          { "id": "opt_4", "text": "out", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "return finaliza la función y devuelve un valor.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "python_14_ch_2",
+        "lessonId": "python_lesson_14",
+        "question": "¿Qué sucede si intentas acceder a una variable definida dentro de una función desde fuera de ella?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "Se devuelve None", "isCorrect": false },
+          { "id": "opt_2", "text": "Se imprime su valor", "isCorrect": false },
+          { "id": "opt_3", "text": "Genera un error", "isCorrect": true },
+          {
+            "id": "opt_4",
+            "text": "La variable se convierte en global",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "Las variables dentro de funciones tienen alcance local.",
+        "points": 10,
+        "order": 2
+      }
+    ]
+  },
+  {
+    "id": "python_lesson_15",
+    "courseId": "python",
+    "title": "Módulos y librerías",
+    "description": "Aprende a importar módulos y usar librerías estándar en Python.",
+    "order": 15,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "Los módulos contienen funciones y variables que puedes reutilizar. Python incluye una gran librería estándar.",
+      "sections": [
+        {
+          "id": "python_15_sec_1",
+          "title": "Importar módulos",
+          "content": "Para usar un módulo, se utiliza la palabra clave import.",
+          "order": 1
+        },
+        {
+          "id": "python_15_sec_2",
+          "title": "Importar funciones específicas",
+          "content": "Puedes importar funciones concretas usando from módulo import función.",
+          "order": 2
+        },
+        {
+          "id": "python_15_sec_3",
+          "title": "Librería estándar",
+          "content": "Python incluye módulos como math, random, datetime, entre otros.",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "python_15_ex_1",
+          "title": "Importar un módulo completo",
+          "code": "import math\nprint(math.sqrt(16))",
+          "language": "python",
+          "explanation": "math.sqrt() calcula la raíz cuadrada."
+        },
+        {
+          "id": "python_15_ex_2",
+          "title": "Importar solo una función",
+          "code": "from random import randint\nprint(randint(1, 10))",
+          "language": "python",
+          "explanation": "randint genera un número aleatorio entre 1 y 10."
+        }
+      ],
+      "summary": "Los módulos permiten reutilizar código y aprovechar la librería estándar de Python.",
+      "keyPoints": [
+        "Usa import para importar módulos",
+        "from módulo import función importa solo partes específicas",
+        "Python tiene una rica librería estándar"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "python_15_ch_1",
+        "lessonId": "python_lesson_15",
+        "question": "¿Qué palabra se usa para importar un módulo?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "include", "isCorrect": false },
+          { "id": "opt_2", "text": "load", "isCorrect": false },
+          { "id": "opt_3", "text": "import", "isCorrect": true },
+          { "id": "opt_4", "text": "module", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "import permite traer módulos al programa.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "python_15_ch_2",
+        "lessonId": "python_lesson_15",
+        "question": "¿Qué imprimirá este código?\n\nfrom math import sqrt\nprint(sqrt(9))",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "9", "isCorrect": false },
+          { "id": "opt_2", "text": "3", "isCorrect": true },
+          { "id": "opt_3", "text": "Error", "isCorrect": false },
+          { "id": "opt_4", "text": "sqrt(9)", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "sqrt(9) devuelve la raíz cuadrada que es 3.",
+        "points": 10,
+        "order": 2
+      }
+    ]
+  },
+  {
+    "id": "python_lesson_16",
+    "courseId": "python",
+    "title": "Manejo de errores (try/except)",
+    "description": "Aprende a manejar errores en tiempo de ejecución con try y except.",
+    "order": 16,
+    "estimatedMinutes": 25,
+    "content": {
+      "introduction": "El manejo de errores permite evitar que un programa se detenga inesperadamente. Con try/except puedes capturar excepciones y manejar errores de manera controlada.",
+      "sections": [
+        {
+          "id": "python_16_sec_1",
+          "title": "Estructura try/except",
+          "content": "El código dentro de try se ejecuta normalmente; si ocurre un error, se ejecuta el bloque except.",
+          "order": 1
+        },
+        {
+          "id": "python_16_sec_2",
+          "title": "Capturar tipos específicos de error",
+          "content": "Puedes capturar errores específicos como ValueError o ZeroDivisionError.",
+          "order": 2
+        },
+        {
+          "id": "python_16_sec_3",
+          "title": "Bloques opcionales: else y finally",
+          "content": "else se ejecuta si no ocurre error. finally se ejecuta siempre, ocurra o no un error.",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "python_16_ex_1",
+          "title": "Capturar un error",
+          "code": "try:\n    print(10 / 0)\nexcept ZeroDivisionError:\n    print('No puedes dividir entre cero')",
+          "language": "python",
+          "explanation": "ZeroDivisionError se dispara al intentar dividir entre cero."
+        },
+        {
+          "id": "python_16_ex_2",
+          "title": "else y finally",
+          "code": "try:\n    n = int('5')\nexcept ValueError:\n    print('No es un número')\nelse:\n    print('Conversión exitosa')\nfinally:\n    print('Esto siempre se ejecuta')",
+          "language": "python",
+          "explanation": "else se ejecuta cuando no hay error; finally siempre se ejecuta."
+        }
+      ],
+      "summary": "try/except permite manejar errores sin que el programa se detenga. else y finally ofrecen control adicional.",
+      "keyPoints": [
+        "try para código que puede fallar",
+        "except para manejar errores",
+        "Puedes capturar errores específicos",
+        "finally siempre se ejecuta"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "python_16_ch_1",
+        "lessonId": "python_lesson_16",
+        "question": "¿Qué sucede si ocurre un error dentro del bloque try?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "El programa se cierra",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Pasa automáticamente al bloque except",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "El bloque else se ejecuta",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "Se reinicia el programa",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Si hay error, el control pasa al bloque except.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "python_16_ch_2",
+        "lessonId": "python_lesson_16",
+        "question": "¿Qué bloque se ejecuta siempre, ocurra o no un error?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "try", "isCorrect": false },
+          { "id": "opt_2", "text": "except", "isCorrect": false },
+          { "id": "opt_3", "text": "else", "isCorrect": false },
+          { "id": "opt_4", "text": "finally", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_4",
+        "explanation": "finally siempre se ejecuta, independientemente del resultado.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "python_16_ch_3",
+        "lessonId": "python_lesson_16",
+        "question": "¿Cuál error capturará este código?\n\ntry:\n    int('hola')\nexcept ValueError:\n    print('Error capturado')",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "ZeroDivisionError", "isCorrect": false },
+          { "id": "opt_2", "text": "NameError", "isCorrect": false },
+          { "id": "opt_3", "text": "ValueError", "isCorrect": true },
+          { "id": "opt_4", "text": "TypeError", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "int('hola') produce un ValueError al no poder convertir texto no numérico.",
+        "points": 10,
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": "python_lesson_17",
+    "courseId": "python",
+    "title": "Archivos: lectura y escritura",
+    "description": "Aprende a trabajar con archivos de texto, leer contenido y escribir datos en Python.",
+    "order": 17,
+    "estimatedMinutes": 25,
+    "content": {
+      "introduction": "Python permite trabajar con archivos para almacenar y recuperar datos. Puedes abrir, leer, escribir y cerrar archivos fácilmente.",
+      "sections": [
+        {
+          "id": "python_17_sec_1",
+          "title": "Abrir un archivo",
+          "content": "Usa la función open() para abrir un archivo. Puedes especificar modos como 'r' (leer), 'w' (escribir) y 'a' (agregar).",
+          "order": 1
+        },
+        {
+          "id": "python_17_sec_2",
+          "title": "Leer un archivo",
+          "content": "Puedes usar read(), readline() o readlines() para obtener el contenido de un archivo.",
+          "order": 2
+        },
+        {
+          "id": "python_17_sec_3",
+          "title": "Escribir en un archivo",
+          "content": "Con el modo 'w' se sobrescribe el archivo. Con 'a' se agrega contenido al final.",
+          "order": 3
+        },
+        {
+          "id": "python_17_sec_4",
+          "title": "Cerrar el archivo",
+          "content": "Siempre debes cerrar el archivo con close() o usar with, que lo hace automáticamente.",
+          "order": 4
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "python_17_ex_1",
+          "title": "Leer un archivo",
+          "code": "with open('datos.txt', 'r') as archivo:\n    contenido = archivo.read()\n    print(contenido)",
+          "language": "python",
+          "explanation": "with garantiza que el archivo se cierre correctamente al terminar."
+        },
+        {
+          "id": "python_17_ex_2",
+          "title": "Escribir en un archivo",
+          "code": "with open('salida.txt', 'w') as archivo:\n    archivo.write('Hola desde Python')",
+          "language": "python",
+          "explanation": "El modo 'w' crea o sobrescribe el archivo."
+        }
+      ],
+      "summary": "Python facilita la lectura y escritura de archivos mediante open(), read(), write() y la instrucción with.",
+      "keyPoints": [
+        "open() abre un archivo con un modo específico",
+        "with simplifica el manejo y cierre de archivos",
+        "read(), readline() y readlines() permiten obtener contenido",
+        "w escribe y reemplaza; a agrega al final"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "python_17_ch_1",
+        "lessonId": "python_lesson_17",
+        "question": "¿Qué modo debes usar para agregar contenido al final de un archivo?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "r", "isCorrect": false },
+          { "id": "opt_2", "text": "w", "isCorrect": false },
+          { "id": "opt_3", "text": "a", "isCorrect": true },
+          { "id": "opt_4", "text": "rw", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El modo 'a' agrega contenido sin borrar lo existente.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "python_17_ch_2",
+        "lessonId": "python_lesson_17",
+        "question": "¿Qué hace el bloque 'with' al trabajar con archivos?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "Solo abre el archivo", "isCorrect": false },
+          {
+            "id": "opt_2",
+            "text": "Abre y cierra automáticamente el archivo",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "Solo escribe en el archivo",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "Evita que se generen errores",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "with se encarga de cerrar el archivo automáticamente.",
+        "points": 10,
+        "order": 2
+      }
+    ]
+  },
+  {
+    "id": "python_lesson_18",
+    "courseId": "python",
+    "title": "POO: clases y objetos",
+    "description": "Aprende qué son las clases, cómo crear objetos y cómo definir atributos y métodos.",
+    "order": 18,
+    "estimatedMinutes": 30,
+    "content": {
+      "introduction": "La Programación Orientada a Objetos (POO) permite modelar entidades del mundo real mediante clases y objetos.",
+      "sections": [
+        {
+          "id": "python_18_sec_1",
+          "title": "¿Qué es una clase?",
+          "content": "Una clase es un plano o plantilla que describe un objeto. Define atributos (variables) y métodos (funciones).",
+          "order": 1
+        },
+        {
+          "id": "python_18_sec_2",
+          "title": "Crear un objeto",
+          "content": "Un objeto es una instancia de una clase. Se crea llamando la clase como si fuera una función.",
+          "order": 2
+        },
+        {
+          "id": "python_18_sec_3",
+          "title": "El método __init__",
+          "content": "Es un método especial que se ejecuta al crear un objeto. Permite inicializar atributos.",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "python_18_ex_1",
+          "title": "Clase básica",
+          "code": "class Persona:\n    def __init__(self, nombre):\n        self.nombre = nombre\n\np = Persona('Ana')\nprint(p.nombre)",
+          "language": "python",
+          "explanation": "__init__ asigna valores iniciales al crear un objeto."
+        }
+      ],
+      "summary": "Las clases permiten estructurar código mediante atributos y métodos, y los objetos son instancias de esas clases.",
+      "keyPoints": [
+        "class define una clase",
+        "Los objetos son instancias",
+        "__init__ inicializa atributos",
+        "self representa al propio objeto"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "python_18_ch_1",
+        "lessonId": "python_lesson_18",
+        "question": "¿Qué método se ejecuta automáticamente al crear un objeto?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "__start__", "isCorrect": false },
+          { "id": "opt_2", "text": "__init__", "isCorrect": true },
+          { "id": "opt_3", "text": "__class__", "isCorrect": false },
+          { "id": "opt_4", "text": "__new__", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "__init__ inicializa los atributos del objeto.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "python_18_ch_2",
+        "lessonId": "python_lesson_18",
+        "question": "¿Qué imprimirá este código?\n\nclass A:\n    def __init__(self):\n        self.x = 5\nobj = A()\nprint(obj.x)",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "x", "isCorrect": false },
+          { "id": "opt_2", "text": "5", "isCorrect": true },
+          { "id": "opt_3", "text": "Error", "isCorrect": false },
+          { "id": "opt_4", "text": "Nada", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "El atributo x fue asignado como 5 en __init__.",
+        "points": 10,
+        "order": 2
+      }
+    ]
+  },
+  {
+    "id": "python_lesson_19",
+    "courseId": "python",
+    "title": "POO: herencia y métodos especiales",
+    "description": "Aprende a reutilizar clases mediante herencia y a usar métodos especiales como __str__.",
+    "order": 19,
+    "estimatedMinutes": 30,
+    "content": {
+      "introduction": "La herencia permite crear clases que reutilizan atributos y métodos de otra clase. Los métodos especiales permiten personalizar el comportamiento de los objetos.",
+      "sections": [
+        {
+          "id": "python_19_sec_1",
+          "title": "Herencia",
+          "content": "Una clase puede heredar de otra y obtener sus atributos y métodos.",
+          "order": 1
+        },
+        {
+          "id": "python_19_sec_2",
+          "title": "super()",
+          "content": "super() permite acceder a métodos de la clase padre.",
+          "order": 2
+        },
+        {
+          "id": "python_19_sec_3",
+          "title": "Método __str__",
+          "content": "__str__ define cómo se representa un objeto como cadena.",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "python_19_ex_1",
+          "title": "Herencia básica",
+          "code": "class Animal:\n    def hablar(self):\n        print('Hace un sonido')\n\nclass Perro(Animal):\n    pass\n\np = Perro()\np.hablar()",
+          "language": "python",
+          "explanation": "Perro hereda el método hablar de Animal."
+        },
+        {
+          "id": "python_19_ex_2",
+          "title": "Método __str__",
+          "code": "class Persona:\n    def __init__(self, nombre):\n        self.nombre = nombre\n    def __str__(self):\n        return f'Persona: {self.nombre}'\n\nprint(Persona('Luis'))",
+          "language": "python",
+          "explanation": "__str__ define la representación del objeto."
+        }
+      ],
+      "summary": "La herencia permite reutilizar código y los métodos especiales permiten añadir comportamientos personalizados.",
+      "keyPoints": [
+        "Una clase hija hereda de una clase padre",
+        "super() llama métodos de la clase padre",
+        "Métodos especiales empiezan y terminan con __"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "python_19_ch_1",
+        "lessonId": "python_lesson_19",
+        "question": "¿Qué palabra se usa para indicar herencia en Python?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "inherits", "isCorrect": false },
+          { "id": "opt_2", "text": "extends", "isCorrect": false },
+          { "id": "opt_3", "text": "()", "isCorrect": true },
+          { "id": "opt_4", "text": "super", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "La herencia se define colocando la clase padre entre paréntesis.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "python_19_ch_2",
+        "lessonId": "python_lesson_19",
+        "question": "¿Qué imprimirá este código?\n\nclass A:\n    def __str__(self):\n        return 'A'\nprint(A())",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "<objeto A>", "isCorrect": false },
+          { "id": "opt_2", "text": "A", "isCorrect": true },
+          { "id": "opt_3", "text": "Error", "isCorrect": false },
+          { "id": "opt_4", "text": "__str__", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "__str__ define la representación del objeto.",
+        "points": 10,
+        "order": 2
+      }
+    ]
+  },
+  {
+    "id": "python_lesson_20",
+    "courseId": "python",
+    "title": "Proyecto final: Mini aplicación en Python",
+    "description": "Crea una pequeña aplicación que combine lo aprendido: funciones, listas, archivos y POO.",
+    "order": 20,
+    "estimatedMinutes": 35,
+    "content": {
+      "introduction": "En este proyecto crearás una mini aplicación de gestión de tareas que guarda y carga datos desde un archivo.",
+      "sections": [
+        {
+          "id": "python_20_sec_1",
+          "title": "Estructura del proyecto",
+          "content": "Construiremos un programa que permita agregar, listar y guardar tareas usando una clase Tarea y funciones auxiliares.",
+          "order": 1
+        },
+        {
+          "id": "python_20_sec_2",
+          "title": "Clase Tarea",
+          "content": "La clase tendrá atributos como título y estado.",
+          "order": 2
+        },
+        {
+          "id": "python_20_sec_3",
+          "title": "Archivos",
+          "content": "El programa guardará y leerá tareas desde un archivo externo.",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "python_20_ex_1",
+          "title": "Mini app de tareas",
+          "code": "class Tarea:\n    def __init__(self, titulo):\n        self.titulo = titulo\n        self.completada = False\n\n    def __str__(self):\n        estado = '✔' if self.completada else '✘'\n        return f'{self.titulo} - {estado}'\n\n# Lista de tareas\ntareas = []\n\ndef agregar_tarea(titulo):\n    tareas.append(Tarea(titulo))\n\ndef mostrar_tareas():\n    for t in tareas:\n        print(t)\n\ndef guardar_tareas():\n    with open('tareas.txt', 'w') as f:\n        for t in tareas:\n            f.write(f'{t.titulo}|{t.completada}\\n')\n\nagregar_tarea('Aprender Python')\nagregar_tarea('Crear proyecto')\nmostrar_tareas()\nguardar_tareas()",
+          "language": "python",
+          "explanation": "Este programa crea tareas, las almacena en una lista y las guarda en un archivo."
+        }
+      ],
+      "summary": "¡Felicidades! Has completado un proyecto que integra funciones, clases, listas y archivos.",
+      "keyPoints": [
+        "Puedes combinar múltiples conceptos de Python",
+        "Las clases permiten modelar entidades",
+        "Los archivos permiten persistencia de datos",
+        "Las listas facilitan la organización"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "python_20_ch_1",
+        "lessonId": "python_lesson_20",
+        "question": "¿Qué método especial define cómo se imprime un objeto?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "__print__", "isCorrect": false },
+          { "id": "opt_2", "text": "__show__", "isCorrect": false },
+          { "id": "opt_3", "text": "__str__", "isCorrect": true },
+          { "id": "opt_4", "text": "__repr__", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "__str__ define la representación en texto del objeto.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "python_20_ch_2",
+        "lessonId": "python_lesson_20",
+        "question": "¿Qué estructura almacena todas las tareas en el proyecto final?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "Un diccionario", "isCorrect": false },
+          { "id": "opt_2", "text": "Una lista", "isCorrect": true },
+          { "id": "opt_3", "text": "Una tupla", "isCorrect": false },
+          { "id": "opt_4", "text": "Un set", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "La lista tareas almacena los objetos Tarea.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "python_20_ch_3",
+        "lessonId": "python_lesson_20",
+        "question": "¿Qué hace la función guardar_tareas()?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Elimina todas las tareas",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Guarda las tareas en un archivo",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "Imprime las tareas en pantalla",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "Crea objetos Tarea nuevos",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "La función escribe cada tarea en tareas.txt.",
+        "points": 10,
+        "order": 3
+      }
+    ]
   }
 ]

@@ -35,7 +35,7 @@ interface MenuOption {
   id: string;
   title: string;
   color: string;
-  route?: "Python"; // Solo routes que no requieren params
+  route?: "Python" | "Java"; // Solo routes que no requieren params
   progress?: number;
   onPress?: () => void;
 }
@@ -43,6 +43,7 @@ interface MenuOption {
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const [menuVisible, setMenuVisible] = useState<boolean>(false);
   const [pythonProgress, setPythonProgress] = useState<number>(0);
+  const [javaProgress, setJavaProgress] = useState<number>(0);
 
   // Cargar progreso al montar y cuando vuelve el foco
   useEffect(() => {
@@ -56,9 +57,17 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   }, [navigation]);
 
   const loadProgress = async () => {
-    const progress = await DataService.getCourseProgress("python");
-    console.log("Progreso de Python en Home:", progress); // Debug
-    setPythonProgress(progress);
+    const courses = ["python", "java"];
+    const progressMap: Record<string, number> = {};
+
+    for (const courseId of courses) {
+      const progress = await DataService.getCourseProgress(courseId);
+      progressMap[courseId] = progress;
+    }
+
+    // Actualiza estados individuales
+    setPythonProgress(progressMap["python"] || 0);
+    setJavaProgress(progressMap["java"] || 0);
   };
 
   const menuOptions: MenuOption[] = [
@@ -66,15 +75,15 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
       id: "Python",
       title: "Python",
       color: "#3963bdff",
-      progress: pythonProgress, // Usar el estado
+      progress: pythonProgress,
       route: "Python",
     },
     {
       id: "Java",
       title: "Java",
       color: "#f47f36ff",
-      progress: 0,
-      onPress: () => handleComingSoon("Java"),
+      progress: javaProgress,
+      route: "Java",
     },
     {
       id: "Javascript",

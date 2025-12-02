@@ -6,6 +6,7 @@ import RegisterScreen from "../screens/auth/RegisterScreen";
 import RecoverPasswordScreen from "../screens/auth/RecoverPasswordScreen";
 import HomeScreen from "../screens/home/HomeScreen";
 import PythonScreen from "../screens/courses/PythonScreen";
+import JavaScreen from "../screens/courses/JavaScreen";
 import LessonDetailScreen from "../screens/lessons/LessonDetailScreen";
 import ChallengeScreen from "../screens/challenges/ChallengeScreen";
 import ProfileScreen from "../screens/profile/ProfileScreen";
@@ -22,11 +23,14 @@ export type RootStackParamList = {
   RecoverPassword: undefined;
   Home: undefined;
   Python: undefined;
+  Java: undefined;
   LessonDetail: {
     lessonId: string;
+    courseId: string;
   };
   Challenge: {
     lessonId: string;
+    courseId: string;
   };
   Profile: undefined;
   Settings: undefined;
@@ -94,6 +98,13 @@ const StackNavigator: React.FC = () => {
         component={PythonScreen}
         options={{
           title: "Python",
+        }}
+      />
+      <Stack.Screen
+        name="Java"
+        component={JavaScreen}
+        options={{
+          title: "Java",
         }}
       />
 

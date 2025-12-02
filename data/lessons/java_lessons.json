@@ -1,0 +1,222 @@
+[
+  {
+    "id": "java_lesson_1",
+    "courseId": "java",
+    "title": "¿Qué es Java?",
+    "description": "Aprende qué es Java, por qué es tan popular y en qué se utiliza.",
+    "order": 1,
+    "estimatedMinutes": 15,
+    "content": {
+      "introduction": "Java es un lenguaje de programación orientado a objetos, muy popular gracias a su portabilidad y a su uso en todo tipo de aplicaciones, desde móviles hasta servidores.",
+      "sections": [
+        {
+          "id": "java_1_sec_1",
+          "title": "Java como lenguaje de programación",
+          "content": "Java es un lenguaje de propósito general, rápido, seguro y ampliamente usado en la industria. Fue creado en 1995 y sigue vigente debido a su estabilidad.",
+          "order": 1
+        },
+        {
+          "id": "java_1_sec_2",
+          "title": "¿Por qué es tan usado?",
+          "content": "Gracias a la Máquina Virtual Java (JVM), el mismo programa puede ejecutarse en diferentes plataformas sin cambios. Esto hace que Java destaque por su portabilidad.",
+          "order": 2
+        },
+        {
+          "id": "java_1_sec_3",
+          "title": "¿Para qué se usa Java?",
+          "content": "Java se usa en aplicaciones empresariales, Android, servidores web, sistemas bancarios y más.",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "java_1_ex_1",
+          "title": "Hola mundo en Java (vista previa)",
+          "code": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hola mundo\");\n    }\n}",
+          "language": "java",
+          "explanation": "Este será el primer programa completo que aprenderás a ejecutar en la próxima lección."
+        }
+      ],
+      "summary": "Java es un lenguaje poderoso, portable y muy utilizado en la industria tecnológica.",
+      "keyPoints": [
+        "Java es orientado a objetos",
+        "Funciona en casi cualquier sistema gracias a la JVM",
+        "Es ampliamente usado en Android y aplicaciones empresariales",
+        "Tiene una sintaxis clara y robusta"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "java_1_ch_1",
+        "lessonId": "java_lesson_1",
+        "question": "¿Qué característica hace que Java sea portable?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Es un lenguaje muy rápido",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Su sintaxis es simple",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "La Máquina Virtual Java (JVM)",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "Incluye una gran variedad de librerías",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "La JVM permite ejecutar el mismo programa en distintas plataformas.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+
+  {
+    "id": "java_lesson_2",
+    "courseId": "java",
+    "title": "Instalación de Java",
+    "description": "Aprende a instalar Java Development Kit (JDK) y configurar tu entorno.",
+    "order": 2,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "Para programar en Java necesitas instalar el JDK, que incluye herramientas para compilar y ejecutar programas.",
+      "sections": [
+        {
+          "id": "java_2_sec_1",
+          "title": "¿Qué es el JDK?",
+          "content": "El JDK (Java Development Kit) incluye el compilador javac y la JVM para ejecutar programas.",
+          "order": 1
+        },
+        {
+          "id": "java_2_sec_2",
+          "title": "Descargar Java",
+          "content": "Puedes descargar el JDK desde la página oficial de Oracle o desde versiones OpenJDK.",
+          "order": 2
+        },
+        {
+          "id": "java_2_sec_3",
+          "title": "Verificar la instalación",
+          "content": "Una vez instalado, abre la terminal o consola y escribe: java -version",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "java_2_ex_1",
+          "title": "Verificar instalación",
+          "code": "java -version",
+          "language": "bash",
+          "explanation": "Si ves una versión instalada, entonces todo está listo para empezar."
+        }
+      ],
+      "summary": "Instalar Java es el primer paso para empezar a programar, y solo necesitas el JDK para comenzar.",
+      "keyPoints": [
+        "El JDK te permite compilar y ejecutar Java",
+        "Puedes instalar Java desde Oracle o OpenJDK",
+        "java -version verifica la instalación",
+        "Necesitarás también un editor o IDE"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "java_2_ch_1",
+        "lessonId": "java_lesson_2",
+        "question": "¿Qué comando permite verificar que Java está instalado correctamente?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "java --check", "isCorrect": false },
+          { "id": "opt_2", "text": "javac -v", "isCorrect": false },
+          { "id": "opt_3", "text": "java -version", "isCorrect": true },
+          { "id": "opt_4", "text": "jdk -version", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El comando java -version muestra la versión instalada.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+
+  {
+    "id": "java_lesson_3",
+    "courseId": "java",
+    "title": "Tu primer programa en Java",
+    "description": "Aprende a crear, compilar y ejecutar tu primer programa Java.",
+    "order": 3,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "Ahora sí, escribirás tu primer programa en Java. Verás cómo crear un archivo, compilarlo y ejecutarlo.",
+      "sections": [
+        {
+          "id": "java_3_sec_1",
+          "title": "Crear el archivo",
+          "content": "Crea un archivo llamado Main.java. En Java, el nombre del archivo debe coincidir con la clase pública.",
+          "order": 1
+        },
+        {
+          "id": "java_3_sec_2",
+          "title": "Escribir el programa",
+          "content": "En Java, cada aplicación inicia desde el método main().",
+          "order": 2
+        },
+        {
+          "id": "java_3_sec_3",
+          "title": "Compilar y ejecutar",
+          "content": "Usa javac Main.java para compilar y java Main para ejecutarlo.",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "java_3_ex_1",
+          "title": "Primer programa en Java",
+          "code": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hola mundo desde Java\");\n    }\n}",
+          "language": "java",
+          "explanation": "System.out.println imprime texto en la consola."
+        },
+        {
+          "id": "java_3_ex_2",
+          "title": "Compilar y ejecutar",
+          "code": "javac Main.java\njava Main",
+          "language": "bash",
+          "explanation": "javac genera el archivo Main.class necesario para ejecutar el programa."
+        }
+      ],
+      "summary": "Acabas de crear tu primer programa Java. Ya sabes compilar y ejecutar código desde la terminal.",
+      "keyPoints": [
+        "El archivo debe llamarse igual que la clase pública",
+        "El método main() es el punto de inicio",
+        "javac compila y java ejecuta",
+        "System.out.println muestra texto"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "java_3_ch_1",
+        "lessonId": "java_lesson_3",
+        "question": "¿Qué método debe tener toda aplicación Java para iniciar?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "start()", "isCorrect": false },
+          { "id": "opt_2", "text": "init()", "isCorrect": false },
+          { "id": "opt_3", "text": "main()", "isCorrect": true },
+          { "id": "opt_4", "text": "run()", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El método main() es el punto de entrada de cualquier programa Java.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  }
+]

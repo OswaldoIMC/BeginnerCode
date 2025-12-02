@@ -47,7 +47,7 @@ const LessonDetailScreen: React.FC<LessonDetailScreenProps> = ({
   route,
   navigation,
 }) => {
-  const { lessonId } = route.params;
+  const { courseId, lessonId } = route.params;
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -64,7 +64,7 @@ const LessonDetailScreen: React.FC<LessonDetailScreenProps> = ({
   const loadLessonData = () => {
     try {
       setLoading(true);
-      const lessonData = DataService.getLessonById(lessonId);
+      const lessonData = DataService.getLessonById(courseId, lessonId);
       setLesson(lessonData || null);
       setLoading(false);
     } catch (error) {
@@ -78,7 +78,10 @@ const LessonDetailScreen: React.FC<LessonDetailScreenProps> = ({
    */
   const handleStartChallenges = () => {
     if (lesson) {
-      navigation.navigate("Challenge", { lessonId: lesson.id });
+      navigation.navigate("Challenge", {
+        courseId,
+        lessonId: lesson.id,
+      });
     }
   };
 

@@ -21,9 +21,9 @@ import { RootStackParamList } from "../../navigation/StackNavigator";
 import * as Progress from "react-native-progress";
 import DataService from "../../services/DataService";
 
-const PythonImage = require("../../../assets/python.png");
+const JavaImage = require("../../../assets/java.png");
 
-const PythonScreen = () => {
+const JavaScreen = () => {
   const [menuVisible, setMenuVisible] = useState<boolean>(false);
   const [course, setCourse] = useState<Course | null>(null);
   const [lessons, setLessons] = useState<Lesson[]>([]);
@@ -32,7 +32,7 @@ const PythonScreen = () => {
     [key: string]: number;
   }>({});
   const navigation =
-    useNavigation<StackNavigationProp<RootStackParamList, "Python">>();
+    useNavigation<StackNavigationProp<RootStackParamList, "Java">>();
 
   /**
    * Carga los datos del curso y sus lecciones
@@ -56,20 +56,17 @@ const PythonScreen = () => {
       setLoading(true);
 
       // Obtener el curso de Python
-      const pythonCourse = DataService.getCourseById("python");
-      setCourse(pythonCourse || null);
+      const javaCourse = DataService.getCourseById("java");
+      setCourse(javaCourse || null);
 
       // Obtener las lecciones del curso
-      const pythonLessons = DataService.getLessonsByCourse("python");
-      setLessons(pythonLessons);
+      const javaLessons = DataService.getLessonsByCourse("java");
+      setLessons(javaLessons);
 
       // Cargar progreso de todas las lecciones
       const progressMap: { [key: string]: number } = {};
-      for (const lesson of pythonLessons) {
-        const progress = await DataService.getLessonProgress(
-          "python",
-          lesson.id
-        );
+      for (const lesson of javaLessons) {
+        const progress = await DataService.getLessonProgress("java", lesson.id);
         progressMap[lesson.id] = progress;
       }
       setLessonsProgress(progressMap);
@@ -87,7 +84,7 @@ const PythonScreen = () => {
   const handleLessonPress = (lesson: Lesson) => {
     console.log("Navegando a lección:", lesson.title);
     navigation.navigate("LessonDetail", {
-      courseId: "python",
+      courseId: "java",
       lessonId: lesson.id,
     });
   };
@@ -281,7 +278,7 @@ const PythonScreen = () => {
         <View style={styles.contentContainer}>
           {/* Header del curso */}
           <View style={styles.headerContainer}>
-            <Image source={PythonImage} style={styles.logo} />
+            <Image source={JavaImage} style={styles.logo} />
             <Text style={styles.courseTitle}>{course.name}</Text>
 
             {/* Información adicional del curso */}
@@ -307,8 +304,8 @@ const PythonScreen = () => {
                   color={COLORS.primary}
                 />
                 <Text style={styles.infoText}>
-                  {course.difficulty === "beginner"
-                    ? "Principiante"
+                  {course.difficulty === "intermediate"
+                    ? "Intermedio"
                     : course.difficulty}
                 </Text>
               </View>
@@ -371,7 +368,7 @@ const PythonScreen = () => {
                   <Progress.Bar
                     progress={progress}
                     width={null}
-                    color="#3776AB"
+                    color="#f47f36ff"
                     unfilledColor="#E0E0E0"
                     borderWidth={0}
                     height={8}
@@ -404,7 +401,7 @@ const PythonScreen = () => {
   );
 };
 
-export default PythonScreen;
+export default JavaScreen;
 
 const styles = StyleSheet.create({
   container: {

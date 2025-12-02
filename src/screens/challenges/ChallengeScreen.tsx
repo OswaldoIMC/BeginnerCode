@@ -49,7 +49,7 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
   route,
   navigation,
 }) => {
-  const { lessonId } = route.params;
+  const { courseId, lessonId } = route.params;
 
   // Estados principales
   const [lesson, setLesson] = useState<Lesson | null>(null);
@@ -85,7 +85,7 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
   const loadLessonData = () => {
     try {
       setLoading(true);
-      const lessonData = DataService.getLessonById(lessonId);
+      const lessonData = DataService.getLessonById(courseId, lessonId);
       setLesson(lessonData || null);
       setLoading(false);
     } catch (error) {
