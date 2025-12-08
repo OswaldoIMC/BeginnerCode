@@ -24,6 +24,31 @@ const STORAGE_KEYS = {
  * Maneja la persistencia de datos del usuario
  */
 class StorageService {
+  // Callback para sincronización (se configurará externamente)
+  private syncCallback: ((profile: UserProfile) => void) | null = null;
+
+  /**
+   * Configura el callback de sincronización
+   * Esto evita importaciones circulares
+   */
+  setSyncCallback(callback: (profile: UserProfile) => void): void {
+    this.syncCallback = callback;
+  }
+
+  /**
+   * Ejecuta la sincronización si está configurada
+   */
+  private async triggerSync(profile: UserProfile): Promise<void> {
+    if (this.syncCallback) {
+      // Ejecutar en background para no bloquear
+      setTimeout(() => {
+        if (this.syncCallback) {
+          this.syncCallback(profile);
+        }
+      }, 100);
+    }
+  }
+
   // ==========================================
   // PERFIL DE USUARIO
   // ==========================================
@@ -50,6 +75,10 @@ class StorageService {
         STORAGE_KEYS.USER_PROFILE,
         JSON.stringify(profile)
       );
+
+      // Trigger sync después de guardar
+      await this.triggerSync(profile);
+
       return true;
     } catch (error) {
       console.error("Error al guardar perfil de usuario:", error);
@@ -431,7 +460,7 @@ class StorageService {
         unlockedBadges.push("perfect_score");
       }
 
-      // Curso Completado
+      // Curso Completado - NUEVO
       const completedCourses = profile.coursesProgress.filter(
         (cp) => cp.progressPercentage >= 1.0
       ).length;
@@ -506,7 +535,7 @@ class StorageService {
         totalPoints: profile.totalPoints,
         level: profile.level,
         badgesUnlocked: profile.badges.filter((b) => b.isUnlocked).length,
-        coursesCompleted, // NUEVO: ahora retorna cursos completados
+        coursesCompleted,
       };
     } catch (error) {
       console.error("Error al obtener estadísticas:", error);

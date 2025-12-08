@@ -10,6 +10,7 @@ import {
   Alert,
   Modal,
   Linking,
+  ActivityIndicator,
 } from "react-native";
 import * as Notifications from "expo-notifications";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -21,6 +22,7 @@ import StorageService from "../../services/StorageService";
 import { CommonActions } from "@react-navigation/native";
 import { useTheme } from "../../context/ThemeContext";
 import NotificationService from "../../services/NotificationService";
+import SupabaseSyncService from "../../services/SupabaseSyncService";
 
 type SettingsScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -36,6 +38,11 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
   const [aboutModalVisible, setAboutModalVisible] = useState(false);
   const { theme, isDarkMode, setDarkMode } = useTheme();
 
+  // Estados de sincronización
+  const [lastSyncDate, setLastSyncDate] = useState<Date | null>(null);
+  const [isSyncing, setIsSyncing] = useState(false);
+  const [isOnline, setIsOnline] = useState(true);
+
   useEffect(() => {
     const initNotifications = async () => {
       const enabledInStorage =
@@ -44,8 +51,94 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
       setNotificationsEnabled(enabledInStorage && status === "granted");
     };
     initNotifications();
+
+    // Cargar estado de sincronización
+    loadSyncStatus();
+
+    // Actualizar cada 30 segundos
+    const interval = setInterval(loadSyncStatus, 30000);
+    return () => clearInterval(interval);
   }, []);
 
+  /**
+   * Carga el estado de sincronización
+   */
+  const loadSyncStatus = async () => {
+    const lastSync = await SupabaseSyncService.getLastSyncDate();
+    setLastSyncDate(lastSync);
+
+    const online = await SupabaseSyncService.checkConnection();
+    setIsOnline(online);
+  };
+
+  /**
+   * Formatea el tiempo desde la última sincronización
+   */
+  const formatLastSync = (date: Date | null): string => {
+    if (!date) return "Nunca sincronizado";
+
+    const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
+
+    if (seconds < 60) return "Hace menos de un minuto";
+    if (seconds < 3600) {
+      const minutes = Math.floor(seconds / 60);
+      return `Hace ${minutes} minuto${minutes > 1 ? "s" : ""}`;
+    }
+    if (seconds < 86400) {
+      const hours = Math.floor(seconds / 3600);
+      return `Hace ${hours} hora${hours > 1 ? "s" : ""}`;
+    }
+    const days = Math.floor(seconds / 86400);
+    return `Hace ${days} día${days > 1 ? "s" : ""}`;
+  };
+
+  /**
+   * Sincroniza manualmente con la nube
+   */
+  const handleManualSync = async () => {
+    if (!isOnline) {
+      Alert.alert(
+        "Sin conexión",
+        "No hay conexión a internet. Los datos se sincronizarán automáticamente cuando te conectes."
+      );
+      return;
+    }
+
+    if (isSyncing) {
+      return; // Ya está sincronizando
+    }
+
+    setIsSyncing(true);
+
+    try {
+      const success = await SupabaseSyncService.forceSyncNow();
+
+      if (success) {
+        await loadSyncStatus();
+        Alert.alert(
+          "Sincronización completada",
+          "Tus datos han sido guardados en la nube exitosamente."
+        );
+      } else {
+        Alert.alert(
+          "Error de sincronización",
+          "No se pudieron sincronizar todos los datos. Intenta de nuevo más tarde."
+        );
+      }
+    } catch (error) {
+      console.error("Error en sincronización manual:", error);
+      Alert.alert(
+        "Error",
+        "Hubo un problema al sincronizar. Verifica tu conexión e intenta de nuevo."
+      );
+    } finally {
+      setIsSyncing(false);
+    }
+  };
+
+  /**
+   * Elimina la cuenta y datos locales
+   */
   const handleDeleteAccount = () => {
     Alert.alert(
       "Eliminar cuenta",
@@ -57,6 +150,7 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
           style: "destructive",
           onPress: async () => {
             await StorageService.clearAllData();
+            await SupabaseSyncService.clearSyncData();
             Alert.alert("Cuenta eliminada", "Tu cuenta ha sido eliminada.", [
               {
                 text: "OK",
@@ -104,6 +198,69 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
 
       <ScrollView style={styles.scrollView}>
         <View style={styles.contentContainer}>
+          {/* Sincronización en la Nube */}
+          <View style={styles.sectionContainer}>
+            <Text style={[styles.sectionTitle, { color: theme.text }]}>
+              Sincronización
+            </Text>
+
+            {/* Estado de conexión */}
+            <View style={[styles.syncCard, { backgroundColor: theme.card }]}>
+              <View style={styles.syncHeader}>
+                <View style={styles.syncInfo}>
+                  <MaterialIcons
+                    name={isOnline ? "cloud-done" : "cloud-off"}
+                    size={24}
+                    color={isOnline ? "#4CAF50" : theme.textSecondary}
+                  />
+                  <View style={styles.syncTextContainer}>
+                    <Text style={[styles.syncTitle, { color: theme.text }]}>
+                      {isOnline ? "Conectado" : "Sin conexión"}
+                    </Text>
+                    <Text
+                      style={[
+                        styles.syncSubtitle,
+                        { color: theme.textSecondary },
+                      ]}
+                    >
+                      {formatLastSync(lastSyncDate)}
+                    </Text>
+                  </View>
+                </View>
+
+                {/* Botón de sincronización manual */}
+                <TouchableOpacity
+                  style={[
+                    styles.syncButton,
+                    {
+                      backgroundColor: isOnline
+                        ? theme.primary
+                        : theme.textSecondary,
+                    },
+                    isSyncing && styles.syncButtonDisabled,
+                  ]}
+                  onPress={handleManualSync}
+                  disabled={isSyncing || !isOnline}
+                >
+                  {isSyncing ? (
+                    <ActivityIndicator size="small" color="#fff" />
+                  ) : (
+                    <MaterialIcons name="sync" size={20} color="#fff" />
+                  )}
+                </TouchableOpacity>
+              </View>
+
+              {/* Descripción */}
+              <Text
+                style={[styles.syncDescription, { color: theme.textSecondary }]}
+              >
+                {isOnline
+                  ? "Tus datos se guardan automáticamente en la nube. Presiona el botón para sincronizar ahora."
+                  : "Sin conexión a internet. Los cambios se sincronizarán automáticamente cuando te conectes."}
+              </Text>
+            </View>
+          </View>
+
           {/* Notificaciones */}
           <View style={styles.sectionContainer}>
             <Text style={[styles.sectionTitle, { color: theme.text }]}>
@@ -365,6 +522,58 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 15,
     marginLeft: 5,
+  },
+  syncCard: {
+    padding: 20,
+    borderRadius: 12,
+    marginBottom: 10,
+    elevation: 2,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 2 },
+  },
+  syncHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 12,
+  },
+  syncInfo: {
+    flexDirection: "row",
+    alignItems: "center",
+    flex: 1,
+    gap: 12,
+  },
+  syncTextContainer: {
+    flex: 1,
+  },
+  syncTitle: {
+    fontSize: 16,
+    fontWeight: "600",
+    marginBottom: 2,
+  },
+  syncSubtitle: {
+    fontSize: 12,
+  },
+  syncButton: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    justifyContent: "center",
+    alignItems: "center",
+    elevation: 2,
+    shadowColor: "#000",
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    shadowOffset: { width: 0, height: 1 },
+  },
+  syncButtonDisabled: {
+    opacity: 0.6,
+  },
+  syncDescription: {
+    fontSize: 13,
+    lineHeight: 18,
   },
   settingRow: {
     flexDirection: "row",
