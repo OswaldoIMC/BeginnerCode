@@ -272,10 +272,12 @@ class StorageService {
     const completedLessons = courseProgress.completedLessons.length;
 
     // Obtener el total de lecciones del curso desde los datos
-    let totalLessons = 20; // Por defecto Python tiene 20 lecciones
+    let totalLessons = 20;
 
     // Podrías mejorar esto importando DataService, pero por ahora es estático
     if (courseId === "python") {
+      totalLessons = 20;
+    } else if (courseId === "java") {
       totalLessons = 20;
     }
 
@@ -429,6 +431,18 @@ class StorageService {
         unlockedBadges.push("perfect_score");
       }
 
+      // Curso Completado
+      const completedCourses = profile.coursesProgress.filter(
+        (cp) => cp.progressPercentage >= 1.0
+      ).length;
+      if (
+        completedCourses >= 1 &&
+        !profile.badges.find((b) => b.id === "course_complete")?.isUnlocked
+      ) {
+        await this.unlockBadge("course_complete");
+        unlockedBadges.push("course_complete");
+      }
+
       return unlockedBadges;
     } catch (error) {
       console.error("Error al verificar medallas:", error);
@@ -474,11 +488,16 @@ class StorageService {
     totalPoints: number;
     level: number;
     badgesUnlocked: number;
-    coursesStarted: number;
+    coursesCompleted: number;
   } | null> {
     try {
       const profile = await this.getUserProfile();
       if (!profile) return null;
+
+      // Contar cursos completados (progreso >= 100%)
+      const coursesCompleted = profile.coursesProgress.filter(
+        (cp) => cp.progressPercentage >= 1.0
+      ).length;
 
       return {
         totalLessonsCompleted: profile.lessonsProgress.filter(
@@ -487,7 +506,7 @@ class StorageService {
         totalPoints: profile.totalPoints,
         level: profile.level,
         badgesUnlocked: profile.badges.filter((b) => b.isUnlocked).length,
-        coursesStarted: profile.coursesProgress.length,
+        coursesCompleted, // NUEVO: ahora retorna cursos completados
       };
     } catch (error) {
       console.error("Error al obtener estadísticas:", error);

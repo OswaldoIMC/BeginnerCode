@@ -15,7 +15,6 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../navigation/StackNavigator";
 import { COLORS, FONT_SIZES, UserProfile, Badge } from "../../../types";
 import StorageService from "../../services/StorageService";
-import { CommonActions } from "@react-navigation/native";
 
 /**
  * Props de navegación para esta pantalla
@@ -63,74 +62,6 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
       console.error("Error al cargar perfil:", error);
       setLoading(false);
     }
-  };
-
-  /**
-   * Maneja el reinicio de progreso
-   */
-  const handleResetProgress = () => {
-    Alert.alert(
-      "Reiniciar Progreso",
-      "¿Estás seguro de que quieres reiniciar todo tu progreso? Esta acción no se puede deshacer.",
-      [
-        {
-          text: "Cancelar",
-          style: "cancel",
-        },
-        {
-          text: "Reiniciar",
-          style: "destructive",
-          onPress: async () => {
-            await StorageService.clearAllData();
-            Alert.alert(
-              "Progreso Reiniciado",
-              "Tu progreso ha sido reiniciado. Por favor, inicia sesión nuevamente.",
-              [
-                {
-                  text: "OK",
-                  onPress: () => {
-                    navigation.dispatch(
-                      CommonActions.reset({
-                        index: 0,
-                        routes: [{ name: "Login" }],
-                      })
-                    );
-                  },
-                },
-              ]
-            );
-          },
-        },
-      ]
-    );
-  };
-
-  /**
-   * Maneja el cierre de sesión
-   */
-  const handleLogout = () => {
-    Alert.alert(
-      "Cerrar Sesión",
-      "¿Estás seguro de que quieres cerrar sesión?",
-      [
-        {
-          text: "Cancelar",
-          style: "cancel",
-        },
-        {
-          text: "Cerrar Sesión",
-          style: "destructive",
-          onPress: () => {
-            navigation.dispatch(
-              CommonActions.reset({
-                index: 0,
-                routes: [{ name: "Login" }],
-              })
-            );
-          },
-        },
-      ]
-    );
   };
 
   /**
@@ -293,13 +224,13 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
             {renderStatCard(
               "school",
               stats.totalLessonsCompleted,
-              "Lecciones Completadas",
+              "Lecciones completadas",
               "#4CAF50"
             )}
             {renderStatCard(
               "emoji-events",
               stats.totalPoints,
-              "Puntos Totales",
+              "Puntos totales",
               "#FF9800"
             )}
             {renderStatCard(
@@ -309,9 +240,9 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
               "#FFD700"
             )}
             {renderStatCard(
-              "menu-book",
-              stats.coursesStarted,
-              "Cursos Iniciados",
+              "workspace-premium",
+              stats.coursesCompleted,
+              "Cursos terminados",
               "#2196F3"
             )}
           </View>
@@ -336,7 +267,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>
             <MaterialIcons name="info" size={24} color={COLORS.primary} />{" "}
-            Información de la Cuenta
+            Información de la cuenta
           </Text>
           <View style={styles.infoContainer}>
             <View style={styles.infoRow}>

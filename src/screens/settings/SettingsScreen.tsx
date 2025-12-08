@@ -8,6 +8,8 @@ import {
   StatusBar,
   Switch,
   Alert,
+  Modal,
+  Linking,
 } from "react-native";
 import * as Notifications from "expo-notifications";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -31,6 +33,7 @@ interface SettingsScreenProps {
 
 const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+  const [aboutModalVisible, setAboutModalVisible] = useState(false);
   const { theme, isDarkMode, setDarkMode } = useTheme();
 
   useEffect(() => {
@@ -43,60 +46,38 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
     initNotifications();
   }, []);
 
-  const handleResetProgress = () => {
+  const handleDeleteAccount = () => {
     Alert.alert(
-      "Reiniciar Progreso",
-      "¿Estás seguro de que quieres reiniciar todo tu progreso? Esta acción no se puede deshacer.",
+      "Eliminar cuenta",
+      "¿Estás seguro de que quieres eliminar la cuenta con todo tu progreso? \nEsta acción no se puede deshacer.",
       [
         { text: "Cancelar", style: "cancel" },
         {
-          text: "Reiniciar",
+          text: "Eliminar",
           style: "destructive",
           onPress: async () => {
             await StorageService.clearAllData();
-            Alert.alert(
-              "Progreso reiniciado",
-              "Tu progreso ha sido reiniciado.",
-              [
-                {
-                  text: "OK",
-                  onPress: () => {
-                    navigation.dispatch(
-                      CommonActions.reset({
-                        index: 0,
-                        routes: [{ name: "Login" }],
-                      })
-                    );
-                  },
+            Alert.alert("Cuenta eliminada", "Tu cuenta ha sido eliminada.", [
+              {
+                text: "OK",
+                onPress: () => {
+                  navigation.dispatch(
+                    CommonActions.reset({
+                      index: 0,
+                      routes: [{ name: "Login" }],
+                    })
+                  );
                 },
-              ]
-            );
+              },
+            ]);
           },
         },
       ]
     );
   };
 
-  const handleLogout = () => {
-    Alert.alert(
-      "Cerrar sesión",
-      "¿Estás seguro de que quieres cerrar sesión?",
-      [
-        { text: "Cancelar", style: "cancel" },
-        {
-          text: "Cerrar sesión",
-          style: "destructive",
-          onPress: () => {
-            navigation.dispatch(
-              CommonActions.reset({
-                index: 0,
-                routes: [{ name: "Login" }],
-              })
-            );
-          },
-        },
-      ]
-    );
+  const handleSendEmail = () => {
+    Linking.openURL("mailto:Oswaldo16667@hotmail.com");
   };
 
   return (
@@ -208,6 +189,7 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
 
             <TouchableOpacity
               style={[styles.optionButton, { backgroundColor: theme.card }]}
+              onPress={() => setAboutModalVisible(true)}
             >
               <MaterialIcons name="info" size={24} color={theme.primary} />
               <Text style={[styles.optionText, { color: theme.text }]}>
@@ -236,29 +218,7 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
                   borderWidth: 1,
                 },
               ]}
-              onPress={handleResetProgress}
-            >
-              <MaterialIcons name="refresh" size={24} color={theme.error} />
-              <Text style={[styles.optionText, { color: theme.error }]}>
-                Reiniciar progreso
-              </Text>
-              <MaterialIcons
-                name="chevron-right"
-                size={24}
-                color={theme.error}
-              />
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={[
-                styles.optionButton,
-                {
-                  backgroundColor: theme.card,
-                  borderColor: theme.error,
-                  borderWidth: 1,
-                },
-              ]}
-              onPress={handleLogout}
+              onPress={handleDeleteAccount}
             >
               <MaterialIcons name="clear" size={24} color={theme.error} />
               <Text style={[styles.optionText, { color: theme.error }]}>
@@ -282,6 +242,99 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
           <View style={{ height: 30 }} />
         </View>
       </ScrollView>
+
+      {/* Modal "Acerca de" */}
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={aboutModalVisible}
+        onRequestClose={() => setAboutModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View
+            style={[styles.modalContainer, { backgroundColor: theme.card }]}
+          >
+            {/* Header del Modal */}
+            <View style={styles.modalHeader}>
+              <MaterialIcons
+                name="info"
+                size={50}
+                color={theme.primary}
+                style={styles.modalIcon}
+              />
+              <Text style={[styles.modalTitle, { color: theme.text }]}>
+                Acerca de BeginnerCode
+              </Text>
+            </View>
+
+            {/* Contenido del Modal */}
+            <ScrollView style={styles.modalContent}>
+              <Text style={[styles.modalText, { color: theme.text }]}>
+                BeginnerCode es una aplicación educativa diseñada para ayudar a
+                principiantes a aprender programación de forma interactiva y
+                divertida.
+              </Text>
+
+              <View style={styles.modalSection}>
+                <Text style={[styles.modalSectionTitle, { color: theme.text }]}>
+                  Desarrollo
+                </Text>
+                <Text
+                  style={[styles.modalText, { color: theme.textSecondary }]}
+                >
+                  Desarrollado por Oswaldo Iván Martínez
+                </Text>
+              </View>
+
+              <View style={styles.modalSection}>
+                <Text style={[styles.modalSectionTitle, { color: theme.text }]}>
+                  Contacto
+                </Text>
+                <TouchableOpacity
+                  style={styles.contactButton}
+                  onPress={handleSendEmail}
+                >
+                  <MaterialIcons name="email" size={20} color={theme.primary} />
+                  <Text
+                    style={[styles.contactButtonText, { color: theme.primary }]}
+                  >
+                    Oswaldo16667@hotmail.com
+                  </Text>
+                </TouchableOpacity>
+              </View>
+
+              <View
+                style={[styles.modalFooter, { borderTopColor: theme.border }]}
+              >
+                <Text
+                  style={[
+                    styles.modalFooterText,
+                    { color: theme.textSecondary },
+                  ]}
+                >
+                  Versión 1.0.0
+                </Text>
+                <Text
+                  style={[
+                    styles.modalFooterText,
+                    { color: theme.textSecondary },
+                  ]}
+                >
+                  © 2025 BeginnerCode
+                </Text>
+              </View>
+            </ScrollView>
+
+            {/* Botón Cerrar */}
+            <TouchableOpacity
+              style={[styles.closeButton, { backgroundColor: theme.primary }]}
+              onPress={() => setAboutModalVisible(false)}
+            >
+              <Text style={styles.closeButtonText}>Cerrar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaProvider>
   );
 };
@@ -336,4 +389,95 @@ const styles = StyleSheet.create({
   optionText: { fontSize: 16, flex: 1 },
   versionContainer: { alignItems: "center", marginTop: 20 },
   versionText: { fontSize: 14 },
+  // Estilos del Modal
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+  modalContainer: {
+    width: "100%",
+    maxWidth: 500,
+    maxHeight: "90%",
+    borderRadius: 20,
+    padding: 20,
+    elevation: 5,
+    shadowColor: "#000",
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 5 },
+  },
+  modalHeader: {
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  modalIcon: {
+    marginBottom: 10,
+  },
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalContent: {
+    maxHeight: 400,
+  },
+  modalText: {
+    fontSize: 15,
+    lineHeight: 22,
+    marginBottom: 15,
+  },
+  modalSection: {
+    marginBottom: 20,
+  },
+  modalSectionTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+  contactButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    paddingVertical: 8,
+  },
+  contactButtonText: {
+    fontSize: 15,
+    textDecorationLine: "underline",
+  },
+  linkButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 8,
+  },
+  linkButtonText: {
+    fontSize: 15,
+    flex: 1,
+  },
+  modalFooter: {
+    marginTop: 20,
+    paddingTop: 15,
+    borderTopWidth: 1,
+    alignItems: "center",
+  },
+  modalFooterText: {
+    fontSize: 12,
+    marginBottom: 5,
+  },
+  closeButton: {
+    marginTop: 15,
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+  closeButtonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
 });
