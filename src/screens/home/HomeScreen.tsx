@@ -9,6 +9,7 @@ import {
   Pressable,
   SafeAreaView,
   StatusBar,
+  Alert,
 } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -18,6 +19,7 @@ import { RootStackParamList } from "../../navigation/StackNavigator";
 import { COLORS, FONT_SIZES } from "../../../types";
 import { ScrollView } from "react-native-gesture-handler";
 import DataService from "../../services/DataService";
+import AuthService from "../../services/AuthService";
 
 const PythonImage = require("../../../assets/python.png");
 const JavaImage = require("../../../assets/java.png");
@@ -35,7 +37,7 @@ interface MenuOption {
   id: string;
   title: string;
   color: string;
-  route?: "Python" | "Java"; // Solo routes que no requieren params
+  route?: "Python" | "Java";
   progress?: number;
   onPress?: () => void;
 }
@@ -114,13 +116,40 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   ];
 
   const handleLogout = (): void => {
-    setMenuVisible(false);
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{ name: "Login" }],
-      })
-    );
+    Alert.alert("Cerrar Sesión", "¿Estás seguro de que deseas cerrar sesión?", [
+      {
+        text: "Cancelar",
+        style: "cancel",
+      },
+      {
+        text: "Cerrar Sesión",
+        style: "destructive",
+        onPress: async () => {
+          setMenuVisible(false);
+
+          // IMPORTANTE: Llamar a AuthService.logout() para eliminar la sesión
+          const success = await AuthService.logout();
+
+          if (success) {
+            console.log("Sesión cerrada exitosamente");
+
+            // Navegar a Login y limpiar el stack
+            navigation.dispatch(
+              CommonActions.reset({
+                index: 0,
+                routes: [{ name: "Login" }],
+              })
+            );
+          } else {
+            console.error("Error al cerrar sesión");
+            Alert.alert(
+              "Error",
+              "No se pudo cerrar la sesión. Intenta de nuevo."
+            );
+          }
+        },
+      },
+    ]);
   };
 
   const handleProfile = (): void => {

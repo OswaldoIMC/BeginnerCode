@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { CommonActions } from "@react-navigation/native";
 import { RootStackParamList } from "../../navigation/StackNavigator";
 import { LoginFormData, COLORS, FONT_SIZES } from "../../../types/index";
 import StorageService from "../../services/StorageService";
@@ -111,7 +112,14 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
       }
 
       setIsLoading(false);
-      navigation.replace("Home");
+
+      // Esto evita que el usuario pueda volver atrás con el botón back
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: "Home" }],
+        })
+      );
     } catch (error) {
       console.error("Error en autenticación:", error);
       setIsLoading(false);

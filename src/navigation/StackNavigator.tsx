@@ -37,6 +37,13 @@ export type RootStackParamList = {
 };
 
 /**
+ * Props para el StackNavigator
+ */
+interface StackNavigatorProps {
+  initialRoute?: "Login" | "Home";
+}
+
+/**
  * Creamos el Stack Navigator con tipado
  */
 
@@ -47,10 +54,12 @@ const Stack = createStackNavigator<RootStackParamList>();
  * Gestiona todas las rutas de la aplicación
  */
 
-const StackNavigator: React.FC = () => {
+const StackNavigator: React.FC<StackNavigatorProps> = ({
+  initialRoute = "Login",
+}) => {
   return (
     <Stack.Navigator
-      initialRouteName="Login"
+      initialRouteName={initialRoute}
       screenOptions={{
         headerShown: false, // Oculta el header globalmente
       }}
