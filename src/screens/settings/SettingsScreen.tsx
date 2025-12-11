@@ -13,7 +13,8 @@ import {
   ActivityIndicator,
 } from "react-native";
 import * as Notifications from "expo-notifications";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
+import ConnectivityIndicator from "../../components/ConnectivityIndicator";
 import { MaterialIcons } from "@expo/vector-icons";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../navigation/StackNavigator";
@@ -175,13 +176,16 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaProvider
-      style={[styles.container, { backgroundColor: theme.background }]}
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: theme.surface }]}
+      edges={["top", "bottom"]}
     >
       <StatusBar
         backgroundColor={theme.primary}
         barStyle={isDarkMode ? "light-content" : "dark-content"}
+        translucent={false}
       />
+      <ConnectivityIndicator />
 
       {/* Header */}
       <View style={[styles.headerBar, { backgroundColor: theme.primary }]}>
@@ -492,7 +496,7 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
           </View>
         </View>
       </Modal>
-    </SafeAreaProvider>
+    </SafeAreaView>
   );
 };
 

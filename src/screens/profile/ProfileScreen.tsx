@@ -7,14 +7,15 @@ import {
   TouchableOpacity,
   StatusBar,
   ActivityIndicator,
-  Alert,
 } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
+import ConnectivityIndicator from "../../components/ConnectivityIndicator";
 import { MaterialIcons } from "@expo/vector-icons";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../navigation/StackNavigator";
-import { COLORS, FONT_SIZES, UserProfile, Badge } from "../../../types";
+import { FONT_SIZES, UserProfile, Badge } from "../../../types";
 import StorageService from "../../services/StorageService";
+import { useTheme } from "../../context/ThemeContext";
 
 /**
  * Props de navegación para esta pantalla
@@ -33,6 +34,8 @@ interface ProfileScreenProps {
  * Muestra estadísticas, medallas, nivel y opciones de configuración
  */
 const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
+  const { theme } = useTheme();
+
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [stats, setStats] = useState<any>(null);
@@ -91,14 +94,16 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
     label: string,
     color: string
   ) => (
-    <View style={styles.statCard}>
+    <View style={[styles.statCard, { backgroundColor: theme.card }]}>
       <View
         style={[styles.statIconContainer, { backgroundColor: color + "20" }]}
       >
         <MaterialIcons name={icon as any} size={30} color={color} />
       </View>
-      <Text style={styles.statValue}>{value}</Text>
-      <Text style={styles.statLabel}>{label}</Text>
+      <Text style={[styles.statValue, { color: theme.text }]}>{value}</Text>
+      <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
+        {label}
+      </Text>
     </View>
   );
 
@@ -108,30 +113,37 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const renderBadge = (badge: Badge) => (
     <View
       key={badge.id}
-      style={[styles.badgeCard, !badge.isUnlocked && styles.badgeCardLocked]}
+      style={[
+        styles.badgeCard,
+        { backgroundColor: theme.card },
+        !badge.isUnlocked && styles.badgeCardLocked,
+      ]}
     >
       <Text style={styles.badgeIcon}>{badge.icon}</Text>
+
       <Text
-        style={[styles.badgeName, !badge.isUnlocked && styles.badgeTextLocked]}
+        style={[
+          styles.badgeName,
+          { color: theme.text },
+          !badge.isUnlocked && { color: theme.textSecondary },
+        ]}
       >
         {badge.name}
       </Text>
-      <Text
-        style={[
-          styles.badgeDescription,
-          !badge.isUnlocked && styles.badgeTextLocked,
-        ]}
-      >
+
+      <Text style={[styles.badgeDescription, { color: theme.textSecondary }]}>
         {badge.description}
       </Text>
+
       {badge.isUnlocked && badge.earnedAt && (
-        <Text style={styles.badgeDate}>
+        <Text style={[styles.badgeDate, { color: theme.textSecondary }]}>
           {new Date(badge.earnedAt).toLocaleDateString()}
         </Text>
       )}
+
       {!badge.isUnlocked && (
         <View style={styles.lockedOverlay}>
-          <MaterialIcons name="lock" size={24} color={COLORS.textSecondary} />
+          <MaterialIcons name="lock" size={24} color={theme.textSecondary} />
         </View>
       )}
     </View>
@@ -140,9 +152,13 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   // Mostrar loading
   if (loading) {
     return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color={COLORS.primary} />
-        <Text style={styles.loadingText}>Cargando perfil...</Text>
+      <View
+        style={[styles.loadingContainer, { backgroundColor: theme.surface }]}
+      >
+        <ActivityIndicator size="large" color={theme.primary} />
+        <Text style={[styles.loadingText, { color: theme.textSecondary }]}>
+          Cargando perfil...
+        </Text>
       </View>
     );
   }
@@ -150,11 +166,17 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   // Si no hay perfil
   if (!profile || !stats) {
     return (
-      <View style={styles.loadingContainer}>
-        <MaterialIcons name="error-outline" size={50} color={COLORS.error} />
-        <Text style={styles.errorText}>No se pudo cargar el perfil</Text>
+      <View
+        style={[styles.loadingContainer, { backgroundColor: theme.surface }]}
+      >
+        <MaterialIcons name="error-outline" size={50} color={theme.error} />
+
+        <Text style={[styles.errorText, { color: theme.error }]}>
+          No se pudo cargar el perfil
+        </Text>
+
         <TouchableOpacity
-          style={styles.backButton}
+          style={[styles.backButton, { backgroundColor: theme.primary }]}
           onPress={() => navigation.goBack()}
         >
           <Text style={styles.backButtonText}>Volver</Text>
@@ -167,15 +189,33 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const pointsForNextLevel = getPointsForNextLevel(profile.level);
 
   return (
-    <SafeAreaProvider style={styles.container}>
-      <StatusBar backgroundColor={COLORS.primary} barStyle="light-content" />
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: theme.surface }]}
+      edges={["top", "bottom"]}
+    >
+      <StatusBar
+        backgroundColor={theme.primary}
+        barStyle="light-content"
+        translucent={false}
+      />
+
+      <ConnectivityIndicator />
 
       {/* Header Bar */}
-      <View style={styles.headerBar}>
+      <View
+        style={[
+          styles.headerBar,
+          { backgroundColor: theme.primary, shadowColor: theme.text },
+        ]}
+      >
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <MaterialIcons name="arrow-back" size={28} color="#fff" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Mi Perfil</Text>
+
+        <Text style={[styles.headerTitle, { color: theme.surface }]}>
+          Mi Perfil
+        </Text>
+
         <View style={{ width: 28 }} />
       </View>
 
@@ -183,22 +223,30 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
         style={styles.scrollView}
         contentContainerStyle={styles.contentContainer}
       >
-        {/* Sección de Usuario */}
-        <View style={styles.userSection}>
+        {/* Usuario */}
+        <View
+          style={[styles.userSection, { backgroundColor: theme.background }]}
+        >
           <View style={styles.avatarContainer}>
             <MaterialIcons
               name="account-circle"
               size={100}
-              color={COLORS.primary}
+              color={theme.primary}
             />
           </View>
-          <Text style={styles.username}>{profile.username}</Text>
+
+          <Text style={[styles.username, { color: theme.text }]}>
+            {profile.username}
+          </Text>
+
           <View style={styles.levelContainer}>
             <MaterialIcons name="stars" size={20} color="#FFD700" />
-            <Text style={styles.levelText}>Nivel {profile.level}</Text>
+            <Text style={[styles.levelText, { color: theme.text }]}>
+              Nivel {profile.level}
+            </Text>
           </View>
 
-          {/* Barra de progreso de nivel */}
+          {/* Progreso */}
           <View style={styles.levelProgressContainer}>
             <View style={styles.levelProgressBar}>
               <View
@@ -208,18 +256,22 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
                 ]}
               />
             </View>
-            <Text style={styles.levelProgressText}>
+
+            <Text
+              style={[styles.levelProgressText, { color: theme.textSecondary }]}
+            >
               {profile.totalPoints % 100} / {pointsForNextLevel} pts
             </Text>
           </View>
         </View>
 
-        {/* Estadísticas Generales */}
+        {/* Estadísticas */}
         <View style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}>
-            <MaterialIcons name="bar-chart" size={24} color={COLORS.primary} />{" "}
+          <Text style={[styles.sectionTitle, { color: theme.text }]}>
+            <MaterialIcons name="bar-chart" size={24} color={theme.primary} />{" "}
             Estadísticas
           </Text>
+
           <View style={styles.statsGrid}>
             {renderStatCard(
               "school",
@@ -250,43 +302,56 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
 
         {/* Medallas */}
         <View style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}>
+          <Text style={[styles.sectionTitle, { color: theme.text }]}>
             <MaterialIcons
               name="emoji-events"
               size={24}
-              color={COLORS.primary}
+              color={theme.primary}
             />{" "}
             Medallas ({stats.badgesUnlocked}/{profile.badges.length})
           </Text>
+
           <View style={styles.badgesGrid}>
             {profile.badges.map(renderBadge)}
           </View>
         </View>
 
-        {/* Información de la cuenta */}
+        {/* Información */}
         <View style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}>
-            <MaterialIcons name="info" size={24} color={COLORS.primary} />{" "}
+          <Text style={[styles.sectionTitle, { color: theme.text }]}>
+            <MaterialIcons name="info" size={24} color={theme.primary} />{" "}
             Información de la cuenta
           </Text>
-          <View style={styles.infoContainer}>
-            <View style={styles.infoRow}>
+
+          <View style={[styles.infoContainer, { backgroundColor: theme.card }]}>
+            <View
+              style={[styles.infoRow, { borderBottomColor: theme.background }]}
+            >
               <MaterialIcons
                 name="person"
                 size={20}
-                color={COLORS.textSecondary}
+                color={theme.textSecondary}
               />
-              <Text style={styles.infoLabel}>Usuario:</Text>
-              <Text style={styles.infoValue}>{profile.username}</Text>
+              <Text style={[styles.infoLabel, { color: theme.textSecondary }]}>
+                Usuario:
+              </Text>
+              <Text style={[styles.infoValue, { color: theme.text }]}>
+                {profile.username}
+              </Text>
             </View>
-            <View style={styles.infoRow}>
+
+            <View
+              style={[styles.infoRow, { borderBottomColor: theme.background }]}
+            >
               <MaterialIcons
                 name="calendar-today"
                 size={20}
-                color={COLORS.textSecondary}
+                color={theme.textSecondary}
               />
-              <Text style={styles.infoLabel}>Miembro desde:</Text>
-              <Text style={styles.infoValue}>
+              <Text style={[styles.infoLabel, { color: theme.textSecondary }]}>
+                Miembro desde:
+              </Text>
+              <Text style={[styles.infoValue, { color: theme.text }]}>
                 {new Date(profile.joinedAt).toLocaleDateString()}
               </Text>
             </View>
@@ -296,7 +361,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
         {/* Espacio al final */}
         <View style={{ height: 30 }} />
       </ScrollView>
-    </SafeAreaProvider>
+    </SafeAreaView>
   );
 };
 
@@ -305,78 +370,81 @@ export default ProfileScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.surface,
   },
+
   loadingContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: COLORS.surface,
   },
+
   loadingText: {
     marginTop: 10,
     fontSize: FONT_SIZES.medium,
-    color: COLORS.textSecondary,
   },
+
   errorText: {
     marginTop: 10,
     fontSize: FONT_SIZES.medium,
-    color: COLORS.error,
     marginBottom: 20,
   },
+
   backButton: {
-    backgroundColor: COLORS.primary,
     paddingHorizontal: 30,
     paddingVertical: 12,
     borderRadius: 8,
   },
+
   backButtonText: {
     color: "#fff",
     fontSize: FONT_SIZES.medium,
     fontWeight: "600",
   },
+
   headerBar: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: COLORS.primary,
     paddingHorizontal: 20,
     paddingVertical: 15,
     elevation: 4,
-    shadowColor: COLORS.text,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
   },
+
   headerTitle: {
     fontSize: FONT_SIZES.xlarge,
     fontWeight: "bold",
-    color: COLORS.surface,
     flex: 1,
     textAlign: "center",
   },
+
   scrollView: {
     flex: 1,
   },
+
   contentContainer: {
     paddingBottom: 20,
   },
+
   userSection: {
-    backgroundColor: COLORS.background,
     alignItems: "center",
     paddingVertical: 30,
     paddingHorizontal: 20,
     marginBottom: 20,
   },
+
   avatarContainer: {
     marginBottom: 15,
   },
+
   username: {
     fontSize: 28,
     fontWeight: "bold",
-    color: COLORS.text,
     marginBottom: 10,
   },
+
   levelContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -387,15 +455,17 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginBottom: 20,
   },
+
   levelText: {
     fontSize: 16,
     fontWeight: "600",
-    color: COLORS.text,
   },
+
   levelProgressContainer: {
     width: "100%",
     maxWidth: 300,
   },
+
   levelProgressBar: {
     height: 10,
     backgroundColor: "#E0E0E0",
@@ -403,36 +473,37 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     marginBottom: 8,
   },
+
   levelProgressFill: {
     height: "100%",
     backgroundColor: "#4CAF50",
     borderRadius: 5,
   },
+
   levelProgressText: {
     fontSize: 12,
-    color: COLORS.textSecondary,
     textAlign: "center",
   },
+
   sectionContainer: {
     paddingHorizontal: 15,
     marginBottom: 25,
   },
+
   sectionTitle: {
     fontSize: 22,
     fontWeight: "bold",
-    color: COLORS.text,
     marginBottom: 15,
-    flexDirection: "row",
-    alignItems: "center",
   },
+
   statsGrid: {
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 10,
     justifyContent: "space-between",
   },
+
   statCard: {
-    backgroundColor: COLORS.card,
     borderRadius: 12,
     padding: 15,
     alignItems: "center",
@@ -443,6 +514,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     shadowOffset: { width: 0, height: 2 },
   },
+
   statIconContainer: {
     width: 60,
     height: 60,
@@ -451,24 +523,25 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 10,
   },
+
   statValue: {
     fontSize: 24,
     fontWeight: "bold",
-    color: COLORS.text,
     marginBottom: 5,
   },
+
   statLabel: {
     fontSize: 12,
-    color: COLORS.textSecondary,
     textAlign: "center",
   },
+
   badgesGrid: {
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 10,
   },
+
   badgeCard: {
-    backgroundColor: COLORS.card,
     borderRadius: 12,
     padding: 15,
     alignItems: "center",
@@ -481,78 +554,60 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     position: "relative",
   },
+
   badgeCardLocked: {
     opacity: 0.6,
   },
+
   badgeIcon: {
     fontSize: 40,
     marginBottom: 10,
   },
+
   badgeName: {
     fontSize: 14,
     fontWeight: "600",
-    color: COLORS.text,
     textAlign: "center",
     marginBottom: 5,
   },
+
   badgeDescription: {
     fontSize: 11,
-    color: COLORS.textSecondary,
     textAlign: "center",
     marginBottom: 5,
   },
+
   badgeDate: {
     fontSize: 10,
-    color: COLORS.textSecondary,
     fontStyle: "italic",
   },
-  badgeTextLocked: {
-    color: COLORS.textSecondary,
-  },
+
   lockedOverlay: {
     position: "absolute",
     top: 10,
     right: 10,
   },
+
   infoContainer: {
-    backgroundColor: COLORS.card,
     borderRadius: 12,
     padding: 15,
   },
+
   infoRow: {
     flexDirection: "row",
     alignItems: "center",
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.background,
     gap: 10,
   },
+
   infoLabel: {
     fontSize: 14,
-    color: COLORS.textSecondary,
     flex: 1,
   },
+
   infoValue: {
     fontSize: 14,
     fontWeight: "600",
-    color: COLORS.text,
-  },
-  optionButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: COLORS.card,
-    padding: 15,
-    borderRadius: 12,
-    marginBottom: 10,
-    gap: 15,
-  },
-  optionText: {
-    fontSize: 16,
-    color: COLORS.text,
-    flex: 1,
-  },
-  dangerButton: {
-    borderWidth: 1,
-    borderColor: COLORS.error + "40",
   },
 });

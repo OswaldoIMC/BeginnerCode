@@ -9,7 +9,10 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  StatusBar,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import ConnectivityIndicator from "../../components/ConnectivityIndicator";
 import { MaterialIcons } from "@expo/vector-icons";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../navigation/StackNavigator";
@@ -156,218 +159,226 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.backButton}
-        >
-          <MaterialIcons name="arrow-back" size={24} color={COLORS.primary} />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Crear Cuenta</Text>
-        <View style={{ width: 24 }} />
-      </View>
-
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
-        keyboardShouldPersistTaps="handled"
+    <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
+      <StatusBar
+        backgroundColor={COLORS.surface}
+        barStyle="dark-content"
+        translucent={false}
+      />
+      <ConnectivityIndicator />
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
-        <View style={styles.formContainer}>
-          <Text style={styles.title}>Registro</Text>
-          <Text style={styles.subtitle}>Completa los siguientes datos</Text>
+        {/* Header */}
+        <View style={styles.header}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={styles.backButton}
+          >
+            <MaterialIcons name="arrow-back" size={24} color={COLORS.primary} />
+          </TouchableOpacity>
+          <Text style={styles.headerTitle}>Crear Cuenta</Text>
+          <View style={{ width: 24 }} />
+        </View>
 
-          {/* Usuario */}
-          <View style={styles.inputContainer}>
-            <MaterialIcons
-              name="person"
-              size={20}
-              color={COLORS.textSecondary}
-              style={styles.inputIcon}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Nombre de usuario"
-              placeholderTextColor={COLORS.textSecondary}
-              value={formData.username}
-              onChangeText={(text) => updateFormData("username", text)}
-              autoCapitalize="none"
-              autoCorrect={false}
-              editable={!isLoading}
-            />
-          </View>
+        <ScrollView
+          style={styles.scrollView}
+          contentContainerStyle={styles.scrollContent}
+          keyboardShouldPersistTaps="handled"
+        >
+          <View style={styles.formContainer}>
+            <Text style={styles.title}>Registro</Text>
+            <Text style={styles.subtitle}>Completa los siguientes datos</Text>
 
-          {/* Email */}
-          <View style={styles.inputContainer}>
-            <MaterialIcons
-              name="email"
-              size={20}
-              color={COLORS.textSecondary}
-              style={styles.inputIcon}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Email"
-              placeholderTextColor={COLORS.textSecondary}
-              value={formData.email}
-              onChangeText={(text) => updateFormData("email", text)}
-              autoCapitalize="none"
-              autoCorrect={false}
-              keyboardType="email-address"
-              editable={!isLoading}
-            />
-          </View>
-
-          {/* Contraseña */}
-          <View style={styles.inputContainer}>
-            <MaterialIcons
-              name="lock"
-              size={20}
-              color={COLORS.textSecondary}
-              style={styles.inputIcon}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Contraseña"
-              placeholderTextColor={COLORS.textSecondary}
-              value={formData.password}
-              onChangeText={(text) => updateFormData("password", text)}
-              secureTextEntry={!showPassword}
-              autoCapitalize="none"
-              autoCorrect={false}
-              editable={!isLoading}
-            />
-            <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+            {/* Usuario */}
+            <View style={styles.inputContainer}>
               <MaterialIcons
-                name={showPassword ? "visibility" : "visibility-off"}
+                name="person"
                 size={20}
                 color={COLORS.textSecondary}
+                style={styles.inputIcon}
               />
-            </TouchableOpacity>
-          </View>
+              <TextInput
+                style={styles.input}
+                placeholder="Nombre de usuario"
+                placeholderTextColor={COLORS.textSecondary}
+                value={formData.username}
+                onChangeText={(text) => updateFormData("username", text)}
+                autoCapitalize="none"
+                autoCorrect={false}
+                editable={!isLoading}
+              />
+            </View>
 
-          {/* Confirmar Contraseña */}
-          <View style={styles.inputContainer}>
-            <MaterialIcons
-              name="lock"
-              size={20}
-              color={COLORS.textSecondary}
-              style={styles.inputIcon}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Confirmar contraseña"
-              placeholderTextColor={COLORS.textSecondary}
-              value={confirmPassword}
-              onChangeText={setConfirmPassword}
-              secureTextEntry={!showConfirmPassword}
-              autoCapitalize="none"
-              autoCorrect={false}
-              editable={!isLoading}
-            />
-            <TouchableOpacity
-              onPress={() => setShowConfirmPassword(!showConfirmPassword)}
-            >
+            {/* Email */}
+            <View style={styles.inputContainer}>
               <MaterialIcons
-                name={showConfirmPassword ? "visibility" : "visibility-off"}
+                name="email"
                 size={20}
                 color={COLORS.textSecondary}
+                style={styles.inputIcon}
               />
-            </TouchableOpacity>
-          </View>
+              <TextInput
+                style={styles.input}
+                placeholder="Email"
+                placeholderTextColor={COLORS.textSecondary}
+                value={formData.email}
+                onChangeText={(text) => updateFormData("email", text)}
+                autoCapitalize="none"
+                autoCorrect={false}
+                keyboardType="email-address"
+                editable={!isLoading}
+              />
+            </View>
 
-          <Text style={styles.sectionTitle}>Pregunta de Seguridad</Text>
-          <Text style={styles.sectionSubtitle}>
-            Selecciona una pregunta y respuesta para recuperar tu contraseña
-          </Text>
+            {/* Contraseña */}
+            <View style={styles.inputContainer}>
+              <MaterialIcons
+                name="lock"
+                size={20}
+                color={COLORS.textSecondary}
+                style={styles.inputIcon}
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="Contraseña"
+                placeholderTextColor={COLORS.textSecondary}
+                value={formData.password}
+                onChangeText={(text) => updateFormData("password", text)}
+                secureTextEntry={!showPassword}
+                autoCapitalize="none"
+                autoCorrect={false}
+                editable={!isLoading}
+              />
+              <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                <MaterialIcons
+                  name={showPassword ? "visibility" : "visibility-off"}
+                  size={20}
+                  color={COLORS.textSecondary}
+                />
+              </TouchableOpacity>
+            </View>
 
-          {/* Pregunta de Seguridad */}
-          <View style={styles.questionsContainer}>
-            {securityQuestions.map((question, index) => (
+            {/* Confirmar Contraseña */}
+            <View style={styles.inputContainer}>
+              <MaterialIcons
+                name="lock"
+                size={20}
+                color={COLORS.textSecondary}
+                style={styles.inputIcon}
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="Confirmar contraseña"
+                placeholderTextColor={COLORS.textSecondary}
+                value={confirmPassword}
+                onChangeText={setConfirmPassword}
+                secureTextEntry={!showConfirmPassword}
+                autoCapitalize="none"
+                autoCorrect={false}
+                editable={!isLoading}
+              />
               <TouchableOpacity
-                key={index}
-                style={[
-                  styles.questionOption,
-                  formData.securityQuestion === question &&
-                    styles.questionSelected,
-                ]}
-                onPress={() => updateFormData("securityQuestion", question)}
-                disabled={isLoading}
+                onPress={() => setShowConfirmPassword(!showConfirmPassword)}
               >
                 <MaterialIcons
-                  name={
-                    formData.securityQuestion === question
-                      ? "radio-button-checked"
-                      : "radio-button-unchecked"
-                  }
+                  name={showConfirmPassword ? "visibility" : "visibility-off"}
                   size={20}
-                  color={
-                    formData.securityQuestion === question
-                      ? COLORS.primary
-                      : COLORS.textSecondary
-                  }
+                  color={COLORS.textSecondary}
                 />
-                <Text
-                  style={[
-                    styles.questionText,
-                    formData.securityQuestion === question &&
-                      styles.questionTextSelected,
-                  ]}
-                >
-                  {question}
-                </Text>
               </TouchableOpacity>
-            ))}
-          </View>
+            </View>
 
-          {/* Respuesta de Seguridad */}
-          <View style={styles.inputContainer}>
-            <MaterialIcons
-              name="question-answer"
-              size={20}
-              color={COLORS.textSecondary}
-              style={styles.inputIcon}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Tu respuesta"
-              placeholderTextColor={COLORS.textSecondary}
-              value={formData.securityAnswer}
-              onChangeText={(text) => updateFormData("securityAnswer", text)}
-              autoCapitalize="none"
-              autoCorrect={false}
-              editable={!isLoading}
-            />
-          </View>
-
-          {/* Botón de Registro */}
-          <TouchableOpacity
-            style={[styles.registerButton, { opacity: isLoading ? 0.6 : 1 }]}
-            onPress={handleRegister}
-            disabled={isLoading}
-          >
-            <Text style={styles.registerButtonText}>
-              {isLoading ? "Creando cuenta..." : "Crear cuenta"}
+            <Text style={styles.sectionTitle}>Pregunta de Seguridad</Text>
+            <Text style={styles.sectionSubtitle}>
+              Selecciona una pregunta y respuesta para recuperar tu contraseña
             </Text>
-          </TouchableOpacity>
 
-          {/* Link a Login */}
-          <View style={styles.loginContainer}>
-            <Text style={styles.loginText}>¿Ya tienes una cuenta?</Text>
+            {/* Pregunta de Seguridad */}
+            <View style={styles.questionsContainer}>
+              {securityQuestions.map((question, index) => (
+                <TouchableOpacity
+                  key={index}
+                  style={[
+                    styles.questionOption,
+                    formData.securityQuestion === question &&
+                      styles.questionSelected,
+                  ]}
+                  onPress={() => updateFormData("securityQuestion", question)}
+                  disabled={isLoading}
+                >
+                  <MaterialIcons
+                    name={
+                      formData.securityQuestion === question
+                        ? "radio-button-checked"
+                        : "radio-button-unchecked"
+                    }
+                    size={20}
+                    color={
+                      formData.securityQuestion === question
+                        ? COLORS.primary
+                        : COLORS.textSecondary
+                    }
+                  />
+                  <Text
+                    style={[
+                      styles.questionText,
+                      formData.securityQuestion === question &&
+                        styles.questionTextSelected,
+                    ]}
+                  >
+                    {question}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+
+            {/* Respuesta de Seguridad */}
+            <View style={styles.inputContainer}>
+              <MaterialIcons
+                name="question-answer"
+                size={20}
+                color={COLORS.textSecondary}
+                style={styles.inputIcon}
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="Tu respuesta"
+                placeholderTextColor={COLORS.textSecondary}
+                value={formData.securityAnswer}
+                onChangeText={(text) => updateFormData("securityAnswer", text)}
+                autoCapitalize="none"
+                autoCorrect={false}
+                editable={!isLoading}
+              />
+            </View>
+
+            {/* Botón de Registro */}
             <TouchableOpacity
-              onPress={() => navigation.navigate("Login")}
-              activeOpacity={0.6}
+              style={[styles.registerButton, { opacity: isLoading ? 0.6 : 1 }]}
+              onPress={handleRegister}
+              disabled={isLoading}
             >
-              <Text style={styles.loginLink}>Inicia sesión</Text>
+              <Text style={styles.registerButtonText}>
+                {isLoading ? "Creando cuenta..." : "Crear cuenta"}
+              </Text>
             </TouchableOpacity>
+
+            {/* Link a Login */}
+            <View style={styles.loginContainer}>
+              <Text style={styles.loginText}>¿Ya tienes una cuenta?</Text>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("Login")}
+                activeOpacity={0.6}
+              >
+                <Text style={styles.loginLink}>Inicia sesión</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 

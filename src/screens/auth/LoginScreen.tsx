@@ -10,14 +10,16 @@ import {
   KeyboardAvoidingView,
   Platform,
   Dimensions,
+  StatusBar,
 } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { CommonActions } from "@react-navigation/native";
 import { RootStackParamList } from "../../navigation/StackNavigator";
 import { LoginFormData, COLORS, FONT_SIZES } from "../../../types/index";
 import StorageService from "../../services/StorageService";
 import AuthService from "../../services/AuthService";
+import ConnectivityIndicator from "../../components/ConnectivityIndicator";
 
 const loginImage = require("../../../assets/Login_Image_NoBG.png");
 const loginHeader = require("../../../assets/login_header.png");
@@ -139,11 +141,17 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
-      <SafeAreaProvider>
+    <SafeAreaView style={styles.safeArea} edges={["top", "bottom"]}>
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor={COLORS.surface}
+        translucent={false}
+      />
+      <ConnectivityIndicator />
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
         <View style={styles.content}>
           <Image source={loginHeader} style={styles.loginHeader} />
           <Image source={loginImage} style={styles.loginImage} />
@@ -191,15 +199,18 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
             </TouchableOpacity>
           </View>
         </View>
-      </SafeAreaProvider>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
     backgroundColor: COLORS.surface,
+  },
+  container: {
+    flex: 1,
   },
   content: {
     flex: 1,

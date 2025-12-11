@@ -7,25 +7,20 @@ import {
   StatusBar,
   ActivityIndicator,
   ScrollView,
-  Modal,
   Animated,
   Alert,
 } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
+import ConnectivityIndicator from "../../components/ConnectivityIndicator";
 import { MaterialIcons } from "@expo/vector-icons";
 import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../navigation/StackNavigator";
-import {
-  COLORS,
-  FONT_SIZES,
-  Lesson,
-  Challenge,
-  ChallengeOption,
-} from "../../../types";
+import { FONT_SIZES, Lesson, Challenge, ChallengeOption } from "../../../types";
 import DataService from "../../services/DataService";
 import StorageService from "../../services/StorageService";
 import * as Progress from "react-native-progress";
+import { useTheme } from "../../context/ThemeContext";
 
 /**
  * Props de navegación para esta pantalla
@@ -51,7 +46,9 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
 }) => {
   const { courseId, lessonId } = route.params;
 
-  // Estados principales
+  /** THEME */
+  const { theme, isDarkMode } = useTheme();
+
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [currentChallengeIndex, setCurrentChallengeIndex] = useState<number>(0);
@@ -98,9 +95,7 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
    * Maneja la selección de una opción
    */
   const handleSelectOption = (optionId: string) => {
-    if (!isAnswered) {
-      setSelectedOption(optionId);
-    }
+    if (!isAnswered) setSelectedOption(optionId);
   };
 
   /**
@@ -167,8 +162,7 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
         lesson.challenges.length
       );
 
-      // Actualizar puntos totales
-      const totalPoints = correctAnswers * 10; // 10 puntos por respuesta correcta
+      const totalPoints = correctAnswers * 10;
       await StorageService.updateTotalPoints(totalPoints);
 
       // Verificar y desbloquear medallas
@@ -189,8 +183,6 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
           }, 1000);
         }
       }
-
-      console.log("Progreso guardado exitosamente");
     } catch (error) {
       console.error("Error al guardar progreso:", error);
     }
@@ -205,8 +197,8 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
     setIsAnswered(false);
     setCorrectAnswers(0);
     setShowResults(false);
-    fadeAnim.setValue(0);
 
+    fadeAnim.setValue(0);
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 300,
@@ -214,36 +206,19 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
     }).start();
   };
 
-  /**
-   * Finaliza y vuelve a la lección
-   */
-  const handleFinish = () => {
-    navigation.goBack();
-  };
+  const handleFinish = () => navigation.goBack();
 
-  /**
-   * Obtiene el color de una opción
-   */
+  /** COLORES DE OPCIONES (hardcodeados los correctos e incorrectos) */
   const getOptionColor = (
     option: ChallengeOption,
     challenge: Challenge
   ): string => {
-    if (!isAnswered) {
-      return COLORS.card;
-    }
+    if (!isAnswered) return theme.card;
 
-    if (option.id === challenge.correctAnswerId) {
-      return "#4CAF50"; // Verde para la correcta
-    }
+    if (option.id === challenge.correctAnswerId) return "#4CAF50";
+    if (selectedOption === option.id) return "#F44336";
 
-    if (
-      selectedOption === option.id &&
-      option.id !== challenge.correctAnswerId
-    ) {
-      return "#F44336"; // Rojo para la incorrecta seleccionada
-    }
-
-    return COLORS.card;
+    return theme.card;
   };
 
   /**
@@ -256,16 +231,8 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
         : "radio-button-unchecked";
     }
 
-    if (option.id === challenge.correctAnswerId) {
-      return "check-circle";
-    }
-
-    if (
-      selectedOption === option.id &&
-      option.id !== challenge.correctAnswerId
-    ) {
-      return "cancel";
-    }
+    if (option.id === challenge.correctAnswerId) return "check-circle";
+    if (selectedOption === option.id) return "cancel";
 
     return "radio-button-unchecked";
   };
@@ -273,21 +240,29 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
   // Mostrar loading
   if (loading) {
     return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color={COLORS.primary} />
-        <Text style={styles.loadingText}>Cargando retos...</Text>
+      <View
+        style={[styles.loadingContainer, { backgroundColor: theme.surface }]}
+      >
+        <ActivityIndicator size="large" color={theme.primary} />
+        <Text style={[styles.loadingText, { color: theme.textSecondary }]}>
+          Cargando retos...
+        </Text>
       </View>
     );
   }
 
-  // Si no hay datos de la lección
   if (!lesson || lesson.challenges.length === 0) {
     return (
-      <View style={styles.loadingContainer}>
-        <MaterialIcons name="error-outline" size={50} color={COLORS.error} />
-        <Text style={styles.errorText}>No hay retos disponibles</Text>
+      <View
+        style={[styles.loadingContainer, { backgroundColor: theme.surface }]}
+      >
+        <MaterialIcons name="error-outline" size={50} color={theme.error} />
+        <Text style={[styles.errorText, { color: theme.error }]}>
+          No hay retos disponibles
+        </Text>
+
         <TouchableOpacity
-          style={styles.backButton}
+          style={[styles.backButton, { backgroundColor: theme.primary }]}
           onPress={() => navigation.goBack()}
         >
           <Text style={styles.backButtonText}>Volver</Text>
@@ -307,24 +282,38 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
     const passed = percentage >= 70;
 
     return (
-      <SafeAreaProvider style={styles.container}>
-        <StatusBar backgroundColor={COLORS.primary} barStyle="light-content" />
+      <SafeAreaView
+        style={[styles.container, { backgroundColor: theme.surface }]}
+      >
+        <StatusBar
+          backgroundColor={theme.primary}
+          barStyle={isDarkMode ? "light-content" : "dark-content"}
+        />
+
+        <ConnectivityIndicator />
 
         <View style={styles.resultsContainer}>
           <MaterialIcons
             name={passed ? "emoji-events" : "sentiment-dissatisfied"}
             size={100}
-            color={passed ? "#FFD700" : COLORS.textSecondary}
+            color={passed ? "#FFD700" : theme.textSecondary}
           />
 
-          <Text style={styles.resultsTitle}>
+          <Text style={[styles.resultsTitle, { color: theme.text }]}>
             {passed ? "¡Felicidades!" : "Sigue Intentando"}
           </Text>
 
-          <Text style={styles.resultsSubtitle}>Has completado los retos</Text>
+          <Text
+            style={[styles.resultsSubtitle, { color: theme.textSecondary }]}
+          >
+            Has completado los retos
+          </Text>
 
           <View style={styles.scoreContainer}>
-            <Text style={styles.scoreLabel}>Tu puntuación</Text>
+            <Text style={[styles.scoreLabel, { color: theme.textSecondary }]}>
+              Tu puntuación
+            </Text>
+
             <Text
               style={[
                 styles.scoreValue,
@@ -333,27 +322,40 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
             >
               {correctAnswers} / {lesson.challenges.length}
             </Text>
-            <Text style={styles.scorePercentage}>{percentage}%</Text>
+
+            <Text
+              style={[styles.scorePercentage, { color: theme.textSecondary }]}
+            >
+              {percentage}%
+            </Text>
           </View>
 
+          {/* Estadísticas */}
           <View style={styles.resultsStats}>
             <View style={styles.statItem}>
               <MaterialIcons name="check-circle" size={30} color="#4CAF50" />
-              <Text style={styles.statValue}>{correctAnswers}</Text>
-              <Text style={styles.statLabel}>Correctas</Text>
+              <Text style={[styles.statValue, { color: theme.text }]}>
+                {correctAnswers}
+              </Text>
+              <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
+                Correctas
+              </Text>
             </View>
+
             <View style={styles.statItem}>
               <MaterialIcons name="cancel" size={30} color="#F44336" />
-              <Text style={styles.statValue}>
+              <Text style={[styles.statValue, { color: theme.text }]}>
                 {lesson.challenges.length - correctAnswers}
               </Text>
-              <Text style={styles.statLabel}>Incorrectas</Text>
+              <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
+                Incorrectas
+              </Text>
             </View>
           </View>
 
           {!passed && (
             <View style={styles.encouragementContainer}>
-              <Text style={styles.encouragementText}>
+              <Text style={[styles.encouragementText, { color: theme.text }]}>
                 Necesitas al menos 70% para aprobar. ¡Puedes intentarlo de
                 nuevo!
               </Text>
@@ -370,7 +372,7 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={[styles.resultButton, styles.finishButton]}
+              style={[styles.resultButton, { backgroundColor: theme.primary }]}
               onPress={handleFinish}
             >
               <MaterialIcons name="check" size={24} color="#fff" />
@@ -378,29 +380,45 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
             </TouchableOpacity>
           </View>
         </View>
-      </SafeAreaProvider>
+      </SafeAreaView>
     );
   }
 
   return (
-    <SafeAreaProvider style={styles.container}>
-      <StatusBar backgroundColor={COLORS.primary} barStyle="light-content" />
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: theme.surface }]}
+    >
+      <StatusBar
+        backgroundColor={theme.primary}
+        barStyle={isDarkMode ? "light-content" : "dark-content"}
+      />
 
-      {/* Header Bar */}
-      <View style={styles.headerBar}>
+      <ConnectivityIndicator />
+
+      {/* Header */}
+      <View
+        style={[
+          styles.headerBar,
+          { backgroundColor: theme.primary, shadowColor: theme.text },
+        ]}
+      >
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <MaterialIcons name="close" size={28} color="#fff" />
         </TouchableOpacity>
+
         <View style={styles.headerProgress}>
           <Text style={styles.headerProgressText}>
             {currentChallengeIndex + 1} / {lesson.challenges.length}
           </Text>
         </View>
+
         <View style={{ width: 28 }} />
       </View>
 
       {/* Barra de progreso */}
-      <View style={styles.progressContainer}>
+      <View
+        style={[styles.progressContainer, { backgroundColor: theme.surface }]}
+      >
         <Progress.Bar
           progress={progress}
           width={null}
@@ -416,10 +434,10 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
         contentContainerStyle={styles.contentContainer}
       >
         <Animated.View style={{ opacity: fadeAnim }}>
-          {/* Tipo de pregunta */}
+          {/* Tipo */}
           <View style={styles.typeContainer}>
-            <MaterialIcons name="quiz" size={20} color={COLORS.primary} />
-            <Text style={styles.typeText}>
+            <MaterialIcons name="quiz" size={20} color={theme.primary} />
+            <Text style={[styles.typeText, { color: theme.textSecondary }]}>
               {currentChallenge.type === "multiple-choice"
                 ? "Opción Múltiple"
                 : currentChallenge.type === "true-false"
@@ -429,13 +447,23 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
           </View>
 
           {/* Pregunta */}
-          <View style={styles.questionContainer}>
-            <Text style={styles.questionText}>{currentChallenge.question}</Text>
+          <View
+            style={[
+              styles.questionContainer,
+              {
+                backgroundColor: theme.background,
+                borderLeftColor: theme.primary,
+              },
+            ]}
+          >
+            <Text style={[styles.questionText, { color: theme.text }]}>
+              {currentChallenge.question}
+            </Text>
           </View>
 
           {/* Opciones */}
           <View style={styles.optionsContainer}>
-            {currentChallenge.options.map((option, index) => (
+            {currentChallenge.options.map((option) => (
               <TouchableOpacity
                 key={option.id}
                 style={[
@@ -444,7 +472,7 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
                     backgroundColor: getOptionColor(option, currentChallenge),
                     borderColor:
                       selectedOption === option.id && !isAnswered
-                        ? COLORS.primary
+                        ? theme.primary
                         : "transparent",
                     borderWidth:
                       selectedOption === option.id && !isAnswered ? 2 : 0,
@@ -462,9 +490,10 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
                     (option.id === currentChallenge.correctAnswerId ||
                       selectedOption === option.id)
                       ? "#fff"
-                      : COLORS.primary
+                      : theme.primary
                   }
                 />
+
                 <Text
                   style={[
                     styles.optionText,
@@ -474,7 +503,7 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
                         (option.id === currentChallenge.correctAnswerId ||
                           selectedOption === option.id)
                           ? "#fff"
-                          : COLORS.text,
+                          : theme.text,
                     },
                   ]}
                 >
@@ -484,9 +513,17 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
             ))}
           </View>
 
-          {/* Explicación (solo se muestra después de responder) */}
+          {/* Explicación */}
           {isAnswered && (
-            <View style={styles.explanationContainer}>
+            <View
+              style={[
+                styles.explanationContainer,
+                {
+                  backgroundColor: "#E3F2FD",
+                  borderLeftColor: "#2196F3",
+                },
+              ]}
+            >
               <View style={styles.explanationHeader}>
                 <MaterialIcons
                   name={
@@ -501,13 +538,14 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
                       : "#2196F3"
                   }
                 />
-                <Text style={styles.explanationTitle}>
+                <Text style={[styles.explanationTitle, { color: theme.text }]}>
                   {selectedOption === currentChallenge.correctAnswerId
                     ? "¡Correcto!"
                     : "Explicación"}
                 </Text>
               </View>
-              <Text style={styles.explanationText}>
+
+              <Text style={[styles.explanationText, { color: theme.text }]}>
                 {currentChallenge.explanation}
               </Text>
 
@@ -524,11 +562,19 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
         </Animated.View>
       </ScrollView>
 
-      {/* Botón de acción */}
-      <View style={styles.buttonContainer}>
+      {/* Botón */}
+      <View
+        style={[styles.buttonContainer, { backgroundColor: theme.surface }]}
+      >
         {!isAnswered ? (
           <TouchableOpacity
-            style={[styles.actionButton, { opacity: selectedOption ? 1 : 0.5 }]}
+            style={[
+              styles.actionButton,
+              {
+                backgroundColor: theme.primary,
+                opacity: selectedOption ? 1 : 0.5,
+              },
+            ]}
             onPress={handleConfirmAnswer}
             disabled={!selectedOption}
           >
@@ -548,36 +594,28 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
           </TouchableOpacity>
         )}
       </View>
-    </SafeAreaProvider>
+    </SafeAreaView>
   );
 };
 
 export default ChallengeScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLORS.surface,
-  },
+  container: { flex: 1 },
+
   loadingContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: COLORS.surface,
   },
-  loadingText: {
-    marginTop: 10,
-    fontSize: FONT_SIZES.medium,
-    color: COLORS.textSecondary,
-  },
+  loadingText: { marginTop: 10, fontSize: FONT_SIZES.medium },
   errorText: {
     marginTop: 10,
     fontSize: FONT_SIZES.medium,
-    color: COLORS.error,
     marginBottom: 20,
   },
+
   backButton: {
-    backgroundColor: COLORS.primary,
     paddingHorizontal: 30,
     paddingVertical: 12,
     borderRadius: 8,
@@ -587,40 +625,30 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZES.medium,
     fontWeight: "600",
   },
+
   headerBar: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: COLORS.primary,
     paddingHorizontal: 20,
     paddingVertical: 15,
     elevation: 4,
-    shadowColor: COLORS.text,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
   },
-  headerProgress: {
-    flex: 1,
-    alignItems: "center",
-  },
+  headerProgress: { flex: 1, alignItems: "center" },
   headerProgressText: {
     fontSize: FONT_SIZES.large,
     fontWeight: "bold",
     color: "#fff",
   },
-  progressContainer: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    backgroundColor: COLORS.surface,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  contentContainer: {
-    padding: 20,
-    paddingBottom: 100,
-  },
+
+  progressContainer: { paddingHorizontal: 20, paddingVertical: 10 },
+
+  scrollView: { flex: 1 },
+  contentContainer: { padding: 20, paddingBottom: 100 },
+
   typeContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -629,27 +657,19 @@ const styles = StyleSheet.create({
   },
   typeText: {
     fontSize: FONT_SIZES.small,
-    color: COLORS.textSecondary,
     fontWeight: "600",
     textTransform: "uppercase",
   },
+
   questionContainer: {
-    backgroundColor: COLORS.background,
     padding: 20,
     borderRadius: 12,
     marginBottom: 25,
     borderLeftWidth: 4,
-    borderLeftColor: COLORS.primary,
   },
-  questionText: {
-    fontSize: 20,
-    fontWeight: "600",
-    color: COLORS.text,
-    lineHeight: 28,
-  },
-  optionsContainer: {
-    gap: 12,
-  },
+  questionText: { fontSize: 20, fontWeight: "600", lineHeight: 28 },
+
+  optionsContainer: { gap: 12 },
   optionCard: {
     flexDirection: "row",
     alignItems: "center",
@@ -662,18 +682,13 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     shadowOffset: { width: 0, height: 2 },
   },
-  optionText: {
-    fontSize: 16,
-    flex: 1,
-    lineHeight: 22,
-  },
+  optionText: { fontSize: 16, flex: 1, lineHeight: 22 },
+
   explanationContainer: {
-    backgroundColor: "#E3F2FD",
     padding: 20,
     borderRadius: 12,
     marginTop: 25,
     borderLeftWidth: 4,
-    borderLeftColor: "#2196F3",
   },
   explanationHeader: {
     flexDirection: "row",
@@ -681,16 +696,9 @@ const styles = StyleSheet.create({
     gap: 10,
     marginBottom: 12,
   },
-  explanationTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: COLORS.text,
-  },
-  explanationText: {
-    fontSize: 15,
-    color: COLORS.text,
-    lineHeight: 22,
-  },
+  explanationTitle: { fontSize: 18, fontWeight: "bold" },
+  explanationText: { fontSize: 15, lineHeight: 22 },
+
   pointsContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -698,28 +706,23 @@ const styles = StyleSheet.create({
     marginTop: 15,
     paddingTop: 15,
     borderTopWidth: 1,
-    borderTopColor: "#BBDEFB",
   },
-  pointsText: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#FF9800",
-  },
+  pointsText: { fontSize: 16, fontWeight: "bold", color: "#FF9800" },
+
   buttonContainer: {
     position: "absolute",
     bottom: 0,
     left: 0,
     right: 0,
     padding: 20,
-    backgroundColor: COLORS.surface,
     elevation: 8,
     shadowColor: "#000",
     shadowOpacity: 0.2,
     shadowRadius: 8,
     shadowOffset: { width: 0, height: -2 },
   },
+
   actionButton: {
-    backgroundColor: COLORS.primary,
     paddingVertical: 16,
     borderRadius: 12,
     alignItems: "center",
@@ -727,68 +730,34 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 10,
   },
-  nextButton: {
-    backgroundColor: "#4CAF50",
-  },
-  actionButtonText: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
+  nextButton: { backgroundColor: "#4CAF50" },
+  actionButtonText: { color: "#fff", fontSize: 18, fontWeight: "bold" },
+
   resultsContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
   },
+
   resultsTitle: {
     fontSize: 32,
     fontWeight: "bold",
-    color: COLORS.text,
     marginTop: 20,
     marginBottom: 10,
   },
-  resultsSubtitle: {
-    fontSize: 16,
-    color: COLORS.textSecondary,
-    marginBottom: 30,
-  },
-  scoreContainer: {
-    alignItems: "center",
-    marginBottom: 40,
-  },
-  scoreLabel: {
-    fontSize: 16,
-    color: COLORS.textSecondary,
-    marginBottom: 10,
-  },
-  scoreValue: {
-    fontSize: 48,
-    fontWeight: "bold",
-  },
-  scorePercentage: {
-    fontSize: 24,
-    color: COLORS.textSecondary,
-    marginTop: 5,
-  },
-  resultsStats: {
-    flexDirection: "row",
-    gap: 40,
-    marginBottom: 30,
-  },
-  statItem: {
-    alignItems: "center",
-    gap: 8,
-  },
-  statValue: {
-    fontSize: 28,
-    fontWeight: "bold",
-    color: COLORS.text,
-  },
-  statLabel: {
-    fontSize: 14,
-    color: COLORS.textSecondary,
-  },
+  resultsSubtitle: { fontSize: 16, marginBottom: 30 },
+
+  scoreContainer: { alignItems: "center", marginBottom: 40 },
+  scoreLabel: { fontSize: 16, marginBottom: 10 },
+  scoreValue: { fontSize: 48, fontWeight: "bold" },
+  scorePercentage: { fontSize: 24, marginTop: 5 },
+
+  resultsStats: { flexDirection: "row", gap: 40, marginBottom: 30 },
+  statItem: { alignItems: "center", gap: 8 },
+  statValue: { fontSize: 28, fontWeight: "bold" },
+  statLabel: { fontSize: 14 },
+
   encouragementContainer: {
     backgroundColor: "#FFF3E0",
     padding: 15,
@@ -797,16 +766,9 @@ const styles = StyleSheet.create({
     borderLeftWidth: 4,
     borderLeftColor: "#FF9800",
   },
-  encouragementText: {
-    fontSize: 14,
-    color: COLORS.text,
-    textAlign: "center",
-    lineHeight: 20,
-  },
-  resultsButtons: {
-    width: "100%",
-    gap: 12,
-  },
+  encouragementText: { fontSize: 14, textAlign: "center", lineHeight: 20 },
+
+  resultsButtons: { width: "100%", gap: 12 },
   resultButton: {
     flexDirection: "row",
     alignItems: "center",
@@ -815,15 +777,6 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     borderRadius: 12,
   },
-  retryButton: {
-    backgroundColor: "#FF9800",
-  },
-  finishButton: {
-    backgroundColor: COLORS.primary,
-  },
-  resultButtonText: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
+  retryButton: { backgroundColor: "#FF9800" },
+  resultButtonText: { color: "#fff", fontSize: 18, fontWeight: "bold" },
 });

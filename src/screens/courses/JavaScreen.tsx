@@ -12,7 +12,8 @@ import {
   ActivityIndicator,
   Alert,
 } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
+import ConnectivityIndicator from "../../components/ConnectivityIndicator";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { CommonActions } from "@react-navigation/native";
@@ -182,8 +183,13 @@ const JavaScreen = () => {
   }
 
   return (
-    <SafeAreaProvider>
-      <StatusBar backgroundColor={COLORS.primary} barStyle="light-content" />
+    <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
+      <StatusBar
+        backgroundColor={COLORS.primary}
+        barStyle="light-content"
+        translucent={false}
+      />
+      <ConnectivityIndicator />
 
       {/* Header Bar */}
       <View style={styles.headerBar}>
@@ -426,7 +432,7 @@ const JavaScreen = () => {
           })}
         </View>
       </ScrollView>
-    </SafeAreaProvider>
+    </SafeAreaView>
   );
 };
 

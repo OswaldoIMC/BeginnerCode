@@ -9,9 +9,11 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  StatusBar,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
+import ConnectivityIndicator from "../../components/ConnectivityIndicator";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../navigation/StackNavigator";
 import { COLORS, FONT_SIZES } from "../../../types/index";
@@ -149,11 +151,17 @@ const RecoverPasswordScreen: React.FC<RecoverPasswordScreenProps> = ({
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
-      <SafeAreaProvider>
+    <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
+      <StatusBar
+        backgroundColor={COLORS.surface}
+        barStyle="dark-content"
+        translucent={false}
+      />
+      <ConnectivityIndicator />
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={handleBack} style={styles.backButton}>
@@ -427,8 +435,8 @@ const RecoverPasswordScreen: React.FC<RecoverPasswordScreenProps> = ({
             )}
           </View>
         </ScrollView>
-      </SafeAreaProvider>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
