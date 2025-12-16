@@ -1,0 +1,10 @@
+{
+  "id": "javascript",
+  "name": "Javascript",
+  "description": "Este curso está basado en el lenguaje de programación Javascript, el objetivo es aprender los fundamentos básicos del lenguaje, así como su estructura.",
+  "color": "#faf32bff",
+  "difficulty": "intermediate",
+  "totalLessons": 20,
+  "estimatedHours": 40,
+  "isComingSoon": false
+}

@@ -1,0 +1,222 @@
+[
+  {
+    "id": "csharp_lesson_1",
+    "courseId": "csharp",
+    "title": "¿Qué es C#?",
+    "description": "Aprende qué es C#, por qué es tan popular y en qué se utiliza.",
+    "order": 1,
+    "estimatedMinutes": 15,
+    "content": {
+      "introduction": "C# (C Sharp) es un lenguaje de programación moderno, orientado a objetos, desarrollado por Microsoft y ampliamente utilizado en el ecosistema .NET.",
+      "sections": [
+        {
+          "id": "csharp_1_sec_1",
+          "title": "C# como lenguaje de programación",
+          "content": "C# es un lenguaje compilado que se ejecuta sobre la plataforma .NET. Combina simplicidad, seguridad y potencia, siendo ideal tanto para principiantes como para profesionales.",
+          "order": 1
+        },
+        {
+          "id": "csharp_1_sec_2",
+          "title": "¿Por qué es tan usado?",
+          "content": "C# se integra profundamente con .NET, lo que permite crear aplicaciones robustas con excelente rendimiento y gran soporte de herramientas.",
+          "order": 2
+        },
+        {
+          "id": "csharp_1_sec_3",
+          "title": "¿Para qué se usa C#?",
+          "content": "C# se usa en aplicaciones de escritorio, desarrollo web con ASP.NET, videojuegos con Unity, aplicaciones móviles y servicios en la nube.",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "csharp_1_ex_1",
+          "title": "Hola mundo en C# (vista previa)",
+          "code": "using System;\n\nclass Program\n{\n    static void Main()\n    {\n        Console.WriteLine(\"Hola mundo\");\n    }\n}",
+          "language": "csharp",
+          "explanation": "Este será el primer programa completo que aprenderás a ejecutar en C#."
+        }
+      ],
+      "summary": "C# es un lenguaje moderno, potente y muy utilizado dentro del ecosistema .NET.",
+      "keyPoints": [
+        "C# es orientado a objetos",
+        "Se ejecuta sobre .NET",
+        "Tiene una sintaxis clara y moderna",
+        "Es muy usado en aplicaciones empresariales y videojuegos"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "csharp_1_ch_1",
+        "lessonId": "csharp_lesson_1",
+        "question": "¿Quién desarrolló el lenguaje C#?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Oracle",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Google",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "Microsoft",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "Mozilla",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "C# fue desarrollado por Microsoft como parte de la plataforma .NET.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+
+  {
+    "id": "csharp_lesson_2",
+    "courseId": "csharp",
+    "title": "Instalación y entorno de C#",
+    "description": "Aprende a preparar tu entorno para empezar a programar en C#.",
+    "order": 2,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "Para programar en C# necesitas instalar el SDK de .NET, que incluye todas las herramientas necesarias.",
+      "sections": [
+        {
+          "id": "csharp_2_sec_1",
+          "title": "¿Qué es .NET?",
+          "content": ".NET es una plataforma de desarrollo que permite crear y ejecutar aplicaciones en C#. Incluye librerías, un runtime y herramientas de desarrollo.",
+          "order": 1
+        },
+        {
+          "id": "csharp_2_sec_2",
+          "title": "Instalar .NET SDK",
+          "content": "Puedes descargar el SDK de .NET desde el sitio oficial de Microsoft para tu sistema operativo.",
+          "order": 2
+        },
+        {
+          "id": "csharp_2_sec_3",
+          "title": "Verificar la instalación",
+          "content": "Una vez instalado, abre la terminal y escribe: dotnet --version",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "csharp_2_ex_1",
+          "title": "Verificar instalación",
+          "code": "dotnet --version",
+          "language": "bash",
+          "explanation": "Si ves un número de versión, .NET está listo para usarse."
+        }
+      ],
+      "summary": "Con el SDK de .NET instalado, ya tienes todo lo necesario para empezar a programar en C#.",
+      "keyPoints": [
+        "C# se ejecuta sobre .NET",
+        "El SDK incluye compilador y runtime",
+        "dotnet --version verifica la instalación",
+        "Visual Studio y VS Code son IDEs recomendados"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "csharp_2_ch_1",
+        "lessonId": "csharp_lesson_2",
+        "question": "¿Qué comando permite verificar que .NET está instalado correctamente?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "csharp --version", "isCorrect": false },
+          { "id": "opt_2", "text": "dotnet check", "isCorrect": false },
+          { "id": "opt_3", "text": "dotnet --version", "isCorrect": true },
+          { "id": "opt_4", "text": ".net version", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El comando dotnet --version muestra la versión instalada del SDK.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+
+  {
+    "id": "csharp_lesson_3",
+    "courseId": "csharp",
+    "title": "Tu primer programa en C#",
+    "description": "Aprende a crear, compilar y ejecutar tu primer programa en C#.",
+    "order": 3,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "Ahora escribirás tu primer programa en C# y aprenderás cómo ejecutarlo.",
+      "sections": [
+        {
+          "id": "csharp_3_sec_1",
+          "title": "Crear el proyecto",
+          "content": "Con .NET puedes crear un proyecto de consola usando el comando dotnet new console.",
+          "order": 1
+        },
+        {
+          "id": "csharp_3_sec_2",
+          "title": "Escribir el programa",
+          "content": "Toda aplicación de consola en C# comienza su ejecución en el método Main().",
+          "order": 2
+        },
+        {
+          "id": "csharp_3_sec_3",
+          "title": "Ejecutar el programa",
+          "content": "Usa dotnet run para compilar y ejecutar el proyecto.",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "csharp_3_ex_1",
+          "title": "Primer programa en C#",
+          "code": "using System;\n\nclass Program\n{\n    static void Main()\n    {\n        Console.WriteLine(\"Hola mundo desde C#\");\n    }\n}",
+          "language": "csharp",
+          "explanation": "Console.WriteLine muestra texto en la consola."
+        },
+        {
+          "id": "csharp_3_ex_2",
+          "title": "Crear y ejecutar proyecto",
+          "code": "dotnet new console\ndotnet run",
+          "language": "bash",
+          "explanation": "Estos comandos crean y ejecutan una aplicación de consola en C#."
+        }
+      ],
+      "summary": "Ya creaste y ejecutaste tu primer programa en C# usando .NET.",
+      "keyPoints": [
+        "C# usa el método Main() como punto de entrada",
+        "Console.WriteLine imprime texto",
+        "dotnet new crea proyectos",
+        "dotnet run compila y ejecuta"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "csharp_3_ch_1",
+        "lessonId": "csharp_lesson_3",
+        "question": "¿Cuál es el punto de entrada de un programa en C#?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "start()", "isCorrect": false },
+          { "id": "opt_2", "text": "begin()", "isCorrect": false },
+          { "id": "opt_3", "text": "Main()", "isCorrect": true },
+          { "id": "opt_4", "text": "run()", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El método Main() es el punto de inicio de cualquier aplicación en C#.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  }
+]

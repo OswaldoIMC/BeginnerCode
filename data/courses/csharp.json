@@ -1,0 +1,10 @@
+{
+  "id": "csharp",
+  "name": "C#",
+  "description": "Este curso está basado en el lenguaje de programación C#, el objetivo es aprender los fundamentos básicos del lenguaje, así como su estructura.",
+  "color": "#a116a3ff",
+  "difficulty": "intermediate",
+  "totalLessons": 20,
+  "estimatedHours": 40,
+  "isComingSoon": false
+}

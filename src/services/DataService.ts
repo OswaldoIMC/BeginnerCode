@@ -10,6 +10,12 @@ import pythonCourseData from "../../data/courses/python.json";
 import pythonLessonsData from "../../data/lessons/python_lessons.json";
 import javaCourseData from "../../data/courses/java.json";
 import javaLessonsData from "../../data/lessons/java_lessons.json";
+import jsCourseData from "../../data/courses/js.json";
+import jsLessonsData from "../../data/lessons/js_lessons.json";
+import csharpCourseData from "../../data/courses/csharp.json";
+import csharpLessonsData from "../../data/lessons/csharp_lessons.json";
+import cppCourseData from "../../data/courses/cpp.json";
+import cppLessonsData from "../../data/lessons/cpp_lessons.json";
 
 /**
  * Servicio de datos
@@ -20,7 +26,10 @@ class DataService {
   private lessonsByCourse: Record<string, Lesson[]> = {
     python: pythonLessonsData as Lesson[],
     java: javaLessonsData as Lesson[],
-    // más cursos aquí
+    javascript: jsLessonsData as Lesson[],
+    csharp: csharpLessonsData as Lesson[],
+    cpp: cppLessonsData as Lesson[],
+    // AQUI SE AGREGAN MAS CURSOS
   };
 
   /**
@@ -36,7 +45,19 @@ class DataService {
         ...(javaCourseData as Course),
         icon: require("../../assets/java.png"),
       },
-      // Aquí puedes añadir más cursos
+      {
+        ...(jsCourseData as Course),
+        icon: require("../../assets/js.png"),
+      },
+      {
+        ...(csharpCourseData as Course),
+        icon: require("../../assets/c-sharp.png"),
+      },
+      {
+        ...(cppCourseData as Course),
+        icon: require("../../assets/c-.png"),
+      },
+      // AQUI SE AGREGAN MAS CURSOS
     ];
   }
 

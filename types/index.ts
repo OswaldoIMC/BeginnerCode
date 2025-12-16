@@ -35,7 +35,7 @@ export interface Course extends BaseEntity {
   id: ID;
   name: string;
   description: string;
-  icon: any; // Para require() de imágenes
+  icon: any;
   color: string;
   difficulty: Difficulty;
   totalLessons: number;

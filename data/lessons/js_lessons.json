@@ -1,0 +1,222 @@
+[
+  {
+    "id": "js_lesson_1",
+    "courseId": "javascript",
+    "title": "¿Qué es JavaScript?",
+    "description": "Aprende qué es JavaScript, por qué es tan popular y en qué se utiliza.",
+    "order": 1,
+    "estimatedMinutes": 15,
+    "content": {
+      "introduction": "JavaScript es un lenguaje de programación muy popular que se utiliza principalmente para crear páginas web interactivas, aunque hoy en día también se usa en servidores, aplicaciones móviles y más.",
+      "sections": [
+        {
+          "id": "js_1_sec_1",
+          "title": "JavaScript como lenguaje de programación",
+          "content": "JavaScript es un lenguaje interpretado, dinámico y de propósito general. Se ejecuta principalmente en navegadores web, aunque también puede ejecutarse fuera de ellos usando entornos como Node.js.",
+          "order": 1
+        },
+        {
+          "id": "js_1_sec_2",
+          "title": "¿Por qué es tan usado?",
+          "content": "JavaScript es el lenguaje estándar de la web. Todos los navegadores modernos lo soportan, lo que permite crear interfaces interactivas y experiencias dinámicas para los usuarios.",
+          "order": 2
+        },
+        {
+          "id": "js_1_sec_3",
+          "title": "¿Para qué se usa JavaScript?",
+          "content": "JavaScript se usa para desarrollo web frontend, backend con Node.js, aplicaciones móviles, videojuegos, servidores y automatización.",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "js_1_ex_1",
+          "title": "Hola mundo en JavaScript (vista previa)",
+          "code": "console.log(\"Hola mundo\");",
+          "language": "javascript",
+          "explanation": "Este será el primer programa que ejecutarás usando JavaScript."
+        }
+      ],
+      "summary": "JavaScript es un lenguaje esencial para el desarrollo web moderno y se utiliza en una gran variedad de plataformas.",
+      "keyPoints": [
+        "JavaScript es el lenguaje de la web",
+        "Se ejecuta en navegadores y servidores",
+        "Es muy versátil y flexible",
+        "Tiene una gran comunidad y ecosistema"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "js_1_ch_1",
+        "lessonId": "js_lesson_1",
+        "question": "¿Dónde se ejecuta principalmente JavaScript?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Solo en servidores",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "En navegadores web",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "Solo en aplicaciones móviles",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "Únicamente en bases de datos",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "JavaScript se ejecuta principalmente en navegadores web.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+
+  {
+    "id": "js_lesson_2",
+    "courseId": "javascript",
+    "title": "Preparar el entorno para JavaScript",
+    "description": "Aprende cómo empezar a programar en JavaScript sin instalaciones complicadas.",
+    "order": 2,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "Para comenzar con JavaScript solo necesitas un navegador web y un editor de código.",
+      "sections": [
+        {
+          "id": "js_2_sec_1",
+          "title": "JavaScript en el navegador",
+          "content": "JavaScript viene integrado en todos los navegadores modernos. Puedes escribir código directamente en la consola del navegador.",
+          "order": 1
+        },
+        {
+          "id": "js_2_sec_2",
+          "title": "Editor de código",
+          "content": "Se recomienda usar un editor como Visual Studio Code para escribir JavaScript de forma cómoda.",
+          "order": 2
+        },
+        {
+          "id": "js_2_sec_3",
+          "title": "Node.js (opcional)",
+          "content": "Node.js permite ejecutar JavaScript fuera del navegador, directamente desde la terminal.",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "js_2_ex_1",
+          "title": "Probar JavaScript en la consola",
+          "code": "console.log(\"JavaScript está funcionando\");",
+          "language": "javascript",
+          "explanation": "Puedes escribir este código en la consola del navegador para probar JavaScript."
+        }
+      ],
+      "summary": "JavaScript es muy fácil de empezar: solo necesitas un navegador o, si quieres, Node.js.",
+      "keyPoints": [
+        "JavaScript funciona sin instalación en el navegador",
+        "Un editor de código facilita el aprendizaje",
+        "Node.js permite ejecutar JavaScript en la terminal",
+        "Es ideal para principiantes"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "js_2_ch_1",
+        "lessonId": "js_lesson_2",
+        "question": "¿Dónde puedes ejecutar JavaScript sin instalar nada?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "En el navegador", "isCorrect": true },
+          { "id": "opt_2", "text": "Solo con Node.js", "isCorrect": false },
+          { "id": "opt_3", "text": "En un compilador", "isCorrect": false },
+          { "id": "opt_4", "text": "En una base de datos", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Todos los navegadores modernos incluyen JavaScript.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+
+  {
+    "id": "js_lesson_3",
+    "courseId": "javascript",
+    "title": "Tu primer programa en JavaScript",
+    "description": "Aprende a escribir y ejecutar tu primer programa en JavaScript.",
+    "order": 3,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "Ahora escribirás tu primer programa completo en JavaScript.",
+      "sections": [
+        {
+          "id": "js_3_sec_1",
+          "title": "Crear el archivo",
+          "content": "Crea un archivo llamado script.js. Los archivos JavaScript usan la extensión .js.",
+          "order": 1
+        },
+        {
+          "id": "js_3_sec_2",
+          "title": "Escribir el programa",
+          "content": "JavaScript no necesita una función principal. El código se ejecuta de arriba hacia abajo.",
+          "order": 2
+        },
+        {
+          "id": "js_3_sec_3",
+          "title": "Ejecutar el programa",
+          "content": "Puedes ejecutar el archivo desde el navegador o usando Node.js en la terminal.",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "js_3_ex_1",
+          "title": "Primer programa en JavaScript",
+          "code": "console.log(\"Hola mundo desde JavaScript\");",
+          "language": "javascript",
+          "explanation": "console.log muestra mensajes en la consola."
+        },
+        {
+          "id": "js_3_ex_2",
+          "title": "Ejecutar con Node.js",
+          "code": "node script.js",
+          "language": "bash",
+          "explanation": "Este comando ejecuta el archivo JavaScript usando Node.js."
+        }
+      ],
+      "summary": "Ya escribiste y ejecutaste tu primer programa en JavaScript.",
+      "keyPoints": [
+        "Los archivos JavaScript usan .js",
+        "No existe un método main()",
+        "console.log imprime en consola",
+        "Puede ejecutarse en navegador o Node.js"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "js_3_ch_1",
+        "lessonId": "js_lesson_3",
+        "question": "¿Qué instrucción se usa para mostrar texto en la consola?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "print()", "isCorrect": false },
+          { "id": "opt_2", "text": "echo()", "isCorrect": false },
+          { "id": "opt_3", "text": "console.log()", "isCorrect": true },
+          { "id": "opt_4", "text": "show()", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "console.log() es la forma estándar de imprimir mensajes en JavaScript.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  }
+]

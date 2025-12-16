@@ -1,0 +1,222 @@
+[
+  {
+    "id": "cpp_lesson_1",
+    "courseId": "cpp",
+    "title": "¿Qué es C++?",
+    "description": "Aprende qué es C++, por qué es tan popular y en qué se utiliza.",
+    "order": 1,
+    "estimatedMinutes": 15,
+    "content": {
+      "introduction": "C++ es un lenguaje de programación potente y eficiente, muy utilizado cuando se necesita alto rendimiento y control sobre el hardware.",
+      "sections": [
+        {
+          "id": "cpp_1_sec_1",
+          "title": "C++ como lenguaje de programación",
+          "content": "C++ es un lenguaje compilado, de propósito general, que combina programación estructurada, orientada a objetos y genérica. Es una extensión del lenguaje C.",
+          "order": 1
+        },
+        {
+          "id": "cpp_1_sec_2",
+          "title": "¿Por qué es tan usado?",
+          "content": "C++ ofrece gran rendimiento y control de memoria, lo que lo hace ideal para aplicaciones donde la eficiencia es crítica.",
+          "order": 2
+        },
+        {
+          "id": "cpp_1_sec_3",
+          "title": "¿Para qué se usa C++?",
+          "content": "C++ se usa en sistemas operativos, videojuegos, motores gráficos, software embebido, aplicaciones de alto rendimiento y sistemas financieros.",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "cpp_1_ex_1",
+          "title": "Hola mundo en C++ (vista previa)",
+          "code": "#include <iostream>\n\nint main() {\n    std::cout << \"Hola mundo\" << std::endl;\n    return 0;\n}",
+          "language": "cpp",
+          "explanation": "Este será el primer programa completo que aprenderás a compilar y ejecutar en C++."
+        }
+      ],
+      "summary": "C++ es un lenguaje rápido, potente y muy utilizado en áreas donde el rendimiento es clave.",
+      "keyPoints": [
+        "C++ es un lenguaje compilado",
+        "Ofrece alto rendimiento",
+        "Permite control de memoria",
+        "Se usa en videojuegos y sistemas"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "cpp_1_ch_1",
+        "lessonId": "cpp_lesson_1",
+        "question": "¿Cuál es una de las principales ventajas de C++?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Se ejecuta solo en navegadores",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Alto rendimiento y control de memoria",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "No necesita compilación",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "Es exclusivo para aplicaciones web",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "C++ destaca por su eficiencia y control sobre los recursos del sistema.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+
+  {
+    "id": "cpp_lesson_2",
+    "courseId": "cpp",
+    "title": "Instalación y entorno de C++",
+    "description": "Aprende a instalar un compilador de C++ y preparar tu entorno de desarrollo.",
+    "order": 2,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "Para programar en C++ necesitas un compilador que traduzca tu código a un programa ejecutable.",
+      "sections": [
+        {
+          "id": "cpp_2_sec_1",
+          "title": "¿Qué es un compilador?",
+          "content": "Un compilador de C++ convierte el código fuente en un archivo ejecutable. Algunos compiladores populares son GCC, Clang y MSVC.",
+          "order": 1
+        },
+        {
+          "id": "cpp_2_sec_2",
+          "title": "Instalar un compilador",
+          "content": "Puedes instalar GCC en Linux, Xcode Command Line Tools en macOS o Visual Studio en Windows.",
+          "order": 2
+        },
+        {
+          "id": "cpp_2_sec_3",
+          "title": "Verificar la instalación",
+          "content": "Una vez instalado el compilador, abre la terminal y escribe: g++ --version",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "cpp_2_ex_1",
+          "title": "Verificar instalación",
+          "code": "g++ --version",
+          "language": "bash",
+          "explanation": "Si el comando muestra una versión, el compilador está listo."
+        }
+      ],
+      "summary": "Instalar un compilador es el primer paso para empezar a programar en C++.",
+      "keyPoints": [
+        "C++ necesita un compilador",
+        "GCC, Clang y MSVC son opciones populares",
+        "g++ --version verifica la instalación",
+        "Un editor o IDE facilita el desarrollo"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "cpp_2_ch_1",
+        "lessonId": "cpp_lesson_2",
+        "question": "¿Qué herramienta se necesita para convertir código C++ en un programa ejecutable?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "Un navegador", "isCorrect": false },
+          { "id": "opt_2", "text": "Un compilador", "isCorrect": true },
+          { "id": "opt_3", "text": "Un intérprete", "isCorrect": false },
+          { "id": "opt_4", "text": "Una base de datos", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "El compilador transforma el código fuente en un ejecutable.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+
+  {
+    "id": "cpp_lesson_3",
+    "courseId": "cpp",
+    "title": "Tu primer programa en C++",
+    "description": "Aprende a crear, compilar y ejecutar tu primer programa en C++.",
+    "order": 3,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "Ahora escribirás tu primer programa completo en C++ y aprenderás cómo compilarlo y ejecutarlo.",
+      "sections": [
+        {
+          "id": "cpp_3_sec_1",
+          "title": "Crear el archivo",
+          "content": "Crea un archivo llamado main.cpp. Los archivos C++ suelen usar la extensión .cpp.",
+          "order": 1
+        },
+        {
+          "id": "cpp_3_sec_2",
+          "title": "Escribir el programa",
+          "content": "Todo programa en C++ comienza su ejecución en la función main().",
+          "order": 2
+        },
+        {
+          "id": "cpp_3_sec_3",
+          "title": "Compilar y ejecutar",
+          "content": "Usa g++ main.cpp para compilar y luego ejecuta el programa generado.",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "cpp_3_ex_1",
+          "title": "Primer programa en C++",
+          "code": "#include <iostream>\n\nint main() {\n    std::cout << \"Hola mundo desde C++\" << std::endl;\n    return 0;\n}",
+          "language": "cpp",
+          "explanation": "std::cout se utiliza para mostrar texto en la consola."
+        },
+        {
+          "id": "cpp_3_ex_2",
+          "title": "Compilar y ejecutar",
+          "code": "g++ main.cpp -o main\n./main",
+          "language": "bash",
+          "explanation": "El parámetro -o permite asignar un nombre al ejecutable."
+        }
+      ],
+      "summary": "Ya creaste, compilaste y ejecutaste tu primer programa en C++.",
+      "keyPoints": [
+        "Los archivos C++ usan .cpp",
+        "La función main() es el punto de inicio",
+        "g++ compila el código",
+        "std::cout imprime en consola"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "cpp_3_ch_1",
+        "lessonId": "cpp_lesson_3",
+        "question": "¿Cuál es el punto de entrada de un programa en C++?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "start()", "isCorrect": false },
+          { "id": "opt_2", "text": "begin()", "isCorrect": false },
+          { "id": "opt_3", "text": "main()", "isCorrect": true },
+          { "id": "opt_4", "text": "run()", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "La función main() es donde comienza la ejecución de un programa en C++.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  }
+]

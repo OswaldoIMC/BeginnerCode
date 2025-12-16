@@ -395,7 +395,7 @@ class SupabaseSyncService {
   }
 
   /**
-   * Descarga datos desde Supabase (útil para restaurar en otro dispositivo)
+   * Descarga datos desde Supabase
    */
   async downloadFromCloud(username: string): Promise<UserProfile | null> {
     try {

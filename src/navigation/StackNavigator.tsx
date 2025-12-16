@@ -7,6 +7,9 @@ import RecoverPasswordScreen from "../screens/auth/RecoverPasswordScreen";
 import HomeScreen from "../screens/home/HomeScreen";
 import PythonScreen from "../screens/courses/PythonScreen";
 import JavaScreen from "../screens/courses/JavaScreen";
+import JsScreen from "../screens/courses/JsScreen";
+import CsharpScreen from "../screens/courses/CsharpScreen";
+import CppScreen from "../screens/courses/CppScreen";
 import LessonDetailScreen from "../screens/lessons/LessonDetailScreen";
 import ChallengeScreen from "../screens/challenges/ChallengeScreen";
 import ProfileScreen from "../screens/profile/ProfileScreen";
@@ -24,6 +27,9 @@ export type RootStackParamList = {
   Home: undefined;
   Python: undefined;
   Java: undefined;
+  Javascript: undefined;
+  Csharp: undefined;
+  Cpp: undefined;
   LessonDetail: {
     lessonId: string;
     courseId: string;
@@ -114,6 +120,27 @@ const StackNavigator: React.FC<StackNavigatorProps> = ({
         component={JavaScreen}
         options={{
           title: "Java",
+        }}
+      />
+      <Stack.Screen
+        name="Javascript"
+        component={JsScreen}
+        options={{
+          title: "Javascript",
+        }}
+      />
+      <Stack.Screen
+        name="Csharp"
+        component={CsharpScreen}
+        options={{
+          title: "C#",
+        }}
+      />
+      <Stack.Screen
+        name="Cpp"
+        component={CppScreen}
+        options={{
+          title: "C++",
         }}
       />
 

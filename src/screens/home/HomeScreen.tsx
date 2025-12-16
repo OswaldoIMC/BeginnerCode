@@ -39,7 +39,7 @@ interface MenuOption {
   id: string;
   title: string;
   color: string;
-  route?: "Python" | "Java";
+  route?: "Python" | "Java" | "Javascript" | "Csharp" | "Cpp";
   progress?: number;
   onPress?: () => void;
 }
@@ -50,6 +50,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [pythonProgress, setPythonProgress] = useState(0);
   const [javaProgress, setJavaProgress] = useState(0);
+  const [jsProgress, setJsProgress] = useState(0);
+  const [csharpProgress, setCsharpProgress] = useState(0);
+  const [cppProgress, setCppProgress] = useState(0);
 
   // Cargar progreso al montar y cuando vuelve el foco
   useEffect(() => {
@@ -61,9 +64,15 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const loadProgress = async () => {
     const progressPython = await DataService.getCourseProgress("python");
     const progressJava = await DataService.getCourseProgress("java");
+    const progressJs = await DataService.getCourseProgress("javascript");
+    const progressCsharp = await DataService.getCourseProgress("csharp");
+    const progressCpp = await DataService.getCourseProgress("cpp");
 
     setPythonProgress(progressPython || 0);
     setJavaProgress(progressJava || 0);
+    setJsProgress(progressJs || 0);
+    setCsharpProgress(progressCsharp || 0);
+    setCppProgress(progressCpp || 0);
   };
 
   const menuOptions: MenuOption[] = [
@@ -85,19 +94,22 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
       id: "Javascript",
       title: "Javascript",
       color: "#faf32bff",
-      onPress: () => handleComingSoon("Javascript"),
+      progress: jsProgress,
+      route: "Javascript",
     },
     {
       id: "C#",
       title: "C#",
       color: "#a116a3ff",
-      onPress: () => handleComingSoon("C#"),
+      progress: csharpProgress,
+      route: "Csharp",
     },
     {
       id: "C++",
       title: "C++",
       color: "#122e92ff",
-      onPress: () => handleComingSoon("C++"),
+      progress: cppProgress,
+      route: "Cpp",
     },
     { id: "Prox", title: "Proximamente", color: "#525358ff" },
   ];

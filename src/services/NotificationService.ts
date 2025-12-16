@@ -132,58 +132,16 @@ class NotificationService {
 
       await Notifications.scheduleNotificationAsync({
         content: {
-          title: "✅ Notificaciones activadas",
+          title: "Notificaciones activadas",
           body: "Recibirás recordatorios diarios para continuar aprendiendo",
           data: { type: "test" },
         },
-        trigger: null, // Enviar inmediatamente
+        trigger: null,
       });
 
       console.log("Notificación de prueba enviada");
     } catch (error) {
       console.error("Error al enviar notificación de prueba:", error);
-    }
-  }
-
-  /**
-   * Programa notificación cuando se complete una lección
-   */
-  async sendLessonCompletedNotification(lessonTitle: string): Promise<void> {
-    try {
-      const enabled = await this.getNotificationsEnabled();
-      if (!enabled) return;
-
-      await Notifications.scheduleNotificationAsync({
-        content: {
-          title: "🎉 ¡Lección completada!",
-          body: `Has terminado: ${lessonTitle}`,
-          data: { type: "lesson_completed", lessonTitle },
-        },
-        trigger: null,
-      });
-    } catch (error) {
-      console.error("Error al enviar notificación de lección:", error);
-    }
-  }
-
-  /**
-   * Programa notificación cuando se desbloquee una medalla
-   */
-  async sendBadgeUnlockedNotification(badgeName: string): Promise<void> {
-    try {
-      const enabled = await this.getNotificationsEnabled();
-      if (!enabled) return;
-
-      await Notifications.scheduleNotificationAsync({
-        content: {
-          title: "🏆 ¡Nueva medalla desbloqueada!",
-          body: `Has conseguido: ${badgeName}`,
-          data: { type: "badge_unlocked", badgeName },
-        },
-        trigger: null,
-      });
-    } catch (error) {
-      console.error("Error al enviar notificación de medalla:", error);
     }
   }
 
