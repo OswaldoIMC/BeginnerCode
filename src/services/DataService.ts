@@ -29,7 +29,6 @@ class DataService {
     javascript: jsLessonsData as Lesson[],
     csharp: csharpLessonsData as Lesson[],
     cpp: cppLessonsData as Lesson[],
-    // AQUI SE AGREGAN MAS CURSOS
   };
 
   /**
@@ -57,7 +56,6 @@ class DataService {
         ...(cppCourseData as Course),
         icon: require("../../assets/c-.png"),
       },
-      // AQUI SE AGREGAN MAS CURSOS
     ];
   }
 

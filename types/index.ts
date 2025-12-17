@@ -255,7 +255,7 @@ export interface ScreenState<T> {
 
 /* Props que reciben las pantallas de navegación */
 export interface ScreenProps<T = any> {
-  navigation: any; // Tipo básico, se puede mejorar después
+  navigation: any;
   route: {
     params?: T;
   };

@@ -18,7 +18,7 @@ export interface RegisteredUser {
   id: string;
   username: string;
   email: string;
-  password: string; // En producción, esto debería estar hasheado
+  password: string;
   securityQuestion: string;
   securityAnswer: string;
   createdAt: string;
@@ -243,7 +243,7 @@ class AuthService {
         id: Date.now().toString(),
         username: data.username,
         email: data.email,
-        password: data.password, // En producción, esto debería estar hasheado
+        password: data.password,
         securityQuestion: data.securityQuestion,
         securityAnswer: data.securityAnswer.toLowerCase().trim(),
         createdAt: new Date().toISOString(),
