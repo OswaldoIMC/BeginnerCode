@@ -118,6 +118,16 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
         console.log("Perfil existente cargado para:", formData.username);
       }
 
+      // Configurar callback de sincronización con Supabase
+      const SupabaseSyncService =
+        require("../../services/SupabaseSyncService").default;
+      StorageService.setSyncCallback((profile) => {
+        SupabaseSyncService.syncUserProfile(profile);
+      });
+
+      // Intentar sincronizar datos pendientes
+      SupabaseSyncService.syncPendingChanges();
+
       setIsLoading(false);
 
       // Esto evita que el usuario pueda volver atrás con el botón back

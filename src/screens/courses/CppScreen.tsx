@@ -23,6 +23,7 @@ import { RootStackParamList } from "../../navigation/StackNavigator";
 import * as Progress from "react-native-progress";
 import DataService from "../../services/DataService";
 import AuthService from "../../services/AuthService";
+import StorageService from "../../services/StorageService";
 
 const CppImage = require("../../../assets/c-.png");
 
@@ -95,30 +96,27 @@ const CppScreen = () => {
   /**
    * Maneja el cierre de sesión
    */
-  const handleLogout = (): void => {
-    Alert.alert("Cerrar Sesión", "¿Estás seguro de que deseas cerrar sesión?", [
-      {
-        text: "Cancelar",
-        style: "cancel",
-      },
+  const handleLogout = () => {
+    Alert.alert("Cerrar Sesión", "¿Deseas cerrar sesión?", [
+      { text: "Cancelar", style: "cancel" },
       {
         text: "Cerrar Sesión",
         style: "destructive",
         onPress: async () => {
           setMenuVisible(false);
 
-          // IMPORTANTE: Llamar a AuthService.logout() para eliminar la sesión
+          // Cerrar sesión en AuthService
           const success = await AuthService.logout();
 
           if (success) {
             console.log("Sesión cerrada exitosamente");
 
+            // Limpiar el usuario actual de StorageService
+            StorageService.setCurrentUsername(null);
+
             // Navegar a Login y limpiar el stack
             navigation.dispatch(
-              CommonActions.reset({
-                index: 0,
-                routes: [{ name: "Login" }],
-              })
+              CommonActions.reset({ index: 0, routes: [{ name: "Login" }] })
             );
           } else {
             console.error("Error al cerrar sesión");
@@ -139,13 +137,6 @@ const CppScreen = () => {
     console.log("Navegando a perfil de usuario");
     setMenuVisible(false);
     navigation.navigate("Profile");
-  };
-
-  /**
-   * Muestra mensaje de funcionalidad próximamente disponible
-   */
-  const handleComingSoon = (feature: string): void => {
-    console.log(`Funcionalidad: ${feature} - Próximamente disponible`);
   };
 
   /**

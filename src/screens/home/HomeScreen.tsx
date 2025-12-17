@@ -21,6 +21,7 @@ import { FONT_SIZES } from "../../../types";
 import DataService from "../../services/DataService";
 import AuthService from "../../services/AuthService";
 import { useTheme } from "../../context/ThemeContext";
+import StorageService from "../../services/StorageService";
 
 // Imágenes
 const PythonImage = require("../../../assets/python.png");
@@ -122,22 +123,30 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         style: "destructive",
         onPress: async () => {
           setMenuVisible(false);
+
+          // Cerrar sesión en AuthService
           const success = await AuthService.logout();
+
           if (success) {
             console.log("Sesión cerrada exitosamente");
+
+            // Limpiar el usuario actual de StorageService
+            StorageService.setCurrentUsername(null);
 
             // Navegar a Login y limpiar el stack
             navigation.dispatch(
               CommonActions.reset({ index: 0, routes: [{ name: "Login" }] })
             );
+          } else {
+            console.error("Error al cerrar sesión");
+            Alert.alert(
+              "Error",
+              "No se pudo cerrar la sesión. Intenta de nuevo."
+            );
           }
         },
       },
     ]);
-  };
-
-  const handleComingSoon = (feature: string) => {
-    console.log(`Próximamente: ${feature}`);
   };
 
   const renderImage = (option: MenuOption) => {

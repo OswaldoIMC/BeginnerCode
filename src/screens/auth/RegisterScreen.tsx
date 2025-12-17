@@ -18,7 +18,6 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../navigation/StackNavigator";
 import { COLORS, FONT_SIZES } from "../../../types/index";
 import AuthService, { RegisterData } from "../../services/AuthService";
-import StorageService from "../../services/StorageService";
 
 type RegisterScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -133,8 +132,8 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
         return;
       }
 
-      // Registro exitoso - crear perfil
-      await StorageService.createInitialProfile(formData.username);
+      // Registro exitoso
+      // El perfil se creará cuando el usuario inicie sesión
 
       setIsLoading(false);
 

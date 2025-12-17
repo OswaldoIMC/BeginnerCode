@@ -1,54 +1,86 @@
-import React, { useEffect, useState } from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import React, { useState, useEffect } from "react";
 import { View, ActivityIndicator, StyleSheet } from "react-native";
-import StackNavigator from "./src/navigation/StackNavigator";
+import { NavigationContainer } from "@react-navigation/native";
 import { ThemeProvider } from "./src/context/ThemeContext";
+import StackNavigator from "./src/navigation/StackNavigator";
+import AuthService from "./src/services/AuthService";
 import StorageService from "./src/services/StorageService";
 import SupabaseSyncService from "./src/services/SupabaseSyncService";
-import AuthService from "./src/services/AuthService";
 
-const App: React.FC = () => {
+export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [initialRoute, setInitialRoute] = useState<"Login" | "Home">("Login");
 
   useEffect(() => {
-    const initializeApp = async () => {
-      try {
-        // 1. Configurar sincronización automática
-        StorageService.setSyncCallback((profile) => {
-          SupabaseSyncService.syncUserProfile(profile).catch((error) => {
-            console.error("Error en sincronización automática:", error);
-          });
-        });
-
-        console.log("Sistema de sincronización inicializado");
-
-        // 2. Verificar si hay una sesión activa
-        const hasSession = await AuthService.hasActiveSession();
-
-        if (hasSession) {
-          console.log("Sesión activa encontrada");
-          setInitialRoute("Home");
-        } else {
-          console.log("No hay sesión activa");
-          setInitialRoute("Login");
-        }
-      } catch (error) {
-        console.error("Error al inicializar app:", error);
-        setInitialRoute("Login");
-      } finally {
-        // Pequeño delay para evitar flash
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 500);
-      }
-    };
-
-    // Ejecutar la inicialización
-    initializeApp();
+    checkAuthStatus();
   }, []);
 
-  // Mostrar splash screen mientras carga
+  /**
+   * Verifica si hay una sesión activa al iniciar la app
+   */
+  const checkAuthStatus = async () => {
+    try {
+      console.log("Verificando sesión activa...");
+
+      // Verificar si hay una sesión activa
+      const currentUser = await AuthService.getCurrentUser();
+
+      if (!currentUser) {
+        console.log("No hay sesión activa, ir a Login");
+        setInitialRoute("Login");
+        setIsLoading(false);
+        return;
+      }
+
+      console.log("Sesión activa encontrada:", currentUser);
+
+      // Verificar que el usuario todavía existe en el sistema
+      const userExists = await AuthService.getUserByUsername(currentUser);
+
+      if (!userExists) {
+        console.log("El usuario ya no existe en el sistema, cerrando sesión");
+        await AuthService.logout();
+        StorageService.setCurrentUsername(null);
+        setInitialRoute("Login");
+        setIsLoading(false);
+        return;
+      }
+
+      // Establecer el usuario actual en StorageService
+      StorageService.setCurrentUsername(currentUser);
+
+      // Verificar que el perfil exista
+      let profile = await StorageService.getUserProfile(currentUser);
+
+      if (!profile) {
+        console.log("No se encontró perfil, creando uno nuevo");
+        profile = await StorageService.createInitialProfile(currentUser);
+      } else {
+        console.log("Perfil cargado para:", currentUser);
+      }
+
+      // Configurar callback de sincronización
+      StorageService.setSyncCallback((profile) => {
+        SupabaseSyncService.syncUserProfile(profile);
+      });
+
+      // Intentar sincronizar datos pendientes si hay conexión
+      SupabaseSyncService.syncPendingChanges();
+
+      // Ir al Home
+      setInitialRoute("Home");
+    } catch (error) {
+      console.error("Error al verificar sesión:", error);
+      // En caso de error, cerrar sesión por seguridad
+      await AuthService.logout();
+      StorageService.setCurrentUsername(null);
+      setInitialRoute("Login");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Mostrar pantalla de carga mientras se verifica la sesión
   if (isLoading) {
     return (
       <View style={styles.loadingContainer}>
@@ -64,15 +96,13 @@ const App: React.FC = () => {
       </NavigationContainer>
     </ThemeProvider>
   );
-};
+}
 
 const styles = StyleSheet.create({
   loadingContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#ffffff",
   },
 });
-
-export default App;

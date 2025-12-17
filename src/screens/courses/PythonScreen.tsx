@@ -24,6 +24,7 @@ import * as Progress from "react-native-progress";
 import DataService from "../../services/DataService";
 import AuthService from "../../services/AuthService";
 import { useTheme } from "../../context/ThemeContext";
+import StorageService from "../../services/StorageService";
 
 const PythonImage = require("../../../assets/python.png");
 
@@ -96,22 +97,27 @@ const PythonScreen = () => {
   /**
    * Maneja el cierre de sesión
    */
-  const handleLogout = (): void => {
-    Alert.alert("Cerrar Sesión", "¿Estás seguro?", [
+  const handleLogout = () => {
+    Alert.alert("Cerrar Sesión", "¿Deseas cerrar sesión?", [
       { text: "Cancelar", style: "cancel" },
       {
         text: "Cerrar Sesión",
         style: "destructive",
         onPress: async () => {
           setMenuVisible(false);
+
+          // Cerrar sesión en AuthService
           const success = await AuthService.logout();
+
           if (success) {
+            console.log("Sesión cerrada exitosamente");
+
+            // Limpiar el usuario actual de StorageService
+            StorageService.setCurrentUsername(null);
+
             // Navegar a Login y limpiar el stack
             navigation.dispatch(
-              CommonActions.reset({
-                index: 0,
-                routes: [{ name: "Login" }],
-              })
+              CommonActions.reset({ index: 0, routes: [{ name: "Login" }] })
             );
           } else {
             console.error("Error al cerrar sesión");
@@ -124,7 +130,6 @@ const PythonScreen = () => {
       },
     ]);
   };
-
   const handleProfile = () => {
     setMenuVisible(false);
     navigation.navigate("Profile");

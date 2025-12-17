@@ -190,19 +190,27 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
                 );
               }
 
-              // 2. Eliminar cuenta de AuthService (datos de autenticación)
+              // 2. Cerrar sesión PRIMERO (esto elimina CURRENT_USER)
+              await AuthService.logout();
+              console.log("Sesión cerrada");
+
+              // 3. Eliminar cuenta de AuthService (datos de autenticación)
               await AuthService.deleteAccount(currentUsername);
               console.log("Datos de autenticación eliminados");
 
-              // 3. Eliminar todos los datos locales del usuario
+              // 4. Eliminar todos los datos locales del usuario
               await StorageService.deleteUserData(currentUsername);
               console.log("Datos locales del usuario eliminados");
 
-              // 4. Limpiar datos de sincronización
+              // 5. Limpiar el usuario actual de StorageService
+              StorageService.setCurrentUsername(null);
+              console.log("Usuario actual limpiado de StorageService");
+
+              // 6. Limpiar datos de sincronización
               await SupabaseSyncService.clearSyncData();
               console.log("Datos de sincronización eliminados");
 
-              // 5. Mostrar confirmación y redirigir al login
+              // 7. Mostrar confirmación y redirigir al login
               Alert.alert(
                 "Cuenta eliminada",
                 isOnline

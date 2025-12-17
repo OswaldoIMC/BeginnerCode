@@ -43,7 +43,7 @@ class StorageService {
   /**
    * Establece el usuario actual para usar claves correctas
    */
-  setCurrentUsername(username: string): void {
+  setCurrentUsername(username: string | null): void {
     this.currentUsername = username;
   }
 
