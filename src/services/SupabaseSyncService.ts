@@ -171,7 +171,7 @@ class SupabaseSyncService {
         .from("user_profiles")
         .select("*")
         .eq("username", profile.username)
-        .maybeSingle(); // Usar maybeSingle() en lugar de single()
+        .maybeSingle();
 
       if (selectError) {
         console.error("Error al verificar perfil existente:", selectError);
@@ -452,6 +452,74 @@ class SupabaseSyncService {
     } catch (error) {
       console.error("Error al descargar desde la nube:", error);
       return null;
+    }
+  }
+
+  /**
+   * Elimina TODA la información de un usuario de Supabase
+   */
+  async deleteUserAccount(username: string): Promise<boolean> {
+    try {
+      const isOnline = await this.checkConnection();
+      if (!isOnline) {
+        console.error("No hay conexión para eliminar cuenta");
+        return false;
+      }
+
+      console.log(`Eliminando cuenta de Supabase para: ${username}`);
+
+      // Eliminar medallas del usuario
+      const { error: badgesError } = await this.supabase
+        .from("user_badges")
+        .delete()
+        .eq("username", username);
+
+      if (badgesError) {
+        console.error("Error al eliminar medallas:", badgesError);
+      } else {
+        console.log("Medallas eliminadas");
+      }
+
+      // Eliminar progreso de lecciones
+      const { error: lessonsError } = await this.supabase
+        .from("lesson_progress")
+        .delete()
+        .eq("username", username);
+
+      if (lessonsError) {
+        console.error("Error al eliminar progreso de lecciones:", lessonsError);
+      } else {
+        console.log("Progreso de lecciones eliminado");
+      }
+
+      // Eliminar progreso de cursos
+      const { error: coursesError } = await this.supabase
+        .from("course_progress")
+        .delete()
+        .eq("username", username);
+
+      if (coursesError) {
+        console.error("Error al eliminar progreso de cursos:", coursesError);
+      } else {
+        console.log("Progreso de cursos eliminado");
+      }
+
+      // Eliminar perfil del usuario
+      const { error: profileError } = await this.supabase
+        .from("user_profiles")
+        .delete()
+        .eq("username", username);
+
+      if (profileError) {
+        console.error("Error al eliminar perfil:", profileError);
+        return false;
+      }
+
+      console.log(`Cuenta eliminada completamente de Supabase: ${username}`);
+      return true;
+    } catch (error) {
+      console.error("Error al eliminar cuenta de Supabase:", error);
+      return false;
     }
   }
 

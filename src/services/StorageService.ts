@@ -11,13 +11,15 @@ import {
   Badge,
 } from "../../types";
 
-// Keys para AsyncStorage
-const STORAGE_KEYS = {
-  USER_PROFILE: "@BeginnerCode:userProfile",
-  COURSE_PROGRESS: "@BeginnerCode:courseProgress",
-  LESSON_PROGRESS: "@BeginnerCode:lessonProgress",
-  BADGES: "@BeginnerCode:badges",
-};
+/**
+ * Genera claves únicas para cada usuario
+ */
+const getStorageKeys = (username: string) => ({
+  USER_PROFILE: `@BeginnerCode:userProfile:${username}`,
+  COURSE_PROGRESS: `@BeginnerCode:courseProgress:${username}`,
+  LESSON_PROGRESS: `@BeginnerCode:lessonProgress:${username}`,
+  BADGES: `@BeginnerCode:badges:${username}`,
+});
 
 /**
  * Servicio de almacenamiento
@@ -27,12 +29,29 @@ class StorageService {
   // Callback para sincronización (se configurará externamente)
   private syncCallback: ((profile: UserProfile) => void) | null = null;
 
+  // Usuario actual en sesión
+  private currentUsername: string | null = null;
+
   /**
    * Configura el callback de sincronización
    * Esto evita importaciones circulares
    */
   setSyncCallback(callback: (profile: UserProfile) => void): void {
     this.syncCallback = callback;
+  }
+
+  /**
+   * Establece el usuario actual para usar claves correctas
+   */
+  setCurrentUsername(username: string): void {
+    this.currentUsername = username;
+  }
+
+  /**
+   * Obtiene el usuario actual
+   */
+  getCurrentUsername(): string | null {
+    return this.currentUsername;
   }
 
   /**
@@ -56,8 +75,15 @@ class StorageService {
   /**
    * Obtiene el perfil completo del usuario
    */
-  async getUserProfile(): Promise<UserProfile | null> {
+  async getUserProfile(username?: string): Promise<UserProfile | null> {
     try {
+      const user = username || this.currentUsername;
+      if (!user) {
+        console.error("No hay usuario actual establecido");
+        return null;
+      }
+
+      const STORAGE_KEYS = getStorageKeys(user);
       const data = await AsyncStorage.getItem(STORAGE_KEYS.USER_PROFILE);
       return data ? JSON.parse(data) : null;
     } catch (error) {
@@ -71,6 +97,13 @@ class StorageService {
    */
   async saveUserProfile(profile: UserProfile): Promise<boolean> {
     try {
+      const user = profile.username || this.currentUsername;
+      if (!user) {
+        console.error("No hay usuario para guardar perfil");
+        return false;
+      }
+
+      const STORAGE_KEYS = getStorageKeys(user);
       await AsyncStorage.setItem(
         STORAGE_KEYS.USER_PROFILE,
         JSON.stringify(profile)
@@ -90,6 +123,9 @@ class StorageService {
    * Crea un perfil inicial para un nuevo usuario
    */
   async createInitialProfile(username: string): Promise<UserProfile> {
+    // Establecer usuario actual
+    this.setCurrentUsername(username);
+
     const profile: UserProfile = {
       id: Date.now().toString(),
       username,
@@ -460,7 +496,7 @@ class StorageService {
         unlockedBadges.push("perfect_score");
       }
 
-      // Curso Completado - NUEVO
+      // Curso Completado
       const completedCourses = profile.coursesProgress.filter(
         (cp) => cp.progressPercentage >= 1.0
       ).length;
@@ -492,19 +528,49 @@ class StorageService {
   }
 
   /**
-   * Limpia todos los datos (útil para testing o reset)
+   * Limpia todos los datos del usuario actual
    */
   async clearAllData(): Promise<boolean> {
     try {
+      const user = this.currentUsername;
+      if (!user) {
+        console.error("No hay usuario actual para limpiar datos");
+        return false;
+      }
+
+      const STORAGE_KEYS = getStorageKeys(user);
       await AsyncStorage.multiRemove([
         STORAGE_KEYS.USER_PROFILE,
         STORAGE_KEYS.COURSE_PROGRESS,
         STORAGE_KEYS.LESSON_PROGRESS,
         STORAGE_KEYS.BADGES,
       ]);
+
+      console.log(`Datos locales eliminados para usuario: ${user}`);
       return true;
     } catch (error) {
       console.error("Error al limpiar datos:", error);
+      return false;
+    }
+  }
+
+  /**
+   * Elimina TODOS los datos de un usuario específico (para eliminar cuenta)
+   */
+  async deleteUserData(username: string): Promise<boolean> {
+    try {
+      const STORAGE_KEYS = getStorageKeys(username);
+      await AsyncStorage.multiRemove([
+        STORAGE_KEYS.USER_PROFILE,
+        STORAGE_KEYS.COURSE_PROGRESS,
+        STORAGE_KEYS.LESSON_PROGRESS,
+        STORAGE_KEYS.BADGES,
+      ]);
+
+      console.log(`Todos los datos eliminados para usuario: ${username}`);
+      return true;
+    } catch (error) {
+      console.error("Error al eliminar datos del usuario:", error);
       return false;
     }
   }

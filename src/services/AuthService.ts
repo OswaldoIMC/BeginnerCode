@@ -413,6 +413,37 @@ class AuthService {
       null
     );
   }
+
+  /**
+   * Elimina una cuenta de usuario del sistema de autenticación
+   */
+  async deleteAccount(username: string): Promise<boolean> {
+    try {
+      const users = await this.getAllUsers();
+
+      // Filtrar para eliminar el usuario
+      const filteredUsers = users.filter(
+        (u) => u.username.toLowerCase() !== username.toLowerCase()
+      );
+
+      // Si no cambió el tamaño del array, el usuario no existía
+      if (filteredUsers.length === users.length) {
+        console.log(
+          `Usuario ${username} no encontrado en el sistema de autenticación`
+        );
+        return false;
+      }
+
+      // Guardar la lista actualizada
+      await this.saveUsers(filteredUsers);
+
+      console.log(`Usuario ${username} eliminado del sistema de autenticación`);
+      return true;
+    } catch (error) {
+      console.error("Error al eliminar cuenta:", error);
+      return false;
+    }
+  }
 }
 
 // Exportar una instancia única del servicio (Singleton)

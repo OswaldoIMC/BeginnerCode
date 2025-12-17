@@ -20,6 +20,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../navigation/StackNavigator";
 import { FONT_SIZES } from "../../../types";
 import StorageService from "../../services/StorageService";
+import AuthService from "../../services/AuthService";
 import { CommonActions } from "@react-navigation/native";
 import { useTheme } from "../../context/ThemeContext";
 import NotificationService from "../../services/NotificationService";
@@ -138,33 +139,97 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
   };
 
   /**
-   * Elimina la cuenta y datos locales
+   * Elimina la cuenta y TODOS los datos (local y Supabase)
    */
   const handleDeleteAccount = () => {
     Alert.alert(
       "Eliminar cuenta",
-      "¿Estás seguro de que quieres eliminar la cuenta con todo tu progreso? \nEsta acción no se puede deshacer.",
+      "¿Estás seguro de que quieres eliminar la cuenta con todo tu progreso?\n\nEsta acción eliminará:\n• Todos tus datos locales\n• Tu cuenta de la nube (Supabase)\n• Todo tu progreso y medallas\n\nEsta acción NO se puede deshacer.",
       [
         { text: "Cancelar", style: "cancel" },
         {
           text: "Eliminar",
           style: "destructive",
           onPress: async () => {
-            await StorageService.clearAllData();
-            await SupabaseSyncService.clearSyncData();
-            Alert.alert("Cuenta eliminada", "Tu cuenta ha sido eliminada.", [
-              {
-                text: "OK",
-                onPress: () => {
-                  navigation.dispatch(
-                    CommonActions.reset({
-                      index: 0,
-                      routes: [{ name: "Login" }],
-                    })
+            try {
+              // Obtener el nombre de usuario actual
+              const currentUsername = StorageService.getCurrentUsername();
+
+              if (!currentUsername) {
+                Alert.alert(
+                  "Error",
+                  "No se pudo identificar el usuario actual"
+                );
+                return;
+              }
+
+              console.log(
+                `Iniciando eliminación de cuenta para: ${currentUsername}`
+              );
+
+              // 1. Eliminar de Supabase primero (requiere conexión)
+              const isOnline = await SupabaseSyncService.checkConnection();
+
+              if (isOnline) {
+                const supabaseDeleted =
+                  await SupabaseSyncService.deleteUserAccount(currentUsername);
+
+                if (supabaseDeleted) {
+                  console.log("Cuenta eliminada de Supabase");
+                } else {
+                  console.warn(
+                    "No se pudo eliminar de Supabase, continuando con local"
                   );
-                },
-              },
-            ]);
+                }
+              } else {
+                console.warn("Sin conexión - solo se eliminarán datos locales");
+                Alert.alert(
+                  "Sin conexión",
+                  "No hay conexión a internet. Solo se eliminarán los datos locales. Para eliminar completamente la cuenta, conéctate a internet y vuelve a intentarlo.",
+                  [{ text: "Entendido" }]
+                );
+              }
+
+              // 2. Eliminar cuenta de AuthService (datos de autenticación)
+              await AuthService.deleteAccount(currentUsername);
+              console.log("Datos de autenticación eliminados");
+
+              // 3. Eliminar todos los datos locales del usuario
+              await StorageService.deleteUserData(currentUsername);
+              console.log("Datos locales del usuario eliminados");
+
+              // 4. Limpiar datos de sincronización
+              await SupabaseSyncService.clearSyncData();
+              console.log("Datos de sincronización eliminados");
+
+              // 5. Mostrar confirmación y redirigir al login
+              Alert.alert(
+                "Cuenta eliminada",
+                isOnline
+                  ? "Tu cuenta y todos tus datos han sido eliminados completamente."
+                  : "Tus datos locales han sido eliminados. La cuenta en la nube se eliminará cuando te conectes a internet.",
+                [
+                  {
+                    text: "OK",
+                    onPress: () => {
+                      // Navegar a Login y limpiar el stack
+                      navigation.dispatch(
+                        CommonActions.reset({
+                          index: 0,
+                          routes: [{ name: "Login" }],
+                        })
+                      );
+                    },
+                  },
+                ]
+              );
+            } catch (error) {
+              console.error("Error al eliminar cuenta:", error);
+              Alert.alert(
+                "Error",
+                "Hubo un problema al eliminar la cuenta. Por favor intenta de nuevo."
+              );
+            }
           },
         },
       ]

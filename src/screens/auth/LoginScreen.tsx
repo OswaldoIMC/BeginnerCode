@@ -104,13 +104,18 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
       // Login exitoso
       console.log("Usuario autenticado:", formData.username);
 
-      // Verificar si ya existe un perfil, si no, crearlo
-      let profile = await StorageService.getUserProfile();
+      // Establecer el usuario actual en StorageService
+      StorageService.setCurrentUsername(formData.username);
 
-      if (!profile || profile.username !== formData.username) {
+      // Verificar si ya existe un perfil para este usuario
+      let profile = await StorageService.getUserProfile(formData.username);
+
+      if (!profile) {
         // Crear perfil inicial para este usuario
         profile = await StorageService.createInitialProfile(formData.username);
         console.log("Perfil inicial creado para:", formData.username);
+      } else {
+        console.log("Perfil existente cargado para:", formData.username);
       }
 
       setIsLoading(false);
