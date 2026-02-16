@@ -1,4 +1,8 @@
-import React, { useState, useEffect } from "react";
+/**
+ * Pantalla de Challenges (REFACTORIZADA)
+ */
+
+import React from "react";
 import {
   View,
   Text,
@@ -8,7 +12,6 @@ import {
   ActivityIndicator,
   ScrollView,
   Animated,
-  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ConnectivityIndicator from "../../components/ConnectivityIndicator";
@@ -16,15 +19,14 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../navigation/StackNavigator";
-import { FONT_SIZES, Lesson, Challenge, ChallengeOption } from "../../../types";
-import DataService from "../../services/DataService";
-import StorageService from "../../services/StorageService";
+import { FONT_SIZES } from "../../../types";
 import * as Progress from "react-native-progress";
 import { useTheme } from "../../context/ThemeContext";
+import { useChallengeViewModel } from "../../hooks/useChallengeViewModel";
 
-/**
- * Props de navegación para esta pantalla
- */
+// ==========================================
+// TIPOS
+// ==========================================
 type ChallengeScreenRouteProp = RouteProp<RootStackParamList, "Challenge">;
 type ChallengeScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -36,209 +38,25 @@ interface ChallengeScreenProps {
   navigation: ChallengeScreenNavigationProp;
 }
 
-/**
- * Pantalla de retos/desafíos
- * Muestra las preguntas una por una y permite al usuario responderlas
- */
+// ==========================================
+// COMPONENTE PRINCIPAL
+// ==========================================
 const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
   route,
   navigation,
 }) => {
   const { courseId, lessonId } = route.params;
-
-  /** THEME */
   const { theme, isDarkMode } = useTheme();
 
-  const [lesson, setLesson] = useState<Lesson | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [currentChallengeIndex, setCurrentChallengeIndex] = useState<number>(0);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [isAnswered, setIsAnswered] = useState<boolean>(false);
-  const [correctAnswers, setCorrectAnswers] = useState<number>(0);
-  const [showResults, setShowResults] = useState<boolean>(false);
-  const [fadeAnim] = useState(new Animated.Value(0));
+  // ViewModel
+  const viewModel = useChallengeViewModel({ courseId, lessonId });
 
-  /**
-   * Carga los datos de la lección
-   */
-  useEffect(() => {
-    loadLessonData();
-  }, [lessonId]);
+  // ==========================================
+  // RENDERIZADO CONDICIONAL
+  // ==========================================
 
-  /**
-   * Animación de entrada
-   */
-  useEffect(() => {
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-  }, [currentChallengeIndex]);
-
-  /**
-   * Función para cargar los datos de la lección
-   */
-  const loadLessonData = () => {
-    try {
-      setLoading(true);
-      const lessonData = DataService.getLessonById(courseId, lessonId);
-      setLesson(lessonData || null);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error al cargar la lección:", error);
-      setLoading(false);
-    }
-  };
-
-  /**
-   * Maneja la selección de una opción
-   */
-  const handleSelectOption = (optionId: string) => {
-    if (!isAnswered) setSelectedOption(optionId);
-  };
-
-  /**
-   * Confirma la respuesta seleccionada
-   */
-  const handleConfirmAnswer = () => {
-    if (!selectedOption || !lesson) return;
-
-    const currentChallenge = lesson.challenges[currentChallengeIndex];
-    const isCorrect = selectedOption === currentChallenge.correctAnswerId;
-
-    setIsAnswered(true);
-
-    if (isCorrect) {
-      setCorrectAnswers((prev) => prev + 1);
-    }
-  };
-
-  /**
-   * Avanza al siguiente reto
-   */
-  const handleNextChallenge = () => {
-    if (!lesson) return;
-
-    // Resetear animación
-    fadeAnim.setValue(0);
-
-    if (currentChallengeIndex < lesson.challenges.length - 1) {
-      setCurrentChallengeIndex((prev) => prev + 1);
-      setSelectedOption(null);
-      setIsAnswered(false);
-
-      // Animar entrada
-      Animated.timing(fadeAnim, {
-        toValue: 1,
-        duration: 300,
-        useNativeDriver: true,
-      }).start();
-    } else {
-      // Guardar progreso antes de mostrar resultados
-      saveProgress();
-      setShowResults(true);
-    }
-  };
-
-  /**
-   * Guarda el progreso de la lección
-   */
-  const saveProgress = async () => {
-    if (!lesson) return;
-
-    try {
-      const percentage = Math.round(
-        (correctAnswers / lesson.challenges.length) * 100
-      );
-      const allChallengesIds = lesson.challenges.map((c) => c.id);
-
-      // Guardar progreso
-      await StorageService.saveLessonProgress(
-        lesson.id,
-        lesson.courseId,
-        allChallengesIds,
-        percentage,
-        lesson.challenges.length
-      );
-
-      const totalPoints = correctAnswers * 10;
-      await StorageService.updateTotalPoints(totalPoints);
-
-      // Verificar y desbloquear medallas
-      const profile = await StorageService.getUserProfile();
-      if (profile) {
-        const unlockedBadges = await StorageService.checkAndUnlockBadges(
-          profile
-        );
-
-        if (unlockedBadges.length > 0) {
-          // Mostrar notificación de medallas desbloqueadas
-          setTimeout(() => {
-            Alert.alert(
-              "¡Nueva Medalla! 🏆",
-              `Has desbloqueado ${unlockedBadges.length} medalla(s) nueva(s)`,
-              [{ text: "¡Genial!" }]
-            );
-          }, 1000);
-        }
-      }
-    } catch (error) {
-      console.error("Error al guardar progreso:", error);
-    }
-  };
-
-  /**
-   * Reinicia los retos
-   */
-  const handleRetry = () => {
-    setCurrentChallengeIndex(0);
-    setSelectedOption(null);
-    setIsAnswered(false);
-    setCorrectAnswers(0);
-    setShowResults(false);
-
-    fadeAnim.setValue(0);
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const handleFinish = () => navigation.goBack();
-
-  /** COLORES DE OPCIONES (hardcodeados los correctos e incorrectos) */
-  const getOptionColor = (
-    option: ChallengeOption,
-    challenge: Challenge
-  ): string => {
-    if (!isAnswered) return theme.card;
-
-    if (option.id === challenge.correctAnswerId) return "#4CAF50";
-    if (selectedOption === option.id) return "#F44336";
-
-    return theme.card;
-  };
-
-  /**
-   * Obtiene el icono de una opción
-   */
-  const getOptionIcon = (option: ChallengeOption, challenge: Challenge) => {
-    if (!isAnswered) {
-      return selectedOption === option.id
-        ? "radio-button-checked"
-        : "radio-button-unchecked";
-    }
-
-    if (option.id === challenge.correctAnswerId) return "check-circle";
-    if (selectedOption === option.id) return "cancel";
-
-    return "radio-button-unchecked";
-  };
-
-  // Mostrar loading
-  if (loading) {
+  // Loading
+  if (viewModel.loading) {
     return (
       <View
         style={[styles.loadingContainer, { backgroundColor: theme.surface }]}
@@ -251,7 +69,8 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
     );
   }
 
-  if (!lesson || lesson.challenges.length === 0) {
+  // Error - No hay lección
+  if (!viewModel.lesson || viewModel.lesson.challenges.length === 0) {
     return (
       <View
         style={[styles.loadingContainer, { backgroundColor: theme.surface }]}
@@ -260,7 +79,6 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
         <Text style={[styles.errorText, { color: theme.error }]}>
           No hay retos disponibles
         </Text>
-
         <TouchableOpacity
           style={[styles.backButton, { backgroundColor: theme.primary }]}
           onPress={() => navigation.goBack()}
@@ -271,16 +89,8 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
     );
   }
 
-  const currentChallenge = lesson.challenges[currentChallengeIndex];
-  const progress = (currentChallengeIndex + 1) / lesson.challenges.length;
-
-  // Modal de resultados finales
-  if (showResults) {
-    const percentage = Math.round(
-      (correctAnswers / lesson.challenges.length) * 100
-    );
-    const passed = percentage >= 70;
-
+  // Pantalla de resultados
+  if (viewModel.showResults) {
     return (
       <SafeAreaView
         style={[styles.container, { backgroundColor: theme.surface }]}
@@ -289,18 +99,17 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
           backgroundColor={theme.primary}
           barStyle={isDarkMode ? "light-content" : "dark-content"}
         />
-
         <ConnectivityIndicator />
 
         <View style={styles.resultsContainer}>
           <MaterialIcons
-            name={passed ? "emoji-events" : "sentiment-dissatisfied"}
+            name={viewModel.passed ? "emoji-events" : "sentiment-dissatisfied"}
             size={100}
-            color={passed ? "#FFD700" : theme.textSecondary}
+            color={viewModel.passed ? "#FFD700" : theme.textSecondary}
           />
 
           <Text style={[styles.resultsTitle, { color: theme.text }]}>
-            {passed ? "¡Felicidades!" : "Sigue Intentando"}
+            {viewModel.passed ? "¡Felicidades!" : "Sigue Intentando"}
           </Text>
 
           <Text
@@ -313,20 +122,18 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
             <Text style={[styles.scoreLabel, { color: theme.textSecondary }]}>
               Tu puntuación
             </Text>
-
             <Text
               style={[
                 styles.scoreValue,
-                { color: passed ? "#4CAF50" : "#FF9800" },
+                { color: viewModel.passed ? "#4CAF50" : "#FF9800" },
               ]}
             >
-              {correctAnswers} / {lesson.challenges.length}
+              {viewModel.correctAnswers} / {viewModel.lesson.challenges.length}
             </Text>
-
             <Text
               style={[styles.scorePercentage, { color: theme.textSecondary }]}
             >
-              {percentage}%
+              {viewModel.percentage}%
             </Text>
           </View>
 
@@ -335,7 +142,7 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
             <View style={styles.statItem}>
               <MaterialIcons name="check-circle" size={30} color="#4CAF50" />
               <Text style={[styles.statValue, { color: theme.text }]}>
-                {correctAnswers}
+                {viewModel.correctAnswers}
               </Text>
               <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
                 Correctas
@@ -345,7 +152,7 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
             <View style={styles.statItem}>
               <MaterialIcons name="cancel" size={30} color="#F44336" />
               <Text style={[styles.statValue, { color: theme.text }]}>
-                {lesson.challenges.length - correctAnswers}
+                {viewModel.lesson.challenges.length - viewModel.correctAnswers}
               </Text>
               <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
                 Incorrectas
@@ -353,7 +160,7 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
             </View>
           </View>
 
-          {!passed && (
+          {!viewModel.passed && (
             <View style={styles.encouragementContainer}>
               <Text style={[styles.encouragementText, { color: theme.text }]}>
                 Necesitas al menos 70% para aprobar. ¡Puedes intentarlo de
@@ -365,7 +172,7 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
           <View style={styles.resultsButtons}>
             <TouchableOpacity
               style={[styles.resultButton, styles.retryButton]}
-              onPress={handleRetry}
+              onPress={viewModel.retry}
             >
               <MaterialIcons name="refresh" size={24} color="#fff" />
               <Text style={styles.resultButtonText}>Intentar de nuevo</Text>
@@ -373,7 +180,7 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
 
             <TouchableOpacity
               style={[styles.resultButton, { backgroundColor: theme.primary }]}
-              onPress={handleFinish}
+              onPress={() => navigation.goBack()}
             >
               <MaterialIcons name="check" size={24} color="#fff" />
               <Text style={styles.resultButtonText}>Finalizar</Text>
@@ -384,6 +191,7 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
     );
   }
 
+  // Pantalla principal de retos
   return (
     <SafeAreaView
       style={[styles.container, { backgroundColor: theme.surface }]}
@@ -392,7 +200,6 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
         backgroundColor={theme.primary}
         barStyle={isDarkMode ? "light-content" : "dark-content"}
       />
-
       <ConnectivityIndicator />
 
       {/* Header */}
@@ -408,7 +215,8 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
 
         <View style={styles.headerProgress}>
           <Text style={styles.headerProgressText}>
-            {currentChallengeIndex + 1} / {lesson.challenges.length}
+            {viewModel.currentChallengeIndex + 1} /{" "}
+            {viewModel.lesson.challenges.length}
           </Text>
         </View>
 
@@ -420,7 +228,7 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
         style={[styles.progressContainer, { backgroundColor: theme.surface }]}
       >
         <Progress.Bar
-          progress={progress}
+          progress={viewModel.progress}
           width={null}
           color="#4CAF50"
           unfilledColor="#E0E0E0"
@@ -433,16 +241,16 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
         style={styles.scrollView}
         contentContainerStyle={styles.contentContainer}
       >
-        <Animated.View style={{ opacity: fadeAnim }}>
-          {/* Tipo */}
+        <Animated.View style={{ opacity: viewModel.fadeAnim }}>
+          {/* Tipo de pregunta */}
           <View style={styles.typeContainer}>
             <MaterialIcons name="quiz" size={20} color={theme.primary} />
             <Text style={[styles.typeText, { color: theme.textSecondary }]}>
-              {currentChallenge.type === "multiple-choice"
+              {viewModel.currentChallenge?.type === "multiple-choice"
                 ? "Opción Múltiple"
-                : currentChallenge.type === "true-false"
-                ? "Verdadero o Falso"
-                : "Completar Código"}
+                : viewModel.currentChallenge?.type === "true-false"
+                  ? "Verdadero o Falso"
+                  : "Completar Código"}
             </Text>
           </View>
 
@@ -457,38 +265,52 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
             ]}
           >
             <Text style={[styles.questionText, { color: theme.text }]}>
-              {currentChallenge.question}
+              {viewModel.currentChallenge?.question}
             </Text>
           </View>
 
           {/* Opciones */}
           <View style={styles.optionsContainer}>
-            {currentChallenge.options.map((option) => (
+            {viewModel.currentChallenge?.options.map((option) => (
               <TouchableOpacity
                 key={option.id}
                 style={[
                   styles.optionCard,
                   {
-                    backgroundColor: getOptionColor(option, currentChallenge),
+                    backgroundColor: viewModel.getOptionColor(
+                      option,
+                      viewModel.currentChallenge!,
+                      theme.card,
+                    ),
                     borderColor:
-                      selectedOption === option.id && !isAnswered
+                      viewModel.selectedOption === option.id &&
+                      !viewModel.isAnswered
                         ? theme.primary
                         : "transparent",
                     borderWidth:
-                      selectedOption === option.id && !isAnswered ? 2 : 0,
+                      viewModel.selectedOption === option.id &&
+                      !viewModel.isAnswered
+                        ? 2
+                        : 0,
                   },
                 ]}
-                onPress={() => handleSelectOption(option.id)}
-                disabled={isAnswered}
+                onPress={() => viewModel.selectOption(option.id)}
+                disabled={viewModel.isAnswered}
                 activeOpacity={0.7}
               >
                 <MaterialIcons
-                  name={getOptionIcon(option, currentChallenge)}
+                  name={
+                    viewModel.getOptionIcon(
+                      option,
+                      viewModel.currentChallenge!,
+                    ) as any
+                  }
                   size={24}
                   color={
-                    isAnswered &&
-                    (option.id === currentChallenge.correctAnswerId ||
-                      selectedOption === option.id)
+                    viewModel.isAnswered &&
+                    (option.id ===
+                      viewModel.currentChallenge!.correctAnswerId ||
+                      viewModel.selectedOption === option.id)
                       ? "#fff"
                       : theme.primary
                   }
@@ -499,9 +321,10 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
                     styles.optionText,
                     {
                       color:
-                        isAnswered &&
-                        (option.id === currentChallenge.correctAnswerId ||
-                          selectedOption === option.id)
+                        viewModel.isAnswered &&
+                        (option.id ===
+                          viewModel.currentChallenge!.correctAnswerId ||
+                          viewModel.selectedOption === option.id)
                           ? "#fff"
                           : theme.text,
                     },
@@ -514,7 +337,7 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
           </View>
 
           {/* Explicación */}
-          {isAnswered && (
+          {viewModel.isAnswered && viewModel.currentChallenge && (
             <View
               style={[
                 styles.explanationContainer,
@@ -527,33 +350,37 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
               <View style={styles.explanationHeader}>
                 <MaterialIcons
                   name={
-                    selectedOption === currentChallenge.correctAnswerId
+                    viewModel.selectedOption ===
+                    viewModel.currentChallenge.correctAnswerId
                       ? "check-circle"
                       : "info"
                   }
                   size={24}
                   color={
-                    selectedOption === currentChallenge.correctAnswerId
+                    viewModel.selectedOption ===
+                    viewModel.currentChallenge.correctAnswerId
                       ? "#4CAF50"
                       : "#2196F3"
                   }
                 />
                 <Text style={[styles.explanationTitle, { color: theme.text }]}>
-                  {selectedOption === currentChallenge.correctAnswerId
+                  {viewModel.selectedOption ===
+                  viewModel.currentChallenge.correctAnswerId
                     ? "¡Correcto!"
                     : "Explicación"}
                 </Text>
               </View>
 
               <Text style={[styles.explanationText, { color: theme.text }]}>
-                {currentChallenge.explanation}
+                {viewModel.currentChallenge.explanation}
               </Text>
 
-              {selectedOption === currentChallenge.correctAnswerId && (
+              {viewModel.selectedOption ===
+                viewModel.currentChallenge.correctAnswerId && (
                 <View style={styles.pointsContainer}>
                   <MaterialIcons name="stars" size={20} color="#FFD700" />
                   <Text style={styles.pointsText}>
-                    +{currentChallenge.points} puntos
+                    +{viewModel.currentChallenge.points} puntos
                   </Text>
                 </View>
               )}
@@ -562,31 +389,32 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
         </Animated.View>
       </ScrollView>
 
-      {/* Botón */}
+      {/* Botón de acción */}
       <View
         style={[styles.buttonContainer, { backgroundColor: theme.surface }]}
       >
-        {!isAnswered ? (
+        {!viewModel.isAnswered ? (
           <TouchableOpacity
             style={[
               styles.actionButton,
               {
                 backgroundColor: theme.primary,
-                opacity: selectedOption ? 1 : 0.5,
+                opacity: viewModel.selectedOption ? 1 : 0.5,
               },
             ]}
-            onPress={handleConfirmAnswer}
-            disabled={!selectedOption}
+            onPress={viewModel.confirmAnswer}
+            disabled={!viewModel.selectedOption}
           >
             <Text style={styles.actionButtonText}>Confirmar respuesta</Text>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity
             style={[styles.actionButton, styles.nextButton]}
-            onPress={handleNextChallenge}
+            onPress={viewModel.nextChallenge}
           >
             <Text style={styles.actionButtonText}>
-              {currentChallengeIndex < lesson.challenges.length - 1
+              {viewModel.currentChallengeIndex <
+              viewModel.lesson.challenges.length - 1
                 ? "Siguiente pregunta"
                 : "Ver Resultados"}
             </Text>
@@ -600,9 +428,11 @@ const ChallengeScreen: React.FC<ChallengeScreenProps> = ({
 
 export default ChallengeScreen;
 
+// ==========================================
+// ESTILOS
+// ==========================================
 const styles = StyleSheet.create({
   container: { flex: 1 },
-
   loadingContainer: {
     flex: 1,
     justifyContent: "center",
@@ -614,7 +444,6 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZES.medium,
     marginBottom: 20,
   },
-
   backButton: {
     paddingHorizontal: 30,
     paddingVertical: 12,
@@ -625,7 +454,6 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZES.medium,
     fontWeight: "600",
   },
-
   headerBar: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -643,12 +471,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#fff",
   },
-
   progressContainer: { paddingHorizontal: 20, paddingVertical: 10 },
-
   scrollView: { flex: 1 },
   contentContainer: { padding: 20, paddingBottom: 100 },
-
   typeContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -660,7 +485,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     textTransform: "uppercase",
   },
-
   questionContainer: {
     padding: 20,
     borderRadius: 12,
@@ -668,7 +492,6 @@ const styles = StyleSheet.create({
     borderLeftWidth: 4,
   },
   questionText: { fontSize: 20, fontWeight: "600", lineHeight: 28 },
-
   optionsContainer: { gap: 12 },
   optionCard: {
     flexDirection: "row",
@@ -683,7 +506,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
   },
   optionText: { fontSize: 16, flex: 1, lineHeight: 22 },
-
   explanationContainer: {
     padding: 20,
     borderRadius: 12,
@@ -698,7 +520,6 @@ const styles = StyleSheet.create({
   },
   explanationTitle: { fontSize: 18, fontWeight: "bold" },
   explanationText: { fontSize: 15, lineHeight: 22 },
-
   pointsContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -708,7 +529,6 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
   },
   pointsText: { fontSize: 16, fontWeight: "bold", color: "#FF9800" },
-
   buttonContainer: {
     position: "absolute",
     bottom: 0,
@@ -721,7 +541,6 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     shadowOffset: { width: 0, height: -2 },
   },
-
   actionButton: {
     paddingVertical: 16,
     borderRadius: 12,
@@ -732,14 +551,12 @@ const styles = StyleSheet.create({
   },
   nextButton: { backgroundColor: "#4CAF50" },
   actionButtonText: { color: "#fff", fontSize: 18, fontWeight: "bold" },
-
   resultsContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
   },
-
   resultsTitle: {
     fontSize: 32,
     fontWeight: "bold",
@@ -747,17 +564,14 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   resultsSubtitle: { fontSize: 16, marginBottom: 30 },
-
   scoreContainer: { alignItems: "center", marginBottom: 40 },
   scoreLabel: { fontSize: 16, marginBottom: 10 },
   scoreValue: { fontSize: 48, fontWeight: "bold" },
   scorePercentage: { fontSize: 24, marginTop: 5 },
-
   resultsStats: { flexDirection: "row", gap: 40, marginBottom: 30 },
   statItem: { alignItems: "center", gap: 8 },
   statValue: { fontSize: 28, fontWeight: "bold" },
   statLabel: { fontSize: 14 },
-
   encouragementContainer: {
     backgroundColor: "#FFF3E0",
     padding: 15,
@@ -767,7 +581,6 @@ const styles = StyleSheet.create({
     borderLeftColor: "#FF9800",
   },
   encouragementText: { fontSize: 14, textAlign: "center", lineHeight: 20 },
-
   resultsButtons: { width: "100%", gap: 12 },
   resultButton: {
     flexDirection: "row",
