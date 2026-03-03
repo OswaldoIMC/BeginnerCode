@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+/**
+ * Pantalla de Recuperación de Contraseña (REFACTORIZADA)
+ */
+
+import React from "react";
 import {
   View,
   Text,
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  Alert,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -17,8 +20,11 @@ import ConnectivityIndicator from "../../components/ConnectivityIndicator";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../navigation/StackNavigator";
 import { COLORS, FONT_SIZES } from "../../../types/index";
-import AuthService from "../../services/AuthService";
+import { useRecoverPasswordViewModel } from "../../hooks/useRecoverPasswordViewModel";
 
+// ==========================================
+// TIPOS
+// ==========================================
 type RecoverPasswordScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   "RecoverPassword"
@@ -28,127 +34,14 @@ interface RecoverPasswordScreenProps {
   navigation: RecoverPasswordScreenNavigationProp;
 }
 
-/**
- * Pantalla de Recuperación de Contraseña
- * Permite a los usuarios recuperar su contraseña mediante pregunta de seguridad
- */
+// ==========================================
+// COMPONENTE PRINCIPAL
+// ==========================================
 const RecoverPasswordScreen: React.FC<RecoverPasswordScreenProps> = ({
   navigation,
 }) => {
-  const [step, setStep] = useState<1 | 2 | 3>(1); // 1: Usuario, 2: Pregunta, 3: Nueva contraseña
-  const [username, setUsername] = useState<string>("");
-  const [securityQuestion, setSecurityQuestion] = useState<string>("");
-  const [securityAnswer, setSecurityAnswer] = useState<string>("");
-  const [newPassword, setNewPassword] = useState<string>("");
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showConfirmPassword, setShowConfirmPassword] =
-    useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  /**
-   * Paso 1: Verificar usuario
-   */
-  const handleCheckUsername = async (): Promise<void> => {
-    if (!username.trim()) {
-      Alert.alert("Error", "Por favor, ingrese su nombre de usuario");
-      return;
-    }
-
-    setIsLoading(true);
-
-    try {
-      const result = await AuthService.getSecurityQuestion(username);
-
-      if (!result.success) {
-        setIsLoading(false);
-        Alert.alert("Error", result.message);
-        return;
-      }
-
-      setSecurityQuestion(result.question || "");
-      setIsLoading(false);
-      setStep(2);
-    } catch (error) {
-      console.error("Error al verificar usuario:", error);
-      setIsLoading(false);
-      Alert.alert("Error", "Hubo un problema. Intenta de nuevo.");
-    }
-  };
-
-  /**
-   * Paso 2: Verificar respuesta de seguridad
-   */
-  const handleVerifyAnswer = (): void => {
-    if (!securityAnswer.trim()) {
-      Alert.alert("Error", "Por favor, ingrese la respuesta de seguridad");
-      return;
-    }
-
-    setStep(3);
-  };
-
-  /**
-   * Paso 3: Cambiar contraseña
-   */
-  const handleResetPassword = async (): Promise<void> => {
-    // Validar nueva contraseña
-    const passwordValidation = AuthService.validatePassword(newPassword);
-    if (!passwordValidation.valid) {
-      Alert.alert("Error", passwordValidation.message);
-      return;
-    }
-
-    // Verificar confirmación
-    if (newPassword !== confirmPassword) {
-      Alert.alert("Error", "Las contraseñas no coinciden");
-      return;
-    }
-
-    setIsLoading(true);
-
-    try {
-      const result = await AuthService.resetPassword(
-        username,
-        securityAnswer,
-        newPassword
-      );
-
-      if (!result.success) {
-        setIsLoading(false);
-        Alert.alert("Error", result.message);
-        return;
-      }
-
-      setIsLoading(false);
-
-      Alert.alert(
-        "¡Contraseña cambiada!",
-        "Tu contraseña ha sido actualizada exitosamente.",
-        [
-          {
-            text: "Aceptar",
-            onPress: () => navigation.replace("Login"),
-          },
-        ]
-      );
-    } catch (error) {
-      console.error("Error al cambiar contraseña:", error);
-      setIsLoading(false);
-      Alert.alert("Error", "Hubo un problema. Intenta de nuevo.");
-    }
-  };
-
-  /**
-   * Volver al paso anterior
-   */
-  const handleBack = (): void => {
-    if (step === 1) {
-      navigation.goBack();
-    } else {
-      setStep((step - 1) as 1 | 2);
-    }
-  };
+  // ViewModel
+  const viewModel = useRecoverPasswordViewModel({ navigation });
 
   return (
     <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
@@ -164,7 +57,7 @@ const RecoverPasswordScreen: React.FC<RecoverPasswordScreenProps> = ({
       >
         {/* Header */}
         <View style={styles.header}>
-          <TouchableOpacity onPress={handleBack} style={styles.backButton}>
+          <TouchableOpacity onPress={viewModel.handleBack} style={styles.backButton}>
             <MaterialIcons name="arrow-back" size={24} color={COLORS.primary} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Recuperar Contraseña</Text>
@@ -183,13 +76,13 @@ const RecoverPasswordScreen: React.FC<RecoverPasswordScreenProps> = ({
                 <View
                   style={[
                     styles.stepCircle,
-                    step >= 1 && styles.stepCircleActive,
+                    viewModel.step >= 1 && styles.stepCircleActive,
                   ]}
                 >
                   <Text
                     style={[
                       styles.stepNumber,
-                      step >= 1 && styles.stepNumberActive,
+                      viewModel.step >= 1 && styles.stepNumberActive,
                     ]}
                   >
                     1
@@ -198,19 +91,19 @@ const RecoverPasswordScreen: React.FC<RecoverPasswordScreenProps> = ({
                 <Text style={styles.stepLabel}>Usuario</Text>
               </View>
               <View
-                style={[styles.stepLine, step >= 2 && styles.stepLineActive]}
+                style={[styles.stepLine, viewModel.step >= 2 && styles.stepLineActive]}
               />
               <View style={styles.stepItem}>
                 <View
                   style={[
                     styles.stepCircle,
-                    step >= 2 && styles.stepCircleActive,
+                    viewModel.step >= 2 && styles.stepCircleActive,
                   ]}
                 >
                   <Text
                     style={[
                       styles.stepNumber,
-                      step >= 2 && styles.stepNumberActive,
+                      viewModel.step >= 2 && styles.stepNumberActive,
                     ]}
                   >
                     2
@@ -219,19 +112,19 @@ const RecoverPasswordScreen: React.FC<RecoverPasswordScreenProps> = ({
                 <Text style={styles.stepLabel}>Verificar</Text>
               </View>
               <View
-                style={[styles.stepLine, step >= 3 && styles.stepLineActive]}
+                style={[styles.stepLine, viewModel.step >= 3 && styles.stepLineActive]}
               />
               <View style={styles.stepItem}>
                 <View
                   style={[
                     styles.stepCircle,
-                    step >= 3 && styles.stepCircleActive,
+                    viewModel.step >= 3 && styles.stepCircleActive,
                   ]}
                 >
                   <Text
                     style={[
                       styles.stepNumber,
-                      step >= 3 && styles.stepNumberActive,
+                      viewModel.step >= 3 && styles.stepNumberActive,
                     ]}
                   >
                     3
@@ -242,7 +135,7 @@ const RecoverPasswordScreen: React.FC<RecoverPasswordScreenProps> = ({
             </View>
 
             {/* Paso 1: Ingresar usuario */}
-            {step === 1 && (
+            {viewModel.step === 1 && (
               <View style={styles.stepContent}>
                 <MaterialIcons
                   name="person-search"
@@ -252,8 +145,7 @@ const RecoverPasswordScreen: React.FC<RecoverPasswordScreenProps> = ({
                 />
                 <Text style={styles.title}>Buscar cuenta</Text>
                 <Text style={styles.subtitle}>
-                  Ingresa tu nombre de usuario para comenzar el proceso de
-                  recuperación
+                  Ingresa tu nombre de usuario para comenzar el proceso de recuperación
                 </Text>
 
                 <View style={styles.inputContainer}>
@@ -267,28 +159,28 @@ const RecoverPasswordScreen: React.FC<RecoverPasswordScreenProps> = ({
                     style={styles.input}
                     placeholder="Nombre de usuario"
                     placeholderTextColor={COLORS.textSecondary}
-                    value={username}
-                    onChangeText={setUsername}
+                    value={viewModel.username}
+                    onChangeText={viewModel.updateUsername}
                     autoCapitalize="none"
                     autoCorrect={false}
-                    editable={!isLoading}
+                    editable={!viewModel.isLoading}
                   />
                 </View>
 
                 <TouchableOpacity
-                  style={[styles.button, { opacity: isLoading ? 0.6 : 1 }]}
-                  onPress={handleCheckUsername}
-                  disabled={isLoading}
+                  style={[styles.button, { opacity: viewModel.isLoading ? 0.6 : 1 }]}
+                  onPress={viewModel.handleCheckUsername}
+                  disabled={viewModel.isLoading}
                 >
                   <Text style={styles.buttonText}>
-                    {isLoading ? "Verificando..." : "Continuar"}
+                    {viewModel.isLoading ? "Verificando..." : "Continuar"}
                   </Text>
                 </TouchableOpacity>
               </View>
             )}
 
             {/* Paso 2: Responder pregunta de seguridad */}
-            {step === 2 && (
+            {viewModel.step === 2 && (
               <View style={styles.stepContent}>
                 <MaterialIcons
                   name="help"
@@ -303,7 +195,7 @@ const RecoverPasswordScreen: React.FC<RecoverPasswordScreenProps> = ({
 
                 <View style={styles.questionCard}>
                   <Text style={styles.questionLabel}>Tu pregunta:</Text>
-                  <Text style={styles.questionText}>{securityQuestion}</Text>
+                  <Text style={styles.questionText}>{viewModel.securityQuestion}</Text>
                 </View>
 
                 <View style={styles.inputContainer}>
@@ -317,8 +209,8 @@ const RecoverPasswordScreen: React.FC<RecoverPasswordScreenProps> = ({
                     style={styles.input}
                     placeholder="Tu respuesta"
                     placeholderTextColor={COLORS.textSecondary}
-                    value={securityAnswer}
-                    onChangeText={setSecurityAnswer}
+                    value={viewModel.securityAnswer}
+                    onChangeText={viewModel.updateSecurityAnswer}
                     autoCapitalize="none"
                     autoCorrect={false}
                   />
@@ -326,7 +218,7 @@ const RecoverPasswordScreen: React.FC<RecoverPasswordScreenProps> = ({
 
                 <TouchableOpacity
                   style={styles.button}
-                  onPress={handleVerifyAnswer}
+                  onPress={viewModel.handleVerifyAnswer}
                 >
                   <Text style={styles.buttonText}>Verificar</Text>
                 </TouchableOpacity>
@@ -334,7 +226,7 @@ const RecoverPasswordScreen: React.FC<RecoverPasswordScreenProps> = ({
             )}
 
             {/* Paso 3: Nueva contraseña */}
-            {step === 3 && (
+            {viewModel.step === 3 && (
               <View style={styles.stepContent}>
                 <MaterialIcons
                   name="lock-reset"
@@ -356,18 +248,16 @@ const RecoverPasswordScreen: React.FC<RecoverPasswordScreenProps> = ({
                     style={styles.input}
                     placeholder="Nueva contraseña"
                     placeholderTextColor={COLORS.textSecondary}
-                    value={newPassword}
-                    onChangeText={setNewPassword}
-                    secureTextEntry={!showPassword}
+                    value={viewModel.newPassword}
+                    onChangeText={viewModel.updateNewPassword}
+                    secureTextEntry={!viewModel.showPassword}
                     autoCapitalize="none"
                     autoCorrect={false}
-                    editable={!isLoading}
+                    editable={!viewModel.isLoading}
                   />
-                  <TouchableOpacity
-                    onPress={() => setShowPassword(!showPassword)}
-                  >
+                  <TouchableOpacity onPress={viewModel.toggleShowPassword}>
                     <MaterialIcons
-                      name={showPassword ? "visibility" : "visibility-off"}
+                      name={viewModel.showPassword ? "visibility" : "visibility-off"}
                       size={20}
                       color={COLORS.textSecondary}
                     />
@@ -385,19 +275,17 @@ const RecoverPasswordScreen: React.FC<RecoverPasswordScreenProps> = ({
                     style={styles.input}
                     placeholder="Confirmar contraseña"
                     placeholderTextColor={COLORS.textSecondary}
-                    value={confirmPassword}
-                    onChangeText={setConfirmPassword}
-                    secureTextEntry={!showConfirmPassword}
+                    value={viewModel.confirmPassword}
+                    onChangeText={viewModel.updateConfirmPassword}
+                    secureTextEntry={!viewModel.showConfirmPassword}
                     autoCapitalize="none"
                     autoCorrect={false}
-                    editable={!isLoading}
+                    editable={!viewModel.isLoading}
                   />
-                  <TouchableOpacity
-                    onPress={() => setShowConfirmPassword(!showConfirmPassword)}
-                  >
+                  <TouchableOpacity onPress={viewModel.toggleShowConfirmPassword}>
                     <MaterialIcons
                       name={
-                        showConfirmPassword ? "visibility" : "visibility-off"
+                        viewModel.showConfirmPassword ? "visibility" : "visibility-off"
                       }
                       size={20}
                       color={COLORS.textSecondary}
@@ -409,26 +297,18 @@ const RecoverPasswordScreen: React.FC<RecoverPasswordScreenProps> = ({
                   <Text style={styles.requirementsTitle}>
                     La contraseña debe tener:
                   </Text>
-                  <Text style={styles.requirementItem}>
-                    • Al menos 6 caracteres
-                  </Text>
-                  <Text style={styles.requirementItem}>
-                    • Al menos una letra
-                  </Text>
-                  <Text style={styles.requirementItem}>
-                    • Al menos un número
-                  </Text>
+                  <Text style={styles.requirementItem}>• Al menos 6 caracteres</Text>
+                  <Text style={styles.requirementItem}>• Al menos una letra</Text>
+                  <Text style={styles.requirementItem}>• Al menos un número</Text>
                 </View>
 
                 <TouchableOpacity
-                  style={[styles.button, { opacity: isLoading ? 0.6 : 1 }]}
-                  onPress={handleResetPassword}
-                  disabled={isLoading}
+                  style={[styles.button, { opacity: viewModel.isLoading ? 0.6 : 1 }]}
+                  onPress={viewModel.handleResetPassword}
+                  disabled={viewModel.isLoading}
                 >
                   <Text style={styles.buttonText}>
-                    {isLoading
-                      ? "Cambiando contraseña..."
-                      : "Cambiar contraseña"}
+                    {viewModel.isLoading ? "Cambiando contraseña..." : "Cambiar contraseña"}
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -440,6 +320,11 @@ const RecoverPasswordScreen: React.FC<RecoverPasswordScreenProps> = ({
   );
 };
 
+export default RecoverPasswordScreen;
+
+// ==========================================
+// ESTILOS
+// ==========================================
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -613,5 +498,3 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-
-export default RecoverPasswordScreen;

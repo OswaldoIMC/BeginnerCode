@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+/**
+ * Pantalla de Login (REFACTORIZADA)
+ */
+
+import React from "react";
 import {
   View,
   Text,
@@ -6,7 +10,6 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
-  Alert,
   KeyboardAvoidingView,
   Platform,
   Dimensions,
@@ -14,146 +17,30 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { CommonActions } from "@react-navigation/native";
 import { RootStackParamList } from "../../navigation/StackNavigator";
-import { LoginFormData, COLORS, FONT_SIZES } from "../../../types/index";
-import StorageService from "../../services/StorageService";
-import AuthService from "../../services/AuthService";
+import { COLORS, FONT_SIZES } from "../../../types/index";
 import ConnectivityIndicator from "../../components/ConnectivityIndicator";
+import { useLoginViewModel } from "../../hooks/useLoginViewModel";
 
 const loginImage = require("../../../assets/Login_Image_NoBG.png");
 const loginHeader = require("../../../assets/login_header.png");
 const { height } = Dimensions.get("window");
 
-type LoginScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  "Login"
->;
+// ==========================================
+// TIPOS
+// ==========================================
+type LoginScreenNavigationProp = StackNavigationProp<RootStackParamList, "Login">;
 
 interface LoginScreenProps {
   navigation: LoginScreenNavigationProp;
 }
 
+// ==========================================
+// COMPONENTE PRINCIPAL
+// ==========================================
 const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
-  const [formData, setFormData] = useState<LoginFormData>({
-    username: "",
-    password: "",
-  });
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const updateFormData = (field: keyof LoginFormData, value: string): void => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [field]: value,
-    }));
-  };
-
-  const validateForm = (): boolean => {
-    if (!formData.username.trim()) {
-      Alert.alert("Error", "Por favor, ingrese su usuario");
-      return false;
-    }
-    if (!formData.password.trim()) {
-      Alert.alert("Error", "Por favor, ingrese su contraseña");
-      return false;
-    }
-    if (formData.password.length < 4) {
-      Alert.alert("Error", "La contraseña debe tener al menos 4 caracteres");
-      return false;
-    }
-    return true;
-  };
-
-  const handleLogin = (): void => {
-    if (!validateForm()) {
-      return;
-    }
-    Alert.alert(
-      "Confirmación de inicio de sesión",
-      `¿Deseas iniciar sesión como ${formData.username}?`,
-      [
-        {
-          text: "Cancelar",
-          style: "cancel",
-        },
-        {
-          text: "Aceptar",
-          onPress: authenticateUser,
-        },
-      ],
-      { cancelable: false }
-    );
-  };
-
-  const authenticateUser = async (): Promise<void> => {
-    setIsLoading(true);
-
-    try {
-      // Intentar login con AuthService
-      const result = await AuthService.login(
-        formData.username,
-        formData.password
-      );
-
-      if (!result.success) {
-        setIsLoading(false);
-        Alert.alert("Error de autenticación", result.message);
-        return;
-      }
-
-      // Login exitoso
-      console.log("Usuario autenticado:", formData.username);
-
-      // Establecer el usuario actual en StorageService
-      StorageService.setCurrentUsername(formData.username);
-
-      // Verificar si ya existe un perfil para este usuario
-      let profile = await StorageService.getUserProfile(formData.username);
-
-      if (!profile) {
-        // Crear perfil inicial para este usuario
-        profile = await StorageService.createInitialProfile(formData.username);
-        console.log("Perfil inicial creado para:", formData.username);
-      } else {
-        console.log("Perfil existente cargado para:", formData.username);
-      }
-
-      // Configurar callback de sincronización con Supabase
-      const SupabaseSyncService =
-        require("../../services/SupabaseSyncService").default;
-      StorageService.setSyncCallback((profile) => {
-        SupabaseSyncService.syncUserProfile(profile);
-      });
-
-      // Intentar sincronizar datos pendientes
-      SupabaseSyncService.syncPendingChanges();
-
-      setIsLoading(false);
-
-      // Esto evita que el usuario pueda volver atrás con el botón back
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 0,
-          routes: [{ name: "Home" }],
-        })
-      );
-    } catch (error) {
-      console.error("Error en autenticación:", error);
-      setIsLoading(false);
-      Alert.alert(
-        "Error",
-        "Hubo un problema al iniciar sesión. Intenta de nuevo."
-      );
-    }
-  };
-
-  const handleForgotPassword = (): void => {
-    navigation.navigate("RecoverPassword");
-  };
-
-  const handleRegister = (): void => {
-    navigation.navigate("Register");
-  };
+  // ViewModel
+  const viewModel = useLoginViewModel({ navigation });
 
   return (
     <SafeAreaView style={styles.safeArea} edges={["top", "bottom"]}>
@@ -177,39 +64,39 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
               style={styles.input}
               placeholder="Usuario"
               placeholderTextColor={COLORS.textSecondary}
-              value={formData.username}
-              onChangeText={(text) => updateFormData("username", text)}
+              value={viewModel.formData.username}
+              onChangeText={(text) => viewModel.updateFormData("username", text)}
               autoCapitalize="none"
               autoCorrect={false}
-              editable={!isLoading}
+              editable={!viewModel.isLoading}
             />
             <TextInput
               style={styles.input}
               placeholder="Contraseña"
               placeholderTextColor={COLORS.textSecondary}
-              value={formData.password}
-              onChangeText={(text) => updateFormData("password", text)}
+              value={viewModel.formData.password}
+              onChangeText={(text) => viewModel.updateFormData("password", text)}
               secureTextEntry
               autoCapitalize="none"
               autoCorrect={false}
-              editable={!isLoading}
+              editable={!viewModel.isLoading}
             />
-            <TouchableOpacity onPress={handleForgotPassword}>
+            <TouchableOpacity onPress={viewModel.handleForgotPassword}>
               <Text style={styles.linkForg}>¿Olvidaste tu contraseña?</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={[styles.loginButton, { opacity: isLoading ? 0.6 : 1 }]}
-              onPress={handleLogin}
-              disabled={isLoading}
+              style={[styles.loginButton, { opacity: viewModel.isLoading ? 0.6 : 1 }]}
+              onPress={viewModel.handleLogin}
+              disabled={viewModel.isLoading}
             >
               <Text style={styles.loginButtonText}>
-                {isLoading ? "Iniciando sesión..." : "Iniciar sesión"}
+                {viewModel.isLoading ? "Iniciando sesión..." : "Iniciar sesión"}
               </Text>
             </TouchableOpacity>
           </View>
           <View style={styles.registerContainer}>
             <Text style={styles.registerText}>¿No tienes una cuenta?</Text>
-            <TouchableOpacity onPress={handleRegister} activeOpacity={0.6}>
+            <TouchableOpacity onPress={viewModel.handleRegister} activeOpacity={0.6}>
               <Text style={styles.linkReg}>Regístrate</Text>
             </TouchableOpacity>
           </View>
@@ -219,6 +106,11 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
   );
 };
 
+export default LoginScreen;
+
+// ==========================================
+// ESTILOS
+// ==========================================
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
@@ -317,5 +209,3 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-
-export default LoginScreen;

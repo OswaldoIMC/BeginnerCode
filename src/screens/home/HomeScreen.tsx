@@ -1,170 +1,44 @@
-import React, { useState, useEffect } from "react";
+/**
+ * Pantalla de Home (REFACTORIZADA)
+ */
+
+import React from "react";
 import {
   View,
   Text,
-  Image,
   StyleSheet,
   TouchableOpacity,
   Modal,
   Pressable,
   StatusBar,
-  Alert,
   ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ConnectivityIndicator from "../../components/ConnectivityIndicator";
 import { MaterialIcons } from "@expo/vector-icons";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { CommonActions } from "@react-navigation/native";
 import { RootStackParamList } from "../../navigation/StackNavigator";
 import { FONT_SIZES } from "../../../types";
-import DataService from "../../services/DataService";
-import AuthService from "../../services/AuthService";
 import { useTheme } from "../../context/ThemeContext";
-import StorageService from "../../services/StorageService";
+import { useHomeViewModel } from "../../hooks/useHomeViewModel";
 
-// Imágenes
-const PythonImage = require("../../../assets/python.png");
-const JavaImage = require("../../../assets/java.png");
-const JSImage = require("../../../assets/js.png");
-const CsharpImage = require("../../../assets/c-sharp.png");
-const CppImage = require("../../../assets/c-.png");
-
+// ==========================================
+// TIPOS
+// ==========================================
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
 
 interface HomeScreenProps {
   navigation: HomeScreenNavigationProp;
 }
 
-interface MenuOption {
-  id: string;
-  title: string;
-  color: string;
-  route?: "Python" | "Java" | "Javascript" | "Csharp" | "Cpp";
-  progress?: number;
-  onPress?: () => void;
-}
-
+// ==========================================
+// COMPONENTE PRINCIPAL
+// ==========================================
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const { theme, isDarkMode } = useTheme();
 
-  const [menuVisible, setMenuVisible] = useState(false);
-  const [pythonProgress, setPythonProgress] = useState(0);
-  const [javaProgress, setJavaProgress] = useState(0);
-  const [jsProgress, setJsProgress] = useState(0);
-  const [csharpProgress, setCsharpProgress] = useState(0);
-  const [cppProgress, setCppProgress] = useState(0);
-
-  // Cargar progreso al montar y cuando vuelve el foco
-  useEffect(() => {
-    loadProgress();
-    const unsubscribe = navigation.addListener("focus", loadProgress);
-    return unsubscribe;
-  }, [navigation]);
-
-  const loadProgress = async () => {
-    const progressPython = await DataService.getCourseProgress("python");
-    const progressJava = await DataService.getCourseProgress("java");
-    const progressJs = await DataService.getCourseProgress("javascript");
-    const progressCsharp = await DataService.getCourseProgress("csharp");
-    const progressCpp = await DataService.getCourseProgress("cpp");
-
-    setPythonProgress(progressPython || 0);
-    setJavaProgress(progressJava || 0);
-    setJsProgress(progressJs || 0);
-    setCsharpProgress(progressCsharp || 0);
-    setCppProgress(progressCpp || 0);
-  };
-
-  const menuOptions: MenuOption[] = [
-    {
-      id: "Python",
-      title: "Python",
-      color: "#3963bdff",
-      progress: pythonProgress,
-      route: "Python",
-    },
-    {
-      id: "Java",
-      title: "Java",
-      color: "#f47f36ff",
-      progress: javaProgress,
-      route: "Java",
-    },
-    {
-      id: "Javascript",
-      title: "Javascript",
-      color: "#faf32bff",
-      progress: jsProgress,
-      route: "Javascript",
-    },
-    {
-      id: "C#",
-      title: "C#",
-      color: "#a116a3ff",
-      progress: csharpProgress,
-      route: "Csharp",
-    },
-    {
-      id: "C++",
-      title: "C++",
-      color: "#122e92ff",
-      progress: cppProgress,
-      route: "Cpp",
-    },
-    { id: "Prox", title: "Proximamente", color: "#525358ff" },
-  ];
-
-  const handleLogout = () => {
-    Alert.alert("Cerrar Sesión", "¿Deseas cerrar sesión?", [
-      { text: "Cancelar", style: "cancel" },
-      {
-        text: "Cerrar Sesión",
-        style: "destructive",
-        onPress: async () => {
-          setMenuVisible(false);
-
-          // Cerrar sesión en AuthService
-          const success = await AuthService.logout();
-
-          if (success) {
-            console.log("Sesión cerrada exitosamente");
-
-            // Limpiar el usuario actual de StorageService
-            StorageService.setCurrentUsername(null);
-
-            // Navegar a Login y limpiar el stack
-            navigation.dispatch(
-              CommonActions.reset({ index: 0, routes: [{ name: "Login" }] })
-            );
-          } else {
-            console.error("Error al cerrar sesión");
-            Alert.alert(
-              "Error",
-              "No se pudo cerrar la sesión. Intenta de nuevo."
-            );
-          }
-        },
-      },
-    ]);
-  };
-
-  const renderImage = (option: MenuOption) => {
-    switch (option.id) {
-      case "Python":
-        return <Image source={PythonImage} style={styles.image} />;
-      case "Java":
-        return <Image source={JavaImage} style={styles.image} />;
-      case "Javascript":
-        return <Image source={JSImage} style={styles.image} />;
-      case "C#":
-        return <Image source={CsharpImage} style={styles.image} />;
-      case "C++":
-        return <Image source={CppImage} style={styles.image} />;
-      default:
-        return null;
-    }
-  };
+  // ViewModel
+  const viewModel = useHomeViewModel({ navigation });
 
   return (
     <SafeAreaView
@@ -184,7 +58,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         </Text>
 
         <TouchableOpacity
-          onPress={() => setMenuVisible(true)}
+          onPress={() => viewModel.setMenuVisible(true)}
           style={styles.iconButton}
         >
           <MaterialIcons name="menu" size={24} color="#fff" />
@@ -192,10 +66,14 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
       </View>
 
       {/* Menu Modal */}
-      <Modal animationType="slide" transparent={true} visible={menuVisible}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={viewModel.menuVisible}
+      >
         <Pressable
           style={styles.menuOverlay}
-          onPress={() => setMenuVisible(false)}
+          onPress={() => viewModel.setMenuVisible(false)}
         >
           <Pressable
             style={[styles.menuContainer, { backgroundColor: theme.surface }]}
@@ -212,7 +90,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
               <Text style={[styles.menuTitle, { color: theme.text }]}>
                 Menú
               </Text>
-              <TouchableOpacity onPress={() => setMenuVisible(false)}>
+              <TouchableOpacity onPress={() => viewModel.setMenuVisible(false)}>
                 <MaterialIcons
                   name="close"
                   size={24}
@@ -226,10 +104,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
               {/* Perfil */}
               <Pressable
                 style={styles.menuOption}
-                onPress={() => {
-                  setMenuVisible(false);
-                  navigation.navigate("Profile");
-                }}
+                onPress={viewModel.handleNavigateToProfile}
               >
                 <View
                   style={[
@@ -268,10 +143,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
               {/* Configuración */}
               <Pressable
                 style={styles.menuOption}
-                onPress={() => {
-                  setMenuVisible(false);
-                  navigation.navigate("Settings");
-                }}
+                onPress={viewModel.handleNavigateToSettings}
               >
                 <View
                   style={[
@@ -316,7 +188,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
               />
 
               {/* Cerrar sesión */}
-              <Pressable style={styles.menuOption} onPress={handleLogout}>
+              <Pressable style={styles.menuOption} onPress={viewModel.handleLogout}>
                 <View
                   style={[
                     styles.menuIconContainer,
@@ -356,14 +228,13 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
           <Text
             style={[styles.instructionText, { color: theme.textSecondary }]}
           >
-            Aprende a programar con estas lecciones interactivas para
-            principiantes.
+            Aprende a programar con estas lecciones interactivas para principiantes.
           </Text>
         </View>
 
         {/* Tarjetas */}
         <View style={styles.gridContainer}>
-          {menuOptions.map((option) => (
+          {viewModel.menuOptions.map((option) => (
             <TouchableOpacity
               key={option.id}
               style={[styles.card, { backgroundColor: theme.card }]}
@@ -373,7 +244,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                   : option.onPress?.()
               }
             >
-              <View style={styles.iconContainer}>{renderImage(option)}</View>
+              <View style={styles.iconContainer}>
+                {viewModel.renderImage(option)}
+              </View>
 
               <View style={styles.textContainer}>
                 <Text style={[styles.cardText, { color: theme.text }]}>
@@ -416,6 +289,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 
 export default HomeScreen;
 
+// ==========================================
+// ESTILOS
+// ==========================================
 const styles = StyleSheet.create({
   container: { flex: 1 },
 
@@ -471,12 +347,6 @@ const styles = StyleSheet.create({
   cardText: {
     fontSize: FONT_SIZES.xxlarge,
     fontWeight: "600",
-  },
-  image: {
-    width: 70,
-    height: 70,
-    resizeMode: "contain",
-    borderRadius: 5,
   },
   progressText: {
     fontSize: FONT_SIZES.small,

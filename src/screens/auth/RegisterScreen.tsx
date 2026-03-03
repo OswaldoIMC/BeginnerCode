@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+/**
+ * Pantalla de Registro (REFACTORIZADA)
+ */
+
+import React from "react";
 import {
   View,
   Text,
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  Alert,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -17,145 +20,23 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../navigation/StackNavigator";
 import { COLORS, FONT_SIZES } from "../../../types/index";
-import AuthService, { RegisterData } from "../../services/AuthService";
+import { useRegisterViewModel } from "../../hooks/useRegisterViewModel";
 
-type RegisterScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  "Register"
->;
+// ==========================================
+// TIPOS
+// ==========================================
+type RegisterScreenNavigationProp = StackNavigationProp<RootStackParamList, "Register">;
 
 interface RegisterScreenProps {
   navigation: RegisterScreenNavigationProp;
 }
 
-/**
- * Pantalla de Registro
- * Permite a nuevos usuarios crear una cuenta
- */
+// ==========================================
+// COMPONENTE PRINCIPAL
+// ==========================================
 const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
-  const [formData, setFormData] = useState<RegisterData>({
-    username: "",
-    email: "",
-    password: "",
-    securityQuestion: "",
-    securityAnswer: "",
-  });
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showConfirmPassword, setShowConfirmPassword] =
-    useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  // Preguntas de seguridad predefinidas
-  const securityQuestions = [
-    "¿Cuál es el nombre de tu primera mascota?",
-    "¿En qué ciudad naciste?",
-    "¿Cuál es tu comida favorita?",
-    "¿Cuál es el nombre de tu mejor amigo de la infancia?",
-    "¿Cuál es tu color favorito?",
-  ];
-
-  const updateFormData = (field: keyof RegisterData, value: string): void => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [field]: value,
-    }));
-  };
-
-  /**
-   * Valida el formulario completo
-   */
-  const validateForm = (): boolean => {
-    // Validar username
-    const usernameValidation = AuthService.validateUsername(formData.username);
-    if (!usernameValidation.valid) {
-      Alert.alert("Error", usernameValidation.message);
-      return false;
-    }
-
-    // Validar email
-    if (!formData.email.trim()) {
-      Alert.alert("Error", "Por favor, ingrese su email");
-      return false;
-    }
-
-    // Validar contraseña
-    const passwordValidation = AuthService.validatePassword(formData.password);
-    if (!passwordValidation.valid) {
-      Alert.alert("Error", passwordValidation.message);
-      return false;
-    }
-
-    // Validar confirmación de contraseña
-    if (formData.password !== confirmPassword) {
-      Alert.alert("Error", "Las contraseñas no coinciden");
-      return false;
-    }
-
-    // Validar pregunta de seguridad
-    if (!formData.securityQuestion) {
-      Alert.alert("Error", "Por favor, seleccione una pregunta de seguridad");
-      return false;
-    }
-
-    // Validar respuesta de seguridad
-    if (!formData.securityAnswer.trim()) {
-      Alert.alert("Error", "Por favor, ingrese la respuesta de seguridad");
-      return false;
-    }
-
-    if (formData.securityAnswer.trim().length < 2) {
-      Alert.alert("Error", "La respuesta de seguridad es muy corta");
-      return false;
-    }
-
-    return true;
-  };
-
-  /**
-   * Maneja el proceso de registro
-   */
-  const handleRegister = async (): Promise<void> => {
-    if (!validateForm()) {
-      return;
-    }
-
-    setIsLoading(true);
-
-    try {
-      // Intentar registrar usuario
-      const result = await AuthService.register(formData);
-
-      if (!result.success) {
-        setIsLoading(false);
-        Alert.alert("Error de registro", result.message);
-        return;
-      }
-
-      // Registro exitoso
-      // El perfil se creará cuando el usuario inicie sesión
-
-      setIsLoading(false);
-
-      Alert.alert(
-        "¡Registro exitoso!",
-        "Tu cuenta ha sido creada. Ya puedes iniciar sesión.",
-        [
-          {
-            text: "Aceptar",
-            onPress: () => navigation.replace("Login"),
-          },
-        ]
-      );
-    } catch (error) {
-      console.error("Error en registro:", error);
-      setIsLoading(false);
-      Alert.alert(
-        "Error",
-        "Hubo un problema al crear tu cuenta. Intenta de nuevo."
-      );
-    }
-  };
+  // ViewModel
+  const viewModel = useRegisterViewModel({ navigation });
 
   return (
     <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
@@ -172,7 +53,7 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity
-            onPress={() => navigation.goBack()}
+            onPress={viewModel.handleGoBack}
             style={styles.backButton}
           >
             <MaterialIcons name="arrow-back" size={24} color={COLORS.primary} />
@@ -202,11 +83,11 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
                 style={styles.input}
                 placeholder="Nombre de usuario"
                 placeholderTextColor={COLORS.textSecondary}
-                value={formData.username}
-                onChangeText={(text) => updateFormData("username", text)}
+                value={viewModel.formData.username}
+                onChangeText={(text) => viewModel.updateFormData("username", text)}
                 autoCapitalize="none"
                 autoCorrect={false}
-                editable={!isLoading}
+                editable={!viewModel.isLoading}
               />
             </View>
 
@@ -222,12 +103,12 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
                 style={styles.input}
                 placeholder="Email"
                 placeholderTextColor={COLORS.textSecondary}
-                value={formData.email}
-                onChangeText={(text) => updateFormData("email", text)}
+                value={viewModel.formData.email}
+                onChangeText={(text) => viewModel.updateFormData("email", text)}
                 autoCapitalize="none"
                 autoCorrect={false}
                 keyboardType="email-address"
-                editable={!isLoading}
+                editable={!viewModel.isLoading}
               />
             </View>
 
@@ -243,16 +124,16 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
                 style={styles.input}
                 placeholder="Contraseña"
                 placeholderTextColor={COLORS.textSecondary}
-                value={formData.password}
-                onChangeText={(text) => updateFormData("password", text)}
-                secureTextEntry={!showPassword}
+                value={viewModel.formData.password}
+                onChangeText={(text) => viewModel.updateFormData("password", text)}
+                secureTextEntry={!viewModel.showPassword}
                 autoCapitalize="none"
                 autoCorrect={false}
-                editable={!isLoading}
+                editable={!viewModel.isLoading}
               />
-              <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+              <TouchableOpacity onPress={viewModel.toggleShowPassword}>
                 <MaterialIcons
-                  name={showPassword ? "visibility" : "visibility-off"}
+                  name={viewModel.showPassword ? "visibility" : "visibility-off"}
                   size={20}
                   color={COLORS.textSecondary}
                 />
@@ -271,18 +152,16 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
                 style={styles.input}
                 placeholder="Confirmar contraseña"
                 placeholderTextColor={COLORS.textSecondary}
-                value={confirmPassword}
-                onChangeText={setConfirmPassword}
-                secureTextEntry={!showConfirmPassword}
+                value={viewModel.confirmPassword}
+                onChangeText={viewModel.updateConfirmPassword}
+                secureTextEntry={!viewModel.showConfirmPassword}
                 autoCapitalize="none"
                 autoCorrect={false}
-                editable={!isLoading}
+                editable={!viewModel.isLoading}
               />
-              <TouchableOpacity
-                onPress={() => setShowConfirmPassword(!showConfirmPassword)}
-              >
+              <TouchableOpacity onPress={viewModel.toggleShowConfirmPassword}>
                 <MaterialIcons
-                  name={showConfirmPassword ? "visibility" : "visibility-off"}
+                  name={viewModel.showConfirmPassword ? "visibility" : "visibility-off"}
                   size={20}
                   color={COLORS.textSecondary}
                 />
@@ -296,26 +175,26 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
 
             {/* Pregunta de Seguridad */}
             <View style={styles.questionsContainer}>
-              {securityQuestions.map((question, index) => (
+              {viewModel.securityQuestions.map((question, index) => (
                 <TouchableOpacity
                   key={index}
                   style={[
                     styles.questionOption,
-                    formData.securityQuestion === question &&
+                    viewModel.formData.securityQuestion === question &&
                       styles.questionSelected,
                   ]}
-                  onPress={() => updateFormData("securityQuestion", question)}
-                  disabled={isLoading}
+                  onPress={() => viewModel.updateFormData("securityQuestion", question)}
+                  disabled={viewModel.isLoading}
                 >
                   <MaterialIcons
                     name={
-                      formData.securityQuestion === question
+                      viewModel.formData.securityQuestion === question
                         ? "radio-button-checked"
                         : "radio-button-unchecked"
                     }
                     size={20}
                     color={
-                      formData.securityQuestion === question
+                      viewModel.formData.securityQuestion === question
                         ? COLORS.primary
                         : COLORS.textSecondary
                     }
@@ -323,7 +202,7 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
                   <Text
                     style={[
                       styles.questionText,
-                      formData.securityQuestion === question &&
+                      viewModel.formData.securityQuestion === question &&
                         styles.questionTextSelected,
                     ]}
                   >
@@ -345,22 +224,22 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
                 style={styles.input}
                 placeholder="Tu respuesta"
                 placeholderTextColor={COLORS.textSecondary}
-                value={formData.securityAnswer}
-                onChangeText={(text) => updateFormData("securityAnswer", text)}
+                value={viewModel.formData.securityAnswer}
+                onChangeText={(text) => viewModel.updateFormData("securityAnswer", text)}
                 autoCapitalize="none"
                 autoCorrect={false}
-                editable={!isLoading}
+                editable={!viewModel.isLoading}
               />
             </View>
 
             {/* Botón de Registro */}
             <TouchableOpacity
-              style={[styles.registerButton, { opacity: isLoading ? 0.6 : 1 }]}
-              onPress={handleRegister}
-              disabled={isLoading}
+              style={[styles.registerButton, { opacity: viewModel.isLoading ? 0.6 : 1 }]}
+              onPress={viewModel.handleRegister}
+              disabled={viewModel.isLoading}
             >
               <Text style={styles.registerButtonText}>
-                {isLoading ? "Creando cuenta..." : "Crear cuenta"}
+                {viewModel.isLoading ? "Creando cuenta..." : "Crear cuenta"}
               </Text>
             </TouchableOpacity>
 
@@ -368,7 +247,7 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
             <View style={styles.loginContainer}>
               <Text style={styles.loginText}>¿Ya tienes una cuenta?</Text>
               <TouchableOpacity
-                onPress={() => navigation.navigate("Login")}
+                onPress={viewModel.handleNavigateToLogin}
                 activeOpacity={0.6}
               >
                 <Text style={styles.loginLink}>Inicia sesión</Text>
@@ -381,6 +260,11 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
   );
 };
 
+export default RegisterScreen;
+
+// ==========================================
+// ESTILOS
+// ==========================================
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -517,5 +401,3 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-
-export default RegisterScreen;
