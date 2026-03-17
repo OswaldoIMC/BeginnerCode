@@ -5,11 +5,7 @@ import LoginScreen from "../screens/auth/LoginScreen";
 import RegisterScreen from "../screens/auth/RegisterScreen";
 import RecoverPasswordScreen from "../screens/auth/RecoverPasswordScreen";
 import HomeScreen from "../screens/home/HomeScreen";
-import PythonScreen from "../screens/courses/PythonScreen";
-import JavaScreen from "../screens/courses/JavaScreen";
-import JsScreen from "../screens/courses/JsScreen";
-import CsharpScreen from "../screens/courses/CsharpScreen";
-import CppScreen from "../screens/courses/CppScreen";
+import CourseScreen from "../screens/courses/CourseScreen";
 import LessonDetailScreen from "../screens/lessons/LessonDetailScreen";
 import ChallengeScreen from "../screens/challenges/ChallengeScreen";
 import ProfileScreen from "../screens/profile/ProfileScreen";
@@ -25,11 +21,9 @@ export type RootStackParamList = {
   Register: undefined;
   RecoverPassword: undefined;
   Home: undefined;
-  Python: undefined;
-  Java: undefined;
-  Javascript: undefined;
-  Csharp: undefined;
-  Cpp: undefined;
+  Course: {
+    courseId: string;
+  };
   LessonDetail: {
     lessonId: string;
     courseId: string;
@@ -107,40 +101,12 @@ const StackNavigator: React.FC<StackNavigatorProps> = ({
         }}
       />
 
-      {/* Pantallas de los cursos */}
+      {/* Pantalla de curso (unificada) */}
       <Stack.Screen
-        name="Python"
-        component={PythonScreen}
+        name="Course"
+        component={CourseScreen}
         options={{
-          title: "Python",
-        }}
-      />
-      <Stack.Screen
-        name="Java"
-        component={JavaScreen}
-        options={{
-          title: "Java",
-        }}
-      />
-      <Stack.Screen
-        name="Javascript"
-        component={JsScreen}
-        options={{
-          title: "Javascript",
-        }}
-      />
-      <Stack.Screen
-        name="Csharp"
-        component={CsharpScreen}
-        options={{
-          title: "C#",
-        }}
-      />
-      <Stack.Screen
-        name="Cpp"
-        component={CppScreen}
-        options={{
-          title: "C++",
+          title: "Curso",
         }}
       />
 

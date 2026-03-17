@@ -1,4 +1,9 @@
-import React, { useState, useEffect } from "react";
+/**
+ * Pantalla de configuración (MVVM)
+ * Maneja sincronización, notificaciones, tema y cuenta
+ */
+
+import React from "react";
 import {
   View,
   Text,
@@ -7,25 +12,21 @@ import {
   TouchableOpacity,
   StatusBar,
   Switch,
-  Alert,
   Modal,
-  Linking,
   ActivityIndicator,
 } from "react-native";
-import * as Notifications from "expo-notifications";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ConnectivityIndicator from "../../components/ConnectivityIndicator";
 import { MaterialIcons } from "@expo/vector-icons";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../navigation/StackNavigator";
 import { FONT_SIZES } from "../../../types";
-import StorageService from "../../services/StorageService";
-import AuthService from "../../services/AuthService";
-import { CommonActions } from "@react-navigation/native";
 import { useTheme } from "../../context/ThemeContext";
-import NotificationService from "../../services/NotificationService";
-import SupabaseSyncService from "../../services/SupabaseSyncService";
+import { useSettingsViewModel } from "../../hooks/useSettingsViewModel";
 
+// ==========================================
+// TIPOS
+// ==========================================
 type SettingsScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   "Settings"
@@ -35,218 +36,14 @@ interface SettingsScreenProps {
   navigation: SettingsScreenNavigationProp;
 }
 
+// ==========================================
+// COMPONENTE PRINCIPAL
+// ==========================================
 const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
-  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
-  const [aboutModalVisible, setAboutModalVisible] = useState(false);
   const { theme, isDarkMode, setDarkMode } = useTheme();
 
-  // Estados de sincronización
-  const [lastSyncDate, setLastSyncDate] = useState<Date | null>(null);
-  const [isSyncing, setIsSyncing] = useState(false);
-  const [isOnline, setIsOnline] = useState(true);
-
-  useEffect(() => {
-    const initNotifications = async () => {
-      const enabledInStorage =
-        await NotificationService.getNotificationsEnabled();
-      const { status } = await Notifications.getPermissionsAsync();
-      setNotificationsEnabled(enabledInStorage && status === "granted");
-    };
-    initNotifications();
-
-    // Cargar estado de sincronización
-    loadSyncStatus();
-
-    // Actualizar cada 30 segundos
-    const interval = setInterval(loadSyncStatus, 30000);
-    return () => clearInterval(interval);
-  }, []);
-
-  /**
-   * Carga el estado de sincronización
-   */
-  const loadSyncStatus = async () => {
-    const lastSync = await SupabaseSyncService.getLastSyncDate();
-    setLastSyncDate(lastSync);
-
-    const online = await SupabaseSyncService.checkConnection();
-    setIsOnline(online);
-  };
-
-  /**
-   * Formatea el tiempo desde la última sincronización
-   */
-  const formatLastSync = (date: Date | null): string => {
-    if (!date) return "Nunca sincronizado";
-
-    const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
-
-    if (seconds < 60) return "Hace menos de un minuto";
-    if (seconds < 3600) {
-      const minutes = Math.floor(seconds / 60);
-      return `Hace ${minutes} minuto${minutes > 1 ? "s" : ""}`;
-    }
-    if (seconds < 86400) {
-      const hours = Math.floor(seconds / 3600);
-      return `Hace ${hours} hora${hours > 1 ? "s" : ""}`;
-    }
-    const days = Math.floor(seconds / 86400);
-    return `Hace ${days} día${days > 1 ? "s" : ""}`;
-  };
-
-  /**
-   * Sincroniza manualmente con la nube
-   */
-  const handleManualSync = async () => {
-    if (!isOnline) {
-      Alert.alert(
-        "Sin conexión",
-        "No hay conexión a internet. Los datos se sincronizarán automáticamente cuando te conectes."
-      );
-      return;
-    }
-
-    if (isSyncing) {
-      return; // Ya está sincronizando
-    }
-
-    setIsSyncing(true);
-
-    try {
-      const success = await SupabaseSyncService.forceSyncNow();
-
-      if (success) {
-        await loadSyncStatus();
-        Alert.alert(
-          "Sincronización completada",
-          "Tus datos han sido guardados en la nube exitosamente."
-        );
-      } else {
-        Alert.alert(
-          "Error de sincronización",
-          "No se pudieron sincronizar todos los datos. Intenta de nuevo más tarde."
-        );
-      }
-    } catch (error) {
-      console.error("Error en sincronización manual:", error);
-      Alert.alert(
-        "Error",
-        "Hubo un problema al sincronizar. Verifica tu conexión e intenta de nuevo."
-      );
-    } finally {
-      setIsSyncing(false);
-    }
-  };
-
-  /**
-   * Elimina la cuenta y TODOS los datos (local y Supabase)
-   */
-  const handleDeleteAccount = () => {
-    Alert.alert(
-      "Eliminar cuenta",
-      "¿Estás seguro de que quieres eliminar la cuenta con todo tu progreso?\n\nEsta acción eliminará:\n• Todos tus datos locales\n• Tu cuenta de la nube (Supabase)\n• Todo tu progreso y medallas\n\nEsta acción NO se puede deshacer.",
-      [
-        { text: "Cancelar", style: "cancel" },
-        {
-          text: "Eliminar",
-          style: "destructive",
-          onPress: async () => {
-            try {
-              // Obtener el nombre de usuario actual
-              const currentUsername = StorageService.getCurrentUsername();
-
-              if (!currentUsername) {
-                Alert.alert(
-                  "Error",
-                  "No se pudo identificar el usuario actual"
-                );
-                return;
-              }
-
-              console.log(
-                `Iniciando eliminación de cuenta para: ${currentUsername}`
-              );
-
-              // 1. Eliminar de Supabase primero (requiere conexión)
-              const isOnline = await SupabaseSyncService.checkConnection();
-
-              if (isOnline) {
-                const supabaseDeleted =
-                  await SupabaseSyncService.deleteUserAccount(currentUsername);
-
-                if (supabaseDeleted) {
-                  console.log("Cuenta eliminada de Supabase");
-                } else {
-                  console.warn(
-                    "No se pudo eliminar de Supabase, continuando con local"
-                  );
-                }
-              } else {
-                console.warn("Sin conexión - solo se eliminarán datos locales");
-                Alert.alert(
-                  "Sin conexión",
-                  "No hay conexión a internet. Solo se eliminarán los datos locales. Para eliminar completamente la cuenta, conéctate a internet y vuelve a intentarlo.",
-                  [{ text: "Entendido" }]
-                );
-              }
-
-              // 2. Cerrar sesión PRIMERO (esto elimina CURRENT_USER)
-              await AuthService.logout();
-              console.log("Sesión cerrada");
-
-              // 3. Eliminar cuenta de AuthService (datos de autenticación)
-              await AuthService.deleteAccount(currentUsername);
-              console.log("Datos de autenticación eliminados");
-
-              // 4. Eliminar todos los datos locales del usuario
-              await StorageService.deleteUserData(currentUsername);
-              console.log("Datos locales del usuario eliminados");
-
-              // 5. Limpiar el usuario actual de StorageService
-              StorageService.setCurrentUsername(null);
-              console.log("Usuario actual limpiado de StorageService");
-
-              // 6. Limpiar datos de sincronización
-              await SupabaseSyncService.clearSyncData();
-              console.log("Datos de sincronización eliminados");
-
-              // 7. Mostrar confirmación y redirigir al login
-              Alert.alert(
-                "Cuenta eliminada",
-                isOnline
-                  ? "Tu cuenta y todos tus datos han sido eliminados completamente."
-                  : "Tus datos locales han sido eliminados. La cuenta en la nube se eliminará cuando te conectes a internet.",
-                [
-                  {
-                    text: "OK",
-                    onPress: () => {
-                      // Navegar a Login y limpiar el stack
-                      navigation.dispatch(
-                        CommonActions.reset({
-                          index: 0,
-                          routes: [{ name: "Login" }],
-                        })
-                      );
-                    },
-                  },
-                ]
-              );
-            } catch (error) {
-              console.error("Error al eliminar cuenta:", error);
-              Alert.alert(
-                "Error",
-                "Hubo un problema al eliminar la cuenta. Por favor intenta de nuevo."
-              );
-            }
-          },
-        },
-      ]
-    );
-  };
-
-  const handleSendEmail = () => {
-    Linking.openURL("mailto:Oswaldo16667@hotmail.com");
-  };
+  // ViewModel
+  const viewModel = useSettingsViewModel({ navigation });
 
   return (
     <SafeAreaView
@@ -262,7 +59,7 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
 
       {/* Header */}
       <View style={[styles.headerBar, { backgroundColor: theme.primary }]}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity onPress={viewModel.handleGoBack}>
           <MaterialIcons name="arrow-back" size={28} color="#fff" />
         </TouchableOpacity>
 
@@ -286,13 +83,15 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
               <View style={styles.syncHeader}>
                 <View style={styles.syncInfo}>
                   <MaterialIcons
-                    name={isOnline ? "cloud-done" : "cloud-off"}
+                    name={viewModel.isOnline ? "cloud-done" : "cloud-off"}
                     size={24}
-                    color={isOnline ? "#4CAF50" : theme.textSecondary}
+                    color={
+                      viewModel.isOnline ? "#4CAF50" : theme.textSecondary
+                    }
                   />
                   <View style={styles.syncTextContainer}>
                     <Text style={[styles.syncTitle, { color: theme.text }]}>
-                      {isOnline ? "Conectado" : "Sin conexión"}
+                      {viewModel.isOnline ? "Conectado" : "Sin conexión"}
                     </Text>
                     <Text
                       style={[
@@ -300,7 +99,7 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
                         { color: theme.textSecondary },
                       ]}
                     >
-                      {formatLastSync(lastSyncDate)}
+                      {viewModel.formattedLastSync}
                     </Text>
                   </View>
                 </View>
@@ -310,16 +109,16 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
                   style={[
                     styles.syncButton,
                     {
-                      backgroundColor: isOnline
+                      backgroundColor: viewModel.isOnline
                         ? theme.primary
                         : theme.textSecondary,
                     },
-                    isSyncing && styles.syncButtonDisabled,
+                    viewModel.isSyncing && styles.syncButtonDisabled,
                   ]}
-                  onPress={handleManualSync}
-                  disabled={isSyncing || !isOnline}
+                  onPress={viewModel.handleManualSync}
+                  disabled={viewModel.isSyncing || !viewModel.isOnline}
                 >
-                  {isSyncing ? (
+                  {viewModel.isSyncing ? (
                     <ActivityIndicator size="small" color="#fff" />
                   ) : (
                     <MaterialIcons name="sync" size={20} color="#fff" />
@@ -331,7 +130,7 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
               <Text
                 style={[styles.syncDescription, { color: theme.textSecondary }]}
               >
-                {isOnline
+                {viewModel.isOnline
                   ? "Tus datos se guardan automáticamente en la nube. Presiona el botón para sincronizar ahora."
                   : "Sin conexión a internet. Los cambios se sincronizarán automáticamente cuando te conectes."}
               </Text>
@@ -367,13 +166,12 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
               </View>
 
               <Switch
-                value={notificationsEnabled}
-                onValueChange={async (value) => {
-                  setNotificationsEnabled(value);
-                  await NotificationService.setNotificationsEnabled(value);
-                }}
+                value={viewModel.notificationsEnabled}
+                onValueChange={viewModel.handleNotificationToggle}
                 trackColor={{ false: theme.border, true: theme.primary + "80" }}
-                thumbColor={notificationsEnabled ? theme.primary : "#f4f3f4"}
+                thumbColor={
+                  viewModel.notificationsEnabled ? theme.primary : "#f4f3f4"
+                }
               />
             </View>
           </View>
@@ -423,7 +221,7 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
 
             <TouchableOpacity
               style={[styles.optionButton, { backgroundColor: theme.card }]}
-              onPress={() => setAboutModalVisible(true)}
+              onPress={() => viewModel.setAboutModalVisible(true)}
             >
               <MaterialIcons name="info" size={24} color={theme.primary} />
               <Text style={[styles.optionText, { color: theme.text }]}>
@@ -452,7 +250,7 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
                   borderWidth: 1,
                 },
               ]}
-              onPress={handleDeleteAccount}
+              onPress={viewModel.handleDeleteAccount}
             >
               <MaterialIcons name="clear" size={24} color={theme.error} />
               <Text style={[styles.optionText, { color: theme.error }]}>
@@ -481,8 +279,8 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
       <Modal
         animationType="fade"
         transparent={true}
-        visible={aboutModalVisible}
-        onRequestClose={() => setAboutModalVisible(false)}
+        visible={viewModel.aboutModalVisible}
+        onRequestClose={() => viewModel.setAboutModalVisible(false)}
       >
         <View style={styles.modalOverlay}>
           <View
@@ -526,9 +324,13 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
                 </Text>
                 <TouchableOpacity
                   style={styles.contactButton}
-                  onPress={handleSendEmail}
+                  onPress={viewModel.handleSendEmail}
                 >
-                  <MaterialIcons name="email" size={20} color={theme.primary} />
+                  <MaterialIcons
+                    name="email"
+                    size={20}
+                    color={theme.primary}
+                  />
                   <Text
                     style={[styles.contactButtonText, { color: theme.primary }]}
                   >
@@ -562,7 +364,7 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
             {/* Botón Cerrar */}
             <TouchableOpacity
               style={[styles.closeButton, { backgroundColor: theme.primary }]}
-              onPress={() => setAboutModalVisible(false)}
+              onPress={() => viewModel.setAboutModalVisible(false)}
             >
               <Text style={styles.closeButtonText}>Cerrar</Text>
             </TouchableOpacity>
@@ -732,18 +534,6 @@ const styles = StyleSheet.create({
   contactButtonText: {
     fontSize: 15,
     textDecorationLine: "underline",
-  },
-  linkButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 12,
-    padding: 12,
-    borderRadius: 8,
-    marginBottom: 8,
-  },
-  linkButtonText: {
-    fontSize: 15,
-    flex: 1,
   },
   modalFooter: {
     marginTop: 20,

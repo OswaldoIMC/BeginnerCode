@@ -1,4 +1,9 @@
-import React, { useState, useEffect } from "react";
+/**
+ * Pantalla de detalle de una lección (MVVM)
+ * Muestra el contenido completo, ejemplos de código y permite ir a los retos
+ */
+
+import React from "react";
 import {
   View,
   Text,
@@ -16,16 +21,15 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../navigation/StackNavigator";
 import {
   FONT_SIZES,
-  Lesson,
   CodeExample,
   ContentSection,
 } from "../../../types";
-import DataService from "../../services/DataService";
 import { useTheme } from "../../context/ThemeContext";
+import { useLessonDetailViewModel } from "../../hooks/useLessonDetailViewModel";
 
-/**
- * Props de navegación para esta pantalla
- */
+// ==========================================
+// TIPOS
+// ==========================================
 type LessonDetailScreenRouteProp = RouteProp<
   RootStackParamList,
   "LessonDetail"
@@ -40,51 +44,22 @@ interface LessonDetailScreenProps {
   navigation: LessonDetailScreenNavigationProp;
 }
 
-/**
- * Pantalla de detalle de una lección
- * Muestra el contenido completo, ejemplos de código y permite ir a los retos
- */
+// ==========================================
+// COMPONENTE PRINCIPAL
+// ==========================================
 const LessonDetailScreen: React.FC<LessonDetailScreenProps> = ({
   route,
   navigation,
 }) => {
   const { courseId, lessonId } = route.params;
-  const [lesson, setLesson] = useState<Lesson | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  /** Tema */
   const { theme, isDarkMode } = useTheme();
 
-  useEffect(() => {
-    loadLessonData();
-  }, [lessonId]);
-
-  /**
-   * Función para cargar los datos de la lección
-   */
-  const loadLessonData = () => {
-    try {
-      setLoading(true);
-      const lessonData = DataService.getLessonById(courseId, lessonId);
-      setLesson(lessonData || null);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error al cargar la lección:", error);
-      setLoading(false);
-    }
-  };
-
-  /**
-   * Navega a la pantalla de retos
-   */
-  const handleStartChallenges = () => {
-    if (lesson) {
-      navigation.navigate("Challenge", {
-        courseId,
-        lessonId: lesson.id,
-      });
-    }
-  };
+  // ViewModel
+  const viewModel = useLessonDetailViewModel({
+    courseId,
+    lessonId,
+    navigation,
+  });
 
   /** Sección de contenido */
   const renderContentSection = (section: ContentSection) => (
@@ -128,7 +103,7 @@ const LessonDetailScreen: React.FC<LessonDetailScreenProps> = ({
   );
 
   // Loading
-  if (loading) {
+  if (viewModel.loading) {
     return (
       <View
         style={[styles.loadingContainer, { backgroundColor: theme.surface }]}
@@ -142,7 +117,7 @@ const LessonDetailScreen: React.FC<LessonDetailScreenProps> = ({
   }
 
   // No data
-  if (!lesson) {
+  if (!viewModel.lesson) {
     return (
       <View
         style={[styles.loadingContainer, { backgroundColor: theme.surface }]}
@@ -154,13 +129,15 @@ const LessonDetailScreen: React.FC<LessonDetailScreenProps> = ({
 
         <TouchableOpacity
           style={[styles.backButton, { backgroundColor: theme.primary }]}
-          onPress={() => navigation.goBack()}
+          onPress={viewModel.handleGoBack}
         >
           <Text style={styles.backButtonText}>Volver</Text>
         </TouchableOpacity>
       </View>
     );
   }
+
+  const lesson = viewModel.lesson;
 
   return (
     <SafeAreaView
@@ -176,7 +153,7 @@ const LessonDetailScreen: React.FC<LessonDetailScreenProps> = ({
 
       {/* Header */}
       <View style={[styles.headerBar, { backgroundColor: theme.primary }]}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity onPress={viewModel.handleGoBack}>
           <MaterialIcons name="arrow-back" size={28} color="#fff" />
         </TouchableOpacity>
 
@@ -272,7 +249,7 @@ const LessonDetailScreen: React.FC<LessonDetailScreenProps> = ({
         {/* Botón de retos */}
         <TouchableOpacity
           style={[styles.challengeButton, { backgroundColor: theme.primary }]}
-          onPress={handleStartChallenges}
+          onPress={viewModel.handleStartChallenges}
           activeOpacity={0.8}
         >
           <MaterialIcons name="emoji-events" size={24} color="#fff" />

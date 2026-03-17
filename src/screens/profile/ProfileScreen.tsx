@@ -1,4 +1,9 @@
-import React, { useState, useEffect } from "react";
+/**
+ * Pantalla de perfil del usuario (MVVM)
+ * Muestra estadísticas, medallas, nivel y opciones de configuración
+ */
+
+import React from "react";
 import {
   View,
   Text,
@@ -13,13 +18,13 @@ import ConnectivityIndicator from "../../components/ConnectivityIndicator";
 import { MaterialIcons } from "@expo/vector-icons";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../navigation/StackNavigator";
-import { FONT_SIZES, UserProfile, Badge } from "../../../types";
-import StorageService from "../../services/StorageService";
+import { FONT_SIZES, Badge } from "../../../types";
 import { useTheme } from "../../context/ThemeContext";
+import { useProfileViewModel } from "../../hooks/useProfileViewModel";
 
-/**
- * Props de navegación para esta pantalla
- */
+// ==========================================
+// TIPOS
+// ==========================================
 type ProfileScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   "Profile"
@@ -29,61 +34,14 @@ interface ProfileScreenProps {
   navigation: ProfileScreenNavigationProp;
 }
 
-/**
- * Pantalla de perfil del usuario
- * Muestra estadísticas, medallas, nivel y opciones de configuración
- */
+// ==========================================
+// COMPONENTE PRINCIPAL
+// ==========================================
 const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const { theme } = useTheme();
 
-  const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [stats, setStats] = useState<any>(null);
-
-  /**
-   * Carga los datos del perfil
-   */
-  useEffect(() => {
-    loadProfileData();
-  }, []);
-
-  /**
-   * Función para cargar los datos del perfil
-   */
-  const loadProfileData = async () => {
-    try {
-      setLoading(true);
-
-      const userProfile = await StorageService.getUserProfile();
-      setProfile(userProfile);
-
-      const userStats = await StorageService.getUserStats();
-      setStats(userStats);
-
-      setLoading(false);
-    } catch (error) {
-      console.error("Error al cargar perfil:", error);
-      setLoading(false);
-    }
-  };
-
-  /**
-   * Calcula los puntos necesarios para el siguiente nivel
-   */
-  const getPointsForNextLevel = (currentLevel: number): number => {
-    return currentLevel * 100;
-  };
-
-  /**
-   * Calcula el progreso hacia el siguiente nivel
-   */
-  const getLevelProgress = (
-    totalPoints: number,
-    currentLevel: number
-  ): number => {
-    const pointsInCurrentLevel = totalPoints % 100;
-    return pointsInCurrentLevel / 100;
-  };
+  // ViewModel
+  const viewModel = useProfileViewModel({ navigation });
 
   /**
    * Renderiza una tarjeta de estadística
@@ -150,7 +108,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   );
 
   // Mostrar loading
-  if (loading) {
+  if (viewModel.loading) {
     return (
       <View
         style={[styles.loadingContainer, { backgroundColor: theme.surface }]}
@@ -164,7 +122,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   }
 
   // Si no hay perfil
-  if (!profile || !stats) {
+  if (!viewModel.profile || !viewModel.stats) {
     return (
       <View
         style={[styles.loadingContainer, { backgroundColor: theme.surface }]}
@@ -177,7 +135,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
 
         <TouchableOpacity
           style={[styles.backButton, { backgroundColor: theme.primary }]}
-          onPress={() => navigation.goBack()}
+          onPress={viewModel.handleGoBack}
         >
           <Text style={styles.backButtonText}>Volver</Text>
         </TouchableOpacity>
@@ -185,8 +143,8 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
     );
   }
 
-  const levelProgress = getLevelProgress(profile.totalPoints, profile.level);
-  const pointsForNextLevel = getPointsForNextLevel(profile.level);
+  const profile = viewModel.profile;
+  const stats = viewModel.stats;
 
   return (
     <SafeAreaView
@@ -208,7 +166,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
           { backgroundColor: theme.primary, shadowColor: theme.text },
         ]}
       >
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity onPress={viewModel.handleGoBack}>
           <MaterialIcons name="arrow-back" size={28} color="#fff" />
         </TouchableOpacity>
 
@@ -252,7 +210,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
               <View
                 style={[
                   styles.levelProgressFill,
-                  { width: `${levelProgress * 100}%` },
+                  { width: `${viewModel.levelProgress * 100}%` },
                 ]}
               />
             </View>
@@ -260,7 +218,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
             <Text
               style={[styles.levelProgressText, { color: theme.textSecondary }]}
             >
-              {profile.totalPoints % 100} / {pointsForNextLevel} pts
+              {profile.totalPoints % 100} / {viewModel.pointsForNextLevel} pts
             </Text>
           </View>
         </View>

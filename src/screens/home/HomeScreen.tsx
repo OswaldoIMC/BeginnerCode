@@ -238,11 +238,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
             <TouchableOpacity
               key={option.id}
               style={[styles.card, { backgroundColor: theme.card }]}
-              onPress={() =>
-                option.route
-                  ? navigation.navigate(option.route)
-                  : option.onPress?.()
-              }
+              onPress={() => viewModel.handleCoursePress(option)}
             >
               <View style={styles.iconContainer}>
                 {viewModel.renderImage(option)}

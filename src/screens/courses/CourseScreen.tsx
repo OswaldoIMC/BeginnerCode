@@ -1,4 +1,9 @@
-import React, { useState, useEffect } from "react";
+/**
+ * Pantalla de Curso unificada (MVVM)
+ * Muestra los detalles y lecciones de cualquier curso según el courseId recibido
+ */
+
+import React from "react";
 import {
   View,
   Text,
@@ -10,132 +15,44 @@ import {
   StatusBar,
   Image,
   ActivityIndicator,
-  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ConnectivityIndicator from "../../components/ConnectivityIndicator";
-import { useNavigation } from "@react-navigation/native";
-import { CommonActions } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
 import { MaterialIcons } from "@expo/vector-icons";
-import { FONT_SIZES, Course, Lesson } from "../../../types";
+import { RouteProp } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../navigation/StackNavigator";
+import { FONT_SIZES } from "../../../types";
 import * as Progress from "react-native-progress";
-import DataService from "../../services/DataService";
-import AuthService from "../../services/AuthService";
 import { useTheme } from "../../context/ThemeContext";
-import StorageService from "../../services/StorageService";
+import { useCourseViewModel } from "../../hooks/useCourseViewModel";
 
-const PythonImage = require("../../../assets/python.png");
+// ==========================================
+// TIPOS
+// ==========================================
+type CourseScreenRouteProp = RouteProp<RootStackParamList, "Course">;
+type CourseScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "Course"
+>;
 
-const PythonScreen = () => {
+interface CourseScreenProps {
+  route: CourseScreenRouteProp;
+  navigation: CourseScreenNavigationProp;
+}
+
+// ==========================================
+// COMPONENTE PRINCIPAL
+// ==========================================
+const CourseScreen: React.FC<CourseScreenProps> = ({ route, navigation }) => {
+  const { courseId } = route.params;
   const { theme, isDarkMode } = useTheme();
 
-  const [menuVisible, setMenuVisible] = useState<boolean>(false);
-  const [course, setCourse] = useState<Course | null>(null);
-  const [lessons, setLessons] = useState<Lesson[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [lessonsProgress, setLessonsProgress] = useState<{
-    [key: string]: number;
-  }>({});
+  // ViewModel
+  const viewModel = useCourseViewModel({ courseId, navigation });
 
-  const navigation =
-    useNavigation<StackNavigationProp<RootStackParamList, "Python">>();
-
-  /**
-   * Carga los datos del curso y sus lecciones
-   */
-  useEffect(() => {
-    loadCourseData();
-    const unsubscribe = navigation.addListener("focus", loadCourseData);
-    return unsubscribe;
-  }, [navigation]);
-
-  /**
-   * Función para cargar los datos del curso
-   */
-  const loadCourseData = async () => {
-    try {
-      setLoading(true);
-
-      // Obtener el curso de Python
-      const pythonCourse = DataService.getCourseById("python");
-      setCourse(pythonCourse || null);
-
-      // Obtener las lecciones del curso
-      const pythonLessons = DataService.getLessonsByCourse("python");
-      setLessons(pythonLessons);
-
-      // Cargar progreso de todas las lecciones
-      const progressMap: { [key: string]: number } = {};
-      for (const lesson of pythonLessons) {
-        progressMap[lesson.id] = await DataService.getLessonProgress(
-          "python",
-          lesson.id
-        );
-      }
-
-      setLessonsProgress(progressMap);
-
-      setLoading(false);
-    } catch (error) {
-      console.error("Error al cargar datos del curso:", error);
-      setLoading(false);
-    }
-  };
-
-  /**
-   * Maneja el clic en una lección
-   */
-  const handleLessonPress = (lesson: Lesson) => {
-    navigation.navigate("LessonDetail", {
-      courseId: "python",
-      lessonId: lesson.id,
-    });
-  };
-
-  /**
-   * Maneja el cierre de sesión
-   */
-  const handleLogout = () => {
-    Alert.alert("Cerrar Sesión", "¿Deseas cerrar sesión?", [
-      { text: "Cancelar", style: "cancel" },
-      {
-        text: "Cerrar Sesión",
-        style: "destructive",
-        onPress: async () => {
-          setMenuVisible(false);
-
-          // Cerrar sesión en AuthService
-          const success = await AuthService.logout();
-
-          if (success) {
-            console.log("Sesión cerrada exitosamente");
-
-            // Limpiar el usuario actual de StorageService
-            StorageService.setCurrentUsername(null);
-
-            // Navegar a Login y limpiar el stack
-            navigation.dispatch(
-              CommonActions.reset({ index: 0, routes: [{ name: "Login" }] })
-            );
-          } else {
-            console.error("Error al cerrar sesión");
-            Alert.alert(
-              "Error",
-              "No se pudo cerrar la sesión. Intenta de nuevo."
-            );
-          }
-        },
-      },
-    ]);
-  };
-  const handleProfile = () => {
-    setMenuVisible(false);
-    navigation.navigate("Profile");
-  };
-
-  if (loading) {
+  // Loading
+  if (viewModel.loading) {
     return (
       <View
         style={[styles.loadingContainer, { backgroundColor: theme.surface }]}
@@ -148,8 +65,8 @@ const PythonScreen = () => {
     );
   }
 
-  // Si no hay datos del curso, mostrar error
-  if (!course) {
+  // Sin datos del curso
+  if (!viewModel.course) {
     return (
       <View
         style={[styles.loadingContainer, { backgroundColor: theme.surface }]}
@@ -161,6 +78,8 @@ const PythonScreen = () => {
       </View>
     );
   }
+
+  const course = viewModel.course;
 
   return (
     <SafeAreaView
@@ -175,7 +94,7 @@ const PythonScreen = () => {
 
       {/* Header */}
       <View style={[styles.headerBar, { backgroundColor: theme.primary }]}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity onPress={viewModel.handleGoBack}>
           <MaterialIcons name="arrow-back" size={28} color="#fff" />
         </TouchableOpacity>
 
@@ -184,7 +103,7 @@ const PythonScreen = () => {
         </Text>
 
         <TouchableOpacity
-          onPress={() => setMenuVisible(true)}
+          onPress={() => viewModel.setMenuVisible(true)}
           style={styles.iconButton}
         >
           <MaterialIcons name="menu" size={24} color="#fff" />
@@ -192,10 +111,10 @@ const PythonScreen = () => {
       </View>
 
       {/* Modal menu */}
-      <Modal transparent animationType="slide" visible={menuVisible}>
+      <Modal transparent animationType="slide" visible={viewModel.menuVisible}>
         <Pressable
           style={styles.menuOverlay}
-          onPress={() => setMenuVisible(false)}
+          onPress={() => viewModel.setMenuVisible(false)}
         >
           <Pressable
             style={[styles.menuContainer, { backgroundColor: theme.surface }]}
@@ -212,7 +131,9 @@ const PythonScreen = () => {
                 Menú
               </Text>
 
-              <TouchableOpacity onPress={() => setMenuVisible(false)}>
+              <TouchableOpacity
+                onPress={() => viewModel.setMenuVisible(false)}
+              >
                 <MaterialIcons
                   name="close"
                   size={24}
@@ -224,7 +145,10 @@ const PythonScreen = () => {
             {/* Opciones del menú */}
             <View style={styles.menuOptions}>
               {/* Perfil */}
-              <Pressable style={styles.menuOption} onPress={handleProfile}>
+              <Pressable
+                style={styles.menuOption}
+                onPress={viewModel.handleNavigateToProfile}
+              >
                 <View
                   style={[
                     styles.menuIconContainer,
@@ -239,7 +163,9 @@ const PythonScreen = () => {
                 </View>
 
                 <View style={styles.menuTextContainer}>
-                  <Text style={[styles.menuOptionTitle, { color: theme.text }]}>
+                  <Text
+                    style={[styles.menuOptionTitle, { color: theme.text }]}
+                  >
                     Mi Perfil
                   </Text>
                   <Text
@@ -262,10 +188,7 @@ const PythonScreen = () => {
               {/* Configuración */}
               <Pressable
                 style={styles.menuOption}
-                onPress={() => {
-                  setMenuVisible(false);
-                  navigation.navigate("Settings");
-                }}
+                onPress={viewModel.handleNavigateToSettings}
               >
                 <View
                   style={[
@@ -281,7 +204,9 @@ const PythonScreen = () => {
                 </View>
 
                 <View style={styles.menuTextContainer}>
-                  <Text style={[styles.menuOptionTitle, { color: theme.text }]}>
+                  <Text
+                    style={[styles.menuOptionTitle, { color: theme.text }]}
+                  >
                     Configuración
                   </Text>
                   <Text
@@ -309,14 +234,21 @@ const PythonScreen = () => {
               />
 
               {/* Logout */}
-              <Pressable style={styles.menuOption} onPress={handleLogout}>
+              <Pressable
+                style={styles.menuOption}
+                onPress={viewModel.handleLogout}
+              >
                 <View
                   style={[
                     styles.menuIconContainer,
                     { backgroundColor: theme.error + "15" },
                   ]}
                 >
-                  <MaterialIcons name="logout" size={24} color={theme.error} />
+                  <MaterialIcons
+                    name="logout"
+                    size={24}
+                    color={theme.error}
+                  />
                 </View>
 
                 <View style={styles.menuTextContainer}>
@@ -358,7 +290,7 @@ const PythonScreen = () => {
               { backgroundColor: theme.background },
             ]}
           >
-            <Image source={PythonImage} style={styles.logo} />
+            <Image source={course.icon} style={styles.logo} />
 
             <Text style={[styles.courseTitle, { color: theme.text }]}>
               {course.name}
@@ -367,8 +299,14 @@ const PythonScreen = () => {
             {/* Información adicional del curso */}
             <View style={styles.courseInfoContainer}>
               <View style={styles.infoItem}>
-                <MaterialIcons name="school" size={18} color={theme.primary} />
-                <Text style={[styles.infoText, { color: theme.textSecondary }]}>
+                <MaterialIcons
+                  name="school"
+                  size={18}
+                  color={theme.primary}
+                />
+                <Text
+                  style={[styles.infoText, { color: theme.textSecondary }]}
+                >
                   {course.totalLessons} lecciones
                 </Text>
               </View>
@@ -379,7 +317,9 @@ const PythonScreen = () => {
                   size={18}
                   color={theme.primary}
                 />
-                <Text style={[styles.infoText, { color: theme.textSecondary }]}>
+                <Text
+                  style={[styles.infoText, { color: theme.textSecondary }]}
+                >
                   ~{course.estimatedHours}h
                 </Text>
               </View>
@@ -390,8 +330,10 @@ const PythonScreen = () => {
                   size={18}
                   color={theme.primary}
                 />
-                <Text style={[styles.infoText, { color: theme.textSecondary }]}>
-                  Principiante
+                <Text
+                  style={[styles.infoText, { color: theme.textSecondary }]}
+                >
+                  {viewModel.getDifficultyLabel(course.difficulty)}
                 </Text>
               </View>
             </View>
@@ -407,22 +349,24 @@ const PythonScreen = () => {
           </Text>
 
           <Text style={[styles.lessonText, { color: theme.primary }]}>
-            Lecciones ({lessons.length})
+            Lecciones ({viewModel.lessons.length})
           </Text>
 
           {/* Lecciones */}
-          {lessons.map((lesson) => {
-            const progress = lessonsProgress[lesson.id] || 0;
+          {viewModel.lessons.map((lesson) => {
+            const progress = viewModel.lessonsProgress[lesson.id] || 0;
 
             return (
               <TouchableOpacity
                 key={lesson.id}
                 style={[styles.lessonCard, { backgroundColor: theme.card }]}
                 activeOpacity={0.8}
-                onPress={() => handleLessonPress(lesson)}
+                onPress={() => viewModel.handleLessonPress(lesson)}
               >
                 <View style={styles.lessonIconContainer}>
-                  <Text style={[styles.lessonNumber, { color: theme.primary }]}>
+                  <Text
+                    style={[styles.lessonNumber, { color: theme.primary }]}
+                  >
                     {lesson.order.toString().padStart(2, "0")}
                   </Text>
                 </View>
@@ -476,12 +420,12 @@ const PythonScreen = () => {
                     </View>
                   </View>
 
-                  {/* Barra de progreso*/}
+                  {/* Barra de progreso */}
                   <Progress.Bar
                     progress={progress}
                     width={null}
                     height={8}
-                    color="#3776AB"
+                    color={course.color}
                     unfilledColor={isDarkMode ? "#444" : "#E0E0E0"}
                     borderWidth={0}
                     style={styles.progressBar}
@@ -514,8 +458,11 @@ const PythonScreen = () => {
   );
 };
 
-export default PythonScreen;
+export default CourseScreen;
 
+// ==========================================
+// ESTILOS
+// ==========================================
 const styles = StyleSheet.create({
   container: { flex: 1 },
 
@@ -624,10 +571,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     flex: 1,
     marginLeft: 12,
-  },
-
-  closeButton: {
-    padding: 4,
   },
 
   menuOptions: {

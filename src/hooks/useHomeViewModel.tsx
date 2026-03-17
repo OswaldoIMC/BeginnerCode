@@ -28,7 +28,7 @@ export interface MenuOption {
   id: string;
   title: string;
   color: string;
-  route?: "Python" | "Java" | "Javascript" | "Csharp" | "Cpp";
+  courseId?: string;
   progress?: number;
   onPress?: () => void;
 }
@@ -147,6 +147,17 @@ export const useHomeViewModel = ({ navigation }: UseHomeViewModelProps) => {
     navigation.navigate("Settings");
   };
 
+  /**
+   * Navega a un curso usando la ruta unificada
+   */
+  const handleCoursePress = (option: MenuOption): void => {
+    if (option.courseId) {
+      navigation.navigate("Course", { courseId: option.courseId });
+    } else if (option.onPress) {
+      option.onPress();
+    }
+  };
+
   // ==========================================
   // HELPERS
   // ==========================================
@@ -184,35 +195,35 @@ export const useHomeViewModel = ({ navigation }: UseHomeViewModelProps) => {
       title: "Python",
       color: "#3963bdff",
       progress: state.pythonProgress,
-      route: "Python",
+      courseId: "python",
     },
     {
       id: "Java",
       title: "Java",
       color: "#f47f36ff",
       progress: state.javaProgress,
-      route: "Java",
+      courseId: "java",
     },
     {
       id: "Javascript",
       title: "Javascript",
       color: "#faf32bff",
       progress: state.jsProgress,
-      route: "Javascript",
+      courseId: "javascript",
     },
     {
       id: "C#",
       title: "C#",
       color: "#a116a3ff",
       progress: state.csharpProgress,
-      route: "Csharp",
+      courseId: "csharp",
     },
     {
       id: "C++",
       title: "C++",
       color: "#122e92ff",
       progress: state.cppProgress,
-      route: "Cpp",
+      courseId: "cpp",
     },
     { id: "Prox", title: "Proximamente", color: "#525358ff" },
   ];
@@ -232,6 +243,8 @@ export const useHomeViewModel = ({ navigation }: UseHomeViewModelProps) => {
     handleLogout,
     handleNavigateToProfile,
     handleNavigateToSettings,
+    handleCoursePress,
     renderImage,
   };
 };
+
