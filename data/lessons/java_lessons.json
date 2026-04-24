@@ -84,8 +84,16 @@
         "question": "Java fue creado en 1995 y es un lenguaje orientado a objetos.",
         "type": "true-false",
         "options": [
-          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
-          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+          {
+            "id": "opt_1",
+            "text": "Verdadero",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_2",
+            "text": "Falso",
+            "isCorrect": false
+          }
         ],
         "correctAnswerId": "opt_1",
         "explanation": "Java es un lenguaje orientado a objetos creado en 1995 que sigue siendo ampliamente utilizado por su estabilidad.",
@@ -98,10 +106,26 @@
         "question": "Completa el código para definir la clase principal en Java según el ejemplo visto:\n\n_____ class Main {",
         "type": "code-completion",
         "options": [
-          { "id": "opt_1", "text": "public", "isCorrect": true },
-          { "id": "opt_2", "text": "private", "isCorrect": false },
-          { "id": "opt_3", "text": "def", "isCorrect": false },
-          { "id": "opt_4", "text": "function", "isCorrect": false }
+          {
+            "id": "opt_1",
+            "text": "public",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_2",
+            "text": "private",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "def",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "function",
+            "isCorrect": false
+          }
         ],
         "correctAnswerId": "opt_1",
         "explanation": "En Java, la clase de entrada típica se define con el modificador de acceso 'public', es decir, 'public class Main'.",
@@ -163,10 +187,26 @@
         "question": "¿Qué comando permite verificar que Java está instalado correctamente?",
         "type": "multiple-choice",
         "options": [
-          { "id": "opt_1", "text": "java --check", "isCorrect": false },
-          { "id": "opt_2", "text": "javac -v", "isCorrect": false },
-          { "id": "opt_3", "text": "java -version", "isCorrect": true },
-          { "id": "opt_4", "text": "jdk -version", "isCorrect": false }
+          {
+            "id": "opt_1",
+            "text": "java --check",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "javac -v",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "java -version",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "jdk -version",
+            "isCorrect": false
+          }
         ],
         "correctAnswerId": "opt_3",
         "explanation": "El comando java -version muestra la versión instalada.",
@@ -179,8 +219,16 @@
         "question": "El JDK no incluye el compilador, este debe descargarse por separado.",
         "type": "true-false",
         "options": [
-          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
-          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+          {
+            "id": "opt_1",
+            "text": "Verdadero",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Falso",
+            "isCorrect": true
+          }
         ],
         "correctAnswerId": "opt_2",
         "explanation": "Es Falso. El JDK (Java Development Kit) SÍ incluye el compilador (javac) además de la JVM.",
@@ -193,10 +241,26 @@
         "question": "¿Qué significa JDK?",
         "type": "multiple-choice",
         "options": [
-          { "id": "opt_1", "text": "Java Default Kernel", "isCorrect": false },
-          { "id": "opt_2", "text": "Java Development Kit", "isCorrect": true },
-          { "id": "opt_3", "text": "Java Download Key", "isCorrect": false },
-          { "id": "opt_4", "text": "Java Device Kernel", "isCorrect": false }
+          {
+            "id": "opt_1",
+            "text": "Java Default Kernel",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Java Development Kit",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "Java Download Key",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "Java Device Kernel",
+            "isCorrect": false
+          }
         ],
         "correctAnswerId": "opt_2",
         "explanation": "JDK significa Java Development Kit, el cual trae las herramientas necesarias para desarrollar en Java.",
@@ -265,10 +329,26 @@
         "question": "¿Qué método debe tener toda aplicación Java para iniciar?",
         "type": "multiple-choice",
         "options": [
-          { "id": "opt_1", "text": "start()", "isCorrect": false },
-          { "id": "opt_2", "text": "init()", "isCorrect": false },
-          { "id": "opt_3", "text": "main()", "isCorrect": true },
-          { "id": "opt_4", "text": "run()", "isCorrect": false }
+          {
+            "id": "opt_1",
+            "text": "start()",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "init()",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "main()",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "run()",
+            "isCorrect": false
+          }
         ],
         "correctAnswerId": "opt_3",
         "explanation": "El método main() es el punto de entrada de cualquier programa Java.",
@@ -281,8 +361,16 @@
         "question": "En Java, el nombre del archivo no necesita coincidir con el de la clase pública.",
         "type": "true-false",
         "options": [
-          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
-          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+          {
+            "id": "opt_1",
+            "text": "Verdadero",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Falso",
+            "isCorrect": true
+          }
         ],
         "correctAnswerId": "opt_2",
         "explanation": "Falso. En Java, el nombre del archivo debe coincidir exactamente con el nombre de la clase pública (ej: Main.java para public class Main).",
@@ -295,10 +383,26 @@
         "question": "Completa el código para imprimir un mensaje en consola:\n\nSystem.out.____(\"Hola mundo\");",
         "type": "code-completion",
         "options": [
-          { "id": "opt_1", "text": "printline", "isCorrect": false },
-          { "id": "opt_2", "text": "write", "isCorrect": false },
-          { "id": "opt_3", "text": "println", "isCorrect": true },
-          { "id": "opt_4", "text": "log", "isCorrect": false }
+          {
+            "id": "opt_1",
+            "text": "printline",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "write",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "println",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "log",
+            "isCorrect": false
+          }
         ],
         "correctAnswerId": "opt_3",
         "explanation": "La instrucción correcta en Java para imprimir una línea en consola es System.out.println().",
@@ -311,15 +415,2176 @@
         "question": "¿Qué comando se usa para compilar el archivo Main.java?",
         "type": "multiple-choice",
         "options": [
-          { "id": "opt_1", "text": "java Main.java", "isCorrect": false },
-          { "id": "opt_2", "text": "compile Main.java", "isCorrect": false },
-          { "id": "opt_3", "text": "javac Main.java", "isCorrect": true },
-          { "id": "opt_4", "text": "build Main.java", "isCorrect": false }
+          {
+            "id": "opt_1",
+            "text": "java Main.java",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "compile Main.java",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "javac Main.java",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "build Main.java",
+            "isCorrect": false
+          }
         ],
         "correctAnswerId": "opt_3",
         "explanation": "Se usa 'javac' seguido del nombre completo del archivo con su extensión para compilar el código fuente.",
         "points": 10,
         "order": 4
+      }
+    ]
+  },
+  {
+    "id": "java_lesson_4",
+    "courseId": "java",
+    "title": "Variables y Tipos de Datos",
+    "description": "Aprende a declarar variables y utilizar los tipos de datos primitivos en Java.",
+    "order": 4,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "Una variable es un espacio en memoria para almacenar datos. En Java, todas las variables deben ser declaradas con un tipo de dato específico (es fuertemente tipado).",
+      "sections": [
+        {
+          "id": "java_4_sec_1",
+          "title": "Tipos de Datos Primitivos",
+          "content": "Los tipos más comunes son int (enteros), double (decimales), boolean (verdadero/falso) y char (un solo carácter).",
+          "order": 1
+        },
+        {
+          "id": "java_4_sec_2",
+          "title": "Strings (Cadenas de texto)",
+          "content": "String es una clase en Java, no un tipo primitivo, pero se usa constantemente para almacenar texto. Se escribe con la primera letra en mayúscula.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "java_4_ex_1",
+          "title": "Declaración de variables",
+          "code": "int edad = 25;\ndouble altura = 1.75;\nboolean esEstudiante = true;\nString nombre = \"Ana\";",
+          "language": "java",
+          "explanation": "Cada variable se declara con su tipo, seguido de su nombre y su valor inicial asignado con el signo igual (=)."
+        }
+      ],
+      "summary": "Java requiere que especifiques qué tipo de dato contendrá cada variable al momento de declararla.",
+      "keyPoints": [
+        "Java es un lenguaje fuertemente tipado.",
+        "int, double, boolean y char son primitivos.",
+        "String es una clase para manejar textos."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "java_4_ch_1",
+        "lessonId": "java_lesson_4",
+        "question": "¿Cuál es el tipo de dato correcto para almacenar un número entero en Java?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "String",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "int",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "boolean",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "double",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "El tipo 'int' se utiliza para almacenar números enteros (sin decimales).",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "java_4_ch_2",
+        "lessonId": "java_lesson_4",
+        "question": "En Java, 'String' es considerado un tipo de dato primitivo al igual que 'int' o 'double'.",
+        "type": "true-false",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Verdadero",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Falso",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. En Java, 'String' es una clase que representa una secuencia de caracteres, no un tipo de dato primitivo.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "java_4_ch_3",
+        "lessonId": "java_lesson_4",
+        "question": "Completa la declaración de la variable para almacenar un texto:\n\n_____ ciudad = \"Madrid\";",
+        "type": "code-completion",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "string",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "String",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "char",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "Text",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Debes usar 'String' con S mayúscula para declarar variables de texto en Java.",
+        "points": 15,
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": "java_lesson_5",
+    "courseId": "java",
+    "title": "Operadores Aritméticos",
+    "description": "Aprende a realizar cálculos matemáticos en Java.",
+    "order": 5,
+    "estimatedMinutes": 15,
+    "content": {
+      "introduction": "Los operadores aritméticos te permiten realizar operaciones matemáticas básicas como sumas, restas, multiplicaciones y divisiones.",
+      "sections": [
+        {
+          "id": "java_5_sec_1",
+          "title": "Operadores Básicos",
+          "content": "Suma (+), Resta (-), Multiplicación (*), División (/) y Módulo o resto (%).",
+          "order": 1
+        },
+        {
+          "id": "java_5_sec_2",
+          "title": "Concatenación de Strings",
+          "content": "El operador suma (+) también se usa para unir (concatenar) cadenas de texto.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "java_5_ex_1",
+          "title": "Cálculos y Concatenación",
+          "code": "int a = 10;\nint b = 3;\nint suma = a + b; // 13\nint resto = a % b; // 1\nString mensaje = \"El resultado es \" + suma;",
+          "language": "java",
+          "explanation": "El operador % devuelve el resto de la división entera. El operador + une números a Strings."
+        }
+      ],
+      "summary": "Usa operadores matemáticos para procesar números y el operador + para juntar textos.",
+      "keyPoints": [
+        "El operador / entre enteros devuelve un entero truncado.",
+        "El operador % es útil para saber si un número es par o impar.",
+        "+ sirve tanto para sumar números como para unir textos."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "java_5_ch_1",
+        "lessonId": "java_lesson_5",
+        "question": "¿Qué operador se usa para obtener el residuo de una división?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "/",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "%",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "*",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "-",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "El operador % (módulo) calcula el resto de una división entera.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "java_5_ch_2",
+        "lessonId": "java_lesson_5",
+        "question": "En Java, el operador '+' se puede utilizar para unir una cadena de texto (String) con un número (int).",
+        "type": "true-false",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Verdadero",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_2",
+            "text": "Falso",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. Al sumar un String y un número, Java convierte automáticamente el número a texto y los concatena.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "java_5_ch_3",
+        "lessonId": "java_lesson_5",
+        "question": "Completa el código para multiplicar las dos variables:\n\nint resultado = x _____ y;",
+        "type": "code-completion",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "x",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "%",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "*",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "/",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El asterisco (*) es el operador de multiplicación en Java.",
+        "points": 15,
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": "java_lesson_6",
+    "courseId": "java",
+    "title": "Entrada de Datos con Scanner",
+    "description": "Aprende a leer datos introducidos por el usuario a través de la consola.",
+    "order": 6,
+    "estimatedMinutes": 25,
+    "content": {
+      "introduction": "Para hacer programas interactivos, necesitamos recibir datos del usuario. En Java, la clase Scanner nos permite leer desde el teclado.",
+      "sections": [
+        {
+          "id": "java_6_sec_1",
+          "title": "Importar Scanner",
+          "content": "Scanner pertenece al paquete java.util, por lo que debes importarlo al inicio de tu archivo: import java.util.Scanner;",
+          "order": 1
+        },
+        {
+          "id": "java_6_sec_2",
+          "title": "Leer datos",
+          "content": "Creamos un objeto Scanner apuntando a System.in y usamos métodos como nextLine() para textos o nextInt() para enteros.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "java_6_ex_1",
+          "title": "Uso básico de Scanner",
+          "code": "import java.util.Scanner;\n\nclass Main {\n  public static void main(String[] args) {\n    Scanner lector = new Scanner(System.in);\n    System.out.println(\"¿Cómo te llamas?\");\n    String nombre = lector.nextLine();\n    System.out.println(\"Hola, \" + nombre);\n  }\n}",
+          "language": "java",
+          "explanation": "El programa se detiene en nextLine() hasta que el usuario escribe algo y presiona Enter."
+        }
+      ],
+      "summary": "La clase Scanner es tu principal herramienta para recibir información del teclado en aplicaciones de consola.",
+      "keyPoints": [
+        "Debes usar 'import java.util.Scanner;'.",
+        "Scanner requiere ser instanciado con 'new Scanner(System.in)'.",
+        "Usa nextLine() para String, nextInt() para int, nextDouble() para double."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "java_6_ch_1",
+        "lessonId": "java_lesson_6",
+        "question": "¿Qué paquete debes importar para utilizar la clase Scanner en Java?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "java.io.Scanner",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "java.util.Scanner",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "java.lang.Scanner",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "java.scanner",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "La clase Scanner se encuentra dentro del paquete java.util de la biblioteca estándar de Java.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "java_6_ch_2",
+        "lessonId": "java_lesson_6",
+        "question": "El método 'nextInt()' de la clase Scanner permite leer una cadena de texto (String) introducida por el usuario.",
+        "type": "true-false",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Verdadero",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Falso",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. 'nextInt()' se usa para leer números enteros. Para textos se utiliza 'nextLine()'.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "java_6_ch_3",
+        "lessonId": "java_lesson_6",
+        "question": "Completa el código para leer una línea de texto desde el teclado usando el objeto 'sc':\n\nString entrada = sc._____();",
+        "type": "code-completion",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "nextString",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "nextLine",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "readLine",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "read",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "El método 'nextLine()' lee todos los caracteres ingresados hasta que el usuario presiona Enter.",
+        "points": 15,
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": "java_lesson_7",
+    "courseId": "java",
+    "title": "Condicional If-Else",
+    "description": "Toma decisiones lógicas en tu código basándote en condiciones.",
+    "order": 7,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "Las estructuras condicionales permiten que tu programa ejecute diferentes bloques de código dependiendo de si una condición es verdadera o falsa.",
+      "sections": [
+        {
+          "id": "java_7_sec_1",
+          "title": "La estructura if",
+          "content": "El bloque 'if' evalúa una condición booleana. Si es verdadera (true), ejecuta su bloque de código.",
+          "order": 1
+        },
+        {
+          "id": "java_7_sec_2",
+          "title": "Else y Else If",
+          "content": "'else' se ejecuta si el 'if' es falso. 'else if' permite agregar nuevas condiciones a la cadena.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "java_7_ex_1",
+          "title": "Validando edad",
+          "code": "int edad = 18;\nif (edad >= 18) {\n  System.out.println(\"Eres mayor de edad\");\n} else {\n  System.out.println(\"Eres menor de edad\");\n}",
+          "language": "java",
+          "explanation": "Si la edad es mayor o igual a 18, imprime la primera frase; de lo contrario, salta al else e imprime la segunda."
+        }
+      ],
+      "summary": "If-else es la herramienta fundamental para guiar el flujo de ejecución en base a reglas y lógica.",
+      "keyPoints": [
+        "La condición del if siempre debe ir entre paréntesis: if (condición).",
+        "Usa == para comparar igualdad y != para diferencia.",
+        "Puedes usar múltiples 'else if' consecutivos."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "java_7_ch_1",
+        "lessonId": "java_lesson_7",
+        "question": "¿Qué bloque de código se ejecuta si la condición de un 'if' resulta ser falsa?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "catch",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "else",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "then",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "default",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "El bloque 'else' es el camino alternativo que toma el programa cuando la condición del 'if' es falsa.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "java_7_ch_2",
+        "lessonId": "java_lesson_7",
+        "question": "En Java, el operador para verificar si dos variables numéricas son iguales en un if es '='.",
+        "type": "true-false",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Verdadero",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Falso",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. El operador '=' se usa para asignar valores. Para comparar igualdad debes usar doble igual '=='.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "java_7_ch_3",
+        "lessonId": "java_lesson_7",
+        "question": "Completa la sintaxis para encadenar una segunda condición si la primera falla:\n\n_____ (edad > 12)",
+        "type": "code-completion",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "elseif",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "else if",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "else",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "if else",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "En Java se escribe 'else if' con un espacio de separación para evaluar condiciones encadenadas.",
+        "points": 15,
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": "java_lesson_8",
+    "courseId": "java",
+    "title": "Operadores Lógicos",
+    "description": "Combina múltiples condiciones booleanas usando AND, OR y NOT.",
+    "order": 8,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "A veces necesitas verificar varias condiciones al mismo tiempo. Los operadores lógicos unen expresiones booleanas.",
+      "sections": [
+        {
+          "id": "java_8_sec_1",
+          "title": "AND (&&) y OR (||)",
+          "content": "El operador && (AND) exige que AMBAS condiciones sean verdaderas. El operador || (OR) exige que AL MENOS UNA sea verdadera.",
+          "order": 1
+        },
+        {
+          "id": "java_8_sec_2",
+          "title": "NOT (!)",
+          "content": "El operador ! (NOT) invierte el valor booleano: de verdadero a falso y viceversa.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "java_8_ex_1",
+          "title": "Control de Acceso",
+          "code": "int edad = 20;\nboolean tieneInvitacion = true;\n\nif (edad >= 18 && tieneInvitacion) {\n  System.out.println(\"Puedes entrar\");\n}\n\nif (!tieneInvitacion) {\n  System.out.println(\"No pasas\");\n}",
+          "language": "java",
+          "explanation": "El primer if usa &&: solo pasará si es mayor de edad Y tiene invitación."
+        }
+      ],
+      "summary": "Los operadores lógicos permiten crear reglas de negocio complejas sin anidar decenas de condicionales.",
+      "keyPoints": [
+        "&& requiere que todo sea verdadero.",
+        "|| requiere solo un verdadero.",
+        "! invierte la condición."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "java_8_ch_1",
+        "lessonId": "java_lesson_8",
+        "question": "¿Qué operador lógico exige que solo UNA de las condiciones evaluadas sea verdadera?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "&&",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "||",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "!",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "==",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "El operador || (OR) devuelve verdadero si cualquiera de las condiciones conectadas resulta verdadera.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "java_8_ch_2",
+        "lessonId": "java_lesson_8",
+        "question": "Si a = true y b = false, la expresión (a && b) dará como resultado 'true'.",
+        "type": "true-false",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Verdadero",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Falso",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. El operador && requiere que ambos operandos sean true. Al ser b falso, todo el conjunto da falso.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "java_8_ch_3",
+        "lessonId": "java_lesson_8",
+        "question": "Completa el operador lógico NOT para invertir el valor de la variable:\n\nboolean denegado = _____permitido;",
+        "type": "code-completion",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "not",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "~",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "-",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "!",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_4",
+        "explanation": "El signo de exclamación (!) es el operador lógico de negación (NOT) en Java.",
+        "points": 15,
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": "java_lesson_9",
+    "courseId": "java",
+    "title": "Estructura Switch",
+    "description": "Evalúa una variable contra múltiples casos de forma limpia y directa.",
+    "order": 9,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "El 'switch' es una alternativa limpia a usar muchos 'else if' cuando estás comparando una misma variable con valores exactos.",
+      "sections": [
+        {
+          "id": "java_9_sec_1",
+          "title": "Funcionamiento del Switch",
+          "content": "Pones la variable en el switch(variable) y luego defines 'case' para cada valor posible. Debes usar 'break' para detener la ejecución de los siguientes casos.",
+          "order": 1
+        },
+        {
+          "id": "java_9_sec_2",
+          "title": "Caso por defecto",
+          "content": "El bloque 'default' sirve como comodín final, ejecutándose si la variable no coincidió con ningún 'case' anterior.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "java_9_ex_1",
+          "title": "Menú de Opciones",
+          "code": "int opcion = 2;\nswitch(opcion) {\n  case 1:\n    System.out.println(\"Nuevo Juego\");\n    break;\n  case 2:\n    System.out.println(\"Cargar Juego\");\n    break;\n  default:\n    System.out.println(\"Salir\");\n}",
+          "language": "java",
+          "explanation": "Imprimirá 'Cargar Juego' y luego el break detendrá el switch impidiendo que evalúe el default."
+        }
+      ],
+      "summary": "El Switch simplifica el código al evaluar igualdades exactas múltiples, como en menús de consola.",
+      "keyPoints": [
+        "Un switch puede evaluar int, char y String.",
+        "Olvidar el 'break' hará que se ejecuten los 'case' de abajo de forma secuencial (fall-through).",
+        "El 'default' es opcional pero muy recomendado."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "java_9_ch_1",
+        "lessonId": "java_lesson_9",
+        "question": "¿Qué instrucción es fundamental añadir al final de cada 'case' para evitar que se ejecuten los demás casos siguientes?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "stop",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "exit",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "break",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "return",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "La instrucción 'break' detiene y saca al flujo del switch, previniendo el efecto fall-through.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "java_9_ch_2",
+        "lessonId": "java_lesson_9",
+        "question": "En Java, el bloque 'default' de un switch es estrictamente obligatorio para que el programa compile sin errores.",
+        "type": "true-false",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Verdadero",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Falso",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. El bloque 'default' es opcional, funciona de forma análoga a un 'else' solitario.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "java_9_ch_3",
+        "lessonId": "java_lesson_9",
+        "question": "Completa la palabra clave que especifica una coincidencia de valor dentro de un switch:\n\n_____ 1:\n  System.out.println(\"Opción 1\");",
+        "type": "code-completion",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "case",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_2",
+            "text": "match",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "when",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "if",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Cada valor esperado se define con la palabra reservada 'case' seguida de dos puntos.",
+        "points": 15,
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": "java_lesson_10",
+    "courseId": "java",
+    "title": "Bucle For",
+    "description": "Repite código una cantidad específica y predeterminada de veces.",
+    "order": 10,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "Un bucle (o loop) permite repetir una acción. El bucle 'for' es perfecto cuando sabes exactamente cuántas veces quieres que se repita la acción.",
+      "sections": [
+        {
+          "id": "java_10_sec_1",
+          "title": "Sintaxis del Bucle For",
+          "content": "Tiene 3 partes separadas por punto y coma: la inicialización (int i = 0), la condición (i < 5) y el incremento (i++).",
+          "order": 1
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "java_10_ex_1",
+          "title": "Contador clásico",
+          "code": "for (int i = 1; i <= 5; i++) {\n  System.out.println(\"Vuelta número: \" + i);\n}",
+          "language": "java",
+          "explanation": "El código imprimirá mensajes del 1 al 5. La variable 'i' aumenta en 1 en cada vuelta (i++)."
+        }
+      ],
+      "summary": "Usa 'for' para conteos exactos e iterar sobre arreglos y listas de forma controlada.",
+      "keyPoints": [
+        "Las tres partes del for van separadas por ; obligatoriamente.",
+        "La variable de inicialización solo existe dentro del for.",
+        "Es ideal para recorridos finitos."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "java_10_ch_1",
+        "lessonId": "java_lesson_10",
+        "question": "¿Qué signo de puntuación se utiliza en la cabecera de un bucle 'for' para separar la inicialización, la condición y el incremento?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Coma (,)",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Punto (.)",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "Punto y coma (;)",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "Dos puntos (:)",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "En Java, se emplea el punto y coma (;) para delimitar las tres expresiones en un for tradicional.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "java_10_ch_2",
+        "lessonId": "java_lesson_10",
+        "question": "En un bucle 'for (int i = 0; i < 5; i++)', el bloque de código se ejecutará 6 veces.",
+        "type": "true-false",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Verdadero",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Falso",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. Los valores de 'i' serán 0, 1, 2, 3 y 4. Al llegar a 5 la condición falla. Por lo tanto, se ejecuta 5 veces.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "java_10_ch_3",
+        "lessonId": "java_lesson_10",
+        "question": "Completa el atajo de incremento utilizado en los bucles para sumar de 1 en 1:\n\nfor (int i = 0; i < 10; i____)",
+        "type": "code-completion",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "+",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "+=",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "++",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "=+",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El sufijo '++' aumenta el valor numérico de la variable en una unidad.",
+        "points": 15,
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": "java_lesson_11",
+    "courseId": "java",
+    "title": "Bucles While y Do-While",
+    "description": "Repite código basándote en una condición dinámica que se evalúa constantemente.",
+    "order": 11,
+    "estimatedMinutes": 25,
+    "content": {
+      "introduction": "A diferencia del for, 'while' y 'do-while' son útiles cuando no sabemos de antemano cuántas vueltas dará el bucle (ej: esperando que un usuario introduzca un dato válido).",
+      "sections": [
+        {
+          "id": "java_11_sec_1",
+          "title": "Bucle While",
+          "content": "Evalúa la condición AL PRINCIPIO. Si es falsa desde el inicio, el código nunca se ejecuta.",
+          "order": 1
+        },
+        {
+          "id": "java_11_sec_2",
+          "title": "Bucle Do-While",
+          "content": "Ejecuta el bloque primero y evalúa AL FINAL. Esto garantiza que el código se ejecute por lo menos una vez.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "java_11_ex_1",
+          "title": "Validación con Do-While",
+          "code": "Scanner sc = new Scanner(System.in);\nint numero;\ndo {\n  System.out.println(\"Ingresa un número positivo:\");\n  numero = sc.nextInt();\n} while(numero < 0);\nSystem.out.println(\"¡Gracias!\");",
+          "language": "java",
+          "explanation": "Se pedirá el número repetidamente mientras el usuario ingrese un número negativo."
+        }
+      ],
+      "summary": "Utiliza while para iteraciones inciertas y do-while cuando necesites que el proceso ocurra sí o sí la primera vez.",
+      "keyPoints": [
+        "Un bucle while puede no ejecutarse nunca.",
+        "Un bucle do-while siempre se ejecuta al menos 1 vez.",
+        "Siempre asegúrate de modificar la variable de control dentro del bucle o causarás un bucle infinito."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "java_11_ch_1",
+        "lessonId": "java_lesson_11",
+        "question": "¿Cuál es la principal diferencia del bucle 'do-while' frente al bucle 'while' normal?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Que do-while se usa con números flotantes",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Que do-while evalúa la condición al final, asegurando 1 ejecución",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "Que do-while es más veloz en memoria",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "Que do-while no admite la condición false",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Dado que el 'while()' del do-while se ubica debajo del cuerpo de ejecución, este entra a ejecutarse ciegamente la primera vez antes de ser evaluado.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "java_11_ch_2",
+        "lessonId": "java_lesson_11",
+        "question": "Un bucle 'while' evalúa su condición antes de ejecutar el bloque, pudiendo saltárselo por completo si la condición es falsa de inicio.",
+        "type": "true-false",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Verdadero",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_2",
+            "text": "Falso",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. Al revisar frontalmente, protege el bloque de código de ser activado si las condiciones no se prestan desde un inicio.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "java_11_ch_3",
+        "lessonId": "java_lesson_11",
+        "question": "Completa el código para la estructura que se ejecuta al menos una vez:\n\n_____ {\n  System.out.println(\"Hola\");\n} while (act);\n",
+        "type": "code-completion",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "try",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "run",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "do",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "begin",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "La estructura completa es 'do { } while()', empezando por la palabra reservada 'do'.",
+        "points": 15,
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": "java_lesson_12",
+    "courseId": "java",
+    "title": "Arrays Unidimensionales",
+    "description": "Agrupa múltiples variables del mismo tipo bajo un solo nombre usando arreglos.",
+    "order": 12,
+    "estimatedMinutes": 30,
+    "content": {
+      "introduction": "Un Array (arreglo) es una estructura que guarda una colección de elementos del mismo tipo de forma consecutiva en la memoria.",
+      "sections": [
+        {
+          "id": "java_12_sec_1",
+          "title": "Creación e Índices",
+          "content": "Se declaran usando corchetes []. Los arrays en Java tienen un tamaño fijo definido al crearlos. El primer elemento siempre está en el índice 0.",
+          "order": 1
+        },
+        {
+          "id": "java_12_sec_2",
+          "title": "La propiedad length",
+          "content": "Todo array posee una propiedad llamada 'length' que contiene la longitud (cantidad de elementos totales) del mismo.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "java_12_ex_1",
+          "title": "Declaración y Acceso",
+          "code": "int[] numeros = new int[3];\nnumeros[0] = 10;\nnumeros[1] = 20;\nnumeros[2] = 30;\n\n// Forma directa:\nString[] nombres = {\"Juan\", \"Ana\", \"Luis\"};\nSystem.out.println(\"Primero: \" + nombres[0]);",
+          "language": "java",
+          "explanation": "El array de nombres tiene 3 elementos. Sus posiciones son 0, 1 y 2."
+        }
+      ],
+      "summary": "Los arrays son la base para almacenar listados estáticos de información en Java, siendo de vital importancia respetar sus límites de índice.",
+      "keyPoints": [
+        "El tamaño de un array básico no puede cambiar después de ser creado.",
+        "Se accede a las celdas mediante índice, empezando por cero.",
+        "Acceder a un índice fuera de rango lanza una excepción ArrayIndexOutOfBoundsException."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "java_12_ch_1",
+        "lessonId": "java_lesson_12",
+        "question": "¿Si un array se declara como 'int[] datos = new int[5];', cuál es el índice más grande al que puedo acceder legalmente?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "datos[5]",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "datos[4]",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "datos[1]",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "datos[6]",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Como empiezan en 0, las posiciones serán 0, 1, 2, 3 y 4. El índice máximo es longitud - 1.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "java_12_ch_2",
+        "lessonId": "java_lesson_12",
+        "question": "En Java, puedes agregar infinitos elementos dinámicamente a un array normal mediante el método '.add()'.",
+        "type": "true-false",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Verdadero",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Falso",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. Los arrays (arreglos) en Java tienen tamaño fijo y carecen de un método .add(). Para eso se usan listas dinámicas como ArrayList.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "java_12_ch_3",
+        "lessonId": "java_lesson_12",
+        "question": "Completa el código para obtener la cantidad total de elementos que el array puede almacenar:\n\nint tope = nombres._____;",
+        "type": "code-completion",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "size()",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "length",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "count",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "Length()",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "En Java, los arrays tienen una propiedad predefinida llamada 'length' (sin paréntesis) para medir su tamaño.",
+        "points": 15,
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": "java_lesson_13",
+    "courseId": "java",
+    "title": "Métodos y Funciones",
+    "description": "Aprende a modularizar el código envolviendo funcionalidades en métodos reutilizables.",
+    "order": 13,
+    "estimatedMinutes": 35,
+    "content": {
+      "introduction": "Un método es un bloque de código que realiza una tarea en particular. Nos permite dividir programas complejos en piezas más pequeñas y reutilizables.",
+      "sections": [
+        {
+          "id": "java_13_sec_1",
+          "title": "Estructura de un Método",
+          "content": "Consta de un modificador (public, private), el tipo de retorno (void, int, String), un nombre descriptivo y los paréntesis para sus parámetros.",
+          "order": 1
+        },
+        {
+          "id": "java_13_sec_2",
+          "title": "Uso de Return",
+          "content": "Si el método indica que devolverá un 'int', debe usar la instrucción 'return' para enviar el número final al bloque de código que lo invocó.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "java_13_ex_1",
+          "title": "Crear y llamar métodos",
+          "code": "class Calculadora {\n  // Método que recibe parámetros y retorna un entero\n  public int sumar(int a, int b) {\n    return a + b;\n  }\n\n  public static void main(String[] args) {\n    Calculadora calc = new Calculadora();\n    int total = calc.sumar(5, 5);\n    System.out.println(total);\n  }\n}",
+          "language": "java",
+          "explanation": "El método 'sumar' procesa el ingreso de a y b y devuelve 10 al método main que lo atrapa en la variable 'total'."
+        }
+      ],
+      "summary": "Los métodos previenen la repetición de código y permiten que un programa sea fácil de leer y testear (Principio DRY - Don't Repeat Yourself).",
+      "keyPoints": [
+        "'void' indica que el método ejecuta su acción y termina sin devolver nada.",
+        "Un método debe invocarse desde otro lugar usando su nombre seguido de paréntesis.",
+        "Los parámetros definidos deben respetarse en cantidad y tipo al llamar al método."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "java_13_ch_1",
+        "lessonId": "java_lesson_13",
+        "question": "¿Qué palabra reservada se debe colocar como tipo de retorno cuando un método NO devuelve ningún dato al finalizar?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "null",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "empty",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "void",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "return",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El tipo 'void' especifica explícitamente que la función es un proceso ciego que ejecuta código pero no arroja resultados capturables.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "java_13_ch_2",
+        "lessonId": "java_lesson_13",
+        "question": "Un método que ha sido declarado para retornar un tipo de dato 'String' puede funcionar perfectamente aunque omitamos poner la palabra 'return'.",
+        "type": "true-false",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Verdadero",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Falso",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. Java marcará un error de compilación estricto si prometiste retornar un tipo de dato y omites el 'return' final en el bloque del método.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "java_13_ch_3",
+        "lessonId": "java_lesson_13",
+        "question": "Completa la palabra para emitir un resultado final y concluir la función:\n\npublic int getDoble(int n) {\n  _____ n * 2;\n}",
+        "type": "code-completion",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "yield",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "print",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "return",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "export",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "La palabra 'return' efectúa el escape enviando hacia afuera la información prometida.",
+        "points": 15,
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": "java_lesson_14",
+    "courseId": "java",
+    "title": "Programación Orientada a Objetos (Clases y Objetos)",
+    "description": "Comprende el pilar de Java creando Clases abstractas que den vida a Objetos reales.",
+    "order": 14,
+    "estimatedMinutes": 40,
+    "content": {
+      "introduction": "Java es un lenguaje Orientado a Objetos (POO). Este paradigma modela problemas de la vida real agrupando información y comportamientos afines en entidades estructurales.",
+      "sections": [
+        {
+          "id": "java_14_sec_1",
+          "title": "Las Clases (Los Planos)",
+          "content": "Una 'Class' actúa como un plano o molde. Describe qué características (atributos) y comportamientos (métodos) tendrán los objetos que nazcan de ella.",
+          "order": 1
+        },
+        {
+          "id": "java_14_sec_2",
+          "title": "Los Objetos (Las Instancias)",
+          "content": "Un Objeto es una entidad viva nacida a partir del plano de la clase. Ocurre mediante el proceso de 'instanciación' usando la palabra 'new'.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "java_14_ex_1",
+          "title": "Molde y Creación",
+          "code": "class Perro {\n  String nombre;\n  void ladrar() {\n    System.out.println(\"¡Guau!\");\n  }\n}\n\n// Instanciación dentro del main\nPerro miMascota = new Perro();\nmiMascota.nombre = \"Fido\";\nmiMascota.ladrar();",
+          "language": "java",
+          "explanation": "Perro es el plano genérico. 'miMascota' es una instancia concreta que reside en memoria y puede operar independientemente."
+        }
+      ],
+      "summary": "La clase es la definición abstracta, mientras que el objeto es la forma materializada que usarás para interactuar en tus procesos lógicos.",
+      "keyPoints": [
+        "Todo en Java pertenece inherentemente a una clase.",
+        "Un objeto encierra estados (atributos) y funcionamientos (métodos).",
+        "La palabra 'new' aparta memoria RAM vital para el nacimiento del objeto."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "java_14_ch_1",
+        "lessonId": "java_lesson_14",
+        "question": "¿Cómo se le llama al proceso informático de apartar memoria y originar un objeto vivo a partir de una clase estructurada?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Compilación",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Herencia",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "Instanciación",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "Parseo",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "Crear el objeto a través del new recibe el nombre de Instanciar (crear una instancia).",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "java_14_ch_2",
+        "lessonId": "java_lesson_14",
+        "question": "Múltiples objetos instanciados de la misma Clase siempre comparten y modifican el mismo valor interno en sus atributos simultáneamente.",
+        "type": "true-false",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Verdadero",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Falso",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. Cada objeto creado con 'new' recibe su propio espacio de variables privadas e independientes en memoria que no afecta al vecino.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "java_14_ch_3",
+        "lessonId": "java_lesson_14",
+        "question": "Completa el código para generar el objeto de tipo Auto:\n\nAuto miCoche = _____ Auto();",
+        "type": "code-completion",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "make",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "create",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "new",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "var",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "La directriz obligatoria para encargar a Java crear vida y espacios para la nueva instancia es 'new'.",
+        "points": 15,
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": "java_lesson_15",
+    "courseId": "java",
+    "title": "Constructores",
+    "description": "Inicializa y configura tus objetos desde el primer segundo de su nacimiento.",
+    "order": 15,
+    "estimatedMinutes": 30,
+    "content": {
+      "introduction": "Un constructor es un bloque especial de código que se invoca de manera automática exactamente en el momento en que se crea el objeto (cuando usas 'new').",
+      "sections": [
+        {
+          "id": "java_15_sec_1",
+          "title": "Sintaxis Rígida",
+          "content": "Debe tener EXACTAMENTE el mismo nombre de la clase, distinguir mayúsculas, y NO llevar un tipo de retorno (ni siquiera void).",
+          "order": 1
+        },
+        {
+          "id": "java_15_sec_2",
+          "title": "El puntero 'this'",
+          "content": "Para diferenciar un parámetro introducido del atributo base de clase, usamos 'this.atributo = parametro'.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "java_15_ex_1",
+          "title": "Uso de Constructor y this",
+          "code": "class CuentaBancaria {\n  String titular;\n  \n  // Constructor\n  public CuentaBancaria(String titular) {\n    this.titular = titular;\n  }\n}\n\n// Main:\nCuentaBancaria cb = new CuentaBancaria(\"Carlos\");",
+          "language": "java",
+          "explanation": "El constructor fuerza a que sea imposible crear una 'CuentaBancaria' vacía sin antes proporcionarle el nombre en el paréntesis de su instanciación."
+        }
+      ],
+      "summary": "Implementa constructores para asegurar que tus clases siempre posean variables listas y válidas esquivando estados 'null' o vacíos mortales.",
+      "keyPoints": [
+        "El constructor carece absolutamente de return types.",
+        "Se llama idéntico a su clase (Ej: class Perro -> public Perro()).",
+        "'this' permite apuntar autorreferencialmente hacia la propia instancia viva."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "java_15_ch_1",
+        "lessonId": "java_lesson_15",
+        "question": "¿Cuál es la regla fundamental que debe seguir todo método que quiera considerarse un 'Constructor' en Java?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Debe retornar un booleano al finalizar",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Debe poseer el modificador abstracto",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "Debe escribirse con el mismo nombre exacto que la clase",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "Debe estar definido como static en sus bases",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El compilador asocia al constructor puramente al identificar que se llama idéntico a la clase contenedora y no arroja retorno.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "java_15_ch_2",
+        "lessonId": "java_lesson_15",
+        "question": "La palabra clave 'this' sirve para indicar al programa que estamos intentando acceder a una variable estática ajena de otra clase.",
+        "type": "true-false",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Verdadero",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Falso",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. 'this' es una autorreferencia que apunta al propio objeto actual que está ejecutando el código, muy útil para diferenciar variables.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "java_15_ch_3",
+        "lessonId": "java_lesson_15",
+        "question": "Completa el uso del autorreferenciador para reasignar la variable global:\n\npublic Persona(String nombre) {\n  _____.nombre = nombre;\n}",
+        "type": "code-completion",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "my",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "self",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "this",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "base",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "En Java, el autorreferenciador se conoce obligatoriamente como 'this'.",
+        "points": 15,
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": "java_lesson_16",
+    "courseId": "java",
+    "title": "Encapsulamiento",
+    "description": "Oculta el funcionamiento y estado interno de tus objetos y protege su integridad de alteraciones externas directas.",
+    "order": 16,
+    "estimatedMinutes": 35,
+    "content": {
+      "introduction": "El encapsulamiento evita que otras clases accedan y modifiquen libremente las variables directas de tu objeto. Esto previene variables corruptas (ej. dinero en negativo).",
+      "sections": [
+        {
+          "id": "java_16_sec_1",
+          "title": "Modificadores de Acceso",
+          "content": "Poner los atributos como 'private' cierra sus murallas al exterior. 'public' permite la vía libre.",
+          "order": 1
+        },
+        {
+          "id": "java_16_sec_2",
+          "title": "Getters y Setters",
+          "content": "Ya que no podemos ver un atributo private, creamos métodos public 'get' (para leer o extraer) y métodos 'set' (para inyectar un valor bajo nuestras propias reglas).",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "java_16_ex_1",
+          "title": "Blindaje de Vida",
+          "code": "class Jugador {\n  private int vida = 100;\n\n  public int getVida() {\n    return this.vida;\n  }\n\n  public void setVida(int nuevaVida) {\n    if(nuevaVida >= 0 && nuevaVida <= 100) {\n      this.vida = nuevaVida;\n    }\n  }\n}",
+          "language": "java",
+          "explanation": "El 'private' prohíbe escribir `jugador.vida = 50000;`. Cualquier cambio externo debe pasar por setVida() el cual rechaza montos imposibles."
+        }
+      ],
+      "summary": "Son las técnicas infaltables formadoras de bases programadoras robustas y enterpise. Nunca expongas atributos nativos, forra con 'private'.",
+      "keyPoints": [
+        "Un atributo privado no compila si se intenta leer invocándolo directo del objeto en otra clase.",
+        "Un Getter suele devolver un valor con un simple return.",
+        "Un Setter recibe parámetros, valida e impone reasignaciones."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "java_16_ch_1",
+        "lessonId": "java_lesson_16",
+        "question": "¿Qué modificador de acceso convierte a un atributo en totalmente inaccesible o invisible desde fuera del archivo o clase donde fue creado?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "public",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "protected",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "private",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "static",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "La designación 'private' aísla a la variable restringiendo que únicamente los métodos internos y locales de su misma clase le escriban directamente.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "java_16_ch_2",
+        "lessonId": "java_lesson_16",
+        "question": "El término 'Getter' hace referencia a un método diseñado explícitamente para modificar y alterar con reglas a un atributo privado interno.",
+        "type": "true-false",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Verdadero",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Falso",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. Los métodos 'Get' se diseñan puramente para LEER o retornar el dato encapsulado, mientras que los métodos 'Set' sirven para alterarlo.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "java_16_ch_3",
+        "lessonId": "java_lesson_16",
+        "question": "Completa el prefijo estándar que se le asigna usualmente a los métodos encargados de asignar o escribir propiedades:\n\npublic void _____Edad(int edad) { }",
+        "type": "code-completion",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "read",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "get",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "put",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "set",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_4",
+        "explanation": "Es convención universal utilizar 'set' (establecer) previo a la propiedad a modificar, generando nombres como setEdad() o setNombre().",
+        "points": 15,
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": "java_lesson_17",
+    "courseId": "java",
+    "title": "Herencia",
+    "description": "Descubre cómo formar jerarquías transmitiendo métodos y propiedades de clases superiores a derivadas.",
+    "order": 17,
+    "estimatedMinutes": 45,
+    "content": {
+      "introduction": "La herencia evita que reescribas cientos de líneas de código base. Una clase 'Hija' puede extender de una clase 'Padre' y adoptar todos sus métodos públicos listos para usarse de a gratis.",
+      "sections": [
+        {
+          "id": "java_17_sec_1",
+          "title": "La palabra clave 'extends'",
+          "content": "Para forjar esta vinculación en Java colocamos 'extends' en la cabecera. Ejemplo: class Gato extends Animal.",
+          "order": 1
+        },
+        {
+          "id": "java_17_sec_2",
+          "title": "Modificador Protected",
+          "content": "Los atributos 'private' no se heredan para ser tocados directo, a menos que cambies el Padre para usar 'protected', lo cual permite manipulación sólo por los familiares herederos.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "java_17_ex_1",
+          "title": "Adopción de comportamientos",
+          "code": "class Vehiculo {\n  public void arrancar() {\n    System.out.println(\"Motor encendido\");\n  }\n}\n\nclass Moto extends Vehiculo {\n  int ruedas = 2;\n}\n\n// Main:\nMoto kawasaki = new Moto();\nkawasaki.arrancar(); // Funciona gracias a la herencia",
+          "language": "java",
+          "explanation": "La 'Moto' no escribió el código arrancar(), pero al ser Vehículo de sangre lo adopta, compila y usa a plenitud."
+        }
+      ],
+      "summary": "Implementa jerarquías formadas. Reduce duplicidades creando módulos maestros generales de herencia única, ya que Java no tolera extender múltiples clases al mismo tiempo.",
+      "keyPoints": [
+        "Un objeto Padre no puede acceder a métodos únicos de los hijos.",
+        "En Java no existe herencia múltiple de Clases (solo una a la vez).",
+        "'super' permite llamar al constructor del padre desde la clase hija."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "java_17_ch_1",
+        "lessonId": "java_lesson_17",
+        "question": "¿Cual es la palabra clave en Java que concreta una asociación hereditaria para que una clase absorba funcionabilidad de una clase superior?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "inherits",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "implements",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "extends",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "super",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "Extends denota de modo literal a una clase que se extenderá (adoptando propiedades) desde un componente primario.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "java_17_ch_2",
+        "lessonId": "java_lesson_17",
+        "question": "En Java, una misma clase 'Hija' tiene la capacidad técnica de usar el comando extends sobre tres o más clases 'Padres' simultáneamente.",
+        "type": "true-false",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Verdadero",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Falso",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. A esto se le llama 'Herencia Múltiple' y Java la rechaza por completo para Clases para evadir el problema de cruce de diamantes. Únicamente se puede extender de un Padre directo.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "java_17_ch_3",
+        "lessonId": "java_lesson_17",
+        "question": "Completa el término que vincula a tu subclase Coche con su ancestro general Vehiculo:\n\nclass Coche _____ Vehiculo { }",
+        "type": "code-completion",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "extends",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_2",
+            "text": "extend",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": ":",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "from",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "La terminología correcta en la declaración base de la cabecera es 'extends'.",
+        "points": 15,
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": "java_lesson_18",
+    "courseId": "java",
+    "title": "Polimorfismo",
+    "description": "Sobrescribe métodos en los descendientes para crear funcionamientos flexibles con la misma firma.",
+    "order": 18,
+    "estimatedMinutes": 45,
+    "content": {
+      "introduction": "El polimorfismo denota que los objetos pueden adoptar múltiples formas. Cuando una clase hereda un método, en ocasiones quiere ejecutar su 'propia' versión de ese funcionamiento a través de la anulación o sobreescritura (Override).",
+      "sections": [
+        {
+          "id": "java_18_sec_1",
+          "title": "Anotación @Override",
+          "content": "Para suplantar con seguridad un método padre en tu clase hija, implementa la misma firma exacta y coloca `@Override` por encima para indicarle al compilador tus intenciones de reemplazar dicho método heredado.",
+          "order": 1
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "java_18_ex_1",
+          "title": "Sobreescritura de Sonidos",
+          "code": "class Animal {\n  public void hacerSonido() {\n    System.out.println(\"Sonido general...\");\n  }\n}\nclass Vaca extends Animal {\n  @Override\n  public void hacerSonido() {\n    System.out.println(\"¡Muuu!\");\n  }\n}",
+          "language": "java",
+          "explanation": "Al instanciar Vaca e invocar hacerSonido(), el procesador ignora el texto genérico del padre y activa exitosamente la función particular sobreescrita y personalizada de Vaca."
+        }
+      ],
+      "summary": "La sobreescritura asegura que si envías una lista generalizada y le das la orden a todos, cada objeto sepa actuar de modo único y diferenciado a los demás.",
+      "keyPoints": [
+        "Las firmas, identificadores y cantidad de parámetros a sobreescribir deben ser literalmente calcados idénticos del padre.",
+        "@Override es una buena práctica y obliga al IDE de Java a revisarte posibles errores ortográficos previendo roturas."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "java_18_ch_1",
+        "lessonId": "java_lesson_18",
+        "question": "¿Qué anotación técnica provee seguridad extra indicando al compilador que tu método intenta suplantar el funcionamiento original traído de su padre?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "@Rewrite",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "@Replace",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "@Override",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "@Super",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "La etiqueta @Override informa al chequeador que se debe anular el comportamiento de la clase maestra para emplear este funcionamiento interno personal.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "java_18_ch_2",
+        "lessonId": "java_lesson_18",
+        "question": "En Java, el Polimorfismo mediante Override requiere estrictamente que los métodos tengan el mismo nombre exacto pero no importa si su cantidad de parámetros cambia drásticamente.",
+        "type": "true-false",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Verdadero",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Falso",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. La firma (nombre más tipos y cantidad de parámetros) debe ser una réplica calcada exacta. De lo contrario, se convierte en un método nuevo (Sobrecarga / Overload), no en un reemplazo.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "java_18_ch_3",
+        "lessonId": "java_lesson_18",
+        "question": "Completa la anotación especial decorativa que certifica el reemplazo de funcionalidad base:\n\n_____\npublic void hablar() { }",
+        "type": "code-completion",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "@Override",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_2",
+            "text": "@override",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "#Override",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "Override",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Toda anotación empieza con @ y en este caso debe emplear la mayúscula O en Override.",
+        "points": 15,
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": "java_lesson_19",
+    "courseId": "java",
+    "title": "Manejo de Excepciones",
+    "description": "Emplea la red de seguridad del bloque try-catch impidiendo el colapso descontrolado del entorno.",
+    "order": 19,
+    "estimatedMinutes": 45,
+    "content": {
+      "introduction": "Un error abrupto de sistema, como dividir un número matemáticamente entre Cero (0), apagará tu programa Java al arrojar un fatal Exception. Para impedirlo existe el atrapador Try-Catch.",
+      "sections": [
+        {
+          "id": "java_19_sec_1",
+          "title": "Uso del Try y Catch",
+          "content": "Dentro de un 'try { }' acorralas e introduces todo código de alta sospecha de crasheo. Si fallase, Java cancela esa área pero brinca sano y salvo cayendo adentro del 'catch (Exception e) { }' permitiendo loguear el error con elegancia.",
+          "order": 1
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "java_19_ex_1",
+          "title": "Salvavidas Aritméticos",
+          "code": "try {\n  int resultado = 10 / 0;\n  System.out.println(resultado);\n} catch (Exception ex) {\n  System.out.println(\"Aviso formal de alerta: No se puede dividir entre cero. \" + ex.getMessage());\n}\nSystem.out.println(\"El programa prosiguió vivo y no se crasheó al escritorio\");",
+          "language": "java",
+          "explanation": "Al reventarse el motor en 10/0, la orden desiste de continuar operando ese try, se redirige pacífica a imprimir el mensaje Catch y salva el programa terminando correctamente."
+        }
+      ],
+      "summary": "Son los guardianes y salvaguardas programáticas obligatorias al gestionar lecturas externas (conexiones base de datos, lectura base de archivo o datos de usuario volátiles).",
+      "keyPoints": [
+        "Un catch() precisa recibir el objeto (ej Exception ex) conteniendo datos mortales del origen del fallo para poder ser examinado.",
+        "Múltiples catch se pueden encadenar detectando y respondiendo diferente si fue error de archivo o error numérico."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "java_19_ch_1",
+        "lessonId": "java_lesson_19",
+        "question": "¿Como se identifica al bloque base contenedor en donde encerramos o aislamos nuestro código peligroso propenso o susceptible de generar un crasheo letal en memoria?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "test { }",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "try { }",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "catch { }",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "run { }",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "El área aisladora inicial se define siempre por la palabra 'try', que significa intentar correr dichas acciones.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "java_19_ch_2",
+        "lessonId": "java_lesson_19",
+        "question": "Si el área contenida dentro de tu bloque 'try { }' logra ejecutarse con total normalidad y sin errores, el bloque 'catch { }' se saltará puramente y no hará nada.",
+        "type": "true-false",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Verdadero",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_2",
+            "text": "Falso",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. El bloque catch solo se activa exclusivamente en eventos críticos de emergencia ante fallos internos de try. Si todo es exitoso, su lectura es omitida y sigue la vida normal.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "java_19_ch_3",
+        "lessonId": "java_lesson_19",
+        "question": "Completa el segmento conector encargado estrictamente de interceptar las excepciones o caídas base originadas:\n\n} _____ (Exception e) {\n  System.out.println(\"Error capturado\");\n}",
+        "type": "code-completion",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "catch",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_2",
+            "text": "finally",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "intercept",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "throw",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "El bloque catch cumple la misión universal de emboscar y amortiguar el fallo programático emitido por su try colindante.",
+        "points": 15,
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": "java_lesson_20",
+    "courseId": "java",
+    "title": "Bloque Finally",
+    "description": "Garantiza ejecuciones de cierre ineludibles al trabajar bajo manejo de excepciones.",
+    "order": 20,
+    "estimatedMinutes": 30,
+    "content": {
+      "introduction": "Vinculado íntimamente a tu esquema try-catch, existe el apéndice de clausura `finally`. Su labor radica en realizar saneamiento, ejecutándose de todas formas tras el análisis de errores.",
+      "sections": [
+        {
+          "id": "java_20_sec_1",
+          "title": "Limpieza de Entorno",
+          "content": "Finalmente evalúa la fiabilidad. Si abriste un scanner activo de teclado o conectaste bases de archivos muy pesadas a tu try, y por falla colapsara interrumpiéndose antes de que tuvieras oportunidad de cerrar recursos en try, finally entrará asegurando liberarlos o imprimir reportes finales de rigor a los Logs.",
+          "order": 1
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "java_20_ex_1",
+          "title": "Aseguramiento Post-Test",
+          "code": "try {\n  int operacion = 100 / 2;\n  System.out.println(operacion);\n} catch (Exception x) {\n  System.out.println(\"Hubo un fatal problema contenido\");\n} finally {\n  System.out.println(\"Misión Terminada y Desconectando de base servidor...\");\n}",
+          "language": "java",
+          "explanation": "Aún si la operación 100/2 jamás falló y evadió al catch, la cláusula finally en la zona baja procederá por fuerza y mandato natural C# o Java de imprimir en consola Desconectando."
+        }
+      ],
+      "summary": "Son útiles como desenganchadores de servicios al ser incondicionalmente mandatorios después de cada intento try de operación frágil.",
+      "keyPoints": [
+        "Un bloque finally es enteramente optativo pero recomendado.",
+        "Se posiciona única y estrictamente al lado posterior del último catch en cascada.",
+        "Hasta un return metido a mitad del try ocasionará un pequeño alto general para disparar primero al finally base, luego efectuar su retiro general a originarse a sus bases finales de vida funcionales allí."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "java_20_ch_1",
+        "lessonId": "java_lesson_20",
+        "question": "¿Como funciona la regla y la ley principal universal que desencadena la ejecución estricta interna dictaminada del apéndice finally de Java de sus bases?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Solamente corre si el try provocó un crash letal de motor",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Ejecuta única y exclusivamente cuando ni un solo fallo existió allí a procesarse",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "Procederá de manera inexcusable siempre a ejecutarse, ocurriera una excepción dentro o pasara sano o con éxito su bloque",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El fin último del finally es de accionar una garantía inquebrantable de vida finalizando todo tipo de acción de recurso consumido base sin importar tu estatus o tu suerte de la línea de arriba en tu validación previa.",
+        "points": 10,
+        "order": 1
+      },
+      {
+        "id": "java_20_ch_2",
+        "lessonId": "java_lesson_20",
+        "question": "En Java, el bloque 'finally' está forzosamente obligado a declararse siempre que escribas un bloque try. De omitirse, no logrará compilar base.",
+        "type": "true-false",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Verdadero",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Falso",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. Puedes tener arquitecturas funcionales limpias construidas sólo por un solitario Try y luego adjuntado un Catch normal. However, you can also have Try and Finally without Catch. So it's not strictly mandatory but optional.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "java_20_ch_3",
+        "lessonId": "java_lesson_20",
+        "question": "Completa el identificador de la estructura incondicional que cierra un bloque captador de la sintaxis try-catch base:\n\n} _____ {\n  System.out.println(\"Adiós siempre\");\n}",
+        "type": "code-completion",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "final",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "finish",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "end",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "finally",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_4",
+        "explanation": "La ordenanza especial para esto deriva en el apéndice de uso nombrado 'finally'.",
+        "points": 15,
+        "order": 3
       }
     ]
   }
