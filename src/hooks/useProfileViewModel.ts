@@ -1,6 +1,5 @@
 /**
- * ViewModel para la pantalla de Profile
- * Maneja la carga del perfil, estadísticas y cálculos de nivel
+ * ViewModel para la pantalla de Perfil
  */
 
 import { useState, useEffect } from "react";
@@ -9,10 +8,7 @@ import { RootStackParamList } from "../navigation/StackNavigator";
 import { UserProfile } from "../../types";
 import StorageService from "../services/StorageService";
 
-type ProfileNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  "Profile"
->;
+type ProfileNavigationProp = StackNavigationProp<RootStackParamList, "Profile">;
 
 interface UseProfileViewModelProps {
   navigation: ProfileNavigationProp;
@@ -85,7 +81,7 @@ export const useProfileViewModel = ({
    */
   const getLevelProgress = (
     totalPoints: number,
-    currentLevel: number
+    currentLevel: number,
   ): number => {
     const pointsInCurrentLevel = totalPoints % 100;
     return pointsInCurrentLevel / 100;

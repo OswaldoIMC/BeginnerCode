@@ -1,6 +1,5 @@
 /**
  * ViewModel para la pantalla de LessonDetail
- * Maneja la carga de datos de la lección y navegación a retos
  */
 
 import { useState, useEffect } from "react";

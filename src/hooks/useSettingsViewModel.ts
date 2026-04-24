@@ -1,6 +1,5 @@
 /**
- * ViewModel para la pantalla de Settings
- * Maneja notificaciones, sincronización, tema oscuro y eliminación de cuenta
+ * ViewModel para la pantalla de Configuracion
  */
 
 import { useState, useEffect } from "react";
@@ -114,7 +113,7 @@ export const useSettingsViewModel = ({
     if (!state.isOnline) {
       Alert.alert(
         "Sin conexión",
-        "No hay conexión a internet. Los datos se sincronizarán automáticamente cuando te conectes."
+        "No hay conexión a internet. Los datos se sincronizarán automáticamente cuando te conectes.",
       );
       return;
     }
@@ -132,19 +131,19 @@ export const useSettingsViewModel = ({
         await loadSyncStatus();
         Alert.alert(
           "Sincronización completada",
-          "Tus datos han sido guardados en la nube exitosamente."
+          "Tus datos han sido guardados en la nube exitosamente.",
         );
       } else {
         Alert.alert(
           "Error de sincronización",
-          "No se pudieron sincronizar todos los datos. Intenta de nuevo más tarde."
+          "No se pudieron sincronizar todos los datos. Intenta de nuevo más tarde.",
         );
       }
     } catch (error) {
       console.error("Error en sincronización manual:", error);
       Alert.alert(
         "Error",
-        "Hubo un problema al sincronizar. Verifica tu conexión e intenta de nuevo."
+        "Hubo un problema al sincronizar. Verifica tu conexión e intenta de nuevo.",
       );
     } finally {
       setState((prev) => ({ ...prev, isSyncing: false }));
@@ -170,13 +169,13 @@ export const useSettingsViewModel = ({
               if (!currentUsername) {
                 Alert.alert(
                   "Error",
-                  "No se pudo identificar el usuario actual"
+                  "No se pudo identificar el usuario actual",
                 );
                 return;
               }
 
               console.log(
-                `Iniciando eliminación de cuenta para: ${currentUsername}`
+                `Iniciando eliminación de cuenta para: ${currentUsername}`,
               );
 
               // 1. Eliminar de Supabase primero (requiere conexión)
@@ -190,17 +189,15 @@ export const useSettingsViewModel = ({
                   console.log("Cuenta eliminada de Supabase");
                 } else {
                   console.warn(
-                    "No se pudo eliminar de Supabase, continuando con local"
+                    "No se pudo eliminar de Supabase, continuando con local",
                   );
                 }
               } else {
-                console.warn(
-                  "Sin conexión - solo se eliminarán datos locales"
-                );
+                console.warn("Sin conexión - solo se eliminarán datos locales");
                 Alert.alert(
                   "Sin conexión",
                   "No hay conexión a internet. Solo se eliminarán los datos locales. Para eliminar completamente la cuenta, conéctate a internet y vuelve a intentarlo.",
-                  [{ text: "Entendido" }]
+                  [{ text: "Entendido" }],
                 );
               }
 
@@ -238,22 +235,22 @@ export const useSettingsViewModel = ({
                         CommonActions.reset({
                           index: 0,
                           routes: [{ name: "Login" }],
-                        })
+                        }),
                       );
                     },
                   },
-                ]
+                ],
               );
             } catch (error) {
               console.error("Error al eliminar cuenta:", error);
               Alert.alert(
                 "Error",
-                "Hubo un problema al eliminar la cuenta. Por favor intenta de nuevo."
+                "Hubo un problema al eliminar la cuenta. Por favor intenta de nuevo.",
               );
             }
           },
         },
-      ]
+      ],
     );
   };
 

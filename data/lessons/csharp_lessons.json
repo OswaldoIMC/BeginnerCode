@@ -80,7 +80,6 @@
       }
     ]
   },
-
   {
     "id": "csharp_lesson_2",
     "courseId": "csharp",
@@ -134,10 +133,26 @@
         "question": "¿Qué comando permite verificar que .NET está instalado correctamente?",
         "type": "multiple-choice",
         "options": [
-          { "id": "opt_1", "text": "csharp --version", "isCorrect": false },
-          { "id": "opt_2", "text": "dotnet check", "isCorrect": false },
-          { "id": "opt_3", "text": "dotnet --version", "isCorrect": true },
-          { "id": "opt_4", "text": ".net version", "isCorrect": false }
+          {
+            "id": "opt_1",
+            "text": "csharp --version",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "dotnet check",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "dotnet --version",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": ".net version",
+            "isCorrect": false
+          }
         ],
         "correctAnswerId": "opt_3",
         "explanation": "El comando dotnet --version muestra la versión instalada del SDK.",
@@ -146,7 +161,6 @@
       }
     ]
   },
-
   {
     "id": "csharp_lesson_3",
     "courseId": "csharp",
@@ -207,13 +221,1218 @@
         "question": "¿Cuál es el punto de entrada de un programa en C#?",
         "type": "multiple-choice",
         "options": [
-          { "id": "opt_1", "text": "start()", "isCorrect": false },
-          { "id": "opt_2", "text": "begin()", "isCorrect": false },
-          { "id": "opt_3", "text": "Main()", "isCorrect": true },
-          { "id": "opt_4", "text": "run()", "isCorrect": false }
+          {
+            "id": "opt_1",
+            "text": "start()",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "begin()",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "Main()",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "run()",
+            "isCorrect": false
+          }
         ],
         "correctAnswerId": "opt_3",
         "explanation": "El método Main() es el punto de inicio de cualquier aplicación en C#.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "csharp_lesson_4",
+    "courseId": "csharp",
+    "title": "Variables y Tipos de Datos C#",
+    "description": "Entiende las definiciones primarias de espacios en memoria dentro del pilar .NET.",
+    "order": 4,
+    "estimatedMinutes": 30,
+    "content": {
+      "introduction": "C# es fuertemente tipado. Declarar una variable es asignar espacio en RAM estableciendo un nombre y precisando la categoría de su valor.",
+      "sections": [
+        {
+          "id": "csharp_4_sec_1",
+          "title": "Tipos Fundamentales Intuitivos",
+          "content": "Empleamos int (para enteros), double y float (para decimales), bool (para lo lógico), string (cadena extensa de textos) y char (Letra unívoca).",
+          "order": 1
+        },
+        {
+          "id": "csharp_4_sec_2",
+          "title": "Camel Case",
+          "content": "En variables es estándar de la industria utilizar un formato camelCase como: 'miNumeroTelefonico = 55;' uniendo todo junto y subiendo cada letra nueva.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "csharp_4_ex_1",
+          "title": "Instanciando memoria inicial C#",
+          "code": "int edadPersona = 22;\ndouble altura = 1.70;\nstring nombre = \"Carlos\";\nbool esMayor = true;",
+          "language": "csharp",
+          "explanation": "Toda sentencia exige ir en culminación de un punto y coma y la palabra string es intrínseca y fácil a diferencia del C purista."
+        }
+      ],
+      "summary": "Declarar tempranamente variables le avisa al procesador virtual qué carga debe soportar un dato para la correcta manipulación matemática posterior sin sorpresas u overloads.",
+      "keyPoints": [
+        "Todo texto va enclavado usando entre dobles comillas integrales (\" \").",
+        "Variables enteras y decimales se delimitan solas, sin usar comillas o sufijos extra universalmente en lo llano."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "csharp_4_ch_1",
+        "lessonId": "csharp_lesson_4",
+        "question": "¿Como se autodenomina el único identificador destinado estricto manejador de textos vastos como palabras y nombres en C#?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "text",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "char",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "string",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "word",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "Abreviatura de un conjunto (hilera) y su uso engloba toda la redacción unida en un objeto.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "csharp_lesson_5",
+    "courseId": "csharp",
+    "title": "Deducción (var) y Constantes (const)",
+    "description": "Protege los valores permanentes del entorno o que el compilador averigüe tu variable.",
+    "order": 5,
+    "estimatedMinutes": 30,
+    "content": {
+      "introduction": "El ecosistema Microsoft nos ofrece var para comodidades ágiles de tipado donde no deseas ser extenso escribiendo lo que salta a la obviedad. A su vez dispones de protecciones en lectura fija con el uso const.",
+      "sections": [
+        {
+          "id": "csharp_5_sec_1",
+          "title": "Implicitamente: var",
+          "content": "Poniendo 'var numero = 1;' el programa deduce por si mismo inferencialmente el que es un 'int' detrás de base. Solo aceptado en instancias definidas locales.",
+          "order": 1
+        },
+        {
+          "id": "csharp_5_sec_2",
+          "title": "Lo Inmutable (const)",
+          "content": "A veces es perjudicial tolerar que alguien modifique nuestro factor de cálculo por resbalo (como el Impuesto Local que es 16). Antepuesto dictaminas que la designación fue final.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "csharp_5_ex_1",
+          "title": "Adivinación virtual y Sellos Reales",
+          "code": "var ciudad = \"Madrid\"; // Sabe que es un string\n// ciudad = 5; (Error inmutable)\n\nconst double GRAVEDAD = 9.8;\n// GRAVEDAD = 9; (Rompe el compilador)",
+          "language": "csharp",
+          "explanation": "El Var de C# es un enlazador, inferido en la compilación y NO es una cosa libre multipropósito como ocurre tristemente en JS, mantendrá su tipo estricto en vida útil."
+        }
+      ],
+      "summary": "Son comodidades. Facilitan lecturas de códigos extensos donde repetir la frase 'ConexionServidorBBDDPoderosa' 2 veces era innecesario, empleando var y fin.",
+      "keyPoints": [
+        "Un Var obliga inicializar enseguida dándole un valor. Sin eso de espejo la computadora fallará.",
+        "Las Costantes deben resolverse y armarse in situ y a tiempo completo de compilada previa."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "csharp_5_ch_1",
+        "lessonId": "csharp_lesson_5",
+        "question": "¿Cual directriz obligatoriamente blindará una cifra prohibiendo todo cambio ulterior de re-escritura variable?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "fix",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "var",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "static",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "const",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_4",
+        "explanation": "Por regla general C# resguarda la información base bajo lectura protegida sólo con const al ser generada.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "csharp_lesson_6",
+    "courseId": "csharp",
+    "title": "Operadores de Aritmética y Asignación",
+    "description": "Mueve, incrementa, suma y procesa datos internamente.",
+    "order": 6,
+    "estimatedMinutes": 25,
+    "content": {
+      "introduction": "Un procesador está ideado puramente a operaciones continuas de base aritmética. En C# hay atajos rápidos pensados al confort de su lectura.",
+      "sections": [
+        {
+          "id": "csharp_6_sec_1",
+          "title": "Operadores Asignacionales Unidos",
+          "content": "Para añadir monto y reguardar enseguida acudimos a atajos tales como +=, -= o *= omitiendo la reescritura de equidad inusitada (saldo = saldo + 5; vs saldo += 5;).",
+          "order": 1
+        },
+        {
+          "id": "csharp_6_sec_2",
+          "title": "El incremento solitario",
+          "content": "Si requieres sumar en un grado base fijo numérico unitario en uno en uno, no existe medio de suma rápido más contable base que poner de modo sufijado el ++ o el descenso veloz --.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "csharp_6_ex_1",
+          "title": "Cálculo Rápido y Limpio",
+          "code": "int bateria = 80;\nbateria -= 10; // Queda 70\nint pasos = 0;\npasos++; // Pasos vale 1 ahora",
+          "language": "csharp",
+          "explanation": "La sencillez en sumatoria es tan habitual al realizar contabilidades iteracionales formales de conteos internos sin ocupar pantalla."
+        }
+      ],
+      "summary": "Son imprescindibles ahorradores de teclado del programador.",
+      "keyPoints": [
+        "Un paso ++ de adición afecta variando su comportamiento dependiendo a donde está puesto detrás como variable++ a que si primero evalúa por estar enfrente: ++variable",
+        "% se sigue ocupando global para arrojar y quedarse puros restos de una eventual división exacta."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "csharp_6_ch_1",
+        "lessonId": "csharp_lesson_6",
+        "question": "¿Si el identificador int puntos comienza siendo 5; Qué sucedería con la forma acortada tras poner ' puntos *= 2; '? ",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "puntos vale 2",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "marcaría un error aritmético",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "puntos es 10",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "Un asterisco adjunto en igualdad le transfiere valor multi-plicacional recíprocamente del monto puesto frente reemplazando rápido al anterior por la multiplicacion originada.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "csharp_lesson_7",
+    "courseId": "csharp",
+    "title": "Lectura y Escrituras Híbridas a Consola",
+    "description": "Logra establecer pláticas entre usuarios enviando salidas terminales e ingiriendo entrada a cambio.",
+    "order": 7,
+    "estimatedMinutes": 35,
+    "content": {
+      "introduction": "El motor .NET preconstruyó y forjó sus clases universales de entorno inicial con Console, tu primer acercamiento hacia que los programas detengan todo para conversar, preguntar o emitir.",
+      "sections": [
+        {
+          "id": "csharp_7_sec_1",
+          "title": "Console.ReadLine()",
+          "content": "Atrapa un texto, sin procesar ni filtrar numéricamente. El usuario tecleará un texto arbitrario el que detendrá por completo todas las acciones base en tanto el botón Enter no se apriete.",
+          "order": 1
+        },
+        {
+          "id": "csharp_7_sec_2",
+          "title": "Convertir Entradas",
+          "content": "Puesto que Console deviene exclusivamente solo devoluciones puramente tipo \"String\", usarlo natural si piden números no sirve. Para cálculos se debe enfrascar primero forzosa en transformaciones puras ejemplo Convert.ToInt32().",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "csharp_7_ex_1",
+          "title": "Conversación Interactiva Terminal C#",
+          "code": "Console.WriteLine(\"Escriba su monto: \");\nstring texto = Console.ReadLine();\nint pago = Convert.ToInt32(texto);\nConsole.WriteLine(\"Debe pagar doble, pagará: \" + (pago * 2) );",
+          "language": "csharp",
+          "explanation": "Los input del entorno Console solo entregan texto literal. La magia inter-media del conversor te abre las llaves matemáticas reales de C#."
+        }
+      ],
+      "summary": "Son las llaves conque probarás tempranamente y jugarás si tu lógica programativa se orienta correctamente.",
+      "keyPoints": [
+        "Un WriteLine expulsa lo enseñado provocando también saltos hacia la linea abajo inferior; el Console.Write imprime todo en seco pegadito.",
+        "Omitir el cast o Parse para recibir el número provocará crash inminente terminal si en su lugar usaron la pura variable string para multiplicación falsa."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "csharp_7_ch_1",
+        "lessonId": "csharp_lesson_7",
+        "question": "¿Como resultan los valores atrapados base puros captados a lo natural de las respuestas dadas implementando Console.ReadLine() nativo?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Depende meramente que se pulsó en teclado es dinámico.",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Entran solo estrictos de ser como base Strings nativos de la API preasignados",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "Integers enteros forzosamente",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Al ser puramente strings, su uso general carece poder aritmético si antes no se ejerce una forzada metamorfosis por métodos Int.Parse.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "csharp_lesson_8",
+    "courseId": "csharp",
+    "title": "Escrutinios: Comparación y la Lógica",
+    "description": "Enséñale verdades y la capacidad que un sistema tiene por verificar la realidad booleana mediante sentencias analíticas completas unidas.",
+    "order": 8,
+    "estimatedMinutes": 35,
+    "content": {
+      "introduction": "Un paso fundamental a un código autónomo y no un reproductor ciego, requiere de verificaciones. La mayoría usa la operancia del AND (&&) y del OR (||).",
+      "sections": [
+        {
+          "id": "csharp_8_sec_1",
+          "title": "Igualando las cosas (== y !=)",
+          "content": "Mientras usar 1 (=) reatribuye a la memoria; el choque dual interactivo del (==) arroja el resultado verdadero o falso dependiendo de la equivalencia general vista allí. Su antónimo de contraste rebelde y distante se apoya sobre él (!=).",
+          "order": 1
+        },
+        {
+          "id": "csharp_8_sec_2",
+          "title": "Compuertas de Negativo y Exigencia",
+          "content": "Para denotar falsedad en variables se interpone una exclamación pura por delante de ella misma (!activo). Para englobar una proposición donde bastaría con ceder un SÍ general a la suerte, usas paralelismos OR ( a == 5 || a == 6).",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "csharp_8_ex_1",
+          "title": "Fichajes Exclusivos y Exigencias Booleares",
+          "code": "bool poseeBoleto = true;\nint pasePrivadoNivel = 10;\n// Evalúa con el operador exclamatorio para negar la afirmación\nbool puedePaseVIP = poseeBoleto && !(pasePrivadoNivel < 8);\nConsole.WriteLine(puedePaseVIP);",
+          "language": "csharp",
+          "explanation": "El doble empalme exclamatorio de pasePrivado lo vuelve en falso si se halla la afirmación (10 menor 8; Falso) por ende negación de un negativo resulta verdad general final a true."
+        }
+      ],
+      "summary": "Son sentencias invisibles y formadores del pilar universal usado por todo programa condicional posterior. Todas rematarán de fin bajo el tipo exclusivo de verdadero true, o del falsacionismo total (false).",
+      "keyPoints": [
+        "Un And (&&) siempre claudicará fallando todo lo global frente a que descubra al instante del análisis general al menos uno que sea Falso.",
+        "Or (||) sobrevive dándote la pauta positiva tan solo un bloque colindante suyo resulte dar verdadero."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "csharp_8_ch_1",
+        "lessonId": "csharp_lesson_8",
+        "question": "¿Como se autodenomina a la compuerta exclusiva exigida para contrastes alternos y alternativos O excluyentes en su programación?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "OR (||)",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_2",
+            "text": "AND (&&)",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "NOT (!)",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "El signo derivado de pipe vertical duplicada da constancia e introducción directa a las condiciones compuertas de alternativa flexible de una vía afirmativa (OR).",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "csharp_lesson_9",
+    "courseId": "csharp",
+    "title": "Bifurcaciones con If-Else",
+    "description": "Modifica tu riel a discreción para elegir de forma independiente comandos que proceden si tu afirmación es cierta.",
+    "order": 9,
+    "estimatedMinutes": 35,
+    "content": {
+      "introduction": "Un Condicional provee encrucijadas viables con respuestas ante un suceso programado impredecible al inicio de forma dura o condicional de variable rellenada interactiva.",
+      "sections": [
+        {
+          "id": "csharp_9_sec_1",
+          "title": "Plataforma Base Sencilla",
+          "content": "Construye una cabecera de `if (afirmación true)` y un cuerpo con rizos {}. El código en medio correrá siempre de haber comprobado al principio. De haber desestimado ese análisis el ordenador brincará ciego sus líneas a posterior y abajo olvidándolas del todo.",
+          "order": 1
+        },
+        {
+          "id": "csharp_9_sec_2",
+          "title": "Túnel de Rescate Alterno General (else)",
+          "content": "Si no cumples pautas previas, la computadora entrará a la base refugio final denominada `else` donde efectuarla orden pasiva restante.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "csharp_9_ex_1",
+          "title": "Cadena de Evaluación Continua Pura",
+          "code": "int acierto = 85;\nif(acierto == 100) {\n  Console.WriteLine(\"Impecable maestro\");\n} else if (acierto > 80) {\n  Console.WriteLine(\"Estuvo Genial al Cierre\");\n} else {\n  Console.WriteLine(\"Fallo garrafal y Suspenso\");\n}",
+          "language": "csharp",
+          "explanation": "En las casadas o las cadenas complejas `else if()`, ante un solo suceso de encuentro positivo verdadero, la orden omite ejecutar lo de su debajo asícumplan su base particular de comprobante. En este programa se ejecuta puramente Estuvo Genial."
+        }
+      ],
+      "summary": "Mecánica principal orientada por las compuertas hacia las elecciones dinámicas por el usuario real.",
+      "keyPoints": [
+        "Un condicional desobligado que incluya una mínima orden corta lineal no requiere siquiera de encerrarlas bajo uso estricto en las llaves abridoras ({) .",
+        "Nunca se debe delimitar con puntos comas la base cabecera de evaluación if()"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "csharp_9_ch_1",
+        "lessonId": "csharp_lesson_9",
+        "question": "¿Como es bautizada el apéndice complementario para efectuar acciones puras siempre condicionalmente eludidas al errar tu sentencia original verificadora base if?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "then",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "catch",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "otherwise",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "else",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_4",
+        "explanation": "El Else ejecuta e indica universalmente a los programadores lo alterno por defecto de la falibilidad del caso inicial previsto.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "csharp_lesson_10",
+    "courseId": "csharp",
+    "title": "El Enrutador Switch",
+    "description": "Una alternativa para comparar sin la sobrecarga pesada por cascada si analizas igualdad total a múltiples caminos.",
+    "order": 10,
+    "estimatedMinutes": 35,
+    "content": {
+      "introduction": "Un agrupador inmerso a tratar una variable pura bajo infinitas coincidencias exactas y prefabricadas de enumerables u objetos char sin amontonar If por doquier de forma visualmente confusa y tediosa de leer u escribirla.",
+      "sections": [
+        {
+          "id": "csharp_10_sec_1",
+          "title": "Empalajes con Los Cases",
+          "content": "Tomas e imprimes a `switch(variable)` en cima y dictas los casos paralelos (ej. case 5:) conteniendo código único a ese estado coincidente numérico. Su escape vital es la orden predeterminada `break;` cerrando a cada case para finalizar.",
+          "order": 1
+        },
+        {
+          "id": "csharp_10_sec_2",
+          "title": "Avance Exclusivo C# en String",
+          "content": "A divergencia del viejo C++, C# permite compilar su switch nativo usando verificador string integrales sin miedo e íntegro bajo `case \"palabra\":` de base literal.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "csharp_10_ex_1",
+          "title": "Elección simple Textual de C# Modernos",
+          "code": "string dia = \"Viernes\";\nswitch (dia) {\n   case \"Lunes\":\n      Console.WriteLine(\"Empieza pesada semana\");\n      break;\n   case \"Viernes\":\n      Console.WriteLine(\"Sale de fiesta hoy\");\n      break;\n   default:\n      Console.WriteLine(\"Algún día será\");\n      break;\n}",
+          "language": "csharp",
+          "explanation": "Comparamos la paridad en string exacto. Note el default de salvavidas que se ejecuta al arrojar de pantalla errata."
+        }
+      ],
+      "summary": "Son visualmente insuperables operando los clásicos menús de videoconsolas limitados o entradas direccionales.",
+      "keyPoints": [
+        "Un break sin poner estropeará todo por el fall-through del escalón inferior C# estricto.",
+        "Puedes usar constantes fijas o int exactos."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "csharp_10_ch_1",
+        "lessonId": "csharp_lesson_10",
+        "question": "¿Como te defiendes como base ante un switch contra valores inusuales e indeciables descartados que el programa detecta omitiendo coincidencias con toda la pila del case original?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Uso la exclusividad Default",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_2",
+            "text": "Incluyo por norma Exception final",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "Abro else if al salir de sus rejas inferiores de compuertas.",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "El apartado especial default previene y procesa a los extraviados residuales dando respuesta firme programada.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "csharp_lesson_11",
+    "courseId": "csharp",
+    "title": "Iteradores Limitados: For y Foreach",
+    "description": "Ejerce control en vueltas múltiples basándote a repeticiones por un numero estático cerrado o recorre tus datos de grupos masivos.",
+    "order": 11,
+    "estimatedMinutes": 30,
+    "content": {
+      "introduction": "Un iterador base no es más un bucle puro estructurado que sabe dónde empezar, y con cuanta vuelta dará marcha a su paro formal calculando al paso su ruta.",
+      "sections": [
+        {
+          "id": "csharp_11_sec_1",
+          "title": "La triple sentencia FOR base",
+          "content": "For posee un empaquetado 3 en mano: (variable inicial; tope o meta a comprobar ; ritmo y crecimiento de su zanja de paso en final) delimitadas internamente bajo la rigurosidad separadas (,;) de puntos coma. Ideal operando cálculos repetitivos exactos secuenciados.",
+          "order": 1
+        },
+        {
+          "id": "csharp_11_sec_2",
+          "title": "Foreach Exclusivo (Lista Continua)",
+          "content": "En Listas llenas de C#, una versión inteligente de esto se ocupa `foreach (tipo x in lista)`. Aborda por su cuenta solita todo grupo y pasa el elemento vivo sin exigir iterantes del número i[0].",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "csharp_11_ex_1",
+          "title": "Recorridos sin Índices Tediosos Manualmente",
+          "code": "string[] marcas = {\"Sony\", \"Nintendo\", \"Xbox\"};\nforeach (string i in marcas) {\n   Console.WriteLine(i);\n}",
+          "language": "csharp",
+          "explanation": "El compilador auto-averigua lo largo extra al conjunto, pasará de inicio a tope imprimiendo a variables dinámicas temporales representativas como Sony suelto natural."
+        }
+      ],
+      "summary": "Son tu compañero de viajes fijos ideal reduciendo incomprensiones en sus pasados al leer la cantidad requerida que hará tu programa circular del tope.",
+      "keyPoints": [
+        "Un For clásico altera listas modificando usando sus corchetes internos",
+        "Foreach no admite que toques y rompas las listas ni reasignes a las memorias dinamicamente dentro a de ella."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "csharp_11_ch_1",
+        "lessonId": "csharp_lesson_11",
+        "question": "¿Cual sentencia te posibilita navegar sin riesgo de falla extrema de frontera a través todo el contenido preconstruido array con el automatismo extra de lenguaje de C# base de manera inteligente directa?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "while()",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "do {} while",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "foreach()",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "for()",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "Foreach asume carga lectora total interna ignorando si posees 3 elementos totales bases o cuentas 4 mil de ellos evadiendo fallos índices.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "csharp_lesson_12",
+    "courseId": "csharp",
+    "title": "Iteradores Desestáticos: while y do-while",
+    "description": "Generan acción en ciclos perdurables anclados a eventos y verificaciones lógicas base puras cambiables y temporales impredecibles.",
+    "order": 12,
+    "estimatedMinutes": 35,
+    "content": {
+      "introduction": "Ideales esperando señales. A diferencia del for, while carece un medidor por número base asignado desde cuna, evalúa desde lejos si sigue adelante mientras te aferras a verdadero.",
+      "sections": [
+        {
+          "id": "csharp_12_sec_1",
+          "title": "Estándares While base",
+          "content": "Revisa frontal el testeo. Si ingresaste al andén validado true y con el progreso en bucle la afirmación fallara, su ciclo cortará sus cuerdas no efectuando ni el siguiente movimiento allí adentro interno en sí.",
+          "order": 1
+        },
+        {
+          "id": "csharp_12_sec_2",
+          "title": "Variación Forzosa Base (Do-While)",
+          "content": "Entra corriendo en picada como ciego al pozo primeramente sí o sí, procesa código interno y se detiene de parón puro atrás abajo analizando y cavando bajo while () si es digno su progreso circular al inicio a por otra repetición repetidas.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "csharp_12_ex_1",
+          "title": "Preguntas recurrentes C# exclusivas",
+          "code": "int contador = 0;\ndo {\n    Console.WriteLine(\"Ejecutando número: \" + contador);\n    contador++;\n} while (contador < 3);",
+          "language": "csharp",
+          "explanation": "Aún sí contador en la base nula previa entrase valiendo 10 superando la valla prohibitiva del menor a 3, sí lograría un console e imprimir ejecución en el inicio por cortesía primera del Do natural inquebrantable."
+        }
+      ],
+      "summary": "Son motores para vigilar a los que actúan o sensores bases si estás armando aplicaciones vivas puras de fondo C# en .NET que esperan tu interactividad.",
+      "keyPoints": [
+        "Un olvidable do() exige al salir un semicolón fin a la instrucción ; post while ().",
+        "Los bucles infinitos crasheados provienen siempre por omitir alterar al medidor test de su encierro base natural falseador."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "csharp_12_ch_1",
+        "lessonId": "csharp_lesson_12",
+        "question": "¿Donde transfiere una instrucción Do-While toda la evaluación pesada test principal comparativa lógica en todo el bloque que arma la función iterativa?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Al medio",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "A pura cabecera y frente.",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "A los finales o pisos tras cerrar el cuerpo iterador de comandos.",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El do-while ubica el While validador atrás y bajando de todo la lectura para asegurar correr libre los elementos previstos ciegos sin trabas primarias nativas lógicas.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "csharp_lesson_13",
+    "courseId": "csharp",
+    "title": "Métodos Base C#",
+    "description": "Fragmentarás la masa de código para volver tu archivo .NET moldeable basando módulos limpios apartados.",
+    "order": 13,
+    "estimatedMinutes": 35,
+    "content": {
+      "introduction": "Un método de un lenguaje (antes Función del viejo C) no debe repetir instrucciones kilométricas amontonadas bajo del Main. Descrubrirás empaquetarlas, llamar con su denominación puramente breve a tu código de distancia limpia y evitable.",
+      "sections": [
+        {
+          "id": "csharp_13_sec_1",
+          "title": "Anatomía Rígida Estructural de Métodos",
+          "content": "Para ser creado pide ser precedido determinando del nivel público-privado estricto, estaticidad pre-configurada ocasional y dictándole universalmente la devolución preestablecida de materia: Void si se calla al culminar o el tipado final para escupir resultados al retorno.",
+          "order": 1
+        },
+        {
+          "id": "csharp_13_sec_2",
+          "title": "El Envió Principal Base: Return",
+          "content": "Para cumplir sus designios numéricos o base calculados requiere que uses el mando de cierre `return tu_resultado;` dándole vida y parando la encomienda metodista al paso. Si el método era bautizado Int o String carecido de returns producirás fallos lógicos a montones fatales de lectura inicial base.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "csharp_13_ex_1",
+          "title": "Fabrica Simple Operante Interna",
+          "code": "static int sumarNumeros(int x, int y) {\n    return x + y;\n}\n\nstatic void Main(string[] args) {\n    int a = sumarNumeros(5, 5);\n    Console.WriteLine(a); // imprime al número 10\n}",
+          "language": "csharp",
+          "explanation": "Ocupamos local en Main por static simpleza para invocar en lugar puro a nuestro método, devolviendo su producto base y dejándolo contenido allí a disposición limpia programatica local para imprimirse en orden pura sin engorros operantes extra explícitamente detallados delante tuyo sino guardados detrás del orden base sumarNumeros()."
+        }
+      ],
+      "summary": "Son las cajas negras. Envías basuras a operarse pre-meditadamente limpias. Devuelven orden y oro operado si tú indicas su tipado al bautizarse formalmente y estructurada base.",
+      "keyPoints": [
+        "Identificaciones con la etiqueta universal obligan tipados inmutables y exactos puros de C#.",
+        "Un método carecido del Static no sería invocado libre sobre el plano Main y exigiría formarse clases u Objetos obligatoriedad."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "csharp_13_ch_1",
+        "lessonId": "csharp_lesson_13",
+        "question": "¿Qué pre-etiquetaje universal exiges imperativo ponerle frente del método principal dictándole que este se cierre y muera olvidándose de arrojar devolución material o retornables explícitos funcionales de bases puros operantes tras tu paso o encargo de ejecución local base natural de su cuerpo principal?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "undefined",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "void",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "null",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "blind",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Void dicta vacuidad de espera, la compilación procede sin retorno return exigido eximiendo al método obligatoriamente a responder datos al mandamás main base puros.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "csharp_lesson_14",
+    "courseId": "csharp",
+    "title": "Módulos Avanzados (Out y Ref)",
+    "description": "Logra saltarte los blindajes C# internos e interactúa enlazando cambios y escupe resultados adicionales múltiples con out.",
+    "order": 14,
+    "estimatedMinutes": 45,
+    "content": {
+      "introduction": "Tratando un parámetro usualmente te blindan dando por copias inalteradas nativas del Main. El C# incluyó modificadores `ref` para permitirte trastocar variables y `out` pensado en métodos devueltos más aluviones al retorno.",
+      "sections": [
+        {
+          "id": "csharp_14_sec_1",
+          "title": "Referenciadores Nativos Puros (ref)",
+          "content": "Empleando ref obligas al usuario externo enviar ya iniciados al nacer las cajitas y variables; desde la función al incrustarles o cambiar montos afectarías con firmeza irremediable sobre la copia madre original fuera base allá nativa de main afectando el origen nativo base int alterado allí de modo puro real de paso de valores en base C# base.",
+          "order": 1
+        },
+        {
+          "id": "csharp_14_sec_2",
+          "title": "Expulsiones al Margen Raros (out)",
+          "content": "Suples el límite universal base indicando un único return natural solitario y permites dar luz múltiple salida final; usas int de out rellenadas por ti base para exportación extra base y en vez de ocupar return.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "csharp_14_ex_1",
+          "title": "Paseo de Alteraciones",
+          "code": "static void multiPorDiez(ref int numeroOriginal) {\n   numeroOriginal *= 10;\n}\n\n// Al invocarlo desde Main()\nint numG = 5;\nmultiPorDiez(ref numG); // num G allí afuera ahora será un monto base de puramente los 50 en el paso mutuo real.",
+          "language": "csharp",
+          "explanation": "No retorna base de return y aún sin poseer tipado en void afectó rompió e inmiscuyó su mano invisible directa a la cifra int numG alterándose verdaderamente a un nuevo mundo virtual local de main base originario allí nativa puramente en vida virtual sin copia simple base interna."
+        }
+      ],
+      "summary": "Son rudimentos para dar una flexibilidad gigante. Out es ideal logrando conversores puros verdaderos que digan base TryParse devolviendo la confirmación bool en return y aparte la cifra verdadera lograda incrustada fuera de la ruta clásica al escape variable real extra de paso múltiple.",
+      "keyPoints": [
+        "Un método Ref demanda inicialización imperiosa y obligatoria sin falta desde las afuera antes de poder accederles.",
+        "Un out consiente al Main base enviando sueltas base nulas sin valor original y delegas tú a llenar de base final pura en vida real base metida a los procesos."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "csharp_14_ch_1",
+        "lessonId": "csharp_lesson_14",
+        "question": "¿Como procedes o logras evadir el veto forzoso C# y le instruyes un escape y una salvedad al mandar 2 elementos devolutorios como base extrados base nativas reales a salida general desde el módulo o funcionales creados si todo es unívoco al devolver un return solitario obligatorio preestablecido real base programado en su natividad de paso c# originarios?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Escribes 2 bases return juntos",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Incorporas etiquetas o el tipo identificatorio de out adjuntado a sus parámetros base solicitando llenar base pura real salida",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "Devuelves Void",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Un Out soluciona obligando preasignar sin valor exterior que mandes al parámetro el que sea manipulado final dándote extracciones varias adicionales reales múltiples al retorno básico.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "csharp_lesson_15",
+    "courseId": "csharp",
+    "title": "Unidimensionales base puros Array C#",
+    "description": "Engloba tus masas informáticas a modo de trenes concatenantes estáticos rígidos para bases limitadas seguras formadas allí.",
+    "order": 15,
+    "estimatedMinutes": 30,
+    "content": {
+      "introduction": "Un array acopla base estricta inquebrantable puramente al mundo de su mismo tipado natural para que manipulas de un golpe con corchetes e índices secuenciales puros desde la 0 iniciales.",
+      "sections": [
+        {
+          "id": "csharp_15_sec_1",
+          "title": "Las Estructuras Declaratorias bases",
+          "content": "Para forjarlas se usan sus corchetes acoplados limpios al tipo base primero seguido a su denominación final; y utilizando al inicializarlas la orden reservada `new`. Ejemplo: int[] listaMia = new int[5]; donde 5 limitará toda extensión posible no negociable real límite de vida en memoria a los 5 variables bases enteros en toda época programadas unidas.",
+          "order": 1
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "csharp_15_ex_1",
+          "title": "Fabricaciones base expresadas formales al vuelo.",
+          "code": "string[] marcasDiscos = new string[3] {\"Seagate\", \"Toshiba\", \"Samsung\"};\nConsole.WriteLine(marcasDiscos[1]); // imprime natural Toshiba por ir índice nivel secundario nivel de arreglo 1",
+          "language": "csharp",
+          "explanation": "Podemos poblar las cosas abriendo corchetes encorvadas o los rizos desde el inicio y base o vacías llenándose posteriormente de indexadas como arr[0]= un valor. Todo al compilar exige base rígida."
+        }
+      ],
+      "summary": "Son elementos veloces puros. Carecen del gasto inflado de memorística por una Lista desbordante de vida dinámica natural. Ocuparlos impone certezas en longitudes finitas certeramente.",
+      "keyPoints": [
+        "Identifica propiedades suyas utilitarias para límites iterativos mediante Array.Length indicadoras base sin ser llamados paréntesicos reales extraños.",
+        "Pasarse de una raya en iterar arrojará invariablemente crasheo y excepción severa ArrayOutOfBound natural inescrutable final."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "csharp_15_ch_1",
+        "lessonId": "csharp_lesson_15",
+        "question": "¿Si el identificador de masa fue moldeado puramente como `int[] grupo = new int[4];` cual resultaría en ser su casillero limitante legal mayor o el índice base superior alcanzado de frontera puro sin estrellarse virtualmente para poder escribirle en indexación C# array original base desde el comienzo?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "grupo[4]",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "grupo[3]",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "grupo[1]",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "grupo[5]",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Dado su nacimiento estricto naciendo a contar puramente e invariable de 0 primero, el paso contable para contar los 4 ocupará puros alojadores 0, 1, 2, y finalizando el n3 limitante real última de índices válidos allí permitidas en vida para leerse seguras sin excepción generador programáticos puras.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "csharp_lesson_16",
+    "courseId": "csharp",
+    "title": "Manejos base Textual en String y sus Cadenas",
+    "description": "Ensámblalos como base pura uniendo textos y explota su magia moderna base introducida por interpolaciones avanzadas nativas de vida sintáctica pura de .NET al programador base sin pesados sumatorias al texto largos.",
+    "order": 16,
+    "estimatedMinutes": 35,
+    "content": {
+      "introduction": "Un manejo de string puro te evita errores fatídicos por usar puros arrays como c++. En C# moderno se adoptan herramientas veloces ahorradoras y fluidas limpias sintácticamente de legibilidad base programador puros al juntar todo lo leído.",
+      "sections": [
+        {
+          "id": "csharp_16_sec_1",
+          "title": "Las Inserciones Interpolatorias Base Modernas ($)",
+          "content": "Saliendo atrás al estilo anticuado e infumable `\"Mis años son\" + var + \" fin.\"`, si antepones simplemente base al frente extra de los textos el signo inicial `$` podrás llamar bases e incrustaciones variables libremente puestas solas entre medias encerradas abarcando puros rizos o las llaves cerradas `{}`. Ejemplo de paso final real textual: $\"Años = {var}\"",
+          "order": 1
+        },
+        {
+          "id": "csharp_16_sec_2",
+          "title": "Funcionales Especializadas",
+          "content": "Ocupa métodos incorporados universales sin forzosidad en sus base ej: misLetras.ToUpper() (para mayores puras); .ToLower() o recortando limpiezas en orillas .Trim().",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "csharp_16_ex_1",
+          "title": "Lectura Limpia Natural C# Base Interpolatorias puros de .NET base textual.",
+          "code": "string nombreD = \"Daniel\";\nstring mensajeFormal = $\"Acreditado base pase VIP y nombre puro: {nombreD.ToUpper()}\";\nConsole.WriteLine(mensajeFormal);",
+          "language": "csharp",
+          "explanation": "El símbolo Dólar antes extra a sus comillas dobles iniciales destraban al mágico motor analizador C# de evaluar puramente de base en { } su ejecución base."
+        }
+      ],
+      "summary": "Son las técnicas infaltables limpiando y en base aligerando visualmente puramente la vida del encargado diseñador textual C# en los logs.",
+      "keyPoints": [
+        "Todo string en base final es un objeto inmutable de c#. Todo cambio de mayúsculas formará atrás en silencio base y de vida un objeto copiando a la basura y reciclador todo puramente textual del viejo.",
+        "Se recomienda StringBuilders para ciclos y sumas de repeticiones de alta demanda de puros y nativas formadas."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "csharp_16_ch_1",
+        "lessonId": "csharp_lesson_16",
+        "question": "¿Como te defiendes como base habilitadora para interpolación literal y meter variable nativamente pura al interior del string en C# base nativo originario y evitar usar puros signos sumar (+) en variables cortadas a lo lejos de oraciones bases visuales rotas o pesadas allí?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Adhiriendo el signo arrobas de frente a cadenas bases puros ( @\"\" )",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Empleando obligados puros un guion (-) enfrente del texto al declararse",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "Inyectándole base literal el signo de Dólar encarecidamente previo base a la frase para desarmarlo e inicial interpolación pura text string ( $\" \" ).",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "Dólar es indicativo clave encendedor del motor interpolatorio que reconoce el valor inyectable y destapa llaves variables para c# moderno nativamente.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "csharp_lesson_17",
+    "courseId": "csharp",
+    "title": "Evolución Base Orientada (POO): Clases y Objetos",
+    "description": "Ingresa de lleno a dotarle un sentido universal a C# en arquitectura donde todos tus funcionamientos son encapsulamientos cerrados o variables nacientes.",
+    "order": 17,
+    "estimatedMinutes": 45,
+    "content": {
+      "introduction": "Un concepto vital que empodera para programar .NET a modo enterprise. Descartas variables flotando huerfanas e introduces molduras maestras formadas `Class` para dictaminar formas generales sobre a crear, originar nuevas variaciones de existencias copias puras derivadas exclusivas allí: los `Objetos`.",
+      "sections": [
+        {
+          "id": "csharp_17_sec_1",
+          "title": "Fabricaciones Maestras Clasistas puros",
+          "content": "Instaurada bajo la palabra reservada clave de uso Class, es un plano ciego base puro para casa general (no hay casa viva ahí). Contemplará Atributos propios puros ej: el color, marca, vida virtual, y albergando o incrustada funciones bases (llamadas Métodos internamente preestablecidos) tales directas base a correr; ej frenar().",
+          "order": 1
+        },
+        {
+          "id": "csharp_17_sec_2",
+          "title": "Las existencias vivas Reales (Instanciamiento C#)",
+          "content": "Se gestan bajo al orden encarecido inicial C# base invocando `new`. Así moldeas de los planos y pasas darle y adjudicas espacio RAM pura asignándole o formando materia con cuerpo.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "csharp_17_ex_1",
+          "title": "Atrayendo y dando vida",
+          "code": "class PerroT {\n  public string raza;\n  public void ladrar() {\n    Console.WriteLine(\"Hace guau\");\n  }\n}\n\n// Dentro uso main...\nPerroT chucho = new PerroT();\nchucho.ladrar();",
+          "language": "csharp",
+          "explanation": "Chucho resulta ser pura existencia derivada única a la rama de PerroT. Es el llamado formal puros base al objeto instanciado donde C# reserva vida a esto y ocupa la palabra public antes si quieres exponer a los demás verlo afuera base natural general a usarse."
+        }
+      ],
+      "summary": "Son las causantes base por la que los menús desplegables c#, los frameworks visuales e inteligencias se componen a modo de cajas manejando la información como encapsuladas y objetos dotados propios sin invadir el exterior general natural ajenas y controladas formales allí programáticas bases lógicas C# puras.",
+      "keyPoints": [
+        "Un Objeto hereda base todas y absolutas capacidades o molde de plano predeterminado pero alberga variables valores privadísimos suyos distintos del resto copiados al mundo.",
+        "A diferido al C++ nativo original de años atrás C# asume puramente puros todo por class. Aún sus tipos en el sistema primitivo string puros son class internas disfrazadas inmutables a puras ordenes general limitadas."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "csharp_17_ch_1",
+        "lessonId": "csharp_lesson_17",
+        "question": "¿Como es bautizada el encargo y creador u orden nativa C# esencial de asignaciones encargada primordialmente dando materia física base inyector memorístico para extraer a un plano muerto ciego general vacío clase, originándosele e induciéndole puros en su lugar de vida programática física real virtual la instancia de `Objeto` como nueva copia activa o base formada natural de vida?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "new",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_2",
+            "text": "start",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "create",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "make",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "La asignación `new` evoca al constructor nativo dándole reservas físicas integrales vivas apartando bytes nativos allí en entorno para su alojamiento y pase a operar sus vidas en .NET de C#",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "csharp_lesson_18",
+    "courseId": "csharp",
+    "title": "Accesibilidad Universal: Constructores y Encapsulado Propiedades (Get - Set)",
+    "description": "Blinda el núcleo, controla tu vida de base, filtra su nacimiento real natural C# e ingrésalas en tus dominios puros programando qué alteran al objeto.",
+    "order": 18,
+    "estimatedMinutes": 45,
+    "content": {
+      "introduction": "Una clase expuesta puramente en vida public no ofrece freno, una barbaridad te asolaría a tu proyecto y permitirian meter negativo -20 a una vida u edad imposible natural C# y corrompen sistemas. Propiedades controlan los ingresos reales sin ensuciar puros a los Main.",
+      "sections": [
+        {
+          "id": "csharp_18_sec_1",
+          "title": "Constructores Puros Inciales Nativos",
+          "content": "Son métodos invocados sin poder omitir siempre originándose del 'new'. Tienen de obligatoriedad el identificarse llamarse puro y duro el exacto propio nominal y sin dar a devoluciones de vida bases del class (ej Class Vehiculo posera de Creador forzoso public Vehiculo().",
+          "order": 1
+        },
+        {
+          "id": "csharp_18_sec_2",
+          "title": "Propiedades Filtradores",
+          "content": "Enmascaras bajo public y oculta al verdadero atributo private. Al tratar meter valores, todo correrá y entrará por tu SET escondido. Al intentar sacarlas desde afuera correrá de orden a buscar al GET donde puedes retornar lo deseado engañosamente blindado.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "csharp_18_ex_1",
+          "title": "Constructor Limpio de Entradas Propiedades C# Nativas puros",
+          "code": "class CajaFuerte {\n   private int dineroT;\n   // Setter puros Getter nativas de pase C# de bases properties\n   public int DineroT {\n      get { return dineroT; }\n      set { \n           if(value > 0) dineroT = value; \n     }\n   }\n}\n// main...\nCajaFuerte ca = new CajaFuerte();\nca.DineroT = -500; // el if filtra que no sea posible allí y protegiendo natural al atributo privado y nunca caerá negativa vida.",
+          "language": "csharp",
+          "explanation": "Se escuda de falsos o errores de capa exterior obligando a la ordenación real interna set filtrarlo. Ocupa C# palabra oculta asignada 'value' identificando a las escrituras dadas y entradas generales pasadas allí base al set al ejecutar las equivalencias igual(=) de ordenamientos exteriores ajenos."
+        }
+      ],
+      "summary": "Son las técnicas infaltables formadoras de bases programadoras superiores. Un proyecto sólido en .NET nunca deja variables primitivas públicas flotando ciegas inalterables y expuestas al público bases externas sin getters cuidadores protectores o set bases lógicas puras de restricciones. C# te facilita además usar short y rápidos `public int Dato {get; set;}` resumiendo el trabajo extra allí donde no requieres filtro nativamente lógica.",
+      "keyPoints": [
+        "Constructores demandan un llenado y evaden y prohíben instanciar carecido puramente parámetros obligatorios previstos a no ser tengas un base vacío sobrecarga disponible.",
+        "Una Propiedad padece de C# camel uppercase inicial por reglas y el privado puro empieza miniúscula subrayada _dato"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "csharp_18_ch_1",
+        "lessonId": "csharp_lesson_18",
+        "question": "¿Cual es el apartado encargado C# universal preescrito y natural base palabra identificatoria que recibe todo valor dictaminado con símbolo de igualdad (=) de la variable de clase proveniente exteriormente donde tu código base property oculta interna `set { } ` pueda examinarlo en comparativa e insertarlo tras confirmarlo sin importar del tipo C# numérico o text que llegue real puro de vida C# local nativa?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "target",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "entry",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "value",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "Sin declararse de vista a ninguna índole base visual de función ni base extra, se adopta mágicamente base y toma C# prestado 'value' asimilando allí mismo y absorbiendo la orden recibida exterior C# a inyectar al objeto de base final de set nativas pura .NET",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "csharp_lesson_19",
+    "courseId": "csharp",
+    "title": "Herencia y Generalizaciones",
+    "description": "No rehagas desde la base ni dupliques; construye derivando de entes complejos primigenios puramente y hereda funcionabilidad gratis programada C#.",
+    "order": 19,
+    "estimatedMinutes": 45,
+    "content": {
+      "introduction": "Un paso vital OOP de programar. Estableces arboles jerárquicos: Una base de general 'Vehículo' traspasaría sus componentes como marchas a derivadas directos como 'Bicicleta' o clase 'Auto' para evitarte codiciar, reescribir inmensidades doble puras nativamente C# al codificador puro y reutilizar.",
+      "sections": [
+        {
+          "id": "csharp_19_sec_1",
+          "title": "Reglas de Herencias Sucesores Dos Puntos",
+          "content": "Para forjarlas se usa al inicio de creación su símbolo anclando a los padres de los base C# (:). Un `class Gato : Mascota`. Gato adoptará al nacer las reglas C# nativa todo los variables formales métodos generales dictaminados dentro Mascota que hayan estado en modo Protegidos(protected) o en Publico.",
+          "order": 1
+        },
+        {
+          "id": "csharp_19_sec_2",
+          "title": "Sustento Único",
+          "content": "C# por arquitectura pre-prohíbe que re-utilices e implementes clase con multiplicidades formadas allí base a progenitores duplicados. No puede una raza surgir en herencia doble C# base natural en simultaneo puro.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "csharp_19_ex_1",
+          "title": "Extendiendo el mundo puro natural jerarquico C# Base",
+          "code": "class Electro { \n  public void enchufar() { Console.WriteLine(\"Encendido C#\"); } \n}\nclass Tele : Electro { \n  public string canal; \n}\n// main \nTele tv = new Tele();\ntv.enchufar();",
+          "language": "csharp",
+          "explanation": "El caso C# resalta notorio. Tele hereda puro `enchufar()` y se apodera dándoles pase para usarse sin contenerlo ella reescrito adentro. Obtienes funciones pre armadas en base al antecesor universal general allí puro formadas naturales C# puros y .net base."
+        }
+      ],
+      "summary": "Son rudimentos bases formadoras. Evitan en duplicado rearmado funciones grandes y complejas de validadores creando a la Base Maestra principal puramente controlada. La base restringe C# de modo private nativas bases. Su alternativa son interfacings.",
+      "keyPoints": [
+        "Un objeto Private no se heredará base hacia ramas de sus vástagos; debes de recurrir al Protected si ansias que hijos manejen pero no externos a la base clase e invenciones libres de base pura."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "csharp_19_ch_1",
+        "lessonId": "csharp_lesson_19",
+        "question": "¿Como procedes o logras evocar a entablar pura la conexión jerárquica pre programada uniendo en .NET la relación del parentesco conector base vinculante natural e instruyendo sobre la asimilación genética programada de clase hacia un hijo nuevo (Ej class Heredero)?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Mediante el vocable clave (extends)",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Adhiriendo el signo doble Dos Puntos identificatorios (:)",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "Insertando -> desde el nombre",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "A de modo a C++, se descarta por completo el implements de java y las extensiones y se delega el pase uniendo limpio base visual C# originario con ( : ) al formarse cabeceras de herencias allí de ordenes puramente de vida bases C# base programática pura.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "csharp_lesson_20",
+    "courseId": "csharp",
+    "title": "Domador de Crisis e interrupciones (Excepciones try catch)",
+    "description": "Previene el caos terminal salvando y frenando salidas abruptas ineficientes cundo el código c# padece paros forzosos por divisiones entre cero y archivos extraviados base reales.",
+    "order": 20,
+    "estimatedMinutes": 45,
+    "content": {
+      "introduction": "Un proyecto serio robusto nunca muere de un pantallazo o cierre forzado sorpresivo y crudo C# ciego en consola final. Manejas las anomalías y errores del entorno C# en vivo que rompen al motor atrapándolos y reaccionando mediante excepciones controladas bases reales.",
+      "sections": [
+        {
+          "id": "csharp_20_sec_1",
+          "title": "Las Burbujas Base Revisoras",
+          "content": "Pones sentencias dudosas de fallo cerradas (lecturas usuario inestables que pidan número int de letras base) ubicados e insertos dentro rizos encapsulados `try { }`. Si algo allí quema mal o crashea internamente pasa al túnel de intercepción sin afectar el motor virtual ajeno base.",
+          "order": 1
+        },
+        {
+          "id": "csharp_20_sec_2",
+          "title": "Captores formales bases",
+          "content": "La malla atajadora C# debajo de ellos será `catch (Exception err)` adonde te resbala todo el crasheo y prosigues limpiamente en comandos para reportar de alerta suave por interfaz sin abortar programa al escritorio de PC usuario C# o apagar base.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "csharp_20_ex_1",
+          "title": "Divisora Mágica Inmune C# puros a cero bases formales de control C# .net puro log.",
+          "code": "try {\n  int[] matrizC = {1, 2, 3};\n  // Indexador imposible inexistente:\n  Console.WriteLine(matrizC[60]);\n} catch (Exception ex) {\n  Console.WriteLine(\"Hubo un fatal problema contenido: \" + ex.Message);\n}",
+          "language": "csharp",
+          "explanation": "En caso normal el PC colapsara con IndexOutsideException y expulsa rojo puro apagando base C#. Emplear esta lógica captura todo base general derivándolo dócilmente a puramente de reporte texto impreso final general sin colapsos nativos C#."
+        }
+      ],
+      "summary": "Son los guardianes y salvaguardas programáticas C# base. Indispensables al gestionar lecturas externas bases inestables puros formales (bases de datos, lectura base archivero y de inputs text usuario de pase de cast C# bases de vida reales de formados). Obligación corporativa .NET general puros sin falta formal.",
+      "keyPoints": [
+        "Puedes adherir apéndices con bloques catch () repetidos buscando atajar casos específicos base de DivideByZeroException y no Exception general ciega pura real.",
+        "Existe la orden forzosa limpiadora unida `finally {}` quien corra base termine lo que ocurra como pase o haya crasheos internos de vida o no puros siempre puros bases C# correrá ejecutándose puramente por de base sin paros pase real formados allí pura vida programática sin paro en escape bases nativas .Net c# reales formales."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "csharp_20_ch_1",
+        "lessonId": "csharp_lesson_20",
+        "question": "¿Como te defiendes como base y como es dictado el orden conector C# universal de intercepción pura salvadora donde programes toda reacción formal base pacífica sin matar el programa base C# nativo originario y evitar usar puros colapsos generales frente a un error fatídicos captados que originaron fallas previas formales a nivel de try anterior C# encajando y atrapando la anomalía base pura y nativa de vida formadas lógicas allí?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "trap",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "catch",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "rescue",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "finally",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "El atrapador Catch, como red final a todo, embosca interrumpiendo el flujo letal que rompió el try inicial encarrilándolo y dándole riendas y poder al programa continuar base en C# nativo .NET base de manera controladas sin pánico formal sin escape a colapso natural.",
         "points": 10,
         "order": 1
       }

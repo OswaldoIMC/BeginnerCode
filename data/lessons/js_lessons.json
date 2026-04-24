@@ -80,7 +80,6 @@
       }
     ]
   },
-
   {
     "id": "js_lesson_2",
     "courseId": "javascript",
@@ -134,10 +133,26 @@
         "question": "¿Dónde puedes ejecutar JavaScript sin instalar nada?",
         "type": "multiple-choice",
         "options": [
-          { "id": "opt_1", "text": "En el navegador", "isCorrect": true },
-          { "id": "opt_2", "text": "Solo con Node.js", "isCorrect": false },
-          { "id": "opt_3", "text": "En un compilador", "isCorrect": false },
-          { "id": "opt_4", "text": "En una base de datos", "isCorrect": false }
+          {
+            "id": "opt_1",
+            "text": "En el navegador",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_2",
+            "text": "Solo con Node.js",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "En un compilador",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "En una base de datos",
+            "isCorrect": false
+          }
         ],
         "correctAnswerId": "opt_1",
         "explanation": "Todos los navegadores modernos incluyen JavaScript.",
@@ -146,7 +161,6 @@
       }
     ]
   },
-
   {
     "id": "js_lesson_3",
     "courseId": "javascript",
@@ -207,13 +221,1261 @@
         "question": "¿Qué instrucción se usa para mostrar texto en la consola?",
         "type": "multiple-choice",
         "options": [
-          { "id": "opt_1", "text": "print()", "isCorrect": false },
-          { "id": "opt_2", "text": "echo()", "isCorrect": false },
-          { "id": "opt_3", "text": "console.log()", "isCorrect": true },
-          { "id": "opt_4", "text": "show()", "isCorrect": false }
+          {
+            "id": "opt_1",
+            "text": "print()",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "echo()",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "console.log()",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "show()",
+            "isCorrect": false
+          }
         ],
         "correctAnswerId": "opt_3",
         "explanation": "console.log() es la forma estándar de imprimir mensajes en JavaScript.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "js_lesson_4",
+    "courseId": "javascript",
+    "title": "Variables (var, let, const)",
+    "description": "Aprende a declarar variables y entender las diferencias entre var, let y const.",
+    "order": 4,
+    "estimatedMinutes": 25,
+    "content": {
+      "introduction": "Las variables son contenedores para almacenar datos. En JavaScript moderno, usamos let y const en lugar de var.",
+      "sections": [
+        {
+          "id": "js_4_sec_1",
+          "title": "La palabra clave let",
+          "content": "let permite declarar variables que pueden cambiar su valor más adelante. Es el reemplazo moderno de var.",
+          "order": 1
+        },
+        {
+          "id": "js_4_sec_2",
+          "title": "La palabra clave const",
+          "content": "const se usa para valores que no van a cambiar. Una vez asignado un valor, no puedes reasignarlo.",
+          "order": 2
+        },
+        {
+          "id": "js_4_sec_3",
+          "title": "¿Por qué no usar var?",
+          "content": "var tiene problemas de alcance (scope) que pueden causar errores difíciles de detectar. Es mejor usar let y const.",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "js_4_ex_1",
+          "title": "Ejemplo de let y const",
+          "code": "let edad = 25;\nedad = 26; // Válido\nconst nombre = 'Ana';\n// nombre = 'María'; // Error",
+          "language": "javascript",
+          "explanation": "let permite reasignación, pero const lanza un error si intentas cambiar su valor."
+        }
+      ],
+      "summary": "Usa let para valores que cambian y const para valores fijos. Evita usar var.",
+      "keyPoints": [
+        "let permite cambiar el valor",
+        "const es para valores constantes",
+        "var está obsoleto en código moderno"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "js_4_ch_1",
+        "lessonId": "js_lesson_4",
+        "question": "¿Qué palabra clave usarías para un valor que nunca cambiará?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "var",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "let",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "const",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "static",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "const se usa para declarar constantes que no cambiarán su valor.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "js_lesson_5",
+    "courseId": "javascript",
+    "title": "Tipos de datos primitivos",
+    "description": "Conoce los tipos de datos básicos: String, Number, Boolean, Null y Undefined.",
+    "order": 5,
+    "estimatedMinutes": 30,
+    "content": {
+      "introduction": "Un tipo de dato le dice al ordenador qué clase de valor estás usando. JavaScript tiene varios tipos de datos primitivos.",
+      "sections": [
+        {
+          "id": "js_5_sec_1",
+          "title": "Strings (Cadenas de texto)",
+          "content": "Se usan para texto. Pueden ir entre comillas simples (''), dobles (\":\") o invertidas (``).",
+          "order": 1
+        },
+        {
+          "id": "js_5_sec_2",
+          "title": "Numbers (Números)",
+          "content": "JavaScript usa un solo tipo para todos los números, ya sean enteros o decimales.",
+          "order": 2
+        },
+        {
+          "id": "js_5_sec_3",
+          "title": "Booleans (Booleanos)",
+          "content": "Solo pueden tener dos valores: true (verdadero) o false (falso). Se usan para lógica.",
+          "order": 3
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "js_5_ex_1",
+          "title": "Ejemplo de tipos de datos",
+          "code": "const nombre = 'Juan'; // String\nconst edad = 30; // Number\nconst esEstudiante = true; // Boolean",
+          "language": "javascript",
+          "explanation": "Aquí vemos tres variables con distintos tipos de datos básicos."
+        }
+      ],
+      "summary": "Los tipos primitivos conforman la base de cualquier dato que manejes en JavaScript.",
+      "keyPoints": [
+        "String para texto",
+        "Number para números",
+        "Boolean para verdadero o falso"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "js_5_ch_1",
+        "lessonId": "js_lesson_5",
+        "question": "¿Qué tipo de dato representa true o false?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "String",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Number",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "Boolean",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "Null",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "Los booleanos solo pueden ser verdaderos (true) o falsos (false).",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "js_lesson_6",
+    "courseId": "javascript",
+    "title": "Operadores aritméticos",
+    "description": "Aprende a realizar operaciones matemáticas básicas en JavaScript.",
+    "order": 6,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "Los operadores aritméticos toman valores numéricos como sus operandos y devuelven un valor numérico único.",
+      "sections": [
+        {
+          "id": "js_6_sec_1",
+          "title": "Signos matemáticos básicos",
+          "content": "Puedes sumar (+), restar (-), multiplicar (*) y dividir (/).",
+          "order": 1
+        },
+        {
+          "id": "js_6_sec_2",
+          "title": "El operador módulo (%)",
+          "content": "El módulo devuelve el resto de una división. Es muy útil para saber si un número es par o impar.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "js_6_ex_1",
+          "title": "Ejemplo de operadores aritméticos",
+          "code": "const suma = 5 + 3;\nconst resto = 10 % 3; // El resto es 1",
+          "language": "javascript",
+          "explanation": "El símbolo % no significa porcentaje, significa resto de la división."
+        }
+      ],
+      "summary": "JavaScript permite realizar cálculos matemáticos de forma sencilla con operadores estándar.",
+      "keyPoints": [
+        "+, -, *, / son los operadores básicos",
+        "% obtiene el resto de la división"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "js_6_ch_1",
+        "lessonId": "js_lesson_6",
+        "question": "¿Cuál es el resultado de 10 % 3?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "3.33",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "3",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "1",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "0",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "10 dividido por 3 es 3. El resto (o módulo) es 1.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "js_lesson_7",
+    "courseId": "javascript",
+    "title": "Operadores de comparación y lógicos",
+    "description": "Compara valores y combina condiciones usando operadores lógicos.",
+    "order": 7,
+    "estimatedMinutes": 25,
+    "content": {
+      "introduction": "Estos operadores te permiten comparar valores (mayor que, menor que) y unir varias condiciones.",
+      "sections": [
+        {
+          "id": "js_7_sec_1",
+          "title": "Operadores de comparación",
+          "content": "Incluyen mayor (>), menor (<), mayor o igual (>=), menor o igual (<=), y la igualdad estricta (===).",
+          "order": 1
+        },
+        {
+          "id": "js_7_sec_2",
+          "title": "Operadores lógicos",
+          "content": "AND (&&) requiere que ambas condiciones sean verdaderas. OR (||) requiere que al menos una sea verdadera.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "js_7_ex_1",
+          "title": "Comparación y lógica",
+          "code": "const esMayorDeEdad = edad >= 18;\nconst puedeConducir = esMayorDeEdad && tieneLicencia;",
+          "language": "javascript",
+          "explanation": "&& asegura que ambas variables sean 'true' para que el resultado sea 'true'."
+        }
+      ],
+      "summary": "Usamos estos operadores constantemente para tomar decisiones en el código.",
+      "keyPoints": [
+        "Usar siempre === para comparar igualdad",
+        "&& significa Y",
+        "|| significa O"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "js_7_ch_1",
+        "lessonId": "js_lesson_7",
+        "question": "¿Qué operador significa 'Y' lógico?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "&&",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_2",
+            "text": "||",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "==",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "!",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "El operador && comprueba que ambas condiciones sean verdaderas.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "js_lesson_8",
+    "courseId": "javascript",
+    "title": "Condicionales (if, else if, else)",
+    "description": "Toma decisiones en tu código ejecutando distintos bloques según condiciones.",
+    "order": 8,
+    "estimatedMinutes": 30,
+    "content": {
+      "introduction": "Un condicional permite que tu programa actúe de manera diferente dependiendo de cierta información.",
+      "sections": [
+        {
+          "id": "js_8_sec_1",
+          "title": "La estructura if",
+          "content": "Evalúa una condición entre paréntesis. Si es verdadera, ejecuta el bloque de código entre llaves.",
+          "order": 1
+        },
+        {
+          "id": "js_8_sec_2",
+          "title": "El bloque else",
+          "content": "Se ejecuta como alternativa cuando la condición if inicial es falsa.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "js_8_ex_1",
+          "title": "Condición if else",
+          "code": "if (edad >= 18) {\n  console.log('Eres mayor');\n} else {\n  console.log('Eres menor');\n}",
+          "language": "javascript",
+          "explanation": "El programa toma distintos caminos según el valor de 'edad'."
+        }
+      ],
+      "summary": "Los condicionales if/else son la base para el flujo de control en la programación.",
+      "keyPoints": [
+        "if requiere una condición verdadera para ejecutarse",
+        "else se ejecuta si ninguna condición previa se cumplió",
+        "Puedes usar else if para evaluar múltiples condiciones"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "js_8_ch_1",
+        "lessonId": "js_lesson_8",
+        "question": "¿Qué bloque de código se ejecuta cuando un 'if' es falso?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "then",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "catch",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "else",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "default",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El bloque else sirve como camino alternativo si el if no se cumple.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "js_lesson_9",
+    "courseId": "javascript",
+    "title": "El condicional switch",
+    "description": "Una forma más limpia de escribir múltiples if-else cuando comparas un solo valor.",
+    "order": 9,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "El switch evalúa una expresión y ejecuta el bloque de código correspondiente al caso coincidente.",
+      "sections": [
+        {
+          "id": "js_9_sec_1",
+          "title": "La estructura switch",
+          "content": "Útil cuando tienes una variable que puede tomar múltiples valores específicos (como días de la semana, colores, etc).",
+          "order": 1
+        },
+        {
+          "id": "js_9_sec_2",
+          "title": "La palabra clave break",
+          "content": "Debes poner 'break' al final de cada caso para evitar que se sigan ejecutando los demás casos.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "js_9_ex_1",
+          "title": "Ejemplo de switch",
+          "code": "switch(dia) {\n  case 'Lunes':\n    console.log('Inicio de semana');\n    break;\n  case 'Viernes':\n    console.log('Casi fin de semana');\n    break;\n  default:\n    console.log('Un día normal');\n}",
+          "language": "javascript",
+          "explanation": "El caso 'default' actúa como el 'else' final."
+        }
+      ],
+      "summary": "switch es excelente para menús u opciones múltiples fijas.",
+      "keyPoints": [
+        "Reemplaza múltiples else if",
+        "No olvides usar break",
+        "Usa default para manejar casos no contemplados"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "js_9_ch_1",
+        "lessonId": "js_lesson_9",
+        "question": "¿Qué palabra clave detiene la ejecución dentro de un switch?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "stop",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "break",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "halt",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "exit",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "break corta la ejecución del switch, evitando que se corran los siguientes 'cases'.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "js_lesson_10",
+    "courseId": "javascript",
+    "title": "Bucles: for",
+    "description": "Repite un bloque de código un número específico de veces.",
+    "order": 10,
+    "estimatedMinutes": 25,
+    "content": {
+      "introduction": "Los bucles te ahorran tener que escribir el mismo código una y otra vez.",
+      "sections": [
+        {
+          "id": "js_10_sec_1",
+          "title": "Partes del bucle for",
+          "content": "Un bucle for consta de tres partes: inicialización (ej. let i = 0), condición (ej. i < 5) y actualización (ej. i++).",
+          "order": 1
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "js_10_ex_1",
+          "title": "Usando un bucle for",
+          "code": "for (let i = 0; i < 5; i++) {\n  console.log('Vuelta número ' + i);\n}",
+          "language": "javascript",
+          "explanation": "Esto imprimirá mensajes desde la vuelta 0 hasta la 4."
+        }
+      ],
+      "summary": "El bucle for es el más común cuando sabes exactamente cuántas veces quieres repetir algo.",
+      "keyPoints": [
+        "Tiene 3 parámetros separados por punto y coma (;)",
+        "i++ suma 1 en cada vuelta"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "js_10_ch_1",
+        "lessonId": "js_lesson_10",
+        "question": "¿Cuál es la sintaxis correcta para un bucle for que se repite 3 veces?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "for (let i = 0; i < 3; i++)",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_2",
+            "text": "for (i = 0, i < 3, i++)",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "for let i = 0 to 3",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "loop (3 times)",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Usa punto y coma (;) para separar las partes del bucle for.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "js_lesson_11",
+    "courseId": "javascript",
+    "title": "Funciones básicas",
+    "description": "Agrupa bloques de código reutilizables bajo un nombre.",
+    "order": 11,
+    "estimatedMinutes": 30,
+    "content": {
+      "introduction": "Las funciones son conjuntos de instrucciones que realizan una tarea. Se pueden ejecutar tantas veces como quieras.",
+      "sections": [
+        {
+          "id": "js_11_sec_1",
+          "title": "Declarar una función",
+          "content": "Usamos la palabra clave 'function', seguida del nombre y paréntesis ().",
+          "order": 1
+        },
+        {
+          "id": "js_11_sec_2",
+          "title": "Parámetros y argumentos",
+          "content": "Las funciones pueden recibir datos para procesarlos, estos se llaman parámetros (al declararla) y argumentos (al llamarla).",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "js_11_ex_1",
+          "title": "Función con parámetros y return",
+          "code": "function sumar(a, b) {\n  return a + b;\n}\nconst resultado = sumar(5, 3); // 8",
+          "language": "javascript",
+          "explanation": "'return' devuelve un valor hacia donde fue llamada la función."
+        }
+      ],
+      "summary": "Las funciones evitan que repitas código y hacen que los programas sean modulares.",
+      "keyPoints": [
+        "Usan la palabra clave function",
+        "Reciben parámetros",
+        "Devuelven resultados con return"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "js_11_ch_1",
+        "lessonId": "js_lesson_11",
+        "question": "¿Qué palabra clave se usa para devolver un valor en una función?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "export",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "return",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "get",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "send",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "return finaliza la función y especifica un valor a ser devuelto.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "js_lesson_12",
+    "courseId": "javascript",
+    "title": "Arrays (Arreglos)",
+    "description": "Almacena colecciones de datos en una sola variable.",
+    "order": 12,
+    "estimatedMinutes": 25,
+    "content": {
+      "introduction": "Un array es una variable especial que puede contener más de un valor a la vez. Es como una lista.",
+      "sections": [
+        {
+          "id": "js_12_sec_1",
+          "title": "Crear un Array",
+          "content": "Se usan corchetes [] y se separan sus elementos con comas.",
+          "order": 1
+        },
+        {
+          "id": "js_12_sec_2",
+          "title": "Acceder a elementos",
+          "content": "Los elementos en un array están indexados, empezando desde el índice 0 para el primero.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "js_12_ex_1",
+          "title": "Declarar y acceder a un array",
+          "code": "const frutas = ['manzana', 'plátano', 'naranja'];\nconsole.log(frutas[0]); // 'manzana'",
+          "language": "javascript",
+          "explanation": "El índice 0 contiene el primer elemento de la lista."
+        }
+      ],
+      "summary": "Los arrays son fundamentales para manejar listas y grupos de datos informáticos.",
+      "keyPoints": [
+        "Usan corchetes []",
+        "Están indexados empezando en 0",
+        "Pueden mezclar números, strings u otros objetos"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "js_12_ch_1",
+        "lessonId": "js_lesson_12",
+        "question": "En un array, ¿cuál es el índice del primer elemento?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "1",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "0",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "-1",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "a",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Casi en toda la programación, los índices empiezan por 0.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "js_lesson_13",
+    "courseId": "javascript",
+    "title": "Métodos de Arrays",
+    "description": "Agrega, elimina y manipula datos dentro de un Array preexistente.",
+    "order": 13,
+    "estimatedMinutes": 30,
+    "content": {
+      "introduction": "Los arrays vienen con funciones integradas (métodos) que hacen muy fácil trabajar con listas de información.",
+      "sections": [
+        {
+          "id": "js_13_sec_1",
+          "title": "push y pop",
+          "content": "push() añade al final del array. pop() elimina el último elemento.",
+          "order": 1
+        },
+        {
+          "id": "js_13_sec_2",
+          "title": "length",
+          "content": "La propiedad length (no es un método) te dice cuántos elementos tiene el array.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "js_13_ex_1",
+          "title": "Uso de push",
+          "code": "const numeros = [1, 2];\nnumeros.push(3);\nconsole.log(numeros); // [1, 2, 3]",
+          "language": "javascript",
+          "explanation": "push altera físicamente el array añadiendo el elemento 3."
+        }
+      ],
+      "summary": "Son herramientas esenciales para no tener que crear un nuevo array cada vez que se modifique una lista.",
+      "keyPoints": [
+        "push() / pop() trabajan al final del array",
+        "length da el tamaño de la lista"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "js_13_ch_1",
+        "lessonId": "js_lesson_13",
+        "question": "¿Qué método añade un elemento al final de un array?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": ".add()",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": ".append()",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": ".push()",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": ".insert()",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": ".push() es la forma estándar en JavaScript para añadir elementos al final de un arreglo.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "js_lesson_14",
+    "courseId": "javascript",
+    "title": "Objetos",
+    "description": "Agrupa datos relacionados almacenados en pares clave-valor.",
+    "order": 14,
+    "estimatedMinutes": 30,
+    "content": {
+      "introduction": "Un objeto permite modelar cosas reales con diferentes propiedades. Representan el fundamento del formato JSON.",
+      "sections": [
+        {
+          "id": "js_14_sec_1",
+          "title": "Sintaxis de un objeto",
+          "content": "Usan llaves {}. Las propiedades se definen como 'clave: valor' y se separan por comas.",
+          "order": 1
+        },
+        {
+          "id": "js_14_sec_2",
+          "title": "Accediendo a las propiedades",
+          "content": "Puedes usar la notación de punto (objeto.propiedad) o de corchetes (objeto['propiedad']).",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "js_14_ex_1",
+          "title": "Creando y leyendo objetos",
+          "code": "const coche = {\n  marca: 'Toyota',\n  año: 2020\n};\nconsole.log(coche.marca); // Toyota",
+          "language": "javascript",
+          "explanation": "El objeto agrupa la marca y año pertinentes al 'coche'."
+        }
+      ],
+      "summary": "Son ideales para almacenar atributos de un ítem particular del mundo real (usuarios, productos, autos).",
+      "keyPoints": [
+        "Usan llaves y sintaxis de clave: valor",
+        "Pueden contener strings, arrays u otros objetos dentro"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "js_14_ch_1",
+        "lessonId": "js_lesson_14",
+        "question": "¿Cómo accedes a la propiedad 'nombre' de un objeto llamado 'usuario' usando punto?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "usuario(nombre)",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "usuario.nombre",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "usuario->nombre",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "usuario[nombre]",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Se usa un simple punto para acceder: objeto.propiedad",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "js_lesson_15",
+    "courseId": "javascript",
+    "title": "Funciones Flecha (Arrow Functions)",
+    "description": "Una forma moderna y concisa de escribir funciones en JavaScript.",
+    "order": 15,
+    "estimatedMinutes": 25,
+    "content": {
+      "introduction": "Introducidas en ES6, las funciones flecha ofrecen una sintaxis más limpia y un manejo diferente del entorno de 'this'.",
+      "sections": [
+        {
+          "id": "js_15_sec_1",
+          "title": "Sintaxis",
+          "content": "Omiten la palabra 'function'. Se usa una flecha => después de los parámetros.",
+          "order": 1
+        },
+        {
+          "id": "js_15_sec_2",
+          "title": "Retornos implícitos",
+          "content": "Si la función solo tiene una línea, se pueden omitir las llaves y el 'return'.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "js_15_ex_1",
+          "title": "Tipos de funciones flecha",
+          "code": "const sumar = (a, b) => a + b;\nconst saludar = nombre => console.log('Hola ' + nombre);",
+          "language": "javascript",
+          "explanation": "El código es mucho más corto gracias a la omisión de las palabras clave de funciones clásicas."
+        }
+      ],
+      "summary": "Son el estándar de hoy en día. Las verás en la gran mayoría del código moderno.",
+      "keyPoints": [
+        "No llevan la palabra function",
+        "Soporta retorno en una sola línea si no lleva bloques de código"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "js_15_ch_1",
+        "lessonId": "js_lesson_15",
+        "question": "En la función 'const doble = x => x * 2;', ¿hay devuelto un valor (return)?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "No, hay que escribir explícitamente 'return'",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Sí, el retorno es implícito",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Las funciones que se escriben en la misma línea que la flecha sin llaves tienen return implícito.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "js_lesson_16",
+    "courseId": "javascript",
+    "title": "DOM: Seleccionar Elementos",
+    "description": "Conecta JavaScript con las etiquetas HTML de tu página web.",
+    "order": 16,
+    "estimatedMinutes": 35,
+    "content": {
+      "introduction": "El DOM es la representación estructural de un documento HTML en forma de árbol. Podemos modificar nuestra página dinámicamente accediendo a este DOM.",
+      "sections": [
+        {
+          "id": "js_16_sec_1",
+          "title": "querySelector",
+          "content": "document.querySelector permite seleccionar el primer elemento HTML que coincida con el selector CSS dado.",
+          "order": 1
+        },
+        {
+          "id": "js_16_sec_2",
+          "title": "getElementById",
+          "content": "Una forma rápida de seleccionar elementos basándose en su atributo id específico en el HTML.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "js_16_ex_1",
+          "title": "Seleccionar título en HTML",
+          "code": "const titulo = document.querySelector('h1');\nconst miBoton = document.getElementById('boton-principal');",
+          "language": "javascript",
+          "explanation": "De esta forma guardas referencias al elemento HTML en variables de JavaScript."
+        }
+      ],
+      "summary": "Paso necesario para interactuar con lo que el usuario ve, vinculando la parte visual (HTML) con la lógica (JS).",
+      "keyPoints": [
+        "El DOM asocia tu código en JS a elementos en pantalla",
+        "querySelector usa sintaxis de CSS para encontrar elementos"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "js_16_ch_1",
+        "lessonId": "js_lesson_16",
+        "question": "¿Qué método utilizarías para seleccionar un div con la clase '.contenedor'?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "document.getElementById('.contenedor')",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "document.querySelector('.contenedor')",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "document.findClass('contenedor')",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "document.get('.contenedor')",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "querySelector permite usar selectores de clases indicados con un punto inicial.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "js_lesson_17",
+    "courseId": "javascript",
+    "title": "DOM: Modificar Elementos",
+    "description": "Cambia textos, estilos, HTML y atributos con JavaScript de forma remota.",
+    "order": 17,
+    "estimatedMinutes": 30,
+    "content": {
+      "introduction": "Una vez seleccionados los elementos, JavaScript puede modificarlos totalmente: cambiar textos, colores o si son invisibles.",
+      "sections": [
+        {
+          "id": "js_17_sec_1",
+          "title": "innerText y textContent",
+          "content": "Formas sencillas de alterar o extraer el texto puro contenido en un elemento HTML.",
+          "order": 1
+        },
+        {
+          "id": "js_17_sec_2",
+          "title": "Cambiar estilos CSS",
+          "content": "La propiedad style te permite aplicar cambios en el CSS dinámicamente como style.color = 'red'.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "js_17_ex_1",
+          "title": "Reemplazar textos y estilos",
+          "code": "const elemento = document.querySelector('h1');\nelemento.textContent = '¡Hola mundo interactivo!';\nelemento.style.color = 'blue';",
+          "language": "javascript",
+          "explanation": "Aquí cambiamos lo que dice el título e hicimos que su fuente se volviera azul."
+        }
+      ],
+      "summary": "Son las operaciones indispensables para crear ventanas modales, temas oscuros y animaciones web.",
+      "keyPoints": [
+        "textContent cambia el texto literal",
+        "style te permite manipular CSS"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "js_17_ch_1",
+        "lessonId": "js_lesson_17",
+        "question": "¿Qué propiedad cambia el contenido de texto dentro de un h1?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "textContent",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_2",
+            "text": "value",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "textInside",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "HTML",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "textContent asigna texto nuevo. innerHTML se utiliza en caso de querer insertar etiquetas HTML.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "js_lesson_18",
+    "courseId": "javascript",
+    "title": "Eventos Básicos (Event Listeners)",
+    "description": "Haz que tu código reaccione cuando el usuario haga clic o pulse teclas.",
+    "order": 18,
+    "estimatedMinutes": 35,
+    "content": {
+      "introduction": "Un avent listener le dice al navegador que escuche una interacción del usuario. Así tu web cobra vida.",
+      "sections": [
+        {
+          "id": "js_18_sec_1",
+          "title": "addEventListener",
+          "content": "La forma en la que vinculamos comportamientos. Pide dos cosas: qué escuchar (ej. 'click') y qué función ejecutar tras el clic.",
+          "order": 1
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "js_18_ex_1",
+          "title": "Ejecutar al hacer click",
+          "code": "const boton = document.querySelector('button');\nboton.addEventListener('click', () => {\n  console.log('¡Botón presionado!');\n});",
+          "language": "javascript",
+          "explanation": "Muestra un mensaje en consola inmediatamente cuando el usuario apriete el botón."
+        }
+      ],
+      "summary": "Eventos populares incluyen 'click', 'mouseover', 'keydown' (teclado), que desencadenan las acciones.",
+      "keyPoints": [
+        "Usar addEventListener para detectar el evento",
+        "Se ejecuta una función por cada iteración del evento"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "js_18_ch_1",
+        "lessonId": "js_lesson_18",
+        "question": "¿Cuál es el evento que escucha la pulsación encima de un elemento?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "hover",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "click",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "tap",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "select",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "'click' reacciona al apretar el botón del ratón o un toque en móvil de forma completa.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "js_lesson_19",
+    "courseId": "javascript",
+    "title": "Templates Literales",
+    "description": "Combina variables y texto sin problemas de concatenación.",
+    "order": 19,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "Los templates literales han reemplazado a la concatenación tradicional con +. Permiten escribir código más legible.",
+      "sections": [
+        {
+          "id": "js_19_sec_1",
+          "title": "Sintaxis",
+          "content": "En lugar de usar comillas estandar (' o \"), usas acentos graves o backticks (``).",
+          "order": 1
+        },
+        {
+          "id": "js_19_sec_2",
+          "title": "Interpolar variables",
+          "content": "Para incrustar una variable, encabézala de $ e inserta la propia variable en llaves ${variable}.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "js_19_ex_1",
+          "title": "Evitando uso del +",
+          "code": "const nombre = 'Juan';\nconst mensaje = `Hola, mi nombre es ${nombre}`;\nconsole.log(mensaje);",
+          "language": "javascript",
+          "explanation": "El símbolo de dólar y llaves incluyen el valor de 'nombre' directamente en la frase."
+        }
+      ],
+      "summary": "Son imprescindibles cuando el código incluye múltiples inyecciones dinámicas de strings.",
+      "keyPoints": [
+        "Siempre usar acentos invertidos para literales (``)",
+        "Soporte de salto de líneas libre dentro del string"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "js_19_ch_1",
+        "lessonId": "js_lesson_19",
+        "question": "¿Qué caracter rodea una plantilla literal (Template Literal)?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Comillas simples ('')",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Comillas dobles (\"\")",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "Backticks o acento grave (``)",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "Corchetes ([])",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "Se necesitan los backticks para poder luego utilizar la estructura ${}.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "js_lesson_20",
+    "courseId": "javascript",
+    "title": "Asincronismo Básico (setTimeout)",
+    "description": "Retrasa la ejecución de un bloque de código y comprende el tiempo en JavaScript.",
+    "order": 20,
+    "estimatedMinutes": 25,
+    "content": {
+      "introduction": "Un código que sea Asíncrono implica que se ejecuta fuera del flujo 'lineal'. JavaScript no detiene el motor esperando la cuenta, avanza con otras tareas.",
+      "sections": [
+        {
+          "id": "js_20_sec_1",
+          "title": "Uso de setTimeout",
+          "content": "Configura un temporizador para programar la invocación de la función más tarde, sin interrumpir tu programa actual.",
+          "order": 1
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "js_20_ex_1",
+          "title": "Mandar mensaje después de 2 segundos",
+          "code": "console.log('Inicio');\nsetTimeout(() => {\n  console.log('Mensaje retrasado');\n}, 2000);\nconsole.log('Fin');",
+          "language": "javascript",
+          "explanation": "El resultado será: Inicio, Fin, Mensaje retrasado; debido al efecto asíncrono que no bloquea la línea siguiente."
+        }
+      ],
+      "summary": "Son las sentencias que originarán más tarde a las famosas Promises y el 'async / await'. Constituyen el tiempo en tu programa.",
+      "keyPoints": [
+        "El tiempo de demorar se evalúa en Milisegundos",
+        "Una ejecución demorada no pausa a otras líneas del código actual"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "js_20_ch_1",
+        "lessonId": "js_lesson_20",
+        "question": "En setTimeout, ¿El tiempo usado como argumento representa segundos o milisegundos?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Segundos",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Días",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "Milisegundos",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "Microsegundos",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "Se expresan en milisegundos, por ejemplo, 1000 milisegundos equivalen temporalmente a 1 segundo.",
         "points": 10,
         "order": 1
       }

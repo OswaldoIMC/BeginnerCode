@@ -80,7 +80,6 @@
       }
     ]
   },
-
   {
     "id": "cpp_lesson_2",
     "courseId": "cpp",
@@ -134,10 +133,26 @@
         "question": "¿Qué herramienta se necesita para convertir código C++ en un programa ejecutable?",
         "type": "multiple-choice",
         "options": [
-          { "id": "opt_1", "text": "Un navegador", "isCorrect": false },
-          { "id": "opt_2", "text": "Un compilador", "isCorrect": true },
-          { "id": "opt_3", "text": "Un intérprete", "isCorrect": false },
-          { "id": "opt_4", "text": "Una base de datos", "isCorrect": false }
+          {
+            "id": "opt_1",
+            "text": "Un navegador",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Un compilador",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "Un intérprete",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "Una base de datos",
+            "isCorrect": false
+          }
         ],
         "correctAnswerId": "opt_2",
         "explanation": "El compilador transforma el código fuente en un ejecutable.",
@@ -146,7 +161,6 @@
       }
     ]
   },
-
   {
     "id": "cpp_lesson_3",
     "courseId": "cpp",
@@ -207,13 +221,1201 @@
         "question": "¿Cuál es el punto de entrada de un programa en C++?",
         "type": "multiple-choice",
         "options": [
-          { "id": "opt_1", "text": "start()", "isCorrect": false },
-          { "id": "opt_2", "text": "begin()", "isCorrect": false },
-          { "id": "opt_3", "text": "main()", "isCorrect": true },
-          { "id": "opt_4", "text": "run()", "isCorrect": false }
+          {
+            "id": "opt_1",
+            "text": "start()",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "begin()",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "main()",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "run()",
+            "isCorrect": false
+          }
         ],
         "correctAnswerId": "opt_3",
         "explanation": "La función main() es donde comienza la ejecución de un programa en C++.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "cpp_lesson_4",
+    "courseId": "cpp",
+    "title": "Variables y tipos de datos",
+    "description": "Aprende a declarar variables y conoce los tipos primitivos en C++.",
+    "order": 4,
+    "estimatedMinutes": 25,
+    "content": {
+      "introduction": "Una variable es un espacio en la memoria reservado para almacenar valores. En C++, cada variable debe tener un tipo de dato específico al momento de declararla.",
+      "sections": [
+        {
+          "id": "cpp_4_sec_1",
+          "title": "Tipos primitivos",
+          "content": "Los principales tipos son int (enteros), float y double (decimales), char (un carácter) y bool (verdadero o falso).",
+          "order": 1
+        },
+        {
+          "id": "cpp_4_sec_2",
+          "title": "Declaración y asignación",
+          "content": "La sintaxis general es: tipoDeDato nombreVariable = valor;",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "cpp_4_ex_1",
+          "title": "Declarar variables de distinto tipo",
+          "code": "int edad = 25;\nfloat altura = 1.75;\nchar inicial = 'A';\nbool esEstudiante = true;",
+          "language": "cpp",
+          "explanation": "C++ es fuertemente tipado, debes especificar el tipo antes del nombre de la variable."
+        }
+      ],
+      "summary": "Para guardar un valor en C++, necesitas declarar una variable con el tipo adecuado para ese tipo de información.",
+      "keyPoints": [
+        "C++ es de tipado estático",
+        "int, float, char y bool son fundamentales",
+        "Las sentencias finalizan con punto y coma (;)"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "cpp_4_ch_1",
+        "lessonId": "cpp_lesson_4",
+        "question": "¿Qué tipo de dato usarías para guardar letras individuales como 'X'?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "int",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "bool",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "char",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "double",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El tipo char se utiliza precisamente para guardar un único carácter, normalmente encerrado en comillas simples.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "cpp_lesson_5",
+    "courseId": "cpp",
+    "title": "Constantes",
+    "description": "Protege los valores para que no cambien a lo largo del programa.",
+    "order": 5,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "A veces necesitas que el valor de una variable nunca cambie durante la ejecución, como el valor de PI o la gravedad.",
+      "sections": [
+        {
+          "id": "cpp_5_sec_1",
+          "title": "La palabra clave const",
+          "content": "Agregando const antes del tipo de dato, le dices al compilador que esa variable será de solo lectura.",
+          "order": 1
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "cpp_5_ex_1",
+          "title": "Definir constantes",
+          "code": "const double PI = 3.14159;\n// PI = 3.14; // ¡Esto daría error al compilar!",
+          "language": "cpp",
+          "explanation": "Es una buena práctica escribir las constantes en mayúsculas."
+        }
+      ],
+      "summary": "Utilizar const evita cambios accidentales a valores que deberían ser fijos.",
+      "keyPoints": [
+        "const hace que la variable sea inmutable",
+        "Debe ser inicializada en el momento que se declara"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "cpp_5_ch_1",
+        "lessonId": "cpp_lesson_5",
+        "question": "¿Qué palabra clave impide que el valor de una variable se modifique?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "var",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "final",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "const",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "static",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "const indica al compilador que la variable evaluada se mantendrá constante.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "cpp_lesson_6",
+    "courseId": "cpp",
+    "title": "Operadores Ariméticos",
+    "description": "Suma, resta y emplea matemáticas numéricas en tu código.",
+    "order": 6,
+    "estimatedMinutes": 20,
+    "content": {
+      "introduction": "C++ incluye todos los operadores matemáticos estándar para manejar fórmulas y cálculos numéricos rápidos.",
+      "sections": [
+        {
+          "id": "cpp_6_sec_1",
+          "title": "Operaciones Básicas",
+          "content": "Puedes usar + para sumar, - para restar, * para multiplicar y / para dividir.",
+          "order": 1
+        },
+        {
+          "id": "cpp_6_sec_2",
+          "title": "Módulo matemático",
+          "content": "El operador % sirve para obtener el resto que queda de una división entera. Útil para verificar números pares (si n % 2 == 0).",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "cpp_6_ex_1",
+          "title": "Ejemplo en código C++",
+          "code": "int suma = 5 + 3;\nint divisionEntera = 10 / 3; // El resultado es 3\nint resto = 10 % 3; // El resultado es 1",
+          "language": "cpp",
+          "explanation": "Al dividir dos int el resultado siempre se trunca a otro int."
+        }
+      ],
+      "summary": "Son equivalentes a los operadores típicos en matemáticas para procesar la información de C++.",
+      "keyPoints": [
+        "Usar tipos float o double para evitar redondear la división",
+        "El módulo es un as de la algoritmia para comprobaciones"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "cpp_6_ch_1",
+        "lessonId": "cpp_lesson_6",
+        "question": "Al operar '5 / 2' en C++ utilizando variables 'int', ¿cuál es el resultado de la variable?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "2.5",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "2",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "3",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "Error",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Dividir dos enteros en C++ origina una división entera, eliminando cualquier decimal de su resultado.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "cpp_lesson_7",
+    "courseId": "cpp",
+    "title": "Entrada de Consola (cin)",
+    "description": "Solicita información al usuario cuando el programa corra en terminal.",
+    "order": 7,
+    "estimatedMinutes": 30,
+    "content": {
+      "introduction": "Además de usar std::cout para escribir en pantalla, puedes utilizar std::cin para leer los datos tecleados por el usuario.",
+      "sections": [
+        {
+          "id": "cpp_7_sec_1",
+          "title": "Uso de std::cin",
+          "content": "El operador >> captura la entrada del usuario y la transfiere (guarda) a la variable establecida.",
+          "order": 1
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "cpp_7_ex_1",
+          "title": "Programa interactivo",
+          "code": "#include <iostream>\n\nint main() {\n  int edad;\n  std::cout << \"Introduce tu edad: \";\n  std::cin >> edad;\n  std::cout << \"Tienes \" << edad << \" años.\" << std::endl;\n  return 0;\n}",
+          "language": "cpp",
+          "explanation": "El proceso se pausará esperando que presiones la tecla ENTER después del número."
+        }
+      ],
+      "summary": "Tener cout y cin brinda las facultades interactivas esenciales que tu código requiere.",
+      "keyPoints": [
+        "std::cin usa las flechas hacia la derecha (>>)",
+        "Requiere la biblioteca <iostream> incorporada",
+        "C++ detecta el tipo e intenta convertir el texto ingresado"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "cpp_7_ch_1",
+        "lessonId": "cpp_lesson_7",
+        "question": "¿Qué objeto se utiliza en C++ para recibir entrada estándar del teclado del usuario?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "std::out",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "std::in",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "std::cin",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "std::scanf",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "cin significa 'character in' y pertenece a iostream en el 'espacio de nombres' estándar.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "cpp_lesson_8",
+    "courseId": "cpp",
+    "title": "Operadores Lógicos y Comparativos",
+    "description": "Compara un punto con otro y aprende la lógica de C++ para armar proposiciones.",
+    "order": 8,
+    "estimatedMinutes": 35,
+    "content": {
+      "introduction": "Estos operadores evalúan valores y devuelven respuestas de tipo 'bool' (solo true o false).",
+      "sections": [
+        {
+          "id": "cpp_8_sec_1",
+          "title": "Comparaciones frecuentes",
+          "content": "Mayor que (>), menor que (<), mayor/igual (>=), menor/igual (<=), e igual a (==). Distinto es !=.",
+          "order": 1
+        },
+        {
+          "id": "cpp_8_sec_2",
+          "title": "Operadores lógicos",
+          "content": "En C++ 'Y' se dice con dos ampersands (&&). 'O' se describe empleando caños paralelos (||).",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "cpp_8_ex_1",
+          "title": "Verificando edad juvenil",
+          "code": "int edad = 16;\nbool esAdolescente = (edad >= 13) && (edad <= 19);\n// resultado true",
+          "language": "cpp",
+          "explanation": "El doble ampersand verifica obligatoriamente que las reglas en la izquierda tanto en su derecha sean válidas ambas."
+        }
+      ],
+      "summary": "Son imprescindibles para dotar al software del poder para observar, diferenciar y escoger acciones frente a las reglas.",
+      "keyPoints": [
+        "Un signo '=' de igualdad indica la asignación a una variable. Usa doble (==) para la comparativa",
+        "El signo '!' sirve para negar directamente algo verdadero o falso"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "cpp_8_ch_1",
+        "lessonId": "cpp_lesson_8",
+        "question": "¿Cuál es el símbolo adecuado para verificar si 2 números resultan desiguales entre ellos?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "!==",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "<>",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "!=",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "==",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "Para probar si una cifra choca con otra por ser distinta requieres '!='",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "cpp_lesson_9",
+    "courseId": "cpp",
+    "title": "Condicional if-else",
+    "description": "Las paredes base de toma de decisiones dinámicas usando if y else.",
+    "order": 9,
+    "estimatedMinutes": 35,
+    "content": {
+      "introduction": "Un programa sería igual un tren sin rieles cambiables sin la directriz 'if'. Determina a qué rama viajarán las próximas órdenes de ejecución.",
+      "sections": [
+        {
+          "id": "cpp_9_sec_1",
+          "title": "Reglas de sintaxis",
+          "content": "La palabra if (condición) y abre un segmento contenido entre las llaves { }. Opcionalmente continuaría con la directriz else {  } si la verdad inicial fallara.",
+          "order": 1
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "cpp_9_ex_1",
+          "title": "Comprobando acceso por edad legal",
+          "code": "if (edad >= 18) {\n   std::cout << \"Autorizado el acceso.\";\n} else {\n   std::cout << \"Estás denegado el paso.\";\n}",
+          "language": "cpp",
+          "explanation": "Acorde del número insertado en edad, ocurrirá tan solo 1 de las impresiones y la otra se obvia."
+        }
+      ],
+      "summary": "Establece ramificaciones que resuelven una encrucijada real.",
+      "keyPoints": [
+        "Un condicional precisa el contenido a evaluar metido dentro de paréntesis () obligatorios",
+        "No es forzoso poner else si el programa no exige acción sustitutiva"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "cpp_9_ch_1",
+        "lessonId": "cpp_lesson_9",
+        "question": "¿Toda orden 'if' está forzada por obligación de cerrar con una parte 'else' adicional?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Sí, de lo opuesto C++ denota un error mortal",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "No, if es autónomo; de omitirse y falsear if no pasará nada extra",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Else responde puramente como opción alternativa. No acarrea exigencia estructural de poseerlo obligatoriamente.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "cpp_lesson_10",
+    "courseId": "cpp",
+    "title": "El Condicional Múltiple (switch)",
+    "description": "Remplaza cascadas complejas que comparan igualdad empleando variables enteras exclusivas.",
+    "order": 10,
+    "estimatedMinutes": 30,
+    "content": {
+      "introduction": "Un problema molesto de amontonar múltiples if e else unicamente verificando un mismo dato contra números y textos concretos; Switch atiende este panorama al reducir lo repetitivo del formato.",
+      "sections": [
+        {
+          "id": "cpp_10_sec_1",
+          "title": "Evaluación con Case",
+          "content": "Al dar una variante en switch(opción), la máquina buscarerá su empate saltando enseguida el lector por aquellas opciones 'case' pertinentes.",
+          "order": 1
+        },
+        {
+          "id": "cpp_10_sec_2",
+          "title": "Ruptura",
+          "content": "Conocido en la sintaxis por ser la cláusula 'break;'. Resulta el factor imprescindible encargado parar al switch, evitando que patine encima arrastrando ejecuciones debajo a las que no conciernen.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "cpp_10_ex_1",
+          "title": "Escogiendo tu dificultad",
+          "code": "switch(opcion) {\n  case 1:\n    std::cout << \"Fácil\";\n    break;\n  case 2:\n    std::cout << \"Normal\";\n    break;\n  default:\n    std::cout << \"Opción inválida\";\n}",
+          "language": "cpp",
+          "explanation": "A menudo la palabra clave default engloba todos las posibles anomalías de las elecciones."
+        }
+      ],
+      "summary": "Mejora masivamente el apartado visual de la lógica orientada a listados tipo selección cerrada (Menús interactivoss).",
+      "keyPoints": [
+        "El Switch se atiene a usar enteros, boleanos, carácteres char o enumerations.",
+        "String en C++ nunca es permitido aplicarsele un switch por cuenta propia estándar",
+        "Rompe con break o verás a los mandos adyacentes comportarse."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "cpp_10_ch_1",
+        "lessonId": "cpp_lesson_10",
+        "question": "¿Como se declara a la directriz universal de fallo en Switch para dar con resultados fuera del molde o errados del teclado?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "finally:",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "other:",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "default:",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "else:",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El identificador exacto de rescate en el switch fue bautizado de manera inherente por default.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "cpp_lesson_11",
+    "courseId": "cpp",
+    "title": "Bucle for",
+    "description": "Iterador estricto que controla la ronda de eventos dada a repeticiones con una cuantía certera.",
+    "order": 11,
+    "estimatedMinutes": 30,
+    "content": {
+      "introduction": "Un for se diseña previendo, creando de antemano el número exacto iterador de pasadas de ejecución. Posee su variable que funciona como timón regulador en cada vuelta que concluya.",
+      "sections": [
+        {
+          "id": "cpp_11_sec_1",
+          "title": "Reguladores triples",
+          "content": "Forze la declaración unida (inicio ; meta de fin ; avance de cada pasada). Esto empaca de modo eficaz lo que pasará en contabilidad de conteo matemático.",
+          "order": 1
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "cpp_11_ex_1",
+          "title": "Tabla con ciclo corto",
+          "code": "for(int r = 0; r < 5; r++) {\n   std::cout << \"Pasada número: \" << r << \"\\n\";\n}",
+          "language": "cpp",
+          "explanation": "Procesa inicialmente una inserción int r en 0, repitiendo tanto como deba, sin tocar ni sobrepasar o igualar el valor final el 5."
+        }
+      ],
+      "summary": "Una repetición fundamental cuando controlas tú el destino y pasos que deben darse.",
+      "keyPoints": [
+        "La inicialización interna 'int i=0;' previene fuga por choque ajeno a otros i exteriores.",
+        "Acepta que avances sumando dos a la vez (por ejemplo operando contrapesos r+=2)"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "cpp_11_ch_1",
+        "lessonId": "cpp_lesson_11",
+        "question": "¿Cual es el divisor central obligatorio que marca distancias en la triple estructura reglamentaria del for?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Comas (,)",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Punto y coma (;)",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "Puntos directos (.)",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "Dos puntos colon (:)",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "C++ especifica la segregación de un for utilizando puntocoma (;).",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "cpp_lesson_12",
+    "courseId": "cpp",
+    "title": "Bucles condicionales: while y do-while",
+    "description": "Repite las sentencias hasta que ocurra un evento detonante, ignorando una cuenta final preestablecida.",
+    "order": 12,
+    "estimatedMinutes": 35,
+    "content": {
+      "introduction": "While (en español mientras) ejecuta el código incansablemente sólo sujeto a que se afirme una tesis en su condición principal inicial.",
+      "sections": [
+        {
+          "id": "cpp_12_sec_1",
+          "title": "while elemental",
+          "content": "Valora desde delante la orden al instante y en el ocaso decide si volverá a leerse otro paso. Si inicialmente la meta está falseada, un while jamás efectuará labores interiores que posee en código.",
+          "order": 1
+        },
+        {
+          "id": "cpp_12_sec_2",
+          "title": "Variación do-while",
+          "content": "Invierte el suceso del análisis. Exige empujar primero una vez inevitable con la garantía de ejecución primaria al inicio para ya en última circunstancia preguntarse si volver o no.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "cpp_12_ex_1",
+          "title": "Adivinar la salida",
+          "code": "int num = 0;\nwhile (num != 1) {\n   std::cout << \"Teclea '1' para salir.\";\n   std::cin >> num;\n}",
+          "language": "cpp",
+          "explanation": "El proceso durará vivo en bucle de la iteración indefinida hasta coincidir de milagro si el interactor da con 1."
+        }
+      ],
+      "summary": "Imprescindibles de ser programados cuando requieres esperar los input de pantalla ignorando una cifra certera de pasos y deteniéndose a orden interactiva ajena a la matemática.",
+      "keyPoints": [
+        "Do-while requiere ';' cerrando al finalizar: '} while(condición) ; '",
+        "Alarma de Loop Infinito si olvidas darle algún desencadenante cambiante hacia el true o el false general en su ciclo"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "cpp_12_ch_1",
+        "lessonId": "cpp_lesson_12",
+        "question": "¿Cual bucle asegura su recorrido inicial obligatorio si la variable evaluada parte siendo desde falso inmediatamente en el código?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "while",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "for",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "do-while",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "Do-while acciona 'Hacer' y por sus narices entra del inicio a leer. Acabadas tales lecturas reacciona percatándose de las trabas impidiendo la vuelta.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "cpp_lesson_13",
+    "courseId": "cpp",
+    "title": "Funciones: Declaración y Definición",
+    "description": "Fragmentación útil para reducir carga lectora separando a las lógicas con nombres propios de tarea.",
+    "order": 13,
+    "estimatedMinutes": 40,
+    "content": {
+      "introduction": "Un paso sustancial para escalar un proyecto en el nivel base a sistemas interconectados. Toda función tiene tipos definidos, recibe los datos y aporta y lanza la salida única devolutoria externa al fin del cálculo en el Main.",
+      "sections": [
+        {
+          "id": "cpp_13_sec_1",
+          "title": "Anatomía",
+          "content": "A diferencia del JS todo es rígido (int miFuncion() ) exigiendo decir previamente la cara o la naturaleza que entregará a C++. Si nada otorga final debe bautizarse usándose 'void'.",
+          "order": 1
+        },
+        {
+          "id": "cpp_13_sec_2",
+          "title": "La separación entre Prototipos",
+          "content": "Para evadir que un programa lea una llamada desconocida y provoque fatalidad error, se permite escribir una prealerta (prototipo finalizado en puntocoma inicial en cabeceras superiores del script) definiéndoles el alcance de que la funcion estará abajo.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "cpp_13_ex_1",
+          "title": "Armando una multiplicación",
+          "code": "int multiplicar(int a, int b) {\n   return a * b;\n}\n\n// Su llamado dentro de Main:\nint calculoFinal = multiplicar(6, 4);",
+          "language": "cpp",
+          "explanation": "Se empaqueta y encapsula las variables numéricas a local. Devuelven respuestas con 'return'. "
+        }
+      ],
+      "summary": "Son ladrillos arquitectónicos base en donde el propio código Main también recae en un tipo particular exigible al mismo núcleo del PC C++.",
+      "keyPoints": [
+        "Una función void ignora y descarta rebotar algún return explícito.",
+        "Reestructuras lógicas complejas hacia llamadas directas entendibles."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "cpp_13_ch_1",
+        "lessonId": "cpp_lesson_13",
+        "question": "¿Como se autodenomina su tipo base una función que en ningún plano piensa contestarnos tras finalizar su encomienda temporal?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "null",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "void",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "empty",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "none",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Void es una etiqueta en C++ donde el valor se obvia dictando nula reacción tras acabarse su encargo programático.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "cpp_lesson_14",
+    "courseId": "cpp",
+    "title": "Paso por Valor vs Paso por Referencia",
+    "description": "Descifra como los parámetros deciden alterar lo nativo externo o solo mutar lo copiado internamente a solas.",
+    "order": 14,
+    "estimatedMinutes": 35,
+    "content": {
+      "introduction": "Tratando con parámetros dentro al llamar una encomienda puedes regalar el mero dato inexpugnable, o proveer los accesos ilícitos y llaves abriendo tu baúl base principal externo al paso.",
+      "sections": [
+        {
+          "id": "cpp_14_sec_1",
+          "title": "El paso simple o del Valor",
+          "content": "Copias. Extraes el número 5 en una variable interna de vida o desuso pasajero en función y pase lo que pase no alterará externamente a la máquina local.",
+          "order": 1
+        },
+        {
+          "id": "cpp_14_sec_2",
+          "title": "Referencia por modificadores paralelos",
+          "content": "Utilizando '&' al recibir datos (ej. void sumar(int &datooriginal)) acceden permitiendo toquetear la matriz de datos enraizada con permanencia que cambiarán irrevocablemente tu paso general en Main.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "cpp_14_ex_1",
+          "title": "Modificar de golpe usando referencias",
+          "code": "void duplicarReal(int &num) {\n   num = num * 2;\n}\nint origen = 10;\nduplicarReal(origen);\n// Origen en el futuro será 20",
+          "language": "cpp",
+          "explanation": "Al añadir el 'Ampersand &', todo golpe al 'num' pasa a impactar e influir verdaderamente con severidad al 'origen'."
+        }
+      ],
+      "summary": "Son primicias introductorias indispensables hacia los misteriosos rincones punteros en memoria que luego seguirán más abajo en la jerarquía C++.",
+      "keyPoints": [
+        "Usar referencias '&' salva carga de memoria (no copian variables gigantes, utilizan originales)",
+        "Referenciabilidades requieren responsabilidad inmensa controlando el uso que dan las funcionales"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "cpp_14_ch_1",
+        "lessonId": "cpp_lesson_14",
+        "question": "¿Cual es el signo identificativo agregado al final del identificador al momento que capturas paso referencial como parámetro real en una función de C++?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "%",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "*",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "&&",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "&",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_4",
+        "explanation": "Empleando & (Ampersand unico) obligas acoplamiento simultáneo directo sobre el archivo madre sin copia clonada.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "cpp_lesson_15",
+    "courseId": "cpp",
+    "title": "Arrays Básicos",
+    "description": "Una variable extendida agrupando a su vez otras de su misma clase o molde primitivo.",
+    "order": 15,
+    "estimatedMinutes": 35,
+    "content": {
+      "introduction": "Un Array de C++ convencional son espacios fijados y estéticos amoblados de memorias. Son muy rígidos, todos comparten identidad y largo estricto que imposibilita extensión futura no avisada del arranque.",
+      "sections": [
+        {
+          "id": "cpp_15_sec_1",
+          "title": "Limitaciones estáticas principales",
+          "content": "Requieres establecer entre sus corchetes [] el metraje final y el volumen sin equivocación de forma perenne ej int listas[5]; ",
+          "order": 1
+        },
+        {
+          "id": "cpp_15_sec_2",
+          "title": "Lectura Indexada",
+          "content": "Compartiendo un molde habitual global, de idéntica manera logran rescatarse desde su fase del nivel base cero, es decir: listas[0], en la delantera de todos.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "cpp_15_ex_1",
+          "title": "Alojamiento con Arreglo",
+          "code": "int puntajes[3] = {100, 85, 42};\nstd::cout << puntajes[1]; // Su salida marca como tal de manera lógica 85.",
+          "language": "cpp",
+          "explanation": "Sus números están fijamente atados sobre su llave que los construyó de cimientos."
+        }
+      ],
+      "summary": "Son rudimentos clásicos. De querer variables sin métrica definida final deberás migrar a usar Librerías Dinámicas de vectores u otros punteros.",
+      "keyPoints": [
+        "Un valor desbordado o extralimitado produce un Buffer fuera límite de gravedad fatal",
+        "Si los defines base vacía y le fijas contenido total, omite rellenar obligatoriamente la regla de límite [3]."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "cpp_15_ch_1",
+        "lessonId": "cpp_lesson_15",
+        "question": "¿Como te provees formalmente crear sin asignar a base general un Array o bloque contable para almacenar un máximo de 10 dobles (double) en el inicio?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "double myArray(10);",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "double myArray[10];",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "array<10> myArray double;",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_4",
+            "text": "[10]double myArray;",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Se anexa a fin del identificador los corchetes ataviados con una enumeratura certera inquebrantable de C++ tradicional.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "cpp_lesson_16",
+    "courseId": "cpp",
+    "title": "Manejo Cadenas de Texto (std::string)",
+    "description": "Administra las combinaciones y agrupaciones grandes de textos largos prescindiendo a los array char antiguos clásicos.",
+    "order": 16,
+    "estimatedMinutes": 35,
+    "content": {
+      "introduction": "Pese a que C heredó a C++ el formato molesto de una cadena Array literal limitada, en C++ surgió desde la modernidad el std::string amparado en librerías para flexibilizar la lectura textual a otro escalón y sin peligro al unirlos.",
+      "sections": [
+        {
+          "id": "cpp_16_sec_1",
+          "title": "Biblioteca Extra de Utilidad",
+          "content": "A la par con tener en tu entorno iostream incorporada deberás integrar adicionalmente al topo superior tu directriz mágica #include <string>",
+          "order": 1
+        },
+        {
+          "id": "cpp_16_sec_2",
+          "title": "Atados, longitudes rápidas",
+          "content": "Pudiendo concatenar palabras mediante simples de sumas (+) de cadenas, sin mayor inconveniente ni límite base restrictivo y pudiendo evaluar distancias con .length().",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "cpp_16_ex_1",
+          "title": "Saludar un texto extendido",
+          "code": "#include <iostream>\n#include <string>\n\nint main() {\n  std::string nombre = \"Ana\";\n  std::string aviso = nombre + \" ha entrado\";\n  std::cout << aviso << \" Largo: \" << aviso.length();\n}",
+          "language": "cpp",
+          "explanation": "Pasa por alto al char e instrumenta las potencias del manejo masivo pre-optimizado que provee strings C++."
+        }
+      ],
+      "summary": "Son imprescindibles. Desecha el char array[] como regla ordinaria a menos que debas compilar obligatoriamente sobre código antiquísimo.",
+      "keyPoints": [
+        "Concatenable de forma sencilla implementando +, no ocupados ser unidos de uno en array al final delimitando \\0 limitantes",
+        "Reinvindican métodos tales que posibiliten el substring como substr()."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "cpp_16_ch_1",
+        "lessonId": "cpp_lesson_16",
+        "question": "¿Cual componente a modo encabezado superior y referencial de biblioteca exige para que su llamado String despliegue potencia total sin generar colapso programado?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "<strings>",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "<text>",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "<string>",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_4",
+            "text": "<char>",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "Precisa en solitario y puramente singulares de <string> como regla estándar en C++ modernos.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "cpp_lesson_17",
+    "courseId": "cpp",
+    "title": "Introducción a los Punteros y Direccionamiento",
+    "description": "Empieza descifrar como las computadoras almacenan hexadecimal de locaciones en sus chips.",
+    "order": 17,
+    "estimatedMinutes": 45,
+    "content": {
+      "introduction": "Un puntero o 'pointer' escapa de almacenar contenido puro y a cambio absorbe las direcciones topográficas localizadoras base desde donde se encierra otro contenido original de forma directa sobre la RAM.",
+      "sections": [
+        {
+          "id": "cpp_17_sec_1",
+          "title": "Ampersand Extractor (& de Dirección)",
+          "content": "Conforma con el ampersand inicial en tu variable localizadora para destaparle sus ocultas revelaciones numeradas relativas alojadas hexadecimales ante su asignación actual como memoria real física interina de su PC.",
+          "order": 1
+        },
+        {
+          "id": "cpp_17_sec_2",
+          "title": "Creando Punteros con Asterisco",
+          "content": "Con el * le adhiere una alerta, este no será tipo puro sino que albergará y señalará rumbos. Sintaxis común: tipo* nombrenuevo",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "cpp_17_ex_1",
+          "title": "Recogiendo ubicaciones de alojamiento",
+          "code": "int casa = 450;\nint* mapa = &casa;\nstd::cout << \"Donde radica la variable? : \" << mapa;",
+          "language": "cpp",
+          "explanation": "Pintará caracteres codificados a lo '0x7ffebb..' ya no visualizando el 450 natural numérico tradicional si te despistas omitiendo llamadas asteriscos."
+        }
+      ],
+      "summary": "Son el ADN central de C++. Causantes de todos sus beneficios masivos y responsables mayúsculos del rendimiento destructivo cuando fallan crasheando su máquina entera en caso no deshechados oportunamente.",
+      "keyPoints": [
+        "Un puntero requiere y necesita imperativamente ir atado contra las direcciones y nunca contra simples naturales equivalencias normales",
+        "Nullptr se ocupa por prevención general ante el riesgo al generarle nacimiento prematuros carentes direccionarios."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "cpp_17_ch_1",
+        "lessonId": "cpp_lesson_17",
+        "question": "¿Como logras develarle el fondo interno, extrayéndole la dirección pura habitada a simple y normal de un valor en C++?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Añadiendo ++ delante de la orden",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Adhiriendo el signo ampersand & a la variable en lectura",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "Añadiendo asteriscos de golpe *",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Exclusivo de direcciones en ampersand &, te devuelve su paradero oculto e insospechado por default al humano habitual.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "cpp_lesson_18",
+    "courseId": "cpp",
+    "title": "Punteros y Referencias",
+    "description": "Indagaciones combinadas explorando manipulaciones crudas con desreferenciados integrales.",
+    "order": 18,
+    "estimatedMinutes": 35,
+    "content": {
+      "introduction": "Luego que creaste el puente entre variables directrices con mapa a casa, podrías también alterar o sacar de raíz lo allí escondido aprovechándote de la llave maestra.",
+      "sections": [
+        {
+          "id": "cpp_18_sec_1",
+          "title": "El Asterisco Revelador (Desreferencia)",
+          "content": "Difiere en el proceso declarador para volver a ser de empleo interno sobre llamados. En una variable ya apuntando a algo, usarle aledaño e inmersamente (*) extraerá otra vez el contenido en bruto.",
+          "order": 1
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "cpp_18_ex_1",
+          "title": "Modificando por desreferencias colaterales.",
+          "code": "int valor = 5;\nint* puntero = &valor;\n*puntero = 99;\nstd::cout << valor;",
+          "language": "cpp",
+          "explanation": "La lectura salarial resultaría el 99, hackeado y cambiada la base interna pura. El origen natural 'valor' no era de 99, pero por el conducto puntero modificador cedieron las trabas."
+        }
+      ],
+      "summary": "Manejo total y crudo que define el lenguaje base frente al hardware natural de un PC.",
+      "keyPoints": [
+        "Un mismo * se aprovecha doblemente diferente en base a contextos: Creadores e interpretadores de punteros referenciantes."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "cpp_18_ch_1",
+        "lessonId": "cpp_lesson_18",
+        "question": "¿Si el identificador var fue fundado 'int *pt = &numero;', imprimir un requerimiento utilizando cout de *pt logrará como efecto resultorio...?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Imprimir puros símbolos raros de direcciones",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Devolvera ceros totales",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_3",
+            "text": "Entregar a luces el numeral en bruto base a donde te llevaba",
+            "isCorrect": true
+          }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El * efectúa la llamada del Des-referenciado. Saca de regreso la materia base escondida oculta desde dentro del baúl de rumbos.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "cpp_lesson_19",
+    "courseId": "cpp",
+    "title": "Estructuras de Conjunto (struct)",
+    "description": "Una aproximación prehistórica a las clases para moldear identidades multi-atributos conjuntas exclusivas formadas.",
+    "order": 19,
+    "estimatedMinutes": 35,
+    "content": {
+      "introduction": "Un problema molesto deviene manejando cosas del tipo 'vida', 'defensa', y 'velocidad' donde los variables se dispersan desconectados sin relación si tuvieras enemigos. Struct empaqueta e ideó junturas moldebles base.",
+      "sections": [
+        {
+          "id": "cpp_19_sec_1",
+          "title": "Bocetos con Structs",
+          "content": "Configurara tu nuevo elemento universal de tipado. Sus elementos permanecen siempre revelados en la mayoría base 'delante' visuales, requiriendo usar puntaje identificador referencial para sacarlos (.) ejemplo monstruo.vida",
+          "order": 1
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "cpp_19_ex_1",
+          "title": "Generador de personaje inicial RPG.",
+          "code": "struct Enemigo {\n  std::string nombre;\n  int daño;\n};\n\nint main() {\n  Enemigo jefe;\n  jefe.nombre = \"Orco Mártir\";\n  jefe.daño = 55;\n}",
+          "language": "cpp",
+          "explanation": "Reagrupas a las informaciones aislantes previendo creaciones enormes masivas. Termina e incrustalas cerradas de base en semicolon final(;) el Struct originario principal de los cabezales."
+        }
+      ],
+      "summary": "Ideales manejando librerías pasadas ligeras estructurantes antes de la sobrecarga POO universal de base global.",
+      "keyPoints": [
+        "Reúne grupos ajenos bajo el paraguas unificado.",
+        "Conforman matrices conjuntas y aglomeraciones más complejas luego para listas o Array"
+      ]
+    },
+    "challenges": [
+      {
+        "id": "cpp_19_ch_1",
+        "lessonId": "cpp_lesson_19",
+        "question": "¿Como logran ser evocados directamente los submiembros intrínsecos ocultos y adyacentes si formas una unidad particular prefabricada de una base en struct ?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Empleando parentesis ej: jugador(vida)",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Utilizando notación de los puntos final ej: jugador.vida ",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "A través de comas conjuntas ej: jugador, vida",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "El modelo . nos vincula hacia los interiores sin falla permitiendo acceder y alterar particularidades en C++ y herencia general a todo script de similar tipografía.",
+        "points": 10,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "cpp_lesson_20",
+    "courseId": "cpp",
+    "title": "Clases y Objetos (Programación Orientada)",
+    "description": "Una subida potente y controladora hacia los planos reales orientados al modelaje estricto encapsulado definitivo.",
+    "order": 20,
+    "estimatedMinutes": 50,
+    "content": {
+      "introduction": "La corona actual del mundo de los software bases, provee la evolución natural a los fallos desprotegidos expuestos formadores sobre struct viejos sin privacía estricta con funciones internas ocultas perennes para un entorno corporativo.",
+      "sections": [
+        {
+          "id": "cpp_20_sec_1",
+          "title": "Restricción de acceso",
+          "content": "A diferencia integral las clases tienen privatizadores predeterminados bloqueando de un tirón la salida externa base si no dictaminas explícitamente y textualmente lo liberado dictando las directrices a la apertura (public:, private:, protected:).",
+          "order": 1
+        },
+        {
+          "id": "cpp_20_sec_2",
+          "title": "Instanciamientos y métodos incrustables",
+          "content": "Una clase encierra además con la permisibilidad integradas funciones o constructores intrínsecos de vida ligada que proceden en ella única e inseparable. Al nacer, el Creador o 'Constructor' es un método que asume nacimiento previario al uso.",
+          "order": 2
+        }
+      ],
+      "codeExamples": [
+        {
+          "id": "cpp_20_ex_1",
+          "title": "Proyectando bases clásicas formales a C++ actual",
+          "code": "class Libro {\n  public:\n   std::string titulo;\n   void detallar() {\n      std::cout << \"Leyendo: \" << titulo;\n   }\n};\n\nint main() {\n  Libro miTexto;\n  miTexto.titulo = \"1984\";\n  miTexto.detallar();\n}",
+          "language": "cpp",
+          "explanation": "Encabeza una privacidad inicial invisible salvo de no avisarse. Enlazarás luego llamadas metodistas internas mediante puntos clásicos aledaños."
+        }
+      ],
+      "summary": "Son las causantes que C pasara a un nombre propio diferente y global dominando industrias enormes en forma general a día actualizado.",
+      "keyPoints": [
+        "Conforma el plano central en esquemas C++ contemporáneos en un escalado de sistemas macros.",
+        "Es obligatorio definir qué barreras públicas y reservaciones poseen de no especificarlas son catalogadas cerradas en lo profundo natural de lectura."
+      ]
+    },
+    "challenges": [
+      {
+        "id": "cpp_20_ch_1",
+        "lessonId": "cpp_lesson_20",
+        "question": "¿Como te proveerás si precisas permitir abiertamente lectura e injerencia sin límites frontales hacia una entidad variable perteneciente a una propia 'class' de moldeada en un documento?",
+        "type": "multiple-choice",
+        "options": [
+          {
+            "id": "opt_1",
+            "text": "Incluyendo bloque private:",
+            "isCorrect": false
+          },
+          {
+            "id": "opt_2",
+            "text": "Incrustando etiquetas en public:",
+            "isCorrect": true
+          },
+          {
+            "id": "opt_3",
+            "text": "Por naturaleza todo material es extraíble abierto",
+            "isCorrect": false
+          }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "La 'Class' clausura toda variable en su fuero central ocultándolas en base nativa. Explotarlas afuera demanda indicarse la llave y pase publico abierto en las ordenatorias base.",
         "points": 10,
         "order": 1
       }

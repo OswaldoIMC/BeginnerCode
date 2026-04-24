@@ -1,6 +1,5 @@
 /**
- * ViewModel para la pantalla de Course (unificado)
- * Maneja la lógica de cualquier curso usando courseId dinámico
+ * ViewModel para la pantalla de Cursos
  */
 
 import { useState, useEffect } from "react";
@@ -81,7 +80,7 @@ export const useCourseViewModel = ({
       for (const lesson of courseLessons) {
         progressMap[lesson.id] = await DataService.getLessonProgress(
           courseId,
-          lesson.id
+          lesson.id,
         );
       }
 
@@ -126,13 +125,13 @@ export const useCourseViewModel = ({
             console.log("Sesión cerrada exitosamente");
             StorageService.setCurrentUsername(null);
             navigation.dispatch(
-              CommonActions.reset({ index: 0, routes: [{ name: "Login" }] })
+              CommonActions.reset({ index: 0, routes: [{ name: "Login" }] }),
             );
           } else {
             console.error("Error al cerrar sesión");
             Alert.alert(
               "Error",
-              "No se pudo cerrar la sesión. Intenta de nuevo."
+              "No se pudo cerrar la sesión. Intenta de nuevo.",
             );
           }
         },
