@@ -77,6 +77,36 @@
         "explanation": "C++ destaca por su eficiencia y control sobre los recursos del sistema.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "cpp_1_ch_2",
+        "lessonId": "cpp_lesson_1",
+        "question": "C++ administra la memoria de manera completamente automática sin permitir control manual al programador.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. Una de las grandes características de C++ es el control directo y manual de la memoria mediante punteros.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "cpp_1_ch_3",
+        "lessonId": "cpp_lesson_1",
+        "question": "Completa el código para incluir la librería estándar de entrada y salida:\n\n#include <_____>",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "stdio.h", "isCorrect": false },
+          { "id": "opt_2", "text": "iostream", "isCorrect": true },
+          { "id": "opt_3", "text": "console", "isCorrect": false },
+          { "id": "opt_4", "text": "stdlib", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "<iostream> es la biblioteca de la biblioteca estándar de C++ para entrada/salida de flujos de datos.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -158,6 +188,36 @@
         "explanation": "El compilador transforma el código fuente en un ejecutable.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "cpp_2_ch_2",
+        "lessonId": "cpp_lesson_2",
+        "question": "El código fuente de C++ puede ser ejecutado directamente en el procesador sin pasar por un proceso de compilación.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. C++ es un lenguaje compilado, lo que significa que requiere de un compilador para traducir el texto al lenguaje máquina.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "cpp_2_ch_3",
+        "lessonId": "cpp_lesson_2",
+        "question": "Completa el comando comúnmente usado en la terminal para compilar con GCC:\n\n_____ main.cpp",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "gcc++", "isCorrect": false },
+          { "id": "opt_2", "text": "cpp", "isCorrect": false },
+          { "id": "opt_3", "text": "g++", "isCorrect": true },
+          { "id": "opt_4", "text": "run", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "g++ es el comando estándar del conjunto GCC para invocar al compilador de C++.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -246,6 +306,36 @@
         "explanation": "La función main() es donde comienza la ejecución de un programa en C++.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "cpp_3_ch_2",
+        "lessonId": "cpp_lesson_3",
+        "question": "La función principal main() debe devolver un valor de tipo entero (int) al sistema operativo al finalizar su ejecución.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. Por convención y estándar, main() retorna '0' para indicar éxito, por lo que es de tipo int.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "cpp_3_ch_3",
+        "lessonId": "cpp_lesson_3",
+        "question": "Completa el código para devolver cero como código de éxito en la función main:\n\n_____ 0;",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "exit", "isCorrect": false },
+          { "id": "opt_2", "text": "stop", "isCorrect": false },
+          { "id": "opt_3", "text": "return", "isCorrect": true },
+          { "id": "opt_4", "text": "break", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "La palabra clave 'return' finaliza la función y devuelve un valor numérico.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -320,6 +410,36 @@
         "explanation": "El tipo char se utiliza precisamente para guardar un único carácter, normalmente encerrado en comillas simples.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "cpp_4_ch_2",
+        "lessonId": "cpp_lesson_4",
+        "question": "En C++, no es obligatorio especificar el tipo de dato de una variable al declararla.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. C++ es un lenguaje fuertemente y estáticamente tipado, por lo que declarar el tipo de dato es forzoso.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "cpp_4_ch_3",
+        "lessonId": "cpp_lesson_4",
+        "question": "Completa la declaración de una variable para almacenar un número con decimales:\n\n_____ precio = 19.99;",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "int", "isCorrect": false },
+          { "id": "opt_2", "text": "bool", "isCorrect": false },
+          { "id": "opt_3", "text": "char", "isCorrect": false },
+          { "id": "opt_4", "text": "double", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_4",
+        "explanation": "'double' o 'float' se utilizan para números de punto flotante. 'double' es más preciso.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -387,6 +507,36 @@
         "explanation": "const indica al compilador que la variable evaluada se mantendrá constante.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "cpp_5_ch_2",
+        "lessonId": "cpp_lesson_5",
+        "question": "Las constantes declaradas con 'const' pueden ser reasignadas una vez durante la ejecución del programa.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. Un valor 'const' debe inicializarse al momento de declararse y nunca más podrá cambiar.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "cpp_5_ch_3",
+        "lessonId": "cpp_lesson_5",
+        "question": "Completa el código para declarar una constante inmutable:\n\n_____ int EDAD_MAX = 100;",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "final", "isCorrect": false },
+          { "id": "opt_2", "text": "const", "isCorrect": true },
+          { "id": "opt_3", "text": "immutable", "isCorrect": false },
+          { "id": "opt_4", "text": "static", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "La palabra clave a usar es 'const'.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -460,6 +610,36 @@
         "explanation": "Dividir dos enteros en C++ origina una división entera, eliminando cualquier decimal de su resultado.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "cpp_6_ch_2",
+        "lessonId": "cpp_lesson_6",
+        "question": "El operador % se utiliza en C++ para calcular un porcentaje.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. El operador % representa el módulo matemáticamente hablando, es decir, el resto de una división.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "cpp_6_ch_3",
+        "lessonId": "cpp_lesson_6",
+        "question": "Completa la operación matemática para sumar dos variables:\n\nint total = a _____ b;",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "+", "isCorrect": true },
+          { "id": "opt_2", "text": "add", "isCorrect": false },
+          { "id": "opt_3", "text": "&", "isCorrect": false },
+          { "id": "opt_4", "text": "sum", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "El signo + se utiliza para la adición aritmética.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -528,6 +708,36 @@
         "explanation": "cin significa 'character in' y pertenece a iostream en el 'espacio de nombres' estándar.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "cpp_7_ch_2",
+        "lessonId": "cpp_lesson_7",
+        "question": "El objeto std::cin se usa de la mano con el operador de inserción (<<) para leer datos introducidos.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. std::cin utiliza el operador de extracción (>>). El operador (<<) lo emplea std::cout.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "cpp_7_ch_3",
+        "lessonId": "cpp_lesson_7",
+        "question": "Completa el código para guardar el dato leído desde teclado en una variable:\n\nstd::_____ >> edad;",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "in", "isCorrect": false },
+          { "id": "opt_2", "text": "cin", "isCorrect": true },
+          { "id": "opt_3", "text": "cout", "isCorrect": false },
+          { "id": "opt_4", "text": "scan", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "El comando adecuado de entrada en iostream es 'cin'.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -601,6 +811,36 @@
         "explanation": "Para probar si una cifra choca con otra por ser distinta requieres '!='",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "cpp_8_ch_2",
+        "lessonId": "cpp_lesson_8",
+        "question": "El operador lógico && comprueba que ambas condiciones evaluadas sean verdaderas simultáneamente.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. Es la conjunción (AND), exige que lado izquierdo y derecho sean 'true'.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "cpp_8_ch_3",
+        "lessonId": "cpp_lesson_8",
+        "question": "Completa el código aplicando el operador lógico OR (O):\n\nif (a == 1 _____ b == 2)",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "||", "isCorrect": true },
+          { "id": "opt_2", "text": "&&", "isCorrect": false },
+          { "id": "opt_3", "text": "or", "isCorrect": false },
+          { "id": "opt_4", "text": "~~", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Los caracteres de tubería (||) actúan como el operador OR en C++.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -658,6 +898,36 @@
         "explanation": "Else responde puramente como opción alternativa. No acarrea exigencia estructural de poseerlo obligatoriamente.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "cpp_9_ch_2",
+        "lessonId": "cpp_lesson_9",
+        "question": "El bloque 'else if' permite evaluar una nueva condición extra pero solo sí la primera (del 'if' original) resultó falsa.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. 'else if' te da la posibilidad de encadenar diversas decisiones conectadas.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "cpp_9_ch_3",
+        "lessonId": "cpp_lesson_9",
+        "question": "Completa la sintaxis para comenzar una estructura condicional:\n\n_____ (numero > 10) { }",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "when", "isCorrect": false },
+          { "id": "opt_2", "text": "for", "isCorrect": false },
+          { "id": "opt_3", "text": "if", "isCorrect": true },
+          { "id": "opt_4", "text": "check", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El núcleo y la base estructural para esta toma de decisiones es la palabra clave 'if'.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -732,6 +1002,36 @@
         "explanation": "El identificador exacto de rescate en el switch fue bautizado de manera inherente por default.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "cpp_10_ch_2",
+        "lessonId": "cpp_lesson_10",
+        "question": "La instrucción 'break' dentro de cada caso es opcional y prescindir de ella jamás afecta el funcionamiento de otros casos del switch.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. Omitir 'break' causará lo que se conoce como 'fall-through' corriendo los casos ubicados debajo.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "cpp_10_ch_3",
+        "lessonId": "cpp_lesson_10",
+        "question": "Completa la palabra clave para marcar una opción dentro del bloque switch:\n\n_____ 1:\n    std::cout << \"Es uno\";\n    break;",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "if", "isCorrect": false },
+          { "id": "opt_2", "text": "case", "isCorrect": true },
+          { "id": "opt_3", "text": "opcion", "isCorrect": false },
+          { "id": "opt_4", "text": "when", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "La elección a revisar en un switch comienza siempre designándola como 'case' o caso.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -799,6 +1099,36 @@
         "explanation": "C++ especifica la segregación de un for utilizando puntocoma (;).",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "cpp_11_ch_2",
+        "lessonId": "cpp_lesson_11",
+        "question": "En un bucle for en C++, puedes omitir la actualización (como i++) en la declaración si la manejas manualmente dentro del cuerpo del bucle.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. Aunque no es común, el formato de C++ permite dejar partes del 'for' vacías si son manejadas internamente.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "cpp_11_ch_3",
+        "lessonId": "cpp_lesson_11",
+        "question": "Completa el bucle for indicando el incremento correcto de la variable 'i':\n\nfor (int i=0; i<5; _____++)",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "j", "isCorrect": false },
+          { "id": "opt_2", "text": "i", "isCorrect": true },
+          { "id": "opt_3", "text": "x", "isCorrect": false },
+          { "id": "opt_4", "text": "1", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "El bucle típicamente incrementa el mismo iterador, en este caso 'i'.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -867,6 +1197,36 @@
         "explanation": "Do-while acciona 'Hacer' y por sus narices entra del inicio a leer. Acabadas tales lecturas reacciona percatándose de las trabas impidiendo la vuelta.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "cpp_12_ch_2",
+        "lessonId": "cpp_lesson_12",
+        "question": "Un bucle 'while' siempre ejecutará su código al menos una vez, incluso si la condición es falsa desde el principio.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. Esa es una característica exclusiva del bucle do-while. El 'while' normal podría ejecutarse cero veces si falla en la primera comprobación.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "cpp_12_ch_3",
+        "lessonId": "cpp_lesson_12",
+        "question": "Completa el código para un bucle que se ejecuta mientras x sea menor que 10:\n\n_____ (x < 10) {\n  x++;\n}",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "if", "isCorrect": false },
+          { "id": "opt_2", "text": "do", "isCorrect": false },
+          { "id": "opt_3", "text": "while", "isCorrect": true },
+          { "id": "opt_4", "text": "for", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El bucle estándar condicional es 'while'.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -940,6 +1300,36 @@
         "explanation": "Void es una etiqueta en C++ donde el valor se obvia dictando nula reacción tras acabarse su encargo programático.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "cpp_13_ch_2",
+        "lessonId": "cpp_lesson_13",
+        "question": "Es obligatorio que todas las funciones en C++ tengan un valor de retorno explícito y diferente de void.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. Las funciones pueden declararse como 'void', lo que significa que no devolverán nada y omitirán la sentencia return al finalizar.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "cpp_13_ch_3",
+        "lessonId": "cpp_lesson_13",
+        "question": "Completa la firma de la función principal obligatoria en C++:\n\nint _____() {\n  return 0;\n}",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "start", "isCorrect": false },
+          { "id": "opt_2", "text": "init", "isCorrect": false },
+          { "id": "opt_3", "text": "main", "isCorrect": true },
+          { "id": "opt_4", "text": "run", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "La función 'main' sirve de punto de partida indispensable en cada programa C++.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1013,6 +1403,36 @@
         "explanation": "Empleando & (Ampersand unico) obligas acoplamiento simultáneo directo sobre el archivo madre sin copia clonada.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "cpp_14_ch_2",
+        "lessonId": "cpp_lesson_14",
+        "question": "Pasar un argumento por valor (sin modificadores extra) significa que la función crea una copia idéntica de la variable original.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. Esta acción nativa te permite preservar el dato original seguro e inalterado mientras realizas operaciones colaterales.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "cpp_14_ch_3",
+        "lessonId": "cpp_lesson_14",
+        "question": "Completa el código para pasar la variable por referencia y poder modificarla:\n\nvoid modificar(int _____num) { }",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "$", "isCorrect": false },
+          { "id": "opt_2", "text": "&", "isCorrect": true },
+          { "id": "opt_3", "text": "#", "isCorrect": false },
+          { "id": "opt_4", "text": "@", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "El símbolo & o ampersand al declarar parámetros dicta el paso de referencias en lugar de copias.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1086,6 +1506,36 @@
         "explanation": "Se anexa a fin del identificador los corchetes ataviados con una enumeratura certera inquebrantable de C++ tradicional.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "cpp_15_ch_2",
+        "lessonId": "cpp_lesson_15",
+        "question": "Los arrays primitivos y básicos en C++ pueden cambiar su tamaño (crecer o reducirse) de manera dinámica durante la ejecución del programa sin problemas.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. Los arreglos típicos (arrays) de C++ asumen tamaños fijos al inicio que luego permanecen inalterables, a menos que uses punteros dinámicos o la biblioteca vector.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "cpp_15_ch_3",
+        "lessonId": "cpp_lesson_15",
+        "question": "Completa el código para declarar un array que contenga exactamente 5 enteros:\n\nint numeros[_____];",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "4", "isCorrect": false },
+          { "id": "opt_2", "text": "5", "isCorrect": true },
+          { "id": "opt_3", "text": "6", "isCorrect": false },
+          { "id": "opt_4", "text": "0", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "El valor dentro de los corchetes define en número entero la capacidad exacta de alojamiento del array.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1159,6 +1609,36 @@
         "explanation": "Precisa en solitario y puramente singulares de <string> como regla estándar en C++ modernos.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "cpp_16_ch_2",
+        "lessonId": "cpp_lesson_16",
+        "question": "Puedes concatenar (unir) dos objetos de texto std::string utilizando simplemente el operador matemático de suma (+).",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. Las strings tienen 'sobrecargado' el signo más (+) para permitir juntar palabras fácilmente.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "cpp_16_ch_3",
+        "lessonId": "cpp_lesson_16",
+        "question": "Completa la directriz sobre el tipo de dato para declarar una variable de texto con la librería estándar de C++:\n\nstd::_____ saludo = \"Hola\";",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "char", "isCorrect": false },
+          { "id": "opt_2", "text": "text", "isCorrect": false },
+          { "id": "opt_3", "text": "string", "isCorrect": true },
+          { "id": "opt_4", "text": "str", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El tipo de dato se denomina genéricamente como 'string' perteneciente al namespace 'std'.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1227,6 +1707,36 @@
         "explanation": "Exclusivo de direcciones en ampersand &, te devuelve su paradero oculto e insospechado por default al humano habitual.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "cpp_17_ch_2",
+        "lessonId": "cpp_lesson_17",
+        "question": "Un puntero en C++ almacena el valor directo y literal de una variable, no el paradero hexadecimal de su dirección en memoria.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. La principal y más notoria particularidad de un puntero es que lo único que aloja dentro suyo son direcciones de memoria, no valores habituales.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "cpp_17_ch_3",
+        "lessonId": "cpp_lesson_17",
+        "question": "Completa el código para declarar apropiadamente un puntero a una variable de tipo entero:\n\n_____ * ptr;",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "var", "isCorrect": false },
+          { "id": "opt_2", "text": "pointer", "isCorrect": false },
+          { "id": "opt_3", "text": "int", "isCorrect": true },
+          { "id": "opt_4", "text": "double", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El puntero asume el mismo tipo de variable al que estará apuntando (en este caso un entero int).",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1288,6 +1798,36 @@
         "explanation": "El * efectúa la llamada del Des-referenciado. Saca de regreso la materia base escondida oculta desde dentro del baúl de rumbos.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "cpp_18_ch_2",
+        "lessonId": "cpp_lesson_18",
+        "question": "El operador de desreferencia (*) se utiliza para acceder al valor almacenado directo albergado en la dirección que apunta el puntero.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. Al usar * antes de la variable puntero en su uso, viajas a la celda en memoria y sacas la información alojada ahí.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "cpp_18_ch_3",
+        "lessonId": "cpp_lesson_18",
+        "question": "Completa el código para obtener la cifra o el valor base al que se halla apuntando 'ptr':\n\nint valor = _____ptr;",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "&", "isCorrect": false },
+          { "id": "opt_2", "text": "*", "isCorrect": true },
+          { "id": "opt_3", "text": "#", "isCorrect": false },
+          { "id": "opt_4", "text": "$", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "El símbolo * ejerce la acción de desreferencia en este caso.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1350,6 +1890,36 @@
         "explanation": "El modelo . nos vincula hacia los interiores sin falla permitiendo acceder y alterar particularidades en C++ y herencia general a todo script de similar tipografía.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "cpp_19_ch_2",
+        "lessonId": "cpp_lesson_19",
+        "question": "Los miembros definidos dentro de un 'struct' de C++ son bloqueados como privados de lectura por defecto.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. La mayor diferencia con las Clases es que todos los datos pertenecientes a un Struct nacen siendo totalmente públicos si no se establece lo contrario.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "cpp_19_ch_3",
+        "lessonId": "cpp_lesson_19",
+        "question": "Completa el código de la declaración de inicio para agrupar variables:\n\n_____ Punto {\n  int x;\n  int y;\n};",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "class", "isCorrect": false },
+          { "id": "opt_2", "text": "struct", "isCorrect": true },
+          { "id": "opt_3", "text": "object", "isCorrect": false },
+          { "id": "opt_4", "text": "type", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "La palabra clave fundamental para estructurar es 'struct'.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1418,6 +1988,36 @@
         "explanation": "La 'Class' clausura toda variable en su fuero central ocultándolas en base nativa. Explotarlas afuera demanda indicarse la llave y pase publico abierto en las ordenatorias base.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "cpp_20_ch_2",
+        "lessonId": "cpp_lesson_20",
+        "question": "En C++, todos los miembros internos declarados en una 'class' arrancan estando privados por defecto salvo que se altere.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. Esto se debe al encapsulamiento, pilar de C++ y principal diferencia con los primitivos 'struct'.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "cpp_20_ch_3",
+        "lessonId": "cpp_lesson_20",
+        "question": "Completa la instanciación de un objeto de la clase 'Coche':\n\n_____ miAuto;",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "new", "isCorrect": false },
+          { "id": "opt_2", "text": "Coche", "isCorrect": true },
+          { "id": "opt_3", "text": "class", "isCorrect": false },
+          { "id": "opt_4", "text": "object", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Se inicializa llamando directamente al identificador de la propia clase como si fuera su tipo de dato.",
+        "points": 15,
+        "order": 3
       }
     ]
   }

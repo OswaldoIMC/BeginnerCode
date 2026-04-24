@@ -77,10 +77,39 @@
         "explanation": "La JVM permite ejecutar el mismo programa en distintas plataformas.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "java_1_ch_2",
+        "lessonId": "java_lesson_1",
+        "question": "Java fue creado en 1995 y es un lenguaje orientado a objetos.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Java es un lenguaje orientado a objetos creado en 1995 que sigue siendo ampliamente utilizado por su estabilidad.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "java_1_ch_3",
+        "lessonId": "java_lesson_1",
+        "question": "Completa el código para definir la clase principal en Java según el ejemplo visto:\n\n_____ class Main {",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "public", "isCorrect": true },
+          { "id": "opt_2", "text": "private", "isCorrect": false },
+          { "id": "opt_3", "text": "def", "isCorrect": false },
+          { "id": "opt_4", "text": "function", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "En Java, la clase de entrada típica se define con el modificador de acceso 'public', es decir, 'public class Main'.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
-
   {
     "id": "java_lesson_2",
     "courseId": "java",
@@ -143,10 +172,39 @@
         "explanation": "El comando java -version muestra la versión instalada.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "java_2_ch_2",
+        "lessonId": "java_lesson_2",
+        "question": "El JDK no incluye el compilador, este debe descargarse por separado.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Es Falso. El JDK (Java Development Kit) SÍ incluye el compilador (javac) además de la JVM.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "java_2_ch_3",
+        "lessonId": "java_lesson_2",
+        "question": "¿Qué significa JDK?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "Java Default Kernel", "isCorrect": false },
+          { "id": "opt_2", "text": "Java Development Kit", "isCorrect": true },
+          { "id": "opt_3", "text": "Java Download Key", "isCorrect": false },
+          { "id": "opt_4", "text": "Java Device Kernel", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "JDK significa Java Development Kit, el cual trae las herramientas necesarias para desarrollar en Java.",
+        "points": 10,
+        "order": 3
       }
     ]
   },
-
   {
     "id": "java_lesson_3",
     "courseId": "java",
@@ -216,6 +274,52 @@
         "explanation": "El método main() es el punto de entrada de cualquier programa Java.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "java_3_ch_2",
+        "lessonId": "java_lesson_3",
+        "question": "En Java, el nombre del archivo no necesita coincidir con el de la clase pública.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. En Java, el nombre del archivo debe coincidir exactamente con el nombre de la clase pública (ej: Main.java para public class Main).",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "java_3_ch_3",
+        "lessonId": "java_lesson_3",
+        "question": "Completa el código para imprimir un mensaje en consola:\n\nSystem.out.____(\"Hola mundo\");",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "printline", "isCorrect": false },
+          { "id": "opt_2", "text": "write", "isCorrect": false },
+          { "id": "opt_3", "text": "println", "isCorrect": true },
+          { "id": "opt_4", "text": "log", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "La instrucción correcta en Java para imprimir una línea en consola es System.out.println().",
+        "points": 15,
+        "order": 3
+      },
+      {
+        "id": "java_3_ch_4",
+        "lessonId": "java_lesson_3",
+        "question": "¿Qué comando se usa para compilar el archivo Main.java?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "java Main.java", "isCorrect": false },
+          { "id": "opt_2", "text": "compile Main.java", "isCorrect": false },
+          { "id": "opt_3", "text": "javac Main.java", "isCorrect": true },
+          { "id": "opt_4", "text": "build Main.java", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "Se usa 'javac' seguido del nombre completo del archivo con su extensión para compilar el código fuente.",
+        "points": 10,
+        "order": 4
       }
     ]
   }

@@ -184,6 +184,22 @@
         "explanation": "El comando correcto es 'python --version' o 'python -V'.",
         "points": 10,
         "order": 2
+      },
+      {
+        "id": "python_2_ch_3",
+        "lessonId": "python_lesson_2",
+        "question": "Completa el comando para verificar la versión instalada de Python:\n\npython --_____",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "version", "isCorrect": true },
+          { "id": "opt_2", "text": "ver", "isCorrect": false },
+          { "id": "opt_3", "text": "v", "isCorrect": false },
+          { "id": "opt_4", "text": "info", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "El comando es python --version",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -376,6 +392,22 @@
         "explanation": "True es un valor booleano, su tipo es <class 'bool'>.",
         "points": 10,
         "order": 2
+      },
+      {
+        "id": "python_4_ch_3",
+        "lessonId": "python_lesson_4",
+        "question": "Completa el código para guardar el nombre 'Carlos' en una variable y luego imprimir su tipo de dato:\n\n_____ = 'Carlos'\nprint(type(nombre))",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "nombre", "isCorrect": true },
+          { "id": "opt_2", "text": "var nombre", "isCorrect": false },
+          { "id": "opt_3", "text": "string nombre", "isCorrect": false },
+          { "id": "opt_4", "text": "let nombre", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "En Python, las variables se declaran simplemente asignando un valor con el operador =. No se necesita ninguna palabra clave como 'var', 'let' o el tipo de dato. Solo escribes: nombre = 'Carlos'.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -463,6 +495,20 @@
         "explanation": "'and' solo devuelve True si ambas expresiones son verdaderas.",
         "points": 10,
         "order": 2
+      },
+      {
+        "id": "python_5_ch_3",
+        "lessonId": "python_lesson_5",
+        "question": "El operador // redondea la división al entero más cercano hacia abajo.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. // realiza una división entera, eliminando la parte decimal.",
+        "points": 10,
+        "order": 3
       }
     ]
   },
@@ -528,6 +574,38 @@
         "explanation": "input() siempre devuelve texto, sin importar lo que escriba el usuario.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "python_6_ch_2",
+        "lessonId": "python_lesson_6",
+        "question": "¿Qué función se utiliza para convertir la entrada del usuario en un número entero?",
+        "type": "multiple-choice",
+        "options": [
+          { "id": "opt_1", "text": "number()", "isCorrect": false },
+          { "id": "opt_2", "text": "int()", "isCorrect": true },
+          { "id": "opt_3", "text": "float()", "isCorrect": false },
+          { "id": "opt_4", "text": "integer()", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "int() convierte un valor (como el texto devuelto por input) a un número entero.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "python_6_ch_3",
+        "lessonId": "python_lesson_6",
+        "question": "Completa el código para convertir a decimal lo que introduce el usuario:\n\npeso = _____(input('¿Cuánto pesas?'))",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "int", "isCorrect": false },
+          { "id": "opt_2", "text": "float", "isCorrect": true },
+          { "id": "opt_3", "text": "decimal", "isCorrect": false },
+          { "id": "opt_4", "text": "number", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "float() convierte el texto introducido a un número decimal.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -616,6 +694,22 @@
         "explanation": "Python usa indentación para definir los bloques de código.",
         "points": 10,
         "order": 2
+      },
+      {
+        "id": "python_7_ch_3",
+        "lessonId": "python_lesson_7",
+        "question": "Completa el código para ejecutar algo si 'edad' es mayor que 18:\n\n_____ edad > 18:\n    print('Es mayor')",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "if", "isCorrect": true },
+          { "id": "opt_2", "text": "else", "isCorrect": false },
+          { "id": "opt_3", "text": "elif", "isCorrect": false },
+          { "id": "opt_4", "text": "while", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "La instrucción 'if' evalúa la condición.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -694,6 +788,36 @@
         "explanation": "for es ideal cuando conoces el número exacto de repeticiones.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "python_8_ch_2",
+        "lessonId": "python_lesson_8",
+        "question": "El ciclo while se ejecuta para siempre a menos que su condición se vuelva falsa.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. Si la condición nunca es False, se convierte en un bucle infinito.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "python_8_ch_3",
+        "lessonId": "python_lesson_8",
+        "question": "Completa el código para generar números del 1 al 4:\n\nfor i in _____(1, 5):\n    print(i)",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "list", "isCorrect": false },
+          { "id": "opt_2", "text": "range", "isCorrect": true },
+          { "id": "opt_3", "text": "sequence", "isCorrect": false },
+          { "id": "opt_4", "text": "loop", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "La función range(1, 5) genera una secuencia de números: 1, 2, 3, 4.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -765,6 +889,36 @@
         "explanation": "append() agrega un elemento al final de la lista.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "python_9_ch_2",
+        "lessonId": "python_lesson_9",
+        "question": "El primer elemento de una lista se encuentra en el índice 1.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. En Python, los índices de las listas comienzan en 0.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "python_9_ch_3",
+        "lessonId": "python_lesson_9",
+        "question": "Completa el código para crear una lista vacía:\n\nmi_lista = _____  _____",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "{}", "isCorrect": false },
+          { "id": "opt_2", "text": "()", "isCorrect": false },
+          { "id": "opt_3", "text": "[]", "isCorrect": true },
+          { "id": "opt_4", "text": "\"\"", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "Las listas en Python se crean usando corchetes [].",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -840,6 +994,36 @@
         "explanation": "La característica principal es que no pueden modificarse.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "python_10_ch_2",
+        "lessonId": "python_lesson_10",
+        "question": "Una vez creada una tupla, puedes usar append() para añadir más elementos.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. Las tuplas son inmutables y no tienen el método append().",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "python_10_ch_3",
+        "lessonId": "python_lesson_10",
+        "question": "Completa el código para acceder al primer elemento de la tupla:\n\npunto = (3, 4)\nprint(punto[_____])",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "1", "isCorrect": false },
+          { "id": "opt_2", "text": "0", "isCorrect": true },
+          { "id": "opt_3", "text": "first", "isCorrect": false },
+          { "id": "opt_4", "text": "-1", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Los índices en Python empiezan en 0.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -911,6 +1095,36 @@
         "explanation": "La forma más común de acceder a valores es usando persona['clave'].",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "python_11_ch_2",
+        "lessonId": "python_lesson_11",
+        "question": "El método get() permite obtener un valor sin generar un error si la clave no existe.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. get() devuelve un valor por defecto (como None) si la clave no existe.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "python_11_ch_3",
+        "lessonId": "python_lesson_11",
+        "question": "Completa el código para crear un diccionario vacío:\n\nmi_diccionario = _____  _____",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "[]", "isCorrect": false },
+          { "id": "opt_2", "text": "()", "isCorrect": false },
+          { "id": "opt_3", "text": "{}", "isCorrect": true },
+          { "id": "opt_4", "text": "dict", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "Los diccionarios se crean con llaves {}.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -976,6 +1190,36 @@
         "explanation": "Los sets no permiten duplicados.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "python_12_ch_2",
+        "lessonId": "python_lesson_12",
+        "question": "Un set en Python mantiene garantizado el orden en el que se agregaron los elementos.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. Los sets son colecciones desordenadas.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "python_12_ch_3",
+        "lessonId": "python_lesson_12",
+        "question": "Completa el código para unir dos sets 'a' y 'b':\n\nresultado = a._____(b)",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "join", "isCorrect": false },
+          { "id": "opt_2", "text": "union", "isCorrect": true },
+          { "id": "opt_3", "text": "add", "isCorrect": false },
+          { "id": "opt_4", "text": "concat", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "El método union() combina los elementos de dos sets.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1050,6 +1294,22 @@
         "explanation": "La función imprime 'Hola' cuando se ejecuta.",
         "points": 10,
         "order": 2
+      },
+      {
+        "id": "python_13_ch_3",
+        "lessonId": "python_lesson_13",
+        "question": "Completa el código para llamar a la función saludar:\n\n_____()",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "call saludar", "isCorrect": false },
+          { "id": "opt_2", "text": "saludar", "isCorrect": true },
+          { "id": "opt_3", "text": "run saludar", "isCorrect": false },
+          { "id": "opt_4", "text": "exec", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Para ejecutar una función simplemente escribes su nombre con paréntesis: saludar().",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1141,6 +1401,22 @@
         "explanation": "Las variables dentro de funciones tienen alcance local.",
         "points": 10,
         "order": 2
+      },
+      {
+        "id": "python_14_ch_3",
+        "lessonId": "python_lesson_14",
+        "question": "Completa el código para que la función devuelva el valor 5:\n\ndef obtener_numero():\n    _____ 5",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "out", "isCorrect": false },
+          { "id": "opt_2", "text": "yield", "isCorrect": false },
+          { "id": "opt_3", "text": "return", "isCorrect": true },
+          { "id": "opt_4", "text": "export", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "La palabra clave return se usa para que la función devuelva un resultado.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1228,6 +1504,22 @@
         "explanation": "sqrt(9) devuelve la raíz cuadrada que es 3.",
         "points": 10,
         "order": 2
+      },
+      {
+        "id": "python_15_ch_3",
+        "lessonId": "python_lesson_15",
+        "question": "Completa el código para importar solo la función randint del módulo random:\n\n_____ random import randint",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "use", "isCorrect": false },
+          { "id": "opt_2", "text": "from", "isCorrect": true },
+          { "id": "opt_3", "text": "get", "isCorrect": false },
+          { "id": "opt_4", "text": "include", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Para importar funciones específicas de un módulo, se usa la sintaxis: from módulo import función.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1454,6 +1746,22 @@
         "explanation": "with se encarga de cerrar el archivo automáticamente.",
         "points": 10,
         "order": 2
+      },
+      {
+        "id": "python_17_ch_3",
+        "lessonId": "python_lesson_17",
+        "question": "Completa el código para abrir el archivo 'datos.txt' en modo lectura:\n\narchivo = _____('datos.txt', 'r')",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "read", "isCorrect": false },
+          { "id": "opt_2", "text": "file", "isCorrect": false },
+          { "id": "opt_3", "text": "open", "isCorrect": true },
+          { "id": "opt_4", "text": "load", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "La función open() es la que se usa para abrir archivos en Python.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1535,6 +1843,22 @@
         "explanation": "El atributo x fue asignado como 5 en __init__.",
         "points": 10,
         "order": 2
+      },
+      {
+        "id": "python_18_ch_3",
+        "lessonId": "python_lesson_18",
+        "question": "Completa el código para crear un objeto de la clase Persona:\n\np1 = _____('Ana')",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "new Persona", "isCorrect": false },
+          { "id": "opt_2", "text": "Persona", "isCorrect": true },
+          { "id": "opt_3", "text": "create Persona", "isCorrect": false },
+          { "id": "opt_4", "text": "class Persona", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "En Python, los objetos se crean simplemente llamando al nombre de la clase como si fuera una función: Persona('Ana').",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1622,6 +1946,22 @@
         "explanation": "__str__ define la representación del objeto.",
         "points": 10,
         "order": 2
+      },
+      {
+        "id": "python_19_ch_3",
+        "lessonId": "python_lesson_19",
+        "question": "Completa el código para acceder a los métodos de la clase padre:\n\n_____().metodo_padre()",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "parent", "isCorrect": false },
+          { "id": "opt_2", "text": "base", "isCorrect": false },
+          { "id": "opt_3", "text": "super", "isCorrect": true },
+          { "id": "opt_4", "text": "self", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "La función super() te da acceso a los métodos y propiedades de la clase padre.",
+        "points": 15,
+        "order": 3
       }
     ]
   },

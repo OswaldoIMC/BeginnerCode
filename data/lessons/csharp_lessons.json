@@ -77,6 +77,36 @@
         "explanation": "C# fue desarrollado por Microsoft como parte de la plataforma .NET.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "csharp_1_ch_2",
+        "lessonId": "csharp_lesson_1",
+        "question": "C# es un lenguaje orientado a objetos que fue desarrollado originalmente por Google.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. C# fue creado y es mantenido principalmente por Microsoft.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "csharp_1_ch_3",
+        "lessonId": "csharp_lesson_1",
+        "question": "Completa el nombre de la plataforma sobre la que se ejecuta C# de manera nativa:\n\n._____",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "COM", "isCorrect": false },
+          { "id": "opt_2", "text": "NET", "isCorrect": true },
+          { "id": "opt_3", "text": "EXE", "isCorrect": false },
+          { "id": "opt_4", "text": "WEB", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "C# está profundamente integrado y se ejecuta sobre la plataforma .NET.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -158,6 +188,36 @@
         "explanation": "El comando dotnet --version muestra la versión instalada del SDK.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "csharp_2_ch_2",
+        "lessonId": "csharp_lesson_2",
+        "question": "El comando 'dotnet --version' en la terminal se utiliza para verificar que el SDK de .NET está correctamente instalado.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. Ese comando imprimirá la versión si todo está configurado correctamente en tu sistema operativo.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "csharp_2_ch_3",
+        "lessonId": "csharp_lesson_2",
+        "question": "Completa el comando básico para trabajar con la plataforma .NET desde la consola:\n\n_____ --version",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "csharp", "isCorrect": false },
+          { "id": "opt_2", "text": "dotnet", "isCorrect": true },
+          { "id": "opt_3", "text": "net", "isCorrect": false },
+          { "id": "opt_4", "text": "cs", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "La herramienta de línea de comandos de .NET se invoca usando la palabra 'dotnet'.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -246,6 +306,36 @@
         "explanation": "El método Main() es el punto de inicio de cualquier aplicación en C#.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "csharp_3_ch_2",
+        "lessonId": "csharp_lesson_3",
+        "question": "Toda aplicación de consola en C# inicia su ejecución obligatoriamente desde el método Main().",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. El compilador de C# busca un método estático llamado Main() para comenzar la ejecución.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "csharp_3_ch_3",
+        "lessonId": "csharp_lesson_3",
+        "question": "Completa el código para imprimir un texto en consola con salto de línea:\n\nConsole._____(\"Hola mundo\");",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "Print", "isCorrect": false },
+          { "id": "opt_2", "text": "log", "isCorrect": false },
+          { "id": "opt_3", "text": "WriteLine", "isCorrect": true },
+          { "id": "opt_4", "text": "Write", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "Console.WriteLine es el método estándar para imprimir texto terminando con un salto de línea en C#.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -319,6 +409,36 @@
         "explanation": "Abreviatura de un conjunto (hilera) y su uso engloba toda la redacción unida en un objeto.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "csharp_4_ch_2",
+        "lessonId": "csharp_lesson_4",
+        "question": "En C#, por ser fuertemente tipado, debes definir claramente el tipo de dato de una variable (ya sea explícitamente o implícitamente con var) al declararla.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. Todo espacio en memoria necesita una categoría bien definida para que el procesador trate los datos apropiadamente.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "csharp_4_ch_3",
+        "lessonId": "csharp_lesson_4",
+        "question": "Completa la declaración de una variable explícita de texto:\n\n_____ nombre = \"Juan\";",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "int", "isCorrect": false },
+          { "id": "opt_2", "text": "bool", "isCorrect": false },
+          { "id": "opt_3", "text": "char", "isCorrect": false },
+          { "id": "opt_4", "text": "string", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_4",
+        "explanation": "Para textos o cadenas de caracteres con comillas dobles, el tipo base usado es 'string'.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -392,6 +512,36 @@
         "explanation": "Por regla general C# resguarda la información base bajo lectura protegida sólo con const al ser generada.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "csharp_5_ch_2",
+        "lessonId": "csharp_lesson_5",
+        "question": "Una variable declarada con la palabra clave 'const' puede cambiar su valor más tarde en el flujo normal del programa.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. Las constantes son inmutables; intentar reasignarles un valor en C# lanzará un error de compilación.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "csharp_5_ch_3",
+        "lessonId": "csharp_lesson_5",
+        "question": "Completa la palabra clave que permite que el compilador deduzca el tipo de dato automáticamente:\n\n_____ edad = 25;",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "auto", "isCorrect": false },
+          { "id": "opt_2", "text": "let", "isCorrect": false },
+          { "id": "opt_3", "text": "var", "isCorrect": true },
+          { "id": "opt_4", "text": "const", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "La palabra clave 'var' permite inferencia de tipos por parte del compilador en variables locales inicializadas.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -460,6 +610,36 @@
         "explanation": "Un asterisco adjunto en igualdad le transfiere valor multi-plicacional recíprocamente del monto puesto frente reemplazando rápido al anterior por la multiplicacion originada.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "csharp_6_ch_2",
+        "lessonId": "csharp_lesson_6",
+        "question": "El operador ++ incrementa el valor de una variable numérica agregándole exactamente una unidad.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. Es un atajo para la suma en uno, muy utilizado al iterar contadores.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "csharp_6_ch_3",
+        "lessonId": "csharp_lesson_6",
+        "question": "Completa el atajo de asignación para sumar 5 a la variable existente:\n\nnumero _____ 5;",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "+", "isCorrect": false },
+          { "id": "opt_2", "text": "++", "isCorrect": false },
+          { "id": "opt_3", "text": "=+", "isCorrect": false },
+          { "id": "opt_4", "text": "+=", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_4",
+        "explanation": "El atajo '+=' significa 'sumarle el valor de la derecha a la variable actual'.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -528,6 +708,36 @@
         "explanation": "Al ser puramente strings, su uso general carece poder aritmético si antes no se ejerce una forzada metamorfosis por métodos Int.Parse.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "csharp_7_ch_2",
+        "lessonId": "csharp_lesson_7",
+        "question": "El método Console.ReadLine() atrapa los datos introducidos y devuelve directamente un valor numérico entero (int).",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. Siempre devuelve texto en forma de 'string'. Si necesitas un int, debes convertirlo explícitamente mediante un método como Convert.ToInt32().",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "csharp_7_ch_3",
+        "lessonId": "csharp_lesson_7",
+        "question": "Completa el código para leer desde el teclado una línea de texto ingresada por el usuario:\n\nstring entrada = Console._____();",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "Read", "isCorrect": false },
+          { "id": "opt_2", "text": "Input", "isCorrect": false },
+          { "id": "opt_3", "text": "ReadLine", "isCorrect": true },
+          { "id": "opt_4", "text": "Scan", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "Console.ReadLine() captura toda la línea de texto ingresada en consola hasta que se presiona Enter.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -596,6 +806,36 @@
         "explanation": "El signo derivado de pipe vertical duplicada da constancia e introducción directa a las condiciones compuertas de alternativa flexible de una vía afirmativa (OR).",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "csharp_8_ch_2",
+        "lessonId": "csharp_lesson_8",
+        "question": "El operador lógico || (OR) devuelve verdadero si al menos una de las condiciones individuales evaluadas es verdadera.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. Sólo devolverá falso en el caso exclusivo en que ambos extremos evaluados sean falsos.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "csharp_8_ch_3",
+        "lessonId": "csharp_lesson_8",
+        "question": "Completa el operador lógico AND (Y) para evaluar que dos expresiones sean correctas forzosamente a la vez:\n\nif (a == 1 _____ b == 2)",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "||", "isCorrect": false },
+          { "id": "opt_2", "text": "&&", "isCorrect": true },
+          { "id": "opt_3", "text": "and", "isCorrect": false },
+          { "id": "opt_4", "text": "&|", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "En C#, el doble ampersand (&&) ejerce la función exigente del operador lógico AND.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -669,6 +909,36 @@
         "explanation": "El Else ejecuta e indica universalmente a los programadores lo alterno por defecto de la falibilidad del caso inicial previsto.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "csharp_9_ch_2",
+        "lessonId": "csharp_lesson_9",
+        "question": "En una estructura if, acompañarlo o finalizar la orden con un bloque 'else' es totalmente obligatorio para que compile el programa.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. La sentencia 'if' puede vivir sola en el código; añadir 'else' es sólo una opción si tienes que tomar una ruta de descarte alternativa.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "csharp_9_ch_3",
+        "lessonId": "csharp_lesson_9",
+        "question": "Completa la palabra clave utilizada para encadenar una nueva evaluación si el primer 'if' falló:\n\n_____ if (numero > 5)",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "then", "isCorrect": false },
+          { "id": "opt_2", "text": "elif", "isCorrect": false },
+          { "id": "opt_3", "text": "else", "isCorrect": true },
+          { "id": "opt_4", "text": "or", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "En C# se dice 'else if' como un puente para añadir más comprobaciones a la cadena.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -737,6 +1007,36 @@
         "explanation": "El apartado especial default previene y procesa a los extraviados residuales dando respuesta firme programada.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "csharp_10_ch_2",
+        "lessonId": "csharp_lesson_10",
+        "question": "La instrucción 'break' es obligatoria al final de cada 'case' en un bloque 'switch' para evitar que C# ejecute el caso de abajo por error.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. A diferencia de otros lenguajes viejos, C# es muy estricto y lanzará un error forzándote a detener cada case impidiendo el 'fall-through' accidental.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "csharp_10_ch_3",
+        "lessonId": "csharp_lesson_10",
+        "question": "Completa la palabra clave especial que maneja los casos que no fueron especificados o atinados dentro del 'switch':\n\n_____:\n  Console.WriteLine(\"Error\");",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "catch", "isCorrect": false },
+          { "id": "opt_2", "text": "finally", "isCorrect": false },
+          { "id": "opt_3", "text": "default", "isCorrect": true },
+          { "id": "opt_4", "text": "else", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El bloque de descarte en el enrutador switch responde al nombre de 'default'.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -810,6 +1110,36 @@
         "explanation": "Foreach asume carga lectora total interna ignorando si posees 3 elementos totales bases o cuentas 4 mil de ellos evadiendo fallos índices.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "csharp_11_ch_2",
+        "lessonId": "csharp_lesson_11",
+        "question": "El bucle 'foreach' te permite modificar de forma sencilla los elementos individuales de la colección original directamente mientras los iteras.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. La variable de iteración en un 'foreach' es de solo lectura, por lo que no puede usarse para alterar la colección original.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "csharp_11_ch_3",
+        "lessonId": "csharp_lesson_11",
+        "question": "Completa la sintaxis base del iterador de colecciones:\n\n_____ (string nombre in nombres) { }",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "for", "isCorrect": false },
+          { "id": "opt_2", "text": "while", "isCorrect": false },
+          { "id": "opt_3", "text": "each", "isCorrect": false },
+          { "id": "opt_4", "text": "foreach", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_4",
+        "explanation": "La palabra clave iteradora que se usa en C# para esto es 'foreach'.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -878,6 +1208,36 @@
         "explanation": "El do-while ubica el While validador atrás y bajando de todo la lectura para asegurar correr libre los elementos previstos ciegos sin trabas primarias nativas lógicas.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "csharp_12_ch_2",
+        "lessonId": "csharp_lesson_12",
+        "question": "La estructura do-while evalúa la condición de continuidad DESPUÉS de ejecutar el bloque de código, asegurando así al menos una ejecución.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. Al estar el while() al final de la orden do{}, el código iterará la primera vez independientemente de las condiciones lógicas.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "csharp_12_ch_3",
+        "lessonId": "csharp_lesson_12",
+        "question": "Completa el bucle de iteración condicional clásico:\n\n_____ (contador < 10) {\n  contador++;\n}",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "if", "isCorrect": false },
+          { "id": "opt_2", "text": "do", "isCorrect": false },
+          { "id": "opt_3", "text": "while", "isCorrect": true },
+          { "id": "opt_4", "text": "loop", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El bloque de ciclo simple que evalúa al principio y repite indefinidamente es 'while'.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -951,6 +1311,36 @@
         "explanation": "Void dicta vacuidad de espera, la compilación procede sin retorno return exigido eximiendo al método obligatoriamente a responder datos al mandamás main base puros.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "csharp_13_ch_2",
+        "lessonId": "csharp_lesson_13",
+        "question": "Un método declarado en C# con la palabra reservada 'void' debe devolver un valor obligatoriamente mediante un 'return'.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. La palabra 'void' especifica explícitamente la ausencia de un valor de retorno.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "csharp_13_ch_3",
+        "lessonId": "csharp_lesson_13",
+        "question": "Completa la sintaxis para retornar de manera definitiva un valor de éxito y terminar un método:\n\n_____ a + b;",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "print", "isCorrect": false },
+          { "id": "opt_2", "text": "send", "isCorrect": false },
+          { "id": "opt_3", "text": "return", "isCorrect": true },
+          { "id": "opt_4", "text": "yield", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "La palabra clave 'return' finaliza la ejecución y entrega el valor devuelto.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1019,6 +1409,36 @@
         "explanation": "Un Out soluciona obligando preasignar sin valor exterior que mandes al parámetro el que sea manipulado final dándote extracciones varias adicionales reales múltiples al retorno básico.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "csharp_14_ch_2",
+        "lessonId": "csharp_lesson_14",
+        "question": "El modificador 'ref' en C# requiere que la variable haya sido debidamente inicializada antes de ser pasada como argumento al método.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. A diferencia de 'out', una variable pasada por referencia (ref) debe contener datos y estar inicializada previamente.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "csharp_14_ch_3",
+        "lessonId": "csharp_lesson_14",
+        "question": "Completa el parámetro para que un método devuelva un valor secundario mediante variables exportables al llamado:\n\nvoid Procesar(_____ int resultado) { }",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "return", "isCorrect": false },
+          { "id": "opt_2", "text": "ref", "isCorrect": false },
+          { "id": "opt_3", "text": "out", "isCorrect": true },
+          { "id": "opt_4", "text": "export", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "La palabra clave 'out' indica que el argumento se pasará como salida pura, permitiendo múltiples devoluciones.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1086,6 +1506,36 @@
         "explanation": "Dado su nacimiento estricto naciendo a contar puramente e invariable de 0 primero, el paso contable para contar los 4 ocupará puros alojadores 0, 1, 2, y finalizando el n3 limitante real última de índices válidos allí permitidas en vida para leerse seguras sin excepción generador programáticos puras.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "csharp_15_ch_2",
+        "lessonId": "csharp_lesson_15",
+        "question": "En C#, puedes cambiar y extender el tamaño de un array básico unidimensional después de haberlo creado e inicializado.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. Los arrays unidimensionales son estructuras de tamaño inmutable en C# una vez que se establecen en memoria.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "csharp_15_ch_3",
+        "lessonId": "csharp_lesson_15",
+        "question": "Completa la declaración base de un array unidimensional de números enteros:\n\nint_____ numeros = new int[5];",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "{ }", "isCorrect": false },
+          { "id": "opt_2", "text": "[ ]", "isCorrect": true },
+          { "id": "opt_3", "text": "( )", "isCorrect": false },
+          { "id": "opt_4", "text": "< >", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Los corchetes adyacentes al tipo de dato indican la definición explícita de un array en C#.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1154,6 +1604,36 @@
         "explanation": "Dólar es indicativo clave encendedor del motor interpolatorio que reconoce el valor inyectable y destapa llaves variables para c# moderno nativamente.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "csharp_16_ch_2",
+        "lessonId": "csharp_lesson_16",
+        "question": "Los objetos de tipo 'string' en C# son inmutables, lo que significa que el texto original interno no puede ser modificado una vez creado en memoria.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. Cada vez que aparentemente modificas un string, .NET en realidad está alojando y creando un nuevo objeto detrás de escena.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "csharp_16_ch_3",
+        "lessonId": "csharp_lesson_16",
+        "question": "Completa el código para invocar de forma limpia la interpolación de texto e incrustar variables:\n\nstring texto = _____\"Hola {nombre}\";",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "@", "isCorrect": false },
+          { "id": "opt_2", "text": "#", "isCorrect": false },
+          { "id": "opt_3", "text": "&", "isCorrect": false },
+          { "id": "opt_4", "text": "$", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_4",
+        "explanation": "Añadir el signo de dólar te habilita las llaves { } para incluir variables en el momento.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1227,6 +1707,36 @@
         "explanation": "La asignación `new` evoca al constructor nativo dándole reservas físicas integrales vivas apartando bytes nativos allí en entorno para su alojamiento y pase a operar sus vidas en .NET de C#",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "csharp_17_ch_2",
+        "lessonId": "csharp_lesson_17",
+        "question": "En C#, si a los miembros y propiedades de una 'class' no se les especifica ningún modificador de acceso visualmente, el sistema los asume como privados ('private') por defecto.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. Es un pilar de seguridad de OOP que todo contenido de clase permanezca cerrado y privado de base en C#.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "csharp_17_ch_3",
+        "lessonId": "csharp_lesson_17",
+        "question": "Completa la instanciación formal para invocar la creación de un nuevo objeto C#:\n\nPerro miPerro = _____ Perro();",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "create", "isCorrect": false },
+          { "id": "opt_2", "text": "new", "isCorrect": true },
+          { "id": "opt_3", "text": "spawn", "isCorrect": false },
+          { "id": "opt_4", "text": "build", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "La palabra clave 'new' asigna memoria y desencadena el nacimiento de la instancia.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1295,6 +1805,36 @@
         "explanation": "Sin declararse de vista a ninguna índole base visual de función ni base extra, se adopta mágicamente base y toma C# prestado 'value' asimilando allí mismo y absorbiendo la orden recibida exterior C# a inyectar al objeto de base final de set nativas pura .NET",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "csharp_18_ch_2",
+        "lessonId": "csharp_lesson_18",
+        "question": "Un Constructor es un método especial de C# que, aunque tiene el mismo nombre que la clase, debe obligatoriamente devolver explícitamente algún tipo de valor (ej: return int).",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. Los constructores no tienen un tipo de retorno especificado en su código, ni siquiera 'void'.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "csharp_18_ch_3",
+        "lessonId": "csharp_lesson_18",
+        "question": "Completa la declaración abreviada (Auto-Implemented) de una Propiedad pura C#:\n\npublic int Edad { _____; set; }",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "read", "isCorrect": false },
+          { "id": "opt_2", "text": "return", "isCorrect": false },
+          { "id": "opt_3", "text": "value", "isCorrect": false },
+          { "id": "opt_4", "text": "get", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_4",
+        "explanation": "El accesor de lectura incorporado se denomina como 'get'.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1362,6 +1902,36 @@
         "explanation": "A de modo a C++, se descarta por completo el implements de java y las extensiones y se delega el pase uniendo limpio base visual C# originario con ( : ) al formarse cabeceras de herencias allí de ordenes puramente de vida bases C# base programática pura.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "csharp_19_ch_2",
+        "lessonId": "csharp_lesson_19",
+        "question": "En C#, una clase puede heredar directamente de múltiples clases base al mismo tiempo para obtener funciones de dos lugares a la vez.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. C# impone herencia simple para evitar el 'problema del diamante'. La vía para múltiple integración se realiza implementando 'interfaces'.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "csharp_19_ch_3",
+        "lessonId": "csharp_lesson_19",
+        "question": "Completa la sintaxis natural para que una clase hija herede atributos de una clase padre:\n\nclass Gato _____ Animal { }",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": ":", "isCorrect": true },
+          { "id": "opt_2", "text": "extends", "isCorrect": false },
+          { "id": "opt_3", "text": "<-", "isCorrect": false },
+          { "id": "opt_4", "text": "inherits", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Los dos puntos (:) establecen la conexión y el lazo de herencia hacia el componente padre.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1435,6 +2005,36 @@
         "explanation": "El atrapador Catch, como red final a todo, embosca interrumpiendo el flujo letal que rompió el try inicial encarrilándolo y dándole riendas y poder al programa continuar base en C# nativo .NET base de manera controladas sin pánico formal sin escape a colapso natural.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "csharp_20_ch_2",
+        "lessonId": "csharp_lesson_20",
+        "question": "El bloque de cierre 'finally' se ejecuta siempre al finalizar el try-catch, sin importar absolutamente si ocurrió o no una excepción previa en la ejecución del código base.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. Finally actúa como garantía de limpieza de código en C#, corriendo irremediablemente y útil para, por ejemplo, cerrar una base de datos.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "csharp_20_ch_3",
+        "lessonId": "csharp_lesson_20",
+        "question": "Completa el inicio de la estructura manejadora y salvavidas que testea posibles crasheos:\n\n_____ {\n  // Código inestable o peligroso\n} catch (Exception ex) { }",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "test", "isCorrect": false },
+          { "id": "opt_2", "text": "check", "isCorrect": false },
+          { "id": "opt_3", "text": "try", "isCorrect": true },
+          { "id": "opt_4", "text": "attempt", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El bloque de comprobación de origen inseguro de fallos comienza siempre con 'try'.",
+        "points": 15,
+        "order": 3
       }
     ]
   }

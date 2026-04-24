@@ -77,6 +77,36 @@
         "explanation": "JavaScript se ejecuta principalmente en navegadores web.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "js_1_ch_2",
+        "lessonId": "js_lesson_1",
+        "question": "JavaScript es un lenguaje estático y que necesita ser compilado antes de ejecutarse.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. JavaScript es interpretado y dinámico.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "js_1_ch_3",
+        "lessonId": "js_lesson_1",
+        "question": "Completa el código para imprimir en consola:\n\n_____.log('Hola');",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "print", "isCorrect": false },
+          { "id": "opt_2", "text": "console", "isCorrect": true },
+          { "id": "opt_3", "text": "system", "isCorrect": false },
+          { "id": "opt_4", "text": "log", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "El objeto global para imprimir en la consola es 'console'.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -158,6 +188,36 @@
         "explanation": "Todos los navegadores modernos incluyen JavaScript.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "js_2_ch_2",
+        "lessonId": "js_lesson_2",
+        "question": "Necesitas instalar un software especial para poder ejecutar código JavaScript en tu navegador.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. JavaScript viene integrado en todos los navegadores modernos.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "js_2_ch_3",
+        "lessonId": "js_lesson_2",
+        "question": "Completa el código para usar el método correcto del objeto console:\n\nconsole._____('Listo');",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "log", "isCorrect": true },
+          { "id": "opt_2", "text": "print", "isCorrect": false },
+          { "id": "opt_3", "text": "write", "isCorrect": false },
+          { "id": "opt_4", "text": "out", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "El método utilizado es 'log'.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -246,6 +306,36 @@
         "explanation": "console.log() es la forma estándar de imprimir mensajes en JavaScript.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "js_3_ch_2",
+        "lessonId": "js_lesson_3",
+        "question": "En JavaScript, el código se ejecuta de arriba hacia abajo de forma natural sin necesidad de una función principal o 'main'.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. A diferencia de otros lenguajes como Java o C, en JS no hace falta un método main().",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "js_3_ch_3",
+        "lessonId": "js_lesson_3",
+        "question": "Completa el comando para ejecutar el archivo 'script.js' con Node.js en la terminal:\n\n_____ script.js",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "node", "isCorrect": true },
+          { "id": "opt_2", "text": "js", "isCorrect": false },
+          { "id": "opt_3", "text": "run", "isCorrect": false },
+          { "id": "opt_4", "text": "execute", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "El comando correcto es 'node' seguido del nombre del archivo.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -326,6 +416,36 @@
         "explanation": "const se usa para declarar constantes que no cambiarán su valor.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "js_4_ch_2",
+        "lessonId": "js_lesson_4",
+        "question": "La palabra clave 'let' permite declarar variables cuyo valor puede cambiar (reasignarse) en el futuro.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. let fue introducido para variables reasignables.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "js_4_ch_3",
+        "lessonId": "js_lesson_4",
+        "question": "Completa el código para declarar una variable que no cambiará:\n\n_____ nombre = 'Ana';",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "let", "isCorrect": false },
+          { "id": "opt_2", "text": "var", "isCorrect": false },
+          { "id": "opt_3", "text": "const", "isCorrect": true },
+          { "id": "opt_4", "text": "static", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "Se usa 'const' para constantes.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -406,6 +526,36 @@
         "explanation": "Los booleanos solo pueden ser verdaderos (true) o falsos (false).",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "js_5_ch_2",
+        "lessonId": "js_lesson_5",
+        "question": "JavaScript utiliza dos tipos de datos diferentes para los números: 'int' para enteros y 'float' para decimales.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. JavaScript usa un solo tipo 'Number' para todos los números numéricos, sean enteros o decimales.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "js_5_ch_3",
+        "lessonId": "js_lesson_5",
+        "question": "Completa el código para asignar un booleano verdadero:\n\nlet esValido = _____ ;",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "true", "isCorrect": true },
+          { "id": "opt_2", "text": "false", "isCorrect": false },
+          { "id": "opt_3", "text": "\"true\"", "isCorrect": false },
+          { "id": "opt_4", "text": "1", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "La palabra clave para el booleano verdadero es true (sin comillas).",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -479,6 +629,36 @@
         "explanation": "10 dividido por 3 es 3. El resto (o módulo) es 1.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "js_6_ch_2",
+        "lessonId": "js_lesson_6",
+        "question": "El operador % se utiliza en JavaScript para calcular el porcentaje matemático de un número.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. El operador % representa el 'módulo' (el resto de una división entera).",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "js_6_ch_3",
+        "lessonId": "js_lesson_6",
+        "question": "Completa el código para realizar una multiplicación:\n\nlet resultado = 5 _____ 3;",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "x", "isCorrect": false },
+          { "id": "opt_2", "text": "*", "isCorrect": true },
+          { "id": "opt_3", "text": ".", "isCorrect": false },
+          { "id": "opt_4", "text": "^", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "El asterisco (*) es el operador de multiplicación en JavaScript.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -553,6 +733,36 @@
         "explanation": "El operador && comprueba que ambas condiciones sean verdaderas.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "js_7_ch_2",
+        "lessonId": "js_lesson_7",
+        "question": "El operador lógico && requiere que al menos una de las condiciones sea verdadera para que el resultado sea true.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. El operador que requiere 'al menos una' verdadera es || (OR).",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "js_7_ch_3",
+        "lessonId": "js_lesson_7",
+        "question": "Completa el código para comprobar si 'a' es estrictamente igual a 'b':\n\nif (a _____ b)",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "=", "isCorrect": false },
+          { "id": "opt_2", "text": "==", "isCorrect": false },
+          { "id": "opt_3", "text": "===", "isCorrect": true },
+          { "id": "opt_4", "text": "!==", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El triple igual (===) verifica igualdad de valor y de tipo, conocido como igualdad estricta.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -627,6 +837,36 @@
         "explanation": "El bloque else sirve como camino alternativo si el if no se cumple.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "js_8_ch_2",
+        "lessonId": "js_lesson_8",
+        "question": "Puedes encadenar múltiples 'else if' para evaluar diferentes condiciones de forma secuencial.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. Los 'else if' te permiten revisar múltiples condiciones en orden.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "js_8_ch_3",
+        "lessonId": "js_lesson_8",
+        "question": "Completa el bloque condicional para que evalúe si es mayor de edad:\n\n_____ (edad >= 18) { }",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "if", "isCorrect": true },
+          { "id": "opt_2", "text": "else", "isCorrect": false },
+          { "id": "opt_3", "text": "when", "isCorrect": false },
+          { "id": "opt_4", "text": "switch", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "El bloque que evalúa una condición siempre empieza con 'if'.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -701,6 +941,36 @@
         "explanation": "break corta la ejecución del switch, evitando que se corran los siguientes 'cases'.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "js_9_ch_2",
+        "lessonId": "js_lesson_9",
+        "question": "El caso 'default' es obligatorio en todas las estructuras de control switch.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. El 'default' es opcional, aunque se recomienda usarlo para manejar casos no previstos.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "js_9_ch_3",
+        "lessonId": "js_lesson_9",
+        "question": "Completa el código para salir de un caso sin ejecutar los siguientes:\n\ncase 'A':\n  _____ ;",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "stop", "isCorrect": false },
+          { "id": "opt_2", "text": "return", "isCorrect": false },
+          { "id": "opt_3", "text": "break", "isCorrect": true },
+          { "id": "opt_4", "text": "exit", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "La palabra clave 'break' detiene el switch.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -768,6 +1038,36 @@
         "explanation": "Usa punto y coma (;) para separar las partes del bucle for.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "js_10_ch_2",
+        "lessonId": "js_lesson_10",
+        "question": "En un bucle for tradicional, 'i++' resta 1 en cada vuelta.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. 'i++' suma 1 en cada vuelta.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "js_10_ch_3",
+        "lessonId": "js_lesson_10",
+        "question": "Completa el código para el incremento del bucle en 1:\n\nfor(let i=0; i<5; ____)",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "i--", "isCorrect": false },
+          { "id": "opt_2", "text": "i+1", "isCorrect": false },
+          { "id": "opt_3", "text": "i++", "isCorrect": true },
+          { "id": "opt_4", "text": "++", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "i++ es la forma estándar de incrementar i en 1 por cada iteración.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -842,6 +1142,36 @@
         "explanation": "return finaliza la función y especifica un valor a ser devuelto.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "js_11_ch_2",
+        "lessonId": "js_lesson_11",
+        "question": "Las funciones pueden recibir información externa para trabajar con ella a través de parámetros.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. Los parámetros permiten enviar datos hacia el interior de la función.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "js_11_ch_3",
+        "lessonId": "js_lesson_11",
+        "question": "Completa el código para declarar una función llamada sumar:\n\n_____ sumar(a, b) { }",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "def", "isCorrect": false },
+          { "id": "opt_2", "text": "fun", "isCorrect": false },
+          { "id": "opt_3", "text": "function", "isCorrect": true },
+          { "id": "opt_4", "text": "create", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "En JavaScript la palabra clave para definir una función es 'function'.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -916,6 +1246,36 @@
         "explanation": "Casi en toda la programación, los índices empiezan por 0.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "js_12_ch_2",
+        "lessonId": "js_lesson_12",
+        "question": "Un array en JavaScript no puede mezclar números y textos; todos sus elementos deben ser del mismo tipo.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. Los arrays en JS pueden mezclar libremente distintos tipos de datos.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "js_12_ch_3",
+        "lessonId": "js_lesson_12",
+        "question": "Completa el código para acceder al segundo elemento del array:\n\nfrutas[_____]",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "0", "isCorrect": false },
+          { "id": "opt_2", "text": "1", "isCorrect": true },
+          { "id": "opt_3", "text": "2", "isCorrect": false },
+          { "id": "opt_4", "text": "second", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Como el primer elemento es el 0, el segundo elemento es el índice 1.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -989,6 +1349,36 @@
         "explanation": ".push() es la forma estándar en JavaScript para añadir elementos al final de un arreglo.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "js_13_ch_2",
+        "lessonId": "js_lesson_13",
+        "question": "El método pop() añade un elemento al principio del array.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. El método pop() sirve para eliminar el último elemento del array.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "js_13_ch_3",
+        "lessonId": "js_lesson_13",
+        "question": "Completa el código para obtener la cantidad de elementos en el array:\n\narray._____",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "size", "isCorrect": false },
+          { "id": "opt_2", "text": "count", "isCorrect": false },
+          { "id": "opt_3", "text": "length", "isCorrect": true },
+          { "id": "opt_4", "text": "items", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "La propiedad 'length' nos indica el número de elementos contenidos en el arreglo.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1062,6 +1452,36 @@
         "explanation": "Se usa un simple punto para acceder: objeto.propiedad",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "js_14_ch_2",
+        "lessonId": "js_lesson_14",
+        "question": "Los objetos agrupan datos usando una sintaxis basada en pares de clave y valor.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. Esta es la base de los objetos en JS y de estructuras como JSON.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "js_14_ch_3",
+        "lessonId": "js_lesson_14",
+        "question": "Completa el código para definir un objeto vacío:\n\nconst usuario = _____",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "()", "isCorrect": false },
+          { "id": "opt_2", "text": "[]", "isCorrect": false },
+          { "id": "opt_3", "text": "{}", "isCorrect": true },
+          { "id": "opt_4", "text": "\"\"", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "Las llaves {} se usan para declarar un objeto en JavaScript.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1125,6 +1545,36 @@
         "explanation": "Las funciones que se escriben en la misma línea que la flecha sin llaves tienen return implícito.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "js_15_ch_2",
+        "lessonId": "js_lesson_15",
+        "question": "Las funciones flecha se escriben siempre con la palabra clave 'function'.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. Las funciones flecha justamente omiten la palabra 'function'.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "js_15_ch_3",
+        "lessonId": "js_lesson_15",
+        "question": "Completa el código de la función flecha:\n\nconst sumar = (a, b) _____ a + b;",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "->", "isCorrect": false },
+          { "id": "opt_2", "text": "=>", "isCorrect": true },
+          { "id": "opt_3", "text": "=", "isCorrect": false },
+          { "id": "opt_4", "text": "~>", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "El símbolo correcto para funciones flecha en JavaScript es =>.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1198,6 +1648,36 @@
         "explanation": "querySelector permite usar selectores de clases indicados con un punto inicial.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "js_16_ch_2",
+        "lessonId": "js_lesson_16",
+        "question": "El DOM permite vincular la parte visual (HTML) con la lógica en JavaScript.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. El DOM actúa como el puente entre el código estático y el dinámico.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "js_16_ch_3",
+        "lessonId": "js_lesson_16",
+        "question": "Completa el código para seleccionar un elemento usando su ID exacto:\n\ndocument.____('mi-id');",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "selectId", "isCorrect": false },
+          { "id": "opt_2", "text": "findId", "isCorrect": false },
+          { "id": "opt_3", "text": "getElementById", "isCorrect": true },
+          { "id": "opt_4", "text": "getId", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El método getElementById toma el ID del elemento y devuelve su referencia en el DOM.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1271,6 +1751,36 @@
         "explanation": "textContent asigna texto nuevo. innerHTML se utiliza en caso de querer insertar etiquetas HTML.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "js_17_ch_2",
+        "lessonId": "js_lesson_17",
+        "question": "Para modificar las propiedades visuales de CSS desde JavaScript se usa la propiedad 'style'.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. Puedes aplicar estilos de manera dinámica a cualquier elemento del DOM.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "js_17_ch_3",
+        "lessonId": "js_lesson_17",
+        "question": "Completa el código para cambiar el color de texto a rojo:\n\nelemento.style._____ = 'red';",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "textColor", "isCorrect": false },
+          { "id": "opt_2", "text": "color", "isCorrect": true },
+          { "id": "opt_3", "text": "fontColor", "isCorrect": false },
+          { "id": "opt_4", "text": "text", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "La propiedad CSS correcta en el objeto style para el color de texto es 'color'.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1338,6 +1848,36 @@
         "explanation": "'click' reacciona al apretar el botón del ratón o un toque en móvil de forma completa.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "js_18_ch_2",
+        "lessonId": "js_lesson_18",
+        "question": "Un event listener pausa y detiene todo el código del programa hasta que el usuario interactúa.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. Los event listeners esperan en segundo plano sin interrumpir el flujo normal del programa.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "js_18_ch_3",
+        "lessonId": "js_lesson_18",
+        "question": "Completa el código para escuchar un clic en el botón:\n\nboton._____('click', () => {});",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "addListener", "isCorrect": false },
+          { "id": "opt_2", "text": "onEvent", "isCorrect": false },
+          { "id": "opt_3", "text": "addEventListener", "isCorrect": true },
+          { "id": "opt_4", "text": "listen", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "El método estándar es addEventListener.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1411,6 +1951,36 @@
         "explanation": "Se necesitan los backticks para poder luego utilizar la estructura ${}.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "js_19_ch_2",
+        "lessonId": "js_lesson_19",
+        "question": "Los templates literales permiten escribir saltos de línea libremente dentro del string, algo que las comillas simples no dejan.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": true },
+          { "id": "opt_2", "text": "Falso", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_1",
+        "explanation": "Verdadero. Al usar backticks puedes presionar 'Enter' y escribir en varias líneas.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "js_19_ch_3",
+        "lessonId": "js_lesson_19",
+        "question": "Completa la sintaxis para interpolar la variable 'nombre':\n\n`Hola ${_____}`",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "name()", "isCorrect": false },
+          { "id": "opt_2", "text": "var nombre", "isCorrect": false },
+          { "id": "opt_3", "text": "nombre", "isCorrect": true },
+          { "id": "opt_4", "text": "'nombre'", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "Dentro de las llaves se escribe directamente el nombre de la variable.",
+        "points": 15,
+        "order": 3
       }
     ]
   },
@@ -1478,6 +2048,36 @@
         "explanation": "Se expresan en milisegundos, por ejemplo, 1000 milisegundos equivalen temporalmente a 1 segundo.",
         "points": 10,
         "order": 1
+      },
+      {
+        "id": "js_20_ch_2",
+        "lessonId": "js_lesson_20",
+        "question": "El uso de setTimeout pausa y bloquea por completo la ejecución del resto del programa en el hilo principal.",
+        "type": "true-false",
+        "options": [
+          { "id": "opt_1", "text": "Verdadero", "isCorrect": false },
+          { "id": "opt_2", "text": "Falso", "isCorrect": true }
+        ],
+        "correctAnswerId": "opt_2",
+        "explanation": "Falso. setTimeout es asíncrono, es decir, el resto del código se sigue ejecutando sin esperar.",
+        "points": 10,
+        "order": 2
+      },
+      {
+        "id": "js_20_ch_3",
+        "lessonId": "js_lesson_20",
+        "question": "Completa el código para invocar el método de retraso:\n\n_____(() => console.log('Hola'), 1000);",
+        "type": "code-completion",
+        "options": [
+          { "id": "opt_1", "text": "delay", "isCorrect": false },
+          { "id": "opt_2", "text": "wait", "isCorrect": false },
+          { "id": "opt_3", "text": "setTimeout", "isCorrect": true },
+          { "id": "opt_4", "text": "timer", "isCorrect": false }
+        ],
+        "correctAnswerId": "opt_3",
+        "explanation": "setTimeout es la función correcta en JavaScript para establecer retrasos asíncronos.",
+        "points": 15,
+        "order": 3
       }
     ]
   }
