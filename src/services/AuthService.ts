@@ -6,6 +6,7 @@
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createClient } from "@supabase/supabase-js";
+import SQLiteStorageService from "./SQLiteStorageService";
 
 // Configuración de Supabase
 const SUPABASE_URL = "https://otrwowwyzgczspclzcwl.supabase.co";
@@ -323,6 +324,9 @@ class AuthService {
     // Guardar usuario
     users.push(newUser);
     await this.saveUsers(users);
+
+    // Guardar también en SQLite
+    await SQLiteStorageService.saveRegisteredUser(newUser);
 
     console.log("Usuario registrado localmente:", data.username);
     return {
@@ -650,6 +654,10 @@ class AuthService {
       }
 
       console.log(`Usuario ${username} eliminado del sistema de autenticación`);
+
+      // También eliminar de SQLite
+      await SQLiteStorageService.deleteRegisteredUser(username);
+
       return true;
     } catch (error) {
       console.error("Error al eliminar cuenta:", error);

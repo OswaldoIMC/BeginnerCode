@@ -6,6 +6,7 @@ import StackNavigator from "./src/navigation/StackNavigator";
 import AuthService from "./src/services/AuthService";
 import StorageService from "./src/services/StorageService";
 import SupabaseSyncService from "./src/services/SupabaseSyncService";
+import SQLiteStorageService from "./src/services/SQLiteStorageService";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -21,6 +22,10 @@ export default function App() {
   const checkAuthStatus = async () => {
     try {
       console.log("Verificando sesión activa...");
+
+      // Inicializar base de datos SQLite
+      await SQLiteStorageService.initDatabase();
+      console.log("SQLite inicializado");
 
       // Verificar si hay una sesión activa
       const currentUser = await AuthService.getCurrentUser();

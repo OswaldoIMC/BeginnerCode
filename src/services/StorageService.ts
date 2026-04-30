@@ -10,6 +10,7 @@ import {
   LessonProgress,
   Badge,
 } from "../../types";
+import SQLiteStorageService from "./SQLiteStorageService";
 
 /**
  * Genera claves únicas para cada usuario
@@ -138,6 +139,11 @@ class StorageService {
     };
 
     await this.saveUserProfile(profile);
+
+    // Replicar en SQLite
+    SQLiteStorageService.setCurrentUsername(username);
+    await SQLiteStorageService.createInitialProfile(username);
+
     return profile;
   }
 
@@ -151,6 +157,9 @@ class StorageService {
 
       profile.totalPoints += points;
       profile.level = this.calculateLevel(profile.totalPoints);
+
+      // Replicar en SQLite
+      await SQLiteStorageService.updateTotalPoints(points);
 
       return await this.saveUserProfile(profile);
     } catch (error) {
@@ -314,6 +323,14 @@ class StorageService {
       await this.updateCourseProgressPercentage(courseId, profile);
 
       const saved = await this.saveUserProfile(profile);
+
+      // Replicar en SQLite
+      SQLiteStorageService.setCurrentUsername(this.currentUsername || '');
+      await SQLiteStorageService.initializeCourseProgress(courseId);
+      await SQLiteStorageService.saveLessonProgress(
+        lessonId, courseId, challengesCompleted, score, totalChallenges
+      );
+
       console.log(`Progreso guardado: ${saved}`);
       return saved;
     } catch (error) {
@@ -446,6 +463,10 @@ class StorageService {
       if (badge && !badge.isUnlocked) {
         badge.isUnlocked = true;
         badge.earnedAt = new Date().toISOString();
+
+        // Replicar en SQLite
+        await SQLiteStorageService.unlockBadge(badgeId);
+
         return await this.saveUserProfile(profile);
       }
 
@@ -547,6 +568,11 @@ class StorageService {
       ]);
 
       console.log(`Datos locales eliminados para usuario: ${user}`);
+
+      // También limpiar en SQLite
+      SQLiteStorageService.setCurrentUsername(user);
+      await SQLiteStorageService.clearAllData();
+
       return true;
     } catch (error) {
       console.error("Error al limpiar datos:", error);

@@ -10,6 +10,7 @@ import LessonDetailScreen from "../screens/lessons/LessonDetailScreen";
 import ChallengeScreen from "../screens/challenges/ChallengeScreen";
 import ProfileScreen from "../screens/profile/ProfileScreen";
 import SettingsScreen from "../screens/settings/SettingsScreen";
+import SQLiteDemoScreen from "../screens/demo/SQLiteDemoScreen";
 
 /**
  * Definición de los tipos para los parámetros de navegación
@@ -34,6 +35,7 @@ export type RootStackParamList = {
   };
   Profile: undefined;
   Settings: undefined;
+  SQLiteDemo: undefined;
 };
 
 /**
@@ -143,6 +145,14 @@ const StackNavigator: React.FC<StackNavigatorProps> = ({
         component={SettingsScreen}
         options={{
           title: "Configuración",
+        }}
+      />
+      {/* Pantalla de demostración SQLite */}
+      <Stack.Screen
+        name="SQLiteDemo"
+        component={SQLiteDemoScreen}
+        options={{
+          title: "Demo SQLite",
         }}
       />
     </Stack.Navigator>

@@ -235,6 +235,28 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
             </TouchableOpacity>
           </View>
 
+          {/* Desarrollo / Demo */}
+          <View style={styles.sectionContainer}>
+            <Text style={[styles.sectionTitle, { color: theme.text }]}>
+              Desarrollo
+            </Text>
+
+            <TouchableOpacity
+              style={[styles.optionButton, { backgroundColor: theme.card, borderColor: '#1B5E20', borderWidth: 1 }]}
+              onPress={() => (navigation as any).navigate("SQLiteDemo")}
+            >
+              <MaterialIcons name="storage" size={24} color="#1B5E20" />
+              <Text style={[styles.optionText, { color: theme.text }]}>
+                Demo SQLite
+              </Text>
+              <MaterialIcons
+                name="chevron-right"
+                size={24}
+                color={theme.textSecondary}
+              />
+            </TouchableOpacity>
+          </View>
+
           {/* Cuenta */}
           <View style={styles.sectionContainer}>
             <Text style={[styles.sectionTitle, { color: theme.text }]}>
