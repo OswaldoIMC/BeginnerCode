@@ -1,6 +1,6 @@
 /**
  * Servicio de Sincronización con Supabase
- * Maneja la sincronización bidireccional entre AsyncStorage y Supabase
+ * Maneja la sincronización bidireccional entre SQLite local y Supabase
  * Implementa estrategia offline-first
  */
 
@@ -15,7 +15,7 @@ const SUPABASE_URL = "https://otrwowwyzgczspclzcwl.supabase.co";
 const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im90cndvd3d5emdjenNwY2x6Y3dsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUyMDk4MDUsImV4cCI6MjA4MDc4NTgwNX0.2D7sYYrjhLUKpDpM5sO0ORdvJm7QLq5HLW7OHsqhaos";
 
-// Keys para AsyncStorage
+// Keys para AsyncStorage (solo metadatos de sincronización)
 const SYNC_KEYS = {
   LAST_SYNC: "@BeginnerCode:lastSync",
   PENDING_CHANGES: "@BeginnerCode:pendingChanges",
@@ -90,6 +90,7 @@ class SupabaseSyncService {
 
   /**
    * Obtiene los cambios pendientes de sincronización
+   * (Se mantiene en AsyncStorage porque es metadata de sync, no datos de negocio)
    */
   private async getPendingChanges(): Promise<PendingChange[]> {
     try {
@@ -364,7 +365,7 @@ class SupabaseSyncService {
 
       for (const change of pendingChanges) {
         try {
-          // Obtener el perfil actual
+          // Obtener el perfil actual desde SQLite
           const profile = await StorageService.getUserProfile();
 
           if (!profile) {
@@ -395,13 +396,13 @@ class SupabaseSyncService {
   }
 
   /**
-   * Descarga datos desde Supabase
+   * Descarga datos desde Supabase y los guarda en SQLite local
    */
   async downloadFromCloud(username: string): Promise<UserProfile | null> {
     try {
       const isOnline = await this.checkConnection();
       if (!isOnline) {
-        console.log("Sin conexión, usando datos locales");
+        console.log("Sin conexión, usando datos locales de SQLite");
         return await StorageService.getUserProfile();
       }
 
@@ -447,7 +448,10 @@ class SupabaseSyncService {
         badges: badgesData || [],
       };
 
-      console.log("Datos descargados desde la nube");
+      // Guardar en SQLite local
+      await StorageService.saveUserProfile(profile);
+
+      console.log("Datos descargados desde la nube y guardados en SQLite");
       return profile;
     } catch (error) {
       console.error("Error al descargar desde la nube:", error);
@@ -541,6 +545,7 @@ class SupabaseSyncService {
    */
   async forceSyncNow(): Promise<boolean> {
     try {
+      // Obtener el perfil desde SQLite
       const profile = await StorageService.getUserProfile();
 
       if (!profile) {

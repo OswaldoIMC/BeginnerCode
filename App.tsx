@@ -6,14 +6,32 @@ import StackNavigator from "./src/navigation/StackNavigator";
 import AuthService from "./src/services/AuthService";
 import StorageService from "./src/services/StorageService";
 import SupabaseSyncService from "./src/services/SupabaseSyncService";
+import DatabaseService from "./src/services/DatabaseService";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [initialRoute, setInitialRoute] = useState<"Login" | "Home">("Login");
 
   useEffect(() => {
-    checkAuthStatus();
+    initializeApp();
   }, []);
+
+  /**
+   * Inicializa la base de datos SQLite y luego verifica la sesión
+   */
+  const initializeApp = async () => {
+    try {
+      // Inicializar base de datos SQLite antes de cualquier operación
+      await DatabaseService.init();
+      console.log("Base de datos SQLite lista");
+
+      // Ahora verificar sesión activa
+      await checkAuthStatus();
+    } catch (error) {
+      console.error("Error al inicializar la app:", error);
+      setIsLoading(false);
+    }
+  };
 
   /**
    * Verifica si hay una sesión activa al iniciar la app

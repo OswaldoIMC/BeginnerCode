@@ -1,9 +1,10 @@
 /**
  * Servicio para manejar el almacenamiento persistente del progreso del usuario
- * Utiliza AsyncStorage para guardar datos localmente
+ * Utiliza SQLite para datos de negocio (perfiles, progreso, medallas)
+ * AsyncStorage se mantiene SOLO para tokens y preferencias simples
  */
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import DatabaseService from "./DatabaseService";
 import {
   UserProfile,
   CourseProgress,
@@ -12,18 +13,8 @@ import {
 } from "../../types";
 
 /**
- * Genera claves únicas para cada usuario
- */
-const getStorageKeys = (username: string) => ({
-  USER_PROFILE: `@BeginnerCode:userProfile:${username}`,
-  COURSE_PROGRESS: `@BeginnerCode:courseProgress:${username}`,
-  LESSON_PROGRESS: `@BeginnerCode:lessonProgress:${username}`,
-  BADGES: `@BeginnerCode:badges:${username}`,
-});
-
-/**
  * Servicio de almacenamiento
- * Maneja la persistencia de datos del usuario
+ * Maneja la persistencia de datos del usuario usando SQLite
  */
 class StorageService {
   // Callback para sincronización (se configurará externamente)
@@ -83,9 +74,93 @@ class StorageService {
         return null;
       }
 
-      const STORAGE_KEYS = getStorageKeys(user);
-      const data = await AsyncStorage.getItem(STORAGE_KEYS.USER_PROFILE);
-      return data ? JSON.parse(data) : null;
+      const db = DatabaseService.getDatabase();
+
+      // Obtener perfil base
+      const profileRow = await db.getFirstAsync<{
+        id: string;
+        username: string;
+        email: string | null;
+        avatar_url: string | null;
+        total_points: number;
+        level: number;
+        joined_at: string;
+      }>("SELECT * FROM user_profiles WHERE username = ?", [user]);
+
+      if (!profileRow) return null;
+
+      // Obtener progreso de cursos
+      const coursesRows = await db.getAllAsync<{
+        course_id: string;
+        completed_lessons: string;
+        total_points: number;
+        started_at: string;
+        last_accessed_at: string;
+        progress_percentage: number;
+      }>("SELECT * FROM course_progress WHERE username = ?", [user]);
+
+      const coursesProgress: CourseProgress[] = coursesRows.map((row) => ({
+        courseId: row.course_id,
+        completedLessons: JSON.parse(row.completed_lessons || "[]"),
+        totalPoints: row.total_points,
+        startedAt: row.started_at,
+        lastAccessedAt: row.last_accessed_at,
+        progressPercentage: row.progress_percentage,
+      }));
+
+      // Obtener progreso de lecciones
+      const lessonsRows = await db.getAllAsync<{
+        lesson_id: string;
+        completed: number;
+        completed_at: string | null;
+        challenges_completed: string;
+        score: number;
+        attempts: number;
+      }>("SELECT * FROM lesson_progress WHERE username = ?", [user]);
+
+      const lessonsProgress: LessonProgress[] = lessonsRows.map((row) => ({
+        lessonId: row.lesson_id,
+        completed: row.completed === 1,
+        completedAt: row.completed_at || undefined,
+        challengesCompleted: JSON.parse(row.challenges_completed || "[]"),
+        score: row.score,
+        attempts: row.attempts,
+      }));
+
+      // Obtener medallas
+      const badgesRows = await db.getAllAsync<{
+        badge_id: string;
+        name: string;
+        description: string;
+        icon: string;
+        is_unlocked: number;
+        earned_at: string | null;
+      }>("SELECT * FROM user_badges WHERE username = ?", [user]);
+
+      const badges: Badge[] = badgesRows.map((row) => ({
+        id: row.badge_id,
+        name: row.name,
+        description: row.description,
+        icon: row.icon,
+        isUnlocked: row.is_unlocked === 1,
+        earnedAt: row.earned_at || undefined,
+      }));
+
+      // Construir perfil completo
+      const profile: UserProfile = {
+        id: profileRow.id,
+        username: profileRow.username,
+        email: profileRow.email || undefined,
+        avatarUrl: profileRow.avatar_url || undefined,
+        coursesProgress,
+        lessonsProgress,
+        badges,
+        totalPoints: profileRow.total_points,
+        level: profileRow.level,
+        joinedAt: profileRow.joined_at,
+      };
+
+      return profile;
     } catch (error) {
       console.error("Error al obtener perfil de usuario:", error);
       return null;
@@ -93,7 +168,7 @@ class StorageService {
   }
 
   /**
-   * Guarda el perfil del usuario
+   * Guarda el perfil del usuario (inserta o actualiza todas las tablas)
    */
   async saveUserProfile(profile: UserProfile): Promise<boolean> {
     try {
@@ -103,11 +178,103 @@ class StorageService {
         return false;
       }
 
-      const STORAGE_KEYS = getStorageKeys(user);
-      await AsyncStorage.setItem(
-        STORAGE_KEYS.USER_PROFILE,
-        JSON.stringify(profile)
+      const db = DatabaseService.getDatabase();
+
+      // Upsert perfil base
+      await db.runAsync(
+        `INSERT INTO user_profiles (id, username, email, avatar_url, total_points, level, joined_at, updated_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+         ON CONFLICT(username) DO UPDATE SET
+           total_points = excluded.total_points,
+           level = excluded.level,
+           email = excluded.email,
+           avatar_url = excluded.avatar_url,
+           updated_at = excluded.updated_at`,
+        [
+          profile.id,
+          user,
+          profile.email || null,
+          profile.avatarUrl || null,
+          profile.totalPoints,
+          profile.level,
+          profile.joinedAt,
+          new Date().toISOString(),
+        ]
       );
+
+      // Guardar progreso de cursos
+      for (const cp of profile.coursesProgress) {
+        await db.runAsync(
+          `INSERT INTO course_progress (username, course_id, completed_lessons, total_points, started_at, last_accessed_at, progress_percentage, updated_at)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+           ON CONFLICT(username, course_id) DO UPDATE SET
+             completed_lessons = excluded.completed_lessons,
+             total_points = excluded.total_points,
+             last_accessed_at = excluded.last_accessed_at,
+             progress_percentage = excluded.progress_percentage,
+             updated_at = excluded.updated_at`,
+          [
+            user,
+            cp.courseId,
+            JSON.stringify(cp.completedLessons),
+            cp.totalPoints,
+            cp.startedAt,
+            cp.lastAccessedAt,
+            cp.progressPercentage,
+            new Date().toISOString(),
+          ]
+        );
+      }
+
+      // Guardar progreso de lecciones
+      for (const lp of profile.lessonsProgress) {
+        await db.runAsync(
+          `INSERT INTO lesson_progress (username, lesson_id, completed, completed_at, challenges_completed, score, attempts, updated_at)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+           ON CONFLICT(username, lesson_id) DO UPDATE SET
+             completed = excluded.completed,
+             completed_at = excluded.completed_at,
+             challenges_completed = excluded.challenges_completed,
+             score = excluded.score,
+             attempts = excluded.attempts,
+             updated_at = excluded.updated_at`,
+          [
+            user,
+            lp.lessonId,
+            lp.completed ? 1 : 0,
+            lp.completedAt || null,
+            JSON.stringify(lp.challengesCompleted),
+            lp.score,
+            lp.attempts,
+            new Date().toISOString(),
+          ]
+        );
+      }
+
+      // Guardar medallas
+      for (const badge of profile.badges) {
+        await db.runAsync(
+          `INSERT INTO user_badges (username, badge_id, name, description, icon, is_unlocked, earned_at, updated_at)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+           ON CONFLICT(username, badge_id) DO UPDATE SET
+             name = excluded.name,
+             description = excluded.description,
+             icon = excluded.icon,
+             is_unlocked = excluded.is_unlocked,
+             earned_at = excluded.earned_at,
+             updated_at = excluded.updated_at`,
+          [
+            user,
+            badge.id,
+            badge.name,
+            badge.description,
+            badge.icon,
+            badge.isUnlocked ? 1 : 0,
+            badge.earnedAt || null,
+            new Date().toISOString(),
+          ]
+        );
+      }
 
       // Trigger sync después de guardar
       await this.triggerSync(profile);
@@ -538,13 +705,16 @@ class StorageService {
         return false;
       }
 
-      const STORAGE_KEYS = getStorageKeys(user);
-      await AsyncStorage.multiRemove([
-        STORAGE_KEYS.USER_PROFILE,
-        STORAGE_KEYS.COURSE_PROGRESS,
-        STORAGE_KEYS.LESSON_PROGRESS,
-        STORAGE_KEYS.BADGES,
+      const db = DatabaseService.getDatabase();
+
+      await db.runAsync("DELETE FROM user_badges WHERE username = ?", [user]);
+      await db.runAsync("DELETE FROM lesson_progress WHERE username = ?", [
+        user,
       ]);
+      await db.runAsync("DELETE FROM course_progress WHERE username = ?", [
+        user,
+      ]);
+      await db.runAsync("DELETE FROM user_profiles WHERE username = ?", [user]);
 
       console.log(`Datos locales eliminados para usuario: ${user}`);
       return true;
@@ -559,12 +729,19 @@ class StorageService {
    */
   async deleteUserData(username: string): Promise<boolean> {
     try {
-      const STORAGE_KEYS = getStorageKeys(username);
-      await AsyncStorage.multiRemove([
-        STORAGE_KEYS.USER_PROFILE,
-        STORAGE_KEYS.COURSE_PROGRESS,
-        STORAGE_KEYS.LESSON_PROGRESS,
-        STORAGE_KEYS.BADGES,
+      const db = DatabaseService.getDatabase();
+
+      await db.runAsync("DELETE FROM user_badges WHERE username = ?", [
+        username,
+      ]);
+      await db.runAsync("DELETE FROM lesson_progress WHERE username = ?", [
+        username,
+      ]);
+      await db.runAsync("DELETE FROM course_progress WHERE username = ?", [
+        username,
+      ]);
+      await db.runAsync("DELETE FROM user_profiles WHERE username = ?", [
+        username,
       ]);
 
       console.log(`Todos los datos eliminados para usuario: ${username}`);
