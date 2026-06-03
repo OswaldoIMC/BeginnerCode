@@ -343,7 +343,7 @@ class AuthService {
         return localResult;
       }
 
-      // Luego registrar en Supabase con confirmación de email deshabilitada
+      // Luego registrar en Supabase Auth con confirmación de email deshabilitada
       const { data: authData, error } = await this.supabase.auth.signUp({
         email: data.email,
         password: data.password,
@@ -357,19 +357,39 @@ class AuthService {
 
       if (error) {
         console.warn(
-          "Registro en Supabase falló, usando solo local:",
+          "Registro en Supabase Auth falló, usando solo local:",
           error.message
         );
-        // No eliminar usuario local, solo advertir
-        // El usuario puede seguir usando la app sin Supabase
-        return {
-          success: true,
-          message: "Usuario registrado exitosamente (solo local)",
-          user: localResult.user,
-        };
+      } else {
+        console.log("Usuario registrado en Supabase Auth:", data.username);
       }
 
-      console.log("Usuario registrado en Supabase:", data.username);
+      // Guardar datos del usuario en la tabla 'users' de Supabase
+      // (para que otros dispositivos puedan encontrar al usuario)
+      try {
+        const { error: dbError } = await this.supabase.from("users").upsert(
+          {
+            username: data.username,
+            email: data.email,
+            security_question: data.securityQuestion,
+            security_answer: data.securityAnswer.toLowerCase().trim(),
+            created_at: new Date().toISOString(),
+          },
+          {
+            onConflict: "username",
+            ignoreDuplicates: false,
+          }
+        );
+
+        if (dbError) {
+          console.warn("No se pudo guardar usuario en tabla users de Supabase:", dbError);
+        } else {
+          console.log("Datos de usuario guardados en tabla users de Supabase");
+        }
+      } catch (dbError) {
+        console.warn("Error al guardar en tabla users:", dbError);
+      }
+
       return {
         success: true,
         message: "Usuario registrado exitosamente",
@@ -459,29 +479,63 @@ class AuthService {
     password: string
   ): Promise<AuthResult> {
     try {
-      // Primero obtener el email del usuario localmente
+      // Primero buscar el email del usuario localmente
       const users = await this.getAllUsers();
-      const user = users.find(
+      let user = users.find(
         (u) => u.username.toLowerCase() === username.toLowerCase()
       );
 
+      // Si no se encontró localmente, buscar en Supabase (tabla users)
       if (!user) {
-        return { success: false, message: "Usuario no encontrado" };
-      }
+        console.log("Usuario no encontrado localmente, buscando en Supabase...");
+        const supabaseUser = await this.findUserInSupabase(username);
 
-      // Intentar login en Supabase con email
-      const { data, error } = await this.supabase.auth.signInWithPassword({
-        email: user.email,
-        password: password,
-      });
+        if (!supabaseUser) {
+          return { success: false, message: "Usuario no encontrado" };
+        }
 
-      if (error) {
-        console.warn(
-          "Login en Supabase falló, usando autenticación local:",
-          error.message
-        );
-        // Siempre usar login local como fallback
-        return await this.loginLocal(username, password);
+        // Intentar login en Supabase con el email encontrado
+        const { data, error } = await this.supabase.auth.signInWithPassword({
+          email: supabaseUser.email,
+          password: password,
+        });
+
+        if (error) {
+          console.warn("Login en Supabase falló:", error.message);
+          return { success: false, message: "Contraseña incorrecta" };
+        }
+
+        // Guardar el usuario localmente para futuros accesos offline
+        const newLocalUser: RegisteredUser = {
+          id: data.user?.id || Date.now().toString(),
+          username: supabaseUser.username,
+          email: supabaseUser.email,
+          password: password,
+          securityQuestion: supabaseUser.security_question || "",
+          securityAnswer: supabaseUser.security_answer || "",
+          createdAt: supabaseUser.created_at || new Date().toISOString(),
+        };
+
+        users.push(newLocalUser);
+        await this.saveUsers(users);
+        user = newLocalUser;
+
+        console.log("Usuario descargado de Supabase y guardado localmente:", username);
+      } else {
+        // Usuario encontrado localmente, intentar login en Supabase
+        const { data, error } = await this.supabase.auth.signInWithPassword({
+          email: user.email,
+          password: password,
+        });
+
+        if (error) {
+          console.warn(
+            "Login en Supabase falló, usando autenticación local:",
+            error.message
+          );
+          // Fallback a login local
+          return await this.loginLocal(username, password);
+        }
       }
 
       // Guardar sesión
@@ -501,20 +555,82 @@ class AuthService {
   }
 
   // ==========================================
+  // BÚSQUEDA EN SUPABASE
+  // ==========================================
+
+  /**
+   * Busca un usuario en la tabla 'users' de Supabase por username
+   * Retorna los datos del usuario o null si no se encuentra
+   */
+  private async findUserInSupabase(
+    username: string
+  ): Promise<{
+    username: string;
+    email: string;
+    security_question: string;
+    security_answer: string;
+    created_at: string;
+  } | null> {
+    try {
+      const { data, error } = await this.supabase
+        .from("users")
+        .select("*")
+        .ilike("username", username)
+        .maybeSingle();
+
+      if (error) {
+        console.error("Error al buscar usuario en Supabase:", error);
+        return null;
+      }
+
+      return data;
+    } catch (error) {
+      console.error("Error al buscar usuario en Supabase:", error);
+      return null;
+    }
+  }
+
+  // ==========================================
   // RECUPERACIÓN DE CONTRASEÑA
   // ==========================================
 
   /**
    * Verifica si el usuario existe y devuelve su pregunta de seguridad
+   * Busca primero localmente, si no encuentra, busca en Supabase
    */
   async getSecurityQuestion(
     username: string
   ): Promise<{ success: boolean; question?: string; message: string }> {
     try {
       const users = await this.getAllUsers();
-      const user = users.find(
+      let user = users.find(
         (u) => u.username.toLowerCase() === username.toLowerCase()
       );
+
+      // Si no se encontró localmente, buscar en Supabase
+      if (!user && this.useCloudAuth) {
+        console.log("Usuario no encontrado localmente para recovery, buscando en Supabase...");
+        const supabaseUser = await this.findUserInSupabase(username);
+
+        if (supabaseUser) {
+          // Guardar localmente para los pasos siguientes de la recuperación
+          const newLocalUser: RegisteredUser = {
+            id: Date.now().toString(),
+            username: supabaseUser.username,
+            email: supabaseUser.email,
+            password: "", // No tenemos la contraseña actual
+            securityQuestion: supabaseUser.security_question || "",
+            securityAnswer: supabaseUser.security_answer || "",
+            createdAt: supabaseUser.created_at || new Date().toISOString(),
+          };
+
+          users.push(newLocalUser);
+          await this.saveUsers(users);
+          user = newLocalUser;
+
+          console.log("Usuario descargado de Supabase para recovery:", username);
+        }
+      }
 
       if (!user) {
         return { success: false, message: "Usuario no encontrado" };
@@ -536,6 +652,7 @@ class AuthService {
 
   /**
    * Verifica la respuesta de seguridad y cambia la contraseña
+   * Actualiza tanto local como en Supabase Auth
    */
   async resetPassword(
     username: string,
@@ -550,7 +667,7 @@ class AuthService {
       }
 
       const users = await this.getAllUsers();
-      const userIndex = users.findIndex(
+      let userIndex = users.findIndex(
         (u) => u.username.toLowerCase() === username.toLowerCase()
       );
 
@@ -572,13 +689,38 @@ class AuthService {
       // Si usa Supabase, también actualizar allí
       if (this.useCloudAuth) {
         try {
-          const { error } = await this.supabase.auth.updateUser({
-            password: newPassword,
+          // Primero iniciar sesión en Supabase para tener una sesión activa
+          // (updateUser requiere sesión activa)
+          const { error: signInError } = await this.supabase.auth.signInWithPassword({
+            email: user.email,
+            password: user.password || newPassword, // Usar contraseña anterior si existe
           });
 
-          if (error) {
-            console.warn("No se pudo actualizar en Supabase:", error);
+          // Si no pudimos iniciar sesión con la contraseña anterior,
+          // la contraseña en Supabase podría ser diferente.
+          // Actualizar la tabla users con la nueva contraseña de seguridad
+          if (!signInError) {
+            const { error: updateError } = await this.supabase.auth.updateUser({
+              password: newPassword,
+            });
+
+            if (updateError) {
+              console.warn("No se pudo actualizar contraseña en Supabase Auth:", updateError);
+            } else {
+              console.log("Contraseña actualizada en Supabase Auth");
+            }
+          } else {
+            console.warn("No se pudo iniciar sesión en Supabase para actualizar contraseña:", signInError.message);
           }
+
+          // También actualizar la pregunta/respuesta de seguridad en la tabla users
+          await this.supabase
+            .from("users")
+            .update({
+              security_question: user.securityQuestion,
+              security_answer: user.securityAnswer,
+            })
+            .ilike("username", username);
         } catch (error) {
           console.warn("Error al actualizar en Supabase:", error);
         }
