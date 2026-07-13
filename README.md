@@ -1,4 +1,5 @@
 <div align="center">
+  <img src="Assets/Login_Image_NoBG.png" alt="BeginnerCode Logo" width="180"/>
 
 # BeginnerCode
 
@@ -15,8 +16,6 @@
 **BeginnerCode** es una aplicación móvil educativa diseñada para enseñar los fundamentos de la programación a principiantes. Con cursos interactivos, lecciones estructuradas y desafíos prácticos, los usuarios pueden aprender lenguajes como **Python**, **JavaScript**, **Java**, **C++** y **C#** de manera progresiva y dinámica.
 
 <br/>
-
-[Características](#-características) · [Tech Stack](#-tech-stack) · [Instalación](#-instalación) · [Arquitectura](#-arquitectura) · [Contribuir](#-contribuir)
 
 </div>
 
@@ -180,7 +179,7 @@ El proyecto cuenta con pipelines automatizados mediante **GitHub Actions**:
 
 ## Autores
 
-- **OswaldoIMC** — [GitHub](https://github.com/OswaldoIMC)
+- **OswaldoIMC** - [GitHub](https://github.com/OswaldoIMC)
 
 ---
 
