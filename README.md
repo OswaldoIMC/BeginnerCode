@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="Assets/Login_Image_NoBG.png" alt="BeginnerCode Logo" width="180"/>
+  <img src="assets/Login_Image_NoBG.png" alt="BeginnerCode Logo" width="180"/>
 
 # BeginnerCode
 
